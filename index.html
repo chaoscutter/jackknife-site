@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jackknife - Spend Your Weekends on Your Life, Not Your House</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Manrope:wght@400;700&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          // === PRIMARY (Teal) -from tokens.ts ===
+          "primary": "#32849e",           // primary.500
+          "primary-container": "#4ea3ba", // primary.400
+          "on-primary": "#ffffff",
+          "on-primary-container": "#f0f8fa",
+          "primary-fixed": "#b8dde7",     // primary.200
+          "primary-fixed-dim": "#87c4d4", // primary.300
+          "on-primary-fixed": "#063340",  // primary.900
+          "on-primary-fixed-variant": "#27596e", // primary.700
+          "inverse-primary": "#87c4d4",   // primary.300
+
+          // === SECONDARY (Green) -from tokens.ts ===
+          "secondary": "#1da485",           // secondary.500
+          "secondary-container": "#bbf7e1", // secondary.200
+          "on-secondary": "#ffffff",
+          "on-secondary-container": "#16574b", // secondary.900
+          "secondary-fixed": "#bbf7e1",     // secondary.200
+          "secondary-fixed-dim": "#86efca", // secondary.300
+          "on-secondary-fixed": "#16574b",  // secondary.900
+          "on-secondary-fixed-variant": "#15846e", // secondary.700
+
+          // === TERTIARY (Warm Amber accent) ===
+          "tertiary": "#b45309",
+          "tertiary-container": "#fef3c7",  // warningLight
+          "on-tertiary": "#ffffff",
+          "on-tertiary-container": "#92400e", // warningDark
+          "tertiary-fixed": "#fef3c7",
+          "tertiary-fixed-dim": "#f59e0b",
+          "on-tertiary-fixed": "#92400e",
+          "on-tertiary-fixed-variant": "#92400e",
+
+          // === SURFACES -from tokens.ts ===
+          "surface": "#f0f8fa",              // primary.50
+          "surface-bright": "#f0f8fa",       // primary.50
+          "surface-dim": "#daeef3",          // primary.100
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#daeef3", // primary.100
+          "surface-container": "#b8dde7",     // primary.200
+          "surface-container-high": "#87c4d4", // primary.300
+          "surface-container-highest": "#87c4d4", // primary.300
+          "surface-variant": "#daeef3",       // primary.100
+          "surface-tint": "#2b6d85",          // primary.600
+          "background": "#f0f8fa",            // primary.50
+          "on-background": "#111827",         // gray.900
+          "on-surface": "#111827",            // gray.900
+          "on-surface-variant": "#4b5563",    // gray.600
+
+          // === SEMANTIC ===
+          "error": "#ef4444",
+          "error-container": "#fee2e2",
+          "on-error": "#ffffff",
+          "on-error-container": "#991b1b",
+
+          // === OUTLINE ===
+          "outline": "#6b7280",          // gray.500
+          "outline-variant": "#d1d5db",  // gray.300
+
+          // === INVERSE ===
+          "inverse-surface": "#063340",  // primary.900
+          "inverse-on-surface": "#daeef3" // primary.100
+        },
+        fontFamily: {
+          "headline": ["Montserrat", "system-ui", "sans-serif"],
+          "body": ["Inter", "system-ui", "sans-serif"],
+          "label": ["Poppins", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 1;
+  }
+  .editorial-shadow {
+    box-shadow: 0 40px 80px -20px rgba(17, 24, 39, 0.08);
+  }
+  .glass-effect {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .bg-cta-custom { background-color: #063340; }
+  .text-accent-green { color: #1da485; }
+  html { scroll-behavior: smooth; }
+
+  /* Hero text transitions */
+  .hero-text-animated {
+    transition: opacity 300ms ease, transform 300ms ease;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .hero-text-animated.fade-out {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .hero-text-animated.fade-in-ready {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  /* Camera flash overlay */
+  .flash-overlay {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 400ms ease-out;
+  }
+  .flash-overlay.flash-in {
+    opacity: 1;
+    transition: opacity 80ms ease-in;
+  }
+
+  /* Progress indicator bars */
+  .progress-bar {
+    width: 60px;
+    height: 3px;
+    background: #e0e5e8;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-bar .fill {
+    position: absolute;
+    inset: 0;
+    background: #00A385;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  .progress-bar .fill.active {
+    animation: progressFill 5000ms linear forwards;
+  }
+  @keyframes progressFill {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+
+  /* Phone ambient glow */
+  .phone-glow {
+    position: absolute;
+    width: 360px;
+    height: 660px;
+    border-radius: 40px;
+    background: radial-gradient(ellipse at center, rgba(0,163,133,0.15) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: opacity 500ms ease;
+  }
+
+  /* Phone notch */
+  .phone-notch {
+    width: 90px;
+    height: 22px;
+    background: #063340;
+    border-radius: 0 0 12px 12px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-text-animated {
+      transition: none !important;
+    }
+    .flash-overlay {
+      display: none !important;
+    }
+    .progress-bar .fill.active {
+      animation: none !important;
+      transform: scaleX(1);
+    }
+  }
+  .sticky-cta {
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+  }
+  .sticky-cta.visible {
+    transform: translateY(0);
+  }
+
+  /* Privacy Trust Bar */
+  :root {
+    --color-background-secondary: #F8FAFB;
+    --color-text-primary: #1A202C;
+    --color-text-secondary: #718096;
+    --border-radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background-secondary: #2D3748;
+      --color-text-primary: #E2E8F0;
+      --color-text-secondary: #A0AEC0;
+    }
+  }
+  .privacy-trust-bar {
+    width: 100%;
+    padding: 40px 40px;
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .trust-bar-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .trust-statement {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .trust-icon {
+    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    filter: saturate(0);
+  }
+  .trust-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .trust-label {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+  .trust-copy {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    margin: 4px 0 0 0;
+    line-height: 1.5;
+  }
+  @media (max-width: 639px) {
+    .privacy-trust-bar {
+      padding: 32px 16px;
+    }
+    .trust-bar-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .privacy-trust-bar {
+      padding: 36px 20px;
+    }
+    .trust-bar-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- ============================================================ -->
+<!-- SHARED NAVIGATION                                            -->
+<!-- ============================================================ -->
+<nav class="fixed top-0 w-full z-50 bg-[#f0f8fa]/70 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+    <div class="text-2xl font-black tracking-tighter font-headline select-none">
+      <span class="text-[#063340]">jack</span><span class="text-[#00a385]">knife</span>
+    </div>
+    <!-- Nav links hidden -hero CTA is primary action -->
+    <div class="hidden items-center gap-8">
+      <a class="text-[#111827]/70 hover:text-[#32849e] transition-colors font-label text-sm tracking-wide" href="#know-it">Know It</a>
+      <a class="text-[#111827]/70 hover:text-[#32849e] transition-colors font-label text-sm tracking-wide" href="#fix-it">Fix It</a>
+      <a class="text-[#111827]/70 hover:text-[#32849e] transition-colors font-label text-sm tracking-wide" href="#prove-it">Prove It</a>
+      <a class="text-[#111827]/70 hover:text-[#32849e] transition-colors font-label text-sm tracking-wide" href="#cta">Pricing</a>
+    </div>
+    <!-- Mobile menu button -->
+    <div>
+      <span class="material-symbols-outlined text-primary text-2xl cursor-pointer">menu</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: HERO                                              -->
+<!-- ============================================================ -->
+<!-- Flash overlay removed -->
+
+<main class="pt-24 pb-20" id="hero">
+  <section class="max-w-[1100px] mx-auto px-6 md:px-10">
+    <!-- Hero: Text + Phone side by side -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-16 lg:gap-20 mb-10">
+      <!-- Left Column: Text, CTA, supporting text, progress -->
+      <div class="flex-1 w-full md:max-w-[500px] z-10 order-1">
+        <!-- Kicker -->
+        <p class="font-headline text-sm font-bold tracking-[3px] uppercase mb-3" style="color: #063340;">
+          Now you can
+        </p>
+        <!-- H1 -->
+        <h1 class="font-headline font-black leading-[1.1] tracking-tight" style="font-size: clamp(36px, 5vw, 56px); margin-bottom: 24px;">
+          <span id="hero-verb" class="hero-text-animated" style="font-weight: 900; color: #00A385;">Fix</span>
+          <br/>
+          <span style="color: #063340;">your home.</span>
+        </h1>
+        <!-- H2 -->
+        <h2 class="font-headline max-w-[400px]" style="font-weight: 500; font-size: 18px; line-height: 1.6; color: #6b7c85; margin-top: 24px;">
+          Jackknife turns one photo into real answers.
+        </h2>
+        <!-- CTA Button -->
+        <button class="w-full max-w-[420px] text-white font-headline text-center" style="background: #00A385; font-weight: 800; font-size: 18px; letter-spacing: 0.5px; padding: 20px 40px; border-radius: 12px; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(0,163,133,0.3); transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease; margin-top: 32px; margin-bottom: 16px;" onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(0,163,133,0.4)';this.style.background='#009474'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,163,133,0.3)';this.style.background='#00A385'" onmousedown="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,163,133,0.3)'" onmouseup="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(0,163,133,0.4)'">
+          Get Jackknife (It's Free)
+        </button>
+        <!-- Progress Indicators -->
+        <div class="flex items-center justify-center md:justify-start gap-2" role="presentation" id="progress-bars" style="margin-top: 24px;">
+          <div class="progress-bar"><div class="fill active" id="progress-0"></div></div>
+          <div class="progress-bar"><div class="fill" id="progress-1"></div></div>
+          <div class="progress-bar"><div class="fill" id="progress-2"></div></div>
+        </div>
+      </div>
+
+      <!-- Right Column: Phone Mockup -->
+      <div class="relative flex justify-center flex-shrink-0 order-2" aria-hidden="true">
+        <div class="phone-glow" style="width: 320px; height: 600px;"></div>
+        <div class="relative" style="width: 280px; height: 560px;">
+          <!-- Phone Frame -->
+          <div class="absolute inset-0 bg-[#063340] rounded-[28px] shadow-[0_24px_80px_rgba(6,51,64,0.3),0_8px_24px_rgba(6,51,64,0.15)]" style="padding: 8px;">
+            <!-- Notch -->
+            <div class="phone-notch"></div>
+            <!-- Screen -->
+            <div class="relative w-full h-full bg-[#f5f7f8] rounded-[20px] overflow-hidden">
+              <!-- Status Bar -->
+              <div class="h-9 bg-white flex items-end justify-center pb-1">
+                <span class="font-headline text-[8px] font-bold tracking-[1px] text-[#063340] uppercase">Jackknife</span>
+              </div>
+              <!-- Screen Content (3 screens for crossfade) -->
+              <div class="absolute top-9 inset-x-0 bottom-0 overflow-hidden">
+
+                <!-- Phase 0: Fix-Flow Screen -->
+                <div class="absolute inset-0 overflow-y-auto" id="phone-screen-0" style="opacity: 1; font-family: Montserrat, sans-serif; padding: 28px; transition: opacity 500ms ease;">
+                  <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">FIX-FLOW ACTIVE</p>
+                  <!-- Issue Card -->
+                  <div style="background: rgba(0,163,133,0.08); border-radius: 12px; padding: 16px; border-left: 3px solid #00A385; margin-bottom: 14px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                      <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #E85A4F, #d4443a); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">🔧</div>
+                      <div>
+                        <p style="font-weight: 700; font-size: 13px; color: #063340; margin: 0;">Water Heater - Sediment Buildup</p>
+                        <p style="font-weight: 400; font-size: 11px; color: #6b7c85; margin: 0;">Diagnosed 2 min ago</p>
+                      </div>
+                    </div>
+                    <p style="font-weight: 400; font-size: 12px; color: #063340; line-height: 1.5; margin: 0;">Sediment accumulation detected at base. Efficiency reduced ~15%. Flush recommended within 2 weeks.</p>
+                  </div>
+                  <!-- Cost Card -->
+                  <div style="background: white; border-radius: 12px; padding: 14px 16px; border: 1px solid #e8edf0; margin-bottom: 14px;">
+                    <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b7c85; margin: 0 0 6px 0;">COST RANGE - ESSEX COUNTY</p>
+                    <p style="margin: 0 0 8px 0;"><span style="font-weight: 800; font-size: 26px; color: #063340;">$150</span> <span style="font-weight: 400; font-size: 14px; color: #6b7c85;"> - </span> <span style="font-weight: 800; font-size: 26px; color: #063340;">$300</span></p>
+                    <div style="height: 6px; border-radius: 3px; background: linear-gradient(90deg, #00A385 0%, #00A385 40%, #e8edf0 40%); margin-bottom: 6px;"></div>
+                    <p style="font-weight: 600; font-size: 10px; color: #00A385; margin: 0;">Below avg. for your area</p>
+                  </div>
+                  <!-- Contractor Card -->
+                  <div style="background: #063340; border-radius: 12px; padding: 14px 16px;">
+                    <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #00A385; margin: 0 0 6px 0;">MATCHED CONTRACTOR</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <div>
+                        <p style="font-weight: 700; font-size: 13px; color: white; margin: 0;">North Shore Plumbing</p>
+                        <p style="font-weight: 400; font-size: 11px; color: rgba(255,255,255,0.6); margin: 0;">4.9 ★ · 12 Jackknife jobs · Rowley, MA</p>
+                      </div>
+                      <div style="background: #00A385; color: white; font-weight: 700; font-size: 11px; border-radius: 8px; padding: 8px 14px; white-space: nowrap;">Book</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 1: Understand / Policy Explainer Screen -->
+                <div class="absolute inset-0 overflow-y-auto" id="phone-screen-1" style="opacity: 0; font-family: Montserrat, sans-serif; padding: 28px; transition: opacity 500ms ease;">
+                  <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">POLICY EXPLAINED</p>
+                  <!-- Policy Header -->
+                  <div style="background: rgba(0,163,133,0.08); border-radius: 12px; padding: 16px; border-left: 3px solid #00A385; margin-bottom: 14px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">📋</div>
+                      <div>
+                        <p style="font-weight: 700; font-size: 13px; color: #063340; margin: 0;">Homeowner's Policy - HO-3</p>
+                        <p style="font-weight: 400; font-size: 11px; color: #6b7c85; margin: 0;">Amica Mutual · Renews Aug 2026</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Explanation Card -->
+                  <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #e8edf0; margin-bottom: 14px;">
+                    <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b7c85; margin: 0 0 8px 0;">WHAT THIS MEANS FOR YOU</p>
+                    <p style="font-weight: 400; font-size: 12px; color: #063340; line-height: 1.7; margin: 0;">Your water heater failure <span style="font-weight: 700;">is covered</span> under dwelling protection -but only if caused by sudden discharge. Gradual leaks are excluded under Section II.</p>
+                    <div style="background: rgba(232,90,79,0.08); border-radius: 8px; padding: 10px 12px; margin-top: 12px;">
+                      <p style="font-weight: 600; font-size: 11px; color: #E85A4F; margin: 0; line-height: 1.4;">⚠ Your deductible is $1,500. Repair estimate is $150–$300. Filing a claim is not recommended.</p>
+                    </div>
+                  </div>
+                  <!-- Coverage Snapshot -->
+                  <div style="background: #063340; border-radius: 12px; padding: 14px 16px;">
+                    <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #00A385; margin: 0 0 8px 0;">COVERAGE SNAPSHOT</p>
+                    <div style="display: flex; text-align: center;">
+                      <div style="flex: 1;">
+                        <p style="font-weight: 800; font-size: 18px; color: white; margin: 0;">$450K</p>
+                        <p style="font-weight: 400; font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; margin-bottom: 0;">Dwelling</p>
+                      </div>
+                      <div style="flex: 1;">
+                        <p style="font-weight: 800; font-size: 18px; color: white; margin: 0;">$225K</p>
+                        <p style="font-weight: 400; font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; margin-bottom: 0;">Personal</p>
+                      </div>
+                      <div style="flex: 1;">
+                        <p style="font-weight: 800; font-size: 18px; color: white; margin: 0;">$300K</p>
+                        <p style="font-weight: 400; font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; margin-bottom: 0;">Liability</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 2: Protect / Insurance Verification Screen -->
+                <div class="absolute inset-0 overflow-y-auto" id="phone-screen-2" style="opacity: 0; font-family: Montserrat, sans-serif; padding: 28px; transition: opacity 500ms ease;">
+                  <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">INSURANCE VERIFICATION</p>
+                  <!-- Score Card -->
+                  <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e8edf0; margin-bottom: 14px; text-align: center;">
+                    <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b7c85; margin: 0 0 8px 0;">HOME PROTECTION SCORE</p>
+                    <svg width="120" height="120" viewBox="0 0 120 120" style="margin: 0 auto 4px auto; display: block; transform: rotate(0deg);">
+                      <circle cx="60" cy="60" r="52" fill="none" stroke="#e8edf0" stroke-width="8"/>
+                      <circle cx="60" cy="60" r="52" fill="none" stroke="#00A385" stroke-width="8" stroke-linecap="round" stroke-dasharray="267.9 326.7" transform="rotate(-90 60 60)"/>
+                      <text x="60" y="55" text-anchor="middle" dominant-baseline="central" style="font-family: Montserrat; font-weight: 800; font-size: 32px; fill: #063340;">82</text>
+                      <text x="60" y="80" text-anchor="middle" style="font-family: Montserrat; font-weight: 700; font-size: 10px; fill: #00A385;">GOOD</text>
+                    </svg>
+                  </div>
+                  <!-- Checklist Card -->
+                  <div style="background: rgba(0,163,133,0.08); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(6,51,64,0.08);">
+                      <span style="font-weight: 500; font-size: 12px; color: #063340;">Dwelling coverage verified</span>
+                      <span style="font-weight: 700; font-size: 11px; color: #00A385; background: rgba(0,163,133,0.1); border-radius: 20px; padding: 3px 10px;">✓</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(6,51,64,0.08);">
+                      <span style="font-weight: 500; font-size: 12px; color: #063340;">Water heater documented</span>
+                      <span style="font-weight: 700; font-size: 11px; color: #00A385; background: rgba(0,163,133,0.1); border-radius: 20px; padding: 3px 10px;">✓</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(6,51,64,0.08);">
+                      <span style="font-weight: 500; font-size: 12px; color: #063340;">Roof inspection</span>
+                      <span style="font-weight: 700; font-size: 11px; color: #E85A4F; background: rgba(232,90,79,0.1); border-radius: 20px; padding: 3px 10px;">Due</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+                      <span style="font-weight: 500; font-size: 12px; color: #063340;">Smoke detectors</span>
+                      <span style="font-weight: 700; font-size: 11px; color: #00A385; background: rgba(0,163,133,0.1); border-radius: 20px; padding: 3px 10px;">✓</span>
+                    </div>
+                  </div>
+                  <!-- Action Card -->
+                  <div style="background: #063340; border-radius: 12px; padding: 14px 16px;">
+                    <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #E85A4F; margin: 0 0 6px 0;">ACTION NEEDED</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <p style="font-weight: 400; font-size: 12px; color: white; line-height: 1.4; margin: 0; max-width: 60%;">Schedule roof inspection to raise score to 94</p>
+                      <div style="background: #00A385; color: white; font-weight: 700; font-size: 11px; border-radius: 8px; padding: 8px 14px; white-space: nowrap;">Schedule</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App Store Badges -centered below -->
+    <div class="flex flex-col items-center text-center">
+      <div class="flex items-center justify-center gap-4 mb-3">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-on-surface/5 text-on-surface-variant">
+          <span class="material-symbols-outlined text-lg">phone_iphone</span>
+          <span class="font-headline text-xs font-semibold tracking-wide">App Store - Coming Soon</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-on-surface/5 text-on-surface-variant">
+          <span class="material-symbols-outlined text-lg">android</span>
+          <span class="font-headline text-xs font-semibold tracking-wide">Google Play - Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Trust Bar -->
+  <div style="width: 100%; margin-top: 80px;">
+    <div class="privacy-trust-bar">
+      <h3 style="max-width: 700px; margin: 0 auto 24px auto; font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: #ffffff; line-height: 1.4; text-align: center;">It's Your Home. It's Your Data.</h3>
+      <div class="trust-bar-container">
+        <div class="trust-statement">
+          <div class="trust-icon" aria-hidden="true">🔒</div>
+          <div class="trust-content">
+            <p class="trust-label">Your data.</p>
+            <p class="trust-copy">Your data stays yours. Always.</p>
+          </div>
+        </div>
+        <div class="trust-statement">
+          <div class="trust-icon" aria-hidden="true">🚫</div>
+          <div class="trust-content">
+            <p class="trust-label">No selling.</p>
+            <p class="trust-copy">We never sell your information.</p>
+          </div>
+        </div>
+        <div class="trust-statement">
+          <div class="trust-icon" aria-hidden="true">⚖️</div>
+          <div class="trust-content">
+            <p class="trust-label">No kickbacks.</p>
+            <p class="trust-copy">No contractor kickbacks.</p>
+          </div>
+        </div>
+        <div class="trust-statement">
+          <div class="trust-icon" aria-hidden="true">✅</div>
+          <div class="trust-content">
+            <p class="trust-label">You control.</p>
+            <p class="trust-copy">You control who sees your home record.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Value Props Cards -->
+  <section style="max-width: 1100px; width: 100%; margin: 0 auto; padding: 80px 40px;">
+    <div style="display: flex; gap: 24px; flex-direction: column;" class="md:!flex-row">
+      <!-- Card 1: Know it. -->
+      <div style="flex: 1; min-width: 0; padding: 32px; background: #FFFFFF; border-radius: 16px; border: none; box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06); display: flex; flex-direction: column; align-items: flex-start;">
+        <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0, 163, 133, 0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+        <h3 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #063340; margin-top: 20px; margin-bottom: 12px; line-height: 1.2;">Know it.</h3>
+        <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.65; margin: 0;">Point your phone at anything in your home. Jackknife tells you what it is, how old it is, what shape it's in, and what it's worth -in seconds.</p>
+      </div>
+      <!-- Card 2: Fix it. -->
+      <div style="flex: 1; min-width: 0; padding: 32px; background: #FFFFFF; border-radius: 16px; border: none; box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06); display: flex; flex-direction: column; align-items: flex-start;">
+        <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0, 163, 133, 0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+            <path d="m9 11 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #063340; margin-top: 20px; margin-bottom: 12px; line-height: 1.2;">Fix it.</h3>
+        <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.65; margin: 0;">Something's off? Get a diagnosis, a cost range, and whether it's DIY -before you call anyone.</p>
+      </div>
+      <!-- Card 3: Prove it. -->
+      <div style="flex: 1; min-width: 0; padding: 32px; background: #FFFFFF; border-radius: 16px; border: none; box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06); display: flex; flex-direction: column; align-items: flex-start;">
+        <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0, 163, 133, 0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #063340; margin-top: 20px; margin-bottom: 12px; line-height: 1.2;">Prove it.</h3>
+        <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.65; margin: 0;">Every photo becomes a record. Insurance claims, home sales, warranty disputes -your proof is already built.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: KNOW IT                                           -->
+<!-- ============================================================ -->
+<section class="pb-24 md:pb-40 overflow-hidden" id="know-it">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <!-- Left Column: Visual -->
+      <div class="relative flex justify-center lg:justify-start">
+        <div class="absolute -top-12 -left-12 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-12 right-12 w-80 h-80 bg-primary-container/10 rounded-full blur-3xl"></div>
+        <div class="relative z-10 w-full max-w-[320px] md:max-w-[380px]">
+          <div class="relative rounded-[3rem] border-8 border-on-surface overflow-hidden shadow-2xl bg-surface-container-lowest">
+            <div class="relative aspect-[9/19.5]">
+              <img alt="Smartphone scanning a home appliance" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQi-nii4Lw2eSy804lpnShHkL4z1lY8UK7vbFwqEFejgIal3EYLFzuzhnvF5XPStat4hzyeCTJ3budwldxX1cok5vQQDyH7X3Z5h_O56njEsPeDnm-ZyxRFzIsK7F-LaVmvnbyTmeLWH1LI9aLR72CzOQNU6UWZgFzERC1nGChNQNaOO_iStfKV2Z3r49_Fgqtk6v7AhC5VS6HR0LCRHRLeFtmxGlJVmuw4erUIArrABIZXRtNgLWtBS-Tj25D1rDkPyc6SolbAQg"/>
+              <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6">
+                <div class="glass-effect bg-surface/70 rounded-xl p-4 shadow-xl border border-white/20 mb-4">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary">
+                      <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Identified</p>
+                      <p class="text-sm font-bold text-on-surface">Rheem Performance Platinum</p>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-on-surface/5">
+                    <div>
+                      <p class="text-[8px] text-on-surface/60 uppercase">Model</p>
+                      <p class="text-[10px] font-semibold">XE50T12CS45U0</p>
+                    </div>
+                    <div>
+                      <p class="text-[8px] text-on-surface/60 uppercase">Installed</p>
+                      <p class="text-[10px] font-semibold">Oct 2021</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-secondary-container shadow-[0_0_15px_rgba(187,247,225,0.8)]"></div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -right-8 top-1/4 z-20 hidden md:block w-56">
+            <div class="bg-surface-container-lowest p-5 rounded-xl shadow-xl border-l-4 border-secondary">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-secondary text-lg">info</span>
+                <span class="text-xs font-bold text-on-surface">Insight</span>
+              </div>
+              <p class="text-xs text-on-surface/80 leading-relaxed">Filter replacement recommended in 14 days based on usage patterns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Column: Content -->
+      <div>
+        <div class="space-y-6 lg:max-w-xl">
+          <span class="inline-block text-primary font-bold text-sm tracking-[0.2em] uppercase font-headline">Know It</span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-on-surface font-headline leading-[1.1] tracking-tight">
+            Every Appliance. <br/>
+            Every Repair. <br/>
+            Every Receipt. <br/>
+            <span class="text-primary-container">One Place.</span>
+          </h2>
+          <div class="space-y-6 pt-4">
+            <p class="text-lg md:text-xl text-on-surface/80 leading-relaxed">
+              Snap a photo. Jackknife identifies it -brand, model, serial number, condition, value.
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-secondary mt-1">remove_circle_outline</span>
+                <span class="text-on-surface/70 font-medium">No typing. No spreadsheets. No digging through drawers.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-secondary mt-1">insights</span>
+                <span class="text-on-surface/70 font-medium">You'll know more about your home in sixty seconds than most homeowners learn in a decade.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-8">
+            <button class="bg-primary text-on-primary px-10 py-5 rounded-full font-label font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20 flex items-center gap-3">
+              Scan My First Item
+              <span class="material-symbols-outlined">camera_enhance</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: FIX IT                                            -->
+<!-- ============================================================ -->
+<section class="pb-24 md:pb-40 overflow-hidden" id="fix-it">
+  <div class="max-w-7xl mx-auto px-8 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <!-- Left Column: Copy -->
+      <div class="lg:col-span-6 order-2 lg:order-1">
+        <span class="inline-block font-label text-primary font-bold tracking-widest text-xs uppercase mb-6">
+          The moment it clicks
+        </span>
+        <h2 class="font-headline text-4xl md:text-5xl lg:text-6xl text-primary font-black tracking-tight leading-[1.1] mb-8">
+          Stop Googling Symptoms. <br/>
+          <span class="text-secondary">Start Knowing.</span>
+        </h2>
+        <div class="space-y-6 mb-12">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </div>
+            <div>
+              <p class="font-body text-lg font-medium text-on-surface leading-tight">What's wrong -in plain English</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <div>
+              <p class="font-body text-lg font-medium text-on-surface leading-tight">What it should cost -before anyone shows up</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">handyman</span>
+            </div>
+            <div>
+              <p class="font-body text-lg font-medium text-on-surface leading-tight">Whether it's DIY or time to call a pro</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">verified</span>
+            </div>
+            <div>
+              <p class="font-body text-lg font-medium text-on-surface leading-tight">Whether it's under warranty or recall</p>
+            </div>
+          </div>
+        </div>
+        <div class="relative mb-12">
+          <div class="absolute -left-4 top-0 bottom-0 w-1 bg-secondary rounded-full opacity-40"></div>
+          <p class="font-headline text-2xl font-bold text-on-surface pl-4 italic leading-snug">
+            "One photo. Sixty seconds. You stopped guessing."
+          </p>
+        </div>
+        <button class="group relative inline-flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-full font-label text-lg font-bold shadow-lg shadow-primary/20 hover:bg-primary-container active:scale-95 transition-all duration-200">
+          Get My Free Diagnosis
+          <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+      </div>
+      <!-- Right Column: Phone Mockup -->
+      <div class="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[420px]">
+          <div class="absolute -top-10 -right-10 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
+          <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+          <div class="relative bg-on-surface p-3 rounded-[3rem] editorial-shadow transform lg:rotate-2 hover:rotate-0 transition-transform duration-700">
+            <div class="bg-surface overflow-hidden rounded-[2.2rem] aspect-[9/19.5] relative">
+              <div class="absolute inset-0">
+                <img alt="Ceiling water stain diagnosis scan" class="w-full h-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-zHvPFKAmIqiLwyRmVvx7qskX_ZAdetei8RDojBR41kLCaUkMVS2-RAeeIF_O13ww_brdSMHk8NtyByyAHyeRyFcwCuJjlr4sNMLviVTNq_69HVjNtD9JFQ3pNVQhWkLPCR2Ee5-OlkycOQJyuzbTRGHb8BTaj52qoTUQxv9PmikErcCfiKRu56AQh1cuoKQudBCD_iTfANcjE2hc1t4VQ8aH1N16m1Ztu42xHi5COnq_EChwDRPGKMQ9NSFJjldlc8EBjmXgS6w"/>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="w-48 h-48 border-2 border-white/50 rounded-3xl border-dashed"></div>
+                </div>
+              </div>
+              <div class="absolute bottom-6 left-4 right-4 z-20">
+                <div class="bg-surface-container-lowest p-5 rounded-2xl shadow-2xl border-l-4 border-secondary">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">AI Analysis Active</span>
+                    <span class="text-on-surface/40 text-[10px]">60s remaining</span>
+                  </div>
+                  <h3 class="font-headline text-lg font-extrabold text-on-surface mb-1">Active Leak Detected</h3>
+                  <p class="font-body text-xs text-on-surface-variant mb-4 leading-relaxed">Source: Upstairs bathroom supply line. Moderate severity.</p>
+                  <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div class="bg-surface-container-low p-2 rounded-lg">
+                      <p class="text-[9px] uppercase font-bold text-on-surface/40 mb-1">Repair Cost</p>
+                      <p class="text-sm font-bold text-primary">$150 - $220</p>
+                    </div>
+                    <div class="bg-surface-container-low p-2 rounded-lg">
+                      <p class="text-[9px] uppercase font-bold text-on-surface/40 mb-1">Effort</p>
+                      <p class="text-sm font-bold text-primary">Pro Needed</p>
+                    </div>
+                  </div>
+                  <div class="w-full bg-primary text-on-primary py-2 rounded-xl text-center text-xs font-bold font-label">
+                    Book Expert Repair
+                  </div>
+                </div>
+              </div>
+              <div class="absolute top-0 w-full p-6 flex justify-between items-center bg-gradient-to-b from-black/40 to-transparent">
+                <span class="material-symbols-outlined text-white">close</span>
+                <span class="material-symbols-outlined text-white">flashlight_on</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: PROVE IT                                          -->
+<!-- ============================================================ -->
+<section class="pb-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto" id="prove-it">
+  <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <!-- Left Column: Copy -->
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <span class="inline-block text-[#32849e] font-label font-bold text-sm tracking-widest uppercase">Your home record</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold font-headline leading-tight text-on-surface tracking-tight">
+          When the Pipe Bursts, Your Insurer Doesn't Want Your Memory. <span class="text-primary">They Want a Record.</span>
+        </h2>
+      </div>
+      <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed max-w-xl">
+        <p class="flex items-start gap-4">
+          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+          <span>Insurance claims get denied for lack of documentation.</span>
+        </p>
+        <p class="flex items-start gap-4">
+          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+          <span>Home sales lose value because buyers can't verify what's been maintained.</span>
+        </p>
+        <p class="flex items-start gap-4">
+          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+          <span>Warranties expire because nobody tracked the date.</span>
+        </p>
+        <p class="pt-4 border-l-4 border-secondary/20 pl-6 italic">
+          Jackknife builds the proof as you go. Every photo becomes a timestamped record. Every receipt gets pulled and filed. Every repair is logged.
+        </p>
+        <p class="text-on-surface font-bold text-xl pt-2">
+          That's the difference between a denied claim and a paid one.
+        </p>
+      </div>
+      <div class="space-y-4 pt-4">
+        <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          <span class="font-label font-medium">Claim-ready files for every item -timestamped and verified</span>
+        </div>
+        <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          <span class="font-label font-medium">Complete maintenance history -searchable by system, date, or contractor</span>
+        </div>
+        <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          <span class="font-label font-medium">One-tap export for insurance, sale, or legal</span>
+        </div>
+      </div>
+    </div>
+    <!-- Right Column: App Mockup -->
+    <div class="relative flex justify-center lg:justify-end">
+      <div class="absolute -top-12 -right-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
+      <div class="relative w-[320px] h-[640px] bg-on-surface rounded-[3rem] p-3 shadow-2xl border-[8px] border-on-surface-variant/20 overflow-hidden ring-1 ring-black/5">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-on-surface rounded-b-2xl z-20"></div>
+        <div class="bg-surface h-full w-full rounded-[2.2rem] overflow-hidden flex flex-col relative">
+          <div class="pt-10 px-6 pb-4 bg-white shadow-sm flex justify-between items-center">
+            <span class="font-headline font-bold text-lg">Inventory</span>
+            <span class="material-symbols-outlined text-primary">add_circle</span>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h4 class="font-bold text-sm">Carrier HVAC System</h4>
+                  <p class="text-[10px] text-on-surface-variant">Serial: #CN45290X</p>
+                </div>
+                <span class="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold">VERIFIED</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[10px] mb-3">
+                <div class="bg-surface-container p-2 rounded-lg">
+                  <span class="block opacity-60">Installed</span>
+                  <span class="font-semibold">Oct 2021</span>
+                </div>
+                <div class="bg-surface-container p-2 rounded-lg">
+                  <span class="block opacity-60">Warranty</span>
+                  <span class="font-semibold text-tertiary">10yr (2031)</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 pt-2 border-t border-outline-variant/20">
+                <span class="material-symbols-outlined text-sm opacity-40">receipt_long</span>
+                <span class="text-[9px] font-medium">$8,400 Maintenance Logged</span>
+              </div>
+            </div>
+            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h4 class="font-bold text-sm">Rheem Hybrid Heater</h4>
+                  <p class="text-[10px] text-on-surface-variant">Unit 40 Gal</p>
+                </div>
+                <span class="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold">VERIFIED</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[10px] mb-3">
+                <div class="bg-surface-container p-2 rounded-lg">
+                  <span class="block opacity-60">Installed</span>
+                  <span class="font-semibold">Jan 2023</span>
+                </div>
+                <div class="bg-surface-container p-2 rounded-lg">
+                  <span class="block opacity-60">Tax Credit</span>
+                  <span class="font-semibold">$2,000 Filed</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden opacity-80">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h4 class="font-bold text-sm">GAF Timberline Shingles</h4>
+                  <p class="text-[10px] text-on-surface-variant">Full Replacement</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 pt-2 text-[10px]">
+                <span class="material-symbols-outlined text-sm text-primary">photo_camera</span>
+                <span class="font-medium">12 Post-Storm Records</span>
+              </div>
+            </div>
+          </div>
+          <div class="h-16 bg-white border-t border-outline-variant/10 flex justify-around items-center px-4">
+            <span class="material-symbols-outlined text-on-surface-variant">home</span>
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+            <span class="material-symbols-outlined text-on-surface-variant">shield</span>
+            <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-12 -right-8 md:-right-16 bg-white p-4 rounded-xl shadow-2xl max-w-[180px] border border-surface-container rotate-3">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-secondary-container text-sm">description</span>
+          </div>
+          <span class="font-bold text-[10px]">Contractor Invoice</span>
+        </div>
+        <div class="h-1.5 w-full bg-surface-container rounded-full mb-1"></div>
+        <div class="h-1.5 w-3/4 bg-surface-container rounded-full mb-3"></div>
+        <div class="text-[9px] text-on-surface-variant flex justify-between">
+          <span>Verified Timestamp</span>
+          <span class="font-bold text-secondary font-label">LOGGED</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: FINAL CTA                                         -->
+<!-- ============================================================ -->
+<section class="bg-cta-custom text-white py-24 px-6 md:py-32 overflow-hidden relative" id="cta">
+  <div class="max-w-5xl mx-auto text-center relative z-10">
+    <h2 class="font-headline text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight">
+      One Photo. That's All It Takes.
+    </h2>
+    <div class="max-w-2xl mx-auto space-y-6">
+      <p class="font-body text-lg md:text-xl text-[#e5e7eb] leading-relaxed">
+        Pick the thing in your home you know the least about. Point your phone at it. Jackknife handles the rest.
+      </p>
+      <p class="font-body text-xl md:text-2xl font-medium text-accent-green leading-snug">
+        You'll know more about your home in sixty seconds than most homeowners learn in a decade.
+      </p>
+      <div class="pt-8">
+        <button class="font-label font-semibold text-lg md:text-xl px-10 py-5 bg-white text-[#063340] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
+          Start My Free Home Scan
+        </button>
+      </div>
+      <p class="font-body text-sm text-[#9ca3af] mt-12 tracking-wide uppercase">
+        Now launching in Essex County, MA.
+      </p>
+    </div>
+  </div>
+  <div class="absolute -right-20 -bottom-20 opacity-10 pointer-events-none hidden lg:block">
+    <div class="w-96 h-96 rounded-full border-[40px] border-white"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SHARED FOOTER                                                -->
+<!-- ============================================================ -->
+<footer class="w-full pt-16 pb-8 bg-[#063340]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+    <div class="text-[#d1d5db] font-body text-sm order-3 md:order-1">
+      &copy; 2026 Jackknife &middot; Essex County, MA
+    </div>
+    <div class="flex gap-6 order-2 md:order-2">
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#1da485] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#1da485] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+    </div>
+    <div class="order-1 md:order-3">
+      <a class="font-label font-bold text-[#1da485] hover:underline decoration-[#1da485] underline-offset-4 transition-opacity opacity-80 hover:opacity-100 flex items-center gap-2" href="#">
+        Are you a contractor? Learn about JK Pro
+        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-12 mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="text-xl font-black tracking-tighter font-headline select-none"><span class="text-white">jack</span><span class="text-[#00a385]">knife</span></div>
+    <div class="flex gap-4">
+      <a class="text-[#9ca3af] hover:text-white transition-colors" href="#">
+        <span class="material-symbols-outlined">share</span>
+      </a>
+      <a class="text-[#9ca3af] hover:text-white transition-colors" href="#">
+        <span class="material-symbols-outlined">mail</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA Bar -->
+<div id="sticky-cta" class="sticky-cta fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-lg border-t border-on-surface/5 py-3 px-6">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="hidden sm:block">
+      <p class="font-headline font-bold text-on-surface text-sm">Ready to know your home?</p>
+      <p class="font-body text-on-surface-variant text-xs">Free forever. 60-second setup.</p>
+    </div>
+    <button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-label px-8 py-3 rounded-full text-sm font-semibold hover:brightness-110 transition-all active:scale-95 flex items-center gap-2 sm:ml-auto">
+      Start My Free Home Scan
+      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  // Show sticky CTA after scrolling past hero
+  const stickyCta = document.getElementById('sticky-cta');
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      stickyCta.classList.toggle('visible', !entry.isIntersecting);
+    },
+    { threshold: 0 }
+  );
+  observer.observe(document.getElementById('hero'));
+
+  // Camera flash hero animation
+  (function() {
+    var PHASES = [
+      { verb: 'Fix' },
+      { verb: 'Understand' },
+      { verb: 'Protect' }
+    ];
+    var CYCLE = 5000;
+    var activeIndex = 0;
+
+    var verbEl = document.getElementById('hero-verb');
+    var progressEls = [
+      document.getElementById('progress-0'),
+      document.getElementById('progress-1'),
+      document.getElementById('progress-2')
+    ];
+    var screenEls = [
+      document.getElementById('phone-screen-0'),
+      document.getElementById('phone-screen-1'),
+      document.getElementById('phone-screen-2')
+    ];
+
+    if (!verbEl) return;
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resetProgress() {
+      progressEls.forEach(function(el, i) {
+        el.classList.remove('active');
+        void el.offsetWidth;
+        if (i === activeIndex) el.classList.add('active');
+      });
+    }
+
+    function updateScreens() {
+      screenEls.forEach(function(el, i) {
+        if (el) el.style.opacity = (i === activeIndex) ? '1' : '0';
+      });
+    }
+
+    resetProgress();
+
+    function transition() {
+      if (prefersReducedMotion) {
+        activeIndex = (activeIndex + 1) % PHASES.length;
+        verbEl.textContent = PHASES[activeIndex].verb;
+        resetProgress();
+        updateScreens();
+        return;
+      }
+
+      // T+0: Fade out verb and current screen simultaneously
+      verbEl.classList.add('fade-out');
+      screenEls.forEach(function(el, i) {
+        if (el && i === activeIndex) el.style.opacity = '0';
+      });
+
+      // T+300: Swap content and fade in
+      setTimeout(function() {
+        activeIndex = (activeIndex + 1) % PHASES.length;
+        verbEl.textContent = PHASES[activeIndex].verb;
+
+        verbEl.classList.remove('fade-out');
+        verbEl.classList.add('fade-in-ready');
+        void verbEl.offsetWidth;
+        verbEl.classList.remove('fade-in-ready');
+
+        updateScreens();
+        resetProgress();
+      }, 300);
+    }
+
+    setInterval(transition, CYCLE);
+  })();
+</script>
+
+</body>
+</html>
