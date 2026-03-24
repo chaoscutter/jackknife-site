@@ -16,7 +16,7 @@
       extend: {
         colors: {
           // === PRIMARY (Teal) -from tokens.ts ===
-          "primary": "#32849e",           // primary.500
+          "primary": "#00A385",           // brand teal
           "primary-container": "#4ea3ba", // primary.400
           "on-primary": "#ffffff",
           "on-primary-container": "#f0f8fa",
@@ -214,24 +214,11 @@
   }
 
   /* Privacy Trust Bar */
-  :root {
-    --color-background-secondary: #F8FAFB;
-    --color-text-primary: #1A202C;
-    --color-text-secondary: #718096;
-    --border-radius-lg: 12px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --color-background-secondary: #2D3748;
-      --color-text-primary: #E2E8F0;
-      --color-text-secondary: #A0AEC0;
-    }
-  }
   .privacy-trust-bar {
     width: 100%;
     padding: 40px 40px;
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-lg);
+    background: #063340;
+    border-radius: 12px;
     max-width: 1100px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -373,10 +360,7 @@
     flex-direction: row;
     gap: 48px;
     align-items: flex-start;
-    background: #FFFFFF;
-    padding: 40px;
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06);
+    padding: 40px 0;
   }
   .panel-benefits {
     flex: 1.2;
@@ -602,7 +586,7 @@
     }
     .panel-content {
       flex-direction: column;
-      padding: 24px 20px;
+      padding: 24px 0;
       gap: 32px;
     }
     .panel-phone {
@@ -729,7 +713,7 @@
           Get Jackknife (It's Free)
         </button>
         <!-- Progress Indicators -->
-        <div class="flex items-center justify-center md:justify-start gap-2" role="presentation" id="progress-bars" style="margin-top: 16px;">
+        <div class="flex items-center justify-center md:justify-start gap-2" role="presentation" id="progress-bars" style="margin-top: 8px;">
           <div class="progress-bar"><div class="fill active" id="progress-0"></div></div>
           <div class="progress-bar"><div class="fill" id="progress-1"></div></div>
           <div class="progress-bar"><div class="fill" id="progress-2"></div></div>
