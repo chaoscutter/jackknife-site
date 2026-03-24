@@ -592,6 +592,8 @@
     .panel-phone {
       order: -1;
       padding-top: 0;
+      width: 100%;
+      align-items: center;
     }
     .tab-phone-frame {
       width: 160px;
@@ -659,9 +661,43 @@
       transition: none;
     }
   }
+
+  /* GSAP scroll animation - initial hidden state */
+  .gsap-trust-bar, .gsap-trust-col,
+  .gsap-bridge-l1, .gsap-bridge-l2,
+  .gsap-hiw-h1, .gsap-hiw-h2, .gsap-hiw-columns > div, .gsap-hiw-divider,
+  .gsap-faq-header, .faq-item,
+  .gsap-brand-bar, .gsap-brand-h1, .gsap-brand-h2,
+  .gsap-cta-h1, .gsap-cta-punchline, .gsap-cta-button, .gsap-cta-footer {
+    opacity: 0;
+  }
+  /* Pillar section fades in as unit */
+  .pillar-section { opacity: 0; }
+  /* Fallback: if JS fails, show everything */
+  .no-js .gsap-trust-bar, .no-js .gsap-trust-col,
+  .no-js .gsap-bridge-l1, .no-js .gsap-bridge-l2,
+  .no-js .gsap-hiw-h1, .no-js .gsap-hiw-h2, .no-js .gsap-hiw-columns > div, .no-js .gsap-hiw-divider,
+  .no-js .gsap-faq-header, .no-js .faq-item,
+  .no-js .gsap-brand-bar, .no-js .gsap-brand-h1, .no-js .gsap-brand-h2,
+  .no-js .gsap-cta-h1, .no-js .gsap-cta-punchline, .no-js .gsap-cta-button, .no-js .gsap-cta-footer,
+  .no-js .pillar-section {
+    opacity: 1;
+  }
+  /* Reduced motion: show everything immediately */
+  @media (prefers-reduced-motion: reduce) {
+    .gsap-trust-bar, .gsap-trust-col,
+    .gsap-bridge-l1, .gsap-bridge-l2,
+    .gsap-hiw-h1, .gsap-hiw-h2, .gsap-hiw-columns > div, .gsap-hiw-divider,
+    .gsap-faq-header, .faq-item,
+    .gsap-brand-bar, .gsap-brand-h1, .gsap-brand-h2,
+    .gsap-cta-h1, .gsap-cta-punchline, .gsap-cta-button, .gsap-cta-footer,
+    .pillar-section {
+      opacity: 1 !important;
+    }
+  }
 </style>
 </head>
-<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container no-js">
 
 <!-- ============================================================ -->
 <!-- SHARED NAVIGATION                                            -->
@@ -866,22 +902,22 @@
 
   <!-- Privacy Trust Bar -->
   <div style="width: 100%; margin-top: 80px;">
-    <div class="privacy-trust-bar">
+    <div class="privacy-trust-bar gsap-trust-bar">
       <h3 style="max-width: 700px; margin: 0 auto 24px auto; font-family: 'Montserrat', sans-serif; font-size: 25px; font-weight: 800; color: #ffffff; line-height: 1.4; text-align: center;">It's Your Home. It's Your Data.</h3>
       <div class="trust-bar-container">
-        <div class="trust-statement">
+        <div class="trust-statement gsap-trust-col">
           <div class="trust-content">
             <p class="trust-label">No selling.</p>
             <p class="trust-copy">We never sell your personal home data. Period.</p>
           </div>
         </div>
-        <div class="trust-statement">
+        <div class="trust-statement gsap-trust-col">
           <div class="trust-content">
             <p class="trust-label">No ads.</p>
             <p class="trust-copy">Your home record is ad-free. By design.</p>
           </div>
         </div>
-        <div class="trust-statement">
+        <div class="trust-statement gsap-trust-col">
           <div class="trust-content">
             <p class="trust-label">You control.</p>
             <p class="trust-copy">You control who sees your home record.</p>
@@ -891,25 +927,32 @@
     </div>
   </div>
 
+  <!-- Positioning Bridge -->
+  <div style="padding: 80px 40px; text-align: center;" class="positioning-bridge gsap-bridge">
+    <div style="max-width: 640px; margin: 0 auto;">
+      <p class="gsap-bridge-l1" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 28px; color: #063340; line-height: 1.3; margin: 0 0 12px 0;">Your home is your most valuable asset.</p>
+      <p class="gsap-bridge-l2" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 20px; color: #6b7c85; line-height: 1.5; margin: 0;">Now there's a tool built to help you manage it.</p>
+    </div>
+  </div>
 
   <!-- ============================================================ -->
   <!-- SECTION: HOW IT WORKS                                        -->
   <!-- ============================================================ -->
-  <section style="padding: 80px 40px; margin-top: 0;">
+  <section class="gsap-hiw-section" style="padding: 80px 40px; margin-top: 0;">
     <div style="max-width: 900px; margin: 0 auto; text-align: center;">
       <!-- Headline -->
-      <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; margin: 0 0 16px 0; line-height: 1.2;">Your Home. Under Control.</h2>
+      <h2 class="gsap-hiw-h1" style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; margin: 0 0 16px 0; line-height: 1.2;">Your Home. Under Control.</h2>
       <!-- Subhead -->
-      <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; color: #6b7c85; line-height: 1.6; max-width: 560px; margin: 0 auto 40px auto;">See what you own, what needs attention, and what to do next. All from one photo.</p>
+      <p class="gsap-hiw-h2" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; color: #6b7c85; line-height: 1.6; max-width: 560px; margin: 0 auto 40px auto;">See what you own, what needs attention, and what to do next. All from one photo.</p>
 
       <!-- Three columns -->
-      <div style="display: flex; flex-direction: column; gap: 48px; align-items: stretch;" class="md:!flex-row md:!gap-12">
+      <div style="display: flex; flex-direction: column; gap: 48px; align-items: stretch;" class="md:!flex-row md:!gap-12 gsap-hiw-columns">
 
         <!-- Card 1: Understand -->
         <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
           <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Understand</p>
           <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture anything in your home.</p>
-          <div style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+          <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
           <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">See what it is, how old it is, what it's worth, and its condition. Instantly.</p>
         </div>
 
@@ -917,7 +960,7 @@
         <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
           <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Fix</p>
           <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture what's not working.</p>
-          <div style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+          <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
           <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Get a diagnosis, cost range, and clear next steps — before you call anyone.</p>
         </div>
 
@@ -925,7 +968,7 @@
         <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
           <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Protect</p>
           <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture a receipt, label, or document.</p>
-          <div style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+          <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
           <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Your proof is stored and ready before anything goes wrong.</p>
         </div>
 
@@ -1276,8 +1319,8 @@
 <!-- ============================================================ -->
 <!-- SECTION: FAQ                                                  -->
 <!-- ============================================================ -->
-<section style="max-width: 800px; width: 100%; margin: 0 auto; padding: 80px 40px;">
-  <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; text-align: center; margin: 0 0 48px 0;">What Homeowners Want to Know</h2>
+<section class="gsap-faq-section" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 80px 40px;">
+  <h2 class="gsap-faq-header" style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; text-align: center; margin: 0 0 48px 0;">What Homeowners Want to Know</h2>
 
   <div class="faq-list" style="display: flex; flex-direction: column; gap: 0;">
 
@@ -1390,31 +1433,31 @@
 <section style="background: #f0f8fa; width: 100%; padding: 100px 40px; display: flex; justify-content: center;" class="brand-statement-section">
   <div style="max-width: 900px; width: 100%; display: flex; gap: 32px; align-items: flex-start;">
     <!-- Teal vertical accent bar -->
-    <div style="width: 4px; flex-shrink: 0; background: linear-gradient(180deg, #00A385 0%, rgba(0, 163, 133, 0.15) 100%); border-radius: 2px; align-self: stretch;"></div>
+    <div class="gsap-brand-bar" style="width: 4px; flex-shrink: 0; background: linear-gradient(180deg, #00A385 0%, rgba(0, 163, 133, 0.15) 100%); border-radius: 2px; align-self: stretch;"></div>
     <!-- Text content -->
     <div style="display: flex; flex-direction: column; justify-content: center;">
-      <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(26px, 3.5vw, 44px); line-height: 1.2; color: #063340; margin: 0 0 24px 0; letter-spacing: -0.5px;">Owning a home shouldn't feel like a second job.</h2>
-      <p style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(17px, 2vw, 22px); line-height: 1.5; color: #00A385; margin: 0; max-width: 640px;">Understand, fix, and protect your home. All from one photo.</p>
+      <h2 class="gsap-brand-h1" style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(26px, 3.5vw, 44px); line-height: 1.2; color: #063340; margin: 0 0 24px 0; letter-spacing: -0.5px;">Owning a home shouldn't feel like a second job.</h2>
+      <p class="gsap-brand-h2" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(17px, 2vw, 22px); line-height: 1.5; color: #00A385; margin: 0; max-width: 640px;">Understand, fix, and protect your home. All from one photo.</p>
     </div>
   </div>
 </section>
 <!-- ============================================================ -->
 <!-- SECTION 5: FINAL CTA                                         -->
 <!-- ============================================================ -->
-<section class="bg-cta-custom text-white px-6 overflow-hidden relative" id="cta" style="padding: 80px 24px 80px 24px;">
+<section class="bg-cta-custom text-white px-6 overflow-hidden relative gsap-cta-section" id="cta" style="padding: 80px 24px 80px 24px;">
   <div class="mx-auto text-center relative z-10" style="max-width: 900px;">
-    <h2 class="font-headline font-extrabold tracking-tight leading-tight text-white" style="font-size: clamp(26px, 4vw, 42px); margin: 0 0 24px 0;">
+    <h2 class="font-headline font-extrabold tracking-tight leading-tight text-white gsap-cta-h1" style="font-size: clamp(26px, 4vw, 42px); margin: 0 0 24px 0;">
       The most expensive thing you own is the one thing you know the least about.
     </h2>
-    <p class="font-headline font-extrabold tracking-tight leading-snug" style="font-size: clamp(20px, 3vw, 30px); color: #00A385; margin: 0 0 48px 0;">
+    <p class="font-headline font-extrabold tracking-tight leading-snug gsap-cta-punchline" style="font-size: clamp(20px, 3vw, 30px); color: #00A385; margin: 0 0 48px 0;">
       And you're managing it with a junk drawer.
     </p>
-    <div>
+    <div class="gsap-cta-button">
       <button class="font-headline font-semibold text-lg md:text-xl px-10 py-5 bg-white text-[#063340] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
         Get Jackknife (It's Free)
       </button>
     </div>
-    <p class="font-body text-sm text-[#9ca3af] tracking-wide uppercase" style="margin-top: 48px;">
+    <p class="font-body text-sm text-[#9ca3af] tracking-wide uppercase gsap-cta-footer" style="margin-top: 48px;">
       Available in Essex County, MA
     </p>
   </div>
@@ -1588,6 +1631,8 @@
       answer.style.maxHeight = answer.scrollHeight + 'px';
       chevron.style.transform = 'rotate(180deg)';
     }
+    // Refresh ScrollTrigger after height change
+    setTimeout(function() { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); }, 400);
   }
 
   function switchPillarTab(index) {
@@ -1625,6 +1670,10 @@
     // Reset and start phone animation for new tab
     resetPhoneAnim(index);
     startPhoneAnim(index);
+
+    // GSAP: animate benefit blocks on tab switch
+    if (typeof animatePanelContent === 'function') animatePanelContent(index);
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
   }
 
   function updateTabIndicator(index) {
@@ -1745,6 +1794,172 @@
     }, { threshold: 0.1 });
     observer.observe(section);
   })();
+</script>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// Remove no-js class — JS is working
+document.documentElement.classList.remove("no-js");
+
+// ===== GSAP Scroll Animations =====
+(function() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    // Show all elements immediately
+    document.querySelectorAll('[class*="gsap-"], .pillar-section, .faq-item').forEach(function(el) {
+      el.style.opacity = '1';
+    });
+    return;
+  }
+
+  // --- Privacy Trust Bar ---
+  gsap.from(".gsap-trust-bar", {
+    opacity: 0,
+    y: 32,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-trust-bar", start: "top 85%", once: true }
+  });
+  gsap.from(".gsap-trust-col", {
+    opacity: 0,
+    y: 16,
+    duration: 0.5,
+    stagger: 0.12,
+    delay: 0.3,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-trust-bar", start: "top 85%", once: true }
+  });
+
+  // --- Positioning Bridge ---
+  gsap.from(".gsap-bridge-l1", {
+    opacity: 0,
+    y: 24,
+    duration: 0.6,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-bridge", start: "top 80%", once: true }
+  });
+  gsap.from(".gsap-bridge-l2", {
+    opacity: 0,
+    y: 24,
+    duration: 0.6,
+    delay: 0.15,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-bridge", start: "top 80%", once: true }
+  });
+
+  // --- How It Works ---
+  gsap.from(".gsap-hiw-h1", {
+    opacity: 0,
+    y: 24,
+    duration: 0.6,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-hiw-section", start: "top 80%", once: true }
+  });
+  gsap.from(".gsap-hiw-h2", {
+    opacity: 0,
+    y: 24,
+    duration: 0.6,
+    delay: 0.15,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-hiw-section", start: "top 80%", once: true }
+  });
+  gsap.from(".gsap-hiw-columns > div", {
+    opacity: 0,
+    y: 32,
+    duration: 0.7,
+    stagger: 0.12,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-hiw-columns", start: "top 80%", once: true }
+  });
+  gsap.from(".gsap-hiw-divider", {
+    width: 0,
+    duration: 0.5,
+    delay: 0.3,
+    stagger: 0.12,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-hiw-columns", start: "top 80%", once: true }
+  });
+
+  // --- Pillar Tabs Section ---
+  gsap.from(".pillar-section", {
+    opacity: 0,
+    y: 32,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".pillar-section", start: "top 80%", once: true }
+  });
+
+  // --- Brand Statement ---
+  gsap.from(".gsap-brand-bar", {
+    scaleY: 0,
+    transformOrigin: "top",
+    duration: 0.6,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".brand-statement-section", start: "top 75%", once: true }
+  });
+  gsap.from(".gsap-brand-h1", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    delay: 0.2,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".brand-statement-section", start: "top 75%", once: true }
+  });
+  gsap.from(".gsap-brand-h2", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    delay: 0.4,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".brand-statement-section", start: "top 75%", once: true }
+  });
+
+  // --- FAQ ---
+  gsap.from(".gsap-faq-header", {
+    opacity: 0,
+    y: 24,
+    duration: 0.6,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".gsap-faq-section", start: "top 80%", once: true }
+  });
+  gsap.from(".faq-item", {
+    opacity: 0,
+    y: 20,
+    duration: 0.5,
+    stagger: 0.08,
+    ease: "power2.out",
+    scrollTrigger: { trigger: ".faq-list", start: "top 80%", once: true }
+  });
+
+  // --- Final CTA ---
+  var ctaTl = gsap.timeline({
+    scrollTrigger: { trigger: ".gsap-cta-section", start: "top 75%", once: true }
+  });
+  ctaTl
+    .from(".gsap-cta-h1", { opacity: 0, y: 24, duration: 0.7, ease: "power2.out" })
+    .from(".gsap-cta-punchline", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.3")
+    .from(".gsap-cta-button", { opacity: 0, y: 16, duration: 0.5, ease: "power2.out" }, "-=0.2")
+    .from(".gsap-cta-footer", { opacity: 0, duration: 0.4, ease: "power2.out" }, "-=0.1");
+
+})();
+
+// --- Tab switch: animate benefit blocks ---
+function animatePanelContent(panelIndex) {
+  var panel = document.querySelectorAll(".pillar-panel")[panelIndex];
+  if (!panel) return;
+  var blocks = panel.querySelectorAll(".benefit-block");
+  if (typeof gsap !== 'undefined') {
+    gsap.fromTo(blocks,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+    );
+  }
+}
 </script>
 
 </body>
