@@ -928,9 +928,10 @@
   </div>
 
   <!-- Positioning Bridge -->
-  <div style="padding: 80px 40px; text-align: center;" class="positioning-bridge gsap-bridge">
+  <div style="padding: 56px 40px 56px; text-align: center;" class="positioning-bridge gsap-bridge">
     <div style="max-width: 640px; margin: 0 auto;">
-      <p class="gsap-bridge-l1" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 28px; color: #063340; line-height: 1.3; margin: 0 0 12px 0;">Your home is your most valuable asset.</p>
+      <div style="width: 48px; height: 2px; background: #00A385; margin: 0 auto 24px auto; border-radius: 1px;"></div>
+      <p class="gsap-bridge-l1" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 34px; color: #063340; line-height: 1.25; margin: 0 0 14px 0;">Your home is your most valuable asset.</p>
       <p class="gsap-bridge-l2" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 20px; color: #6b7c85; line-height: 1.5; margin: 0;">Now there's a tool built to help you manage it.</p>
     </div>
   </div>
@@ -938,40 +939,57 @@
   <!-- ============================================================ -->
   <!-- SECTION: HOW IT WORKS                                        -->
   <!-- ============================================================ -->
-  <section class="gsap-hiw-section" style="padding: 80px 40px; margin-top: 0;">
-    <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+  <section class="gsap-hiw-section" style="padding: 60px 40px 80px; margin-top: 0;">
+    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
       <!-- Headline -->
       <h2 class="gsap-hiw-h1" style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; margin: 0 0 16px 0; line-height: 1.2;">Your Home. Under Control.</h2>
       <!-- Subhead -->
       <p class="gsap-hiw-h2" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; color: #6b7c85; line-height: 1.6; max-width: 560px; margin: 0 auto 40px auto;">See what you own, what needs attention, and what to do next. All from one photo.</p>
 
-      <!-- Three columns -->
-      <div style="display: flex; flex-direction: column; gap: 48px; align-items: stretch;" class="md:!flex-row md:!gap-12 gsap-hiw-columns">
+      <!-- Three columns in white card -->
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 48px 40px; box-shadow: 0 2px 16px rgba(6, 51, 64, 0.06);">
+        <div style="display: flex; flex-direction: column; gap: 48px; align-items: stretch;" class="md:!flex-row md:!gap-12 gsap-hiw-columns">
 
-        <!-- Card 1: Understand -->
-        <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
-          <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Understand</p>
-          <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture anything in your home.</p>
-          <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
-          <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">See what it is, how old it is, what it's worth, and its condition. Instantly.</p>
+          <!-- Card 1: Understand -->
+          <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="color: white; font-family: Montserrat; font-weight: 700; font-size: 13px;">1</span>
+              </div>
+              <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0;">Understand</p>
+            </div>
+            <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture anything in your home.</p>
+            <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+            <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">See what it is, how old it is, what it's worth, and its condition. Instantly.</p>
+          </div>
+
+          <!-- Card 2: Fix -->
+          <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="color: white; font-family: Montserrat; font-weight: 700; font-size: 13px;">2</span>
+              </div>
+              <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0;">Fix</p>
+            </div>
+            <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture what's not working.</p>
+            <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+            <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Get a diagnosis, cost range, and clear next steps - before you call anyone.</p>
+          </div>
+
+          <!-- Card 3: Protect -->
+          <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="color: white; font-family: Montserrat; font-weight: 700; font-size: 13px;">3</span>
+              </div>
+              <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0;">Protect</p>
+            </div>
+            <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture a receipt, label, or document.</p>
+            <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+            <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Your proof is stored and ready before anything goes wrong.</p>
+          </div>
+
         </div>
-
-        <!-- Card 2: Fix -->
-        <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
-          <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Fix</p>
-          <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture what's not working.</p>
-          <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
-          <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Get a diagnosis, cost range, and clear next steps — before you call anyone.</p>
-        </div>
-
-        <!-- Card 3: Protect -->
-        <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
-          <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Protect</p>
-          <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture a receipt, label, or document.</p>
-          <div class="gsap-hiw-divider" style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
-          <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Your proof is stored and ready before anything goes wrong.</p>
-        </div>
-
       </div>
     </div>
   </section>
