@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Jackknife - Spend Your Weekends on Your Life, Not Your House</title>
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Manrope:wght@400;700&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -101,8 +101,33 @@
     -webkit-backdrop-filter: blur(20px);
   }
   .bg-cta-custom { background-color: #063340; }
-  .text-accent-green { color: #1da485; }
+  .text-accent-green { color: #00A385; }
   html { scroll-behavior: smooth; }
+
+  /* Hero CTA */
+  .hero-cta {
+    display: inline-block;
+    background: #00A385;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    padding: 18px 48px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,163,133,0.3);
+    transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 767px) {
+    .hero-cta {
+      width: 100%;
+      max-width: 360px;
+      font-size: 16px;
+      padding: 16px 32px;
+    }
+  }
 
   /* Hero text transitions */
   .hero-text-animated {
@@ -117,21 +142,6 @@
   .hero-text-animated.fade-in-ready {
     opacity: 0;
     transform: translateY(12px);
-  }
-
-  /* Camera flash overlay */
-  .flash-overlay {
-    position: fixed;
-    inset: 0;
-    background: white;
-    z-index: 1000;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 400ms ease-out;
-  }
-  .flash-overlay.flash-in {
-    opacity: 1;
-    transition: opacity 80ms ease-in;
   }
 
   /* Progress indicator bars */
@@ -190,9 +200,6 @@
     .hero-text-animated {
       transition: none !important;
     }
-    .flash-overlay {
-      display: none !important;
-    }
     .progress-bar .fill.active {
       animation: none !important;
       transform: scaleX(1);
@@ -231,7 +238,7 @@
   }
   .trust-bar-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     max-width: 1200px;
     margin: 0 auto;
@@ -258,18 +265,18 @@
     flex-direction: column;
   }
   .trust-label {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-text-secondary);
+    color: rgba(255,255,255,0.6);
     margin: 0;
     line-height: 1.4;
   }
   .trust-copy {
     font-size: 16px;
     font-weight: 400;
-    color: var(--color-text-primary);
+    color: #FFFFFF;
     margin: 4px 0 0 0;
     line-height: 1.5;
   }
@@ -278,8 +285,8 @@
       padding: 32px 16px;
     }
     .trust-bar-container {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
   }
   @media (min-width: 640px) and (max-width: 1023px) {
@@ -289,6 +296,383 @@
     .trust-bar-container {
       grid-template-columns: repeat(2, 1fr);
       gap: 28px;
+    }
+  }
+
+  /* ===== Brand Statement mobile ===== */
+  @media (max-width: 767px) {
+    .brand-statement-section {
+      padding: 64px 24px !important;
+    }
+    .brand-statement-section > div {
+      gap: 24px !important;
+    }
+  }
+
+  /* ===== Pillar Tabs ===== */
+  .pillar-section {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+  .pillar-tabs {
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid #e0e5e8;
+    margin-bottom: 0;
+  }
+  .pillar-tab {
+    flex: 1;
+    text-align: center;
+    padding: 16px 0;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #6b7c85;
+    letter-spacing: 0.5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 200ms ease, font-weight 200ms ease;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pillar-tab:hover {
+    color: #063340;
+  }
+  .pillar-tab.active {
+    color: #063340;
+    font-weight: 700;
+  }
+  .tab-indicator {
+    position: absolute;
+    bottom: -2px;
+    height: 3px;
+    background: #00A385;
+    border-radius: 2px;
+    transition: left 0.3s ease, width 0.3s ease;
+  }
+
+  /* Tab Panels */
+  .pillar-panels {
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar-panel {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .pillar-panel.active {
+    display: flex;
+    opacity: 1;
+  }
+  .panel-content {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    align-items: flex-start;
+    background: #FFFFFF;
+    padding: 40px;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06);
+  }
+  .panel-benefits {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .benefit-block {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 28px 32px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  .benefit-block.active-benefit {
+    border-left: 3px solid #00A385;
+  }
+  .benefit-block:last-child {
+    margin-bottom: 0;
+  }
+  /* How It Works - equalize input line heights on desktop */
+  @media (min-width: 768px) {
+    .hiw-input {
+      min-height: 50px;
+    }
+  }
+  /* Positioning bridge - mobile */
+  @media (max-width: 767px) {
+    .positioning-bridge {
+      padding: 56px 24px !important;
+    }
+    .positioning-bridge p:first-child {
+      font-size: 22px !important;
+    }
+    .positioning-bridge p:last-child {
+      font-size: 17px !important;
+    }
+  }
+  .benefit-block h3 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #063340;
+    margin: 0 0 16px 0;
+    line-height: 1.3;
+  }
+  .benefit-block p {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #6b7c85;
+    line-height: 1.65;
+    margin: 0 0 16px 0;
+  }
+  .benefit-closer {
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 15px;
+    color: #00A385;
+    margin: 0;
+  }
+  .panel-phone {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+  }
+
+  /* Tab Phone Mockup */
+  .tab-phone-frame {
+    width: 280px;
+    height: 560px;
+    background: #063340;
+    border-radius: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(6, 51, 64, 0.15);
+  }
+  .tab-phone-notch {
+    width: 90px;
+    height: 22px;
+    background: #063340;
+    border-radius: 0 0 12px 12px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  .tab-phone-screen {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    background: #f8fafb;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .anim-step {
+    position: absolute;
+    inset: 0;
+    padding: 28px 16px 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .anim-step.active {
+    opacity: 1;
+  }
+  .anim-step-label {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #00A385;
+    margin-bottom: 8px;
+  }
+  .anim-step-title {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: #063340;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .anim-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 4px rgba(6, 51, 64, 0.08);
+  }
+  .anim-card-sm {
+    font-family: Montserrat, sans-serif;
+    font-size: 10px;
+    color: #6b7c85;
+    line-height: 1.4;
+  }
+  .anim-card-title {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #063340;
+    margin-bottom: 4px;
+  }
+  .anim-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+  .anim-badge-teal {
+    background: rgba(0, 163, 133, 0.12);
+    color: #00A385;
+  }
+  .anim-badge-coral {
+    background: rgba(232, 90, 79, 0.12);
+    color: #E85A4F;
+  }
+  .anim-badge-navy {
+    background: rgba(6, 51, 64, 0.08);
+    color: #063340;
+  }
+
+  /* Phone step dots */
+  .phone-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .phone-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e0e5e8;
+    transition: background 0.3s ease;
+  }
+  .phone-dot.active {
+    background: #00A385;
+  }
+
+  /* Mobile Tab Dots */
+  .tab-dots {
+    display: none;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0;
+  }
+  .tab-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e0e5e8;
+    transition: background 0.3s ease;
+    cursor: pointer;
+  }
+  .tab-dot.active {
+    background: #00A385;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 767px) {
+    .pillar-section {
+      padding: 60px 20px;
+    }
+    .pillar-tab {
+      font-size: 16px;
+      padding: 12px 6px;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .pillar-tab svg {
+      display: none;
+    }
+    .panel-content {
+      flex-direction: column;
+      padding: 24px 20px;
+      gap: 32px;
+    }
+    .panel-phone {
+      order: -1;
+      padding-top: 0;
+    }
+    .tab-phone-frame {
+      width: 160px;
+      height: 320px;
+    }
+    .tab-phone-notch {
+      width: 56px;
+      height: 14px;
+    }
+    .tab-phone-screen {
+      top: 8px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 18px;
+    }
+    .anim-step {
+      padding: 18px 10px 10px;
+    }
+    .anim-step-label {
+      font-size: 8px;
+      margin-bottom: 4px;
+    }
+    .anim-step-title {
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .anim-card {
+      padding: 6px;
+      margin-bottom: 5px;
+    }
+    .anim-card-title {
+      font-size: 10px;
+    }
+    .anim-card-sm {
+      font-size: 8px;
+    }
+    .anim-badge {
+      font-size: 7px;
+      padding: 1px 5px;
+    }
+    .tab-dots {
+      display: flex;
+    }
+    .benefit-block {
+      padding: 24px;
+      margin-bottom: 0;
+    }
+    .benefit-block h3 {
+      font-size: 20px;
+    }
+    .benefit-block p {
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pillar-panel {
+      transition: none;
+    }
+    .tab-indicator {
+      transition: none;
+    }
+    .anim-step {
+      transition: none;
     }
   }
 </style>
@@ -310,10 +694,8 @@
       <a class="text-[#111827]/70 hover:text-[#32849e] transition-colors font-label text-sm tracking-wide" href="#prove-it">Prove It</a>
       <a class="text-[#111827]/70 hover:text-[#32849e] transition-colors font-label text-sm tracking-wide" href="#cta">Pricing</a>
     </div>
-    <!-- Mobile menu button -->
-    <div>
-      <span class="material-symbols-outlined text-primary text-2xl cursor-pointer">menu</span>
-    </div>
+    <!-- Spacer for flex alignment -->
+    <div></div>
   </div>
 </nav>
 
@@ -322,32 +704,32 @@
 <!-- ============================================================ -->
 <!-- Flash overlay removed -->
 
-<main class="pt-24 pb-20" id="hero">
+<main class="pt-20 pb-16 md:pt-12 md:pb-8" id="hero">
   <section class="max-w-[1100px] mx-auto px-6 md:px-10">
     <!-- Hero: Text + Phone side by side -->
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-16 lg:gap-20 mb-10">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12 mb-6">
       <!-- Left Column: Text, CTA, supporting text, progress -->
-      <div class="flex-1 w-full md:max-w-[500px] z-10 order-1">
+      <div class="w-full md:flex-[1.2] md:max-w-[540px] z-10 order-1">
         <!-- Kicker -->
         <p class="font-headline text-sm font-bold tracking-[3px] uppercase mb-3" style="color: #063340;">
           Now you can
         </p>
         <!-- H1 -->
-        <h1 class="font-headline font-black leading-[1.1] tracking-tight" style="font-size: clamp(36px, 5vw, 56px); margin-bottom: 24px;">
+        <h1 class="font-headline font-black leading-[1.1] tracking-tight" style="font-size: clamp(40px, 5.5vw, 64px); margin-bottom: 16px;">
           <span id="hero-verb" class="hero-text-animated" style="font-weight: 900; color: #00A385;">Fix</span>
-          <br/>
-          <span style="color: #063340;">your home.</span>
+          <br class="md:hidden"/>
+          <span style="color: #063340;"> your home.</span>
         </h1>
         <!-- H2 -->
-        <h2 class="font-headline max-w-[400px]" style="font-weight: 500; font-size: 18px; line-height: 1.6; color: #6b7c85; margin-top: 24px;">
+        <h2 class="font-headline max-w-[400px]" style="font-weight: 500; font-size: 18px; line-height: 1.6; color: #6b7c85; margin-top: 8px;">
           Jackknife turns one photo into real answers.
         </h2>
         <!-- CTA Button -->
-        <button class="w-full max-w-[420px] text-white font-headline text-center" style="background: #00A385; font-weight: 800; font-size: 18px; letter-spacing: 0.5px; padding: 20px 40px; border-radius: 12px; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(0,163,133,0.3); transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease; margin-top: 32px; margin-bottom: 16px;" onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(0,163,133,0.4)';this.style.background='#009474'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,163,133,0.3)';this.style.background='#00A385'" onmousedown="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,163,133,0.3)'" onmouseup="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(0,163,133,0.4)'">
+        <button class="hero-cta text-white font-headline text-center" onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(0,163,133,0.4)';this.style.background='#009474'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,163,133,0.3)';this.style.background='#00A385'" onmousedown="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,163,133,0.3)'" onmouseup="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(0,163,133,0.4)'">
           Get Jackknife (It's Free)
         </button>
         <!-- Progress Indicators -->
-        <div class="flex items-center justify-center md:justify-start gap-2" role="presentation" id="progress-bars" style="margin-top: 24px;">
+        <div class="flex items-center justify-center md:justify-start gap-2" role="presentation" id="progress-bars" style="margin-top: 16px;">
           <div class="progress-bar"><div class="fill active" id="progress-0"></div></div>
           <div class="progress-bar"><div class="fill" id="progress-1"></div></div>
           <div class="progress-bar"><div class="fill" id="progress-2"></div></div>
@@ -355,7 +737,7 @@
       </div>
 
       <!-- Right Column: Phone Mockup -->
-      <div class="relative flex justify-center flex-shrink-0 order-2" aria-hidden="true">
+      <div class="relative flex justify-center flex-shrink-0 order-2 md:flex-[0.8] md:mt-4 md:self-center" aria-hidden="true">
         <div class="phone-glow" style="width: 320px; height: 600px;"></div>
         <div class="relative" style="width: 280px; height: 560px;">
           <!-- Phone Frame -->
@@ -462,7 +844,7 @@
                   <!-- Checklist Card -->
                   <div style="background: rgba(0,163,133,0.08); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(6,51,64,0.08);">
-                      <span style="font-weight: 500; font-size: 12px; color: #063340;">Dwelling coverage verified</span>
+                      <span style="font-weight: 500; font-size: 12px; color: #063340;">Dwelling coverage documented</span>
                       <span style="font-weight: 700; font-size: 11px; color: #00A385; background: rgba(0,163,133,0.1); border-radius: 20px; padding: 3px 10px;">✓</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(6,51,64,0.08);">
@@ -495,49 +877,27 @@
       </div>
     </div>
 
-    <!-- App Store Badges -centered below -->
-    <div class="flex flex-col items-center text-center">
-      <div class="flex items-center justify-center gap-4 mb-3">
-        <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-on-surface/5 text-on-surface-variant">
-          <span class="material-symbols-outlined text-lg">phone_iphone</span>
-          <span class="font-headline text-xs font-semibold tracking-wide">App Store - Coming Soon</span>
-        </div>
-        <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-on-surface/5 text-on-surface-variant">
-          <span class="material-symbols-outlined text-lg">android</span>
-          <span class="font-headline text-xs font-semibold tracking-wide">Google Play - Coming Soon</span>
-        </div>
-      </div>
-    </div>
+    <!-- App Store badges removed until apps are live -->
   </section>
 
   <!-- Privacy Trust Bar -->
   <div style="width: 100%; margin-top: 80px;">
     <div class="privacy-trust-bar">
-      <h3 style="max-width: 700px; margin: 0 auto 24px auto; font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: #ffffff; line-height: 1.4; text-align: center;">It's Your Home. It's Your Data.</h3>
+      <h3 style="max-width: 700px; margin: 0 auto 24px auto; font-family: 'Montserrat', sans-serif; font-size: 25px; font-weight: 800; color: #ffffff; line-height: 1.4; text-align: center;">It's Your Home. It's Your Data.</h3>
       <div class="trust-bar-container">
         <div class="trust-statement">
-          <div class="trust-icon" aria-hidden="true">🔒</div>
-          <div class="trust-content">
-            <p class="trust-label">Your data.</p>
-            <p class="trust-copy">Your data stays yours. Always.</p>
-          </div>
-        </div>
-        <div class="trust-statement">
-          <div class="trust-icon" aria-hidden="true">🚫</div>
           <div class="trust-content">
             <p class="trust-label">No selling.</p>
-            <p class="trust-copy">We never sell your information.</p>
+            <p class="trust-copy">We never sell your personal home data. Period.</p>
           </div>
         </div>
         <div class="trust-statement">
-          <div class="trust-icon" aria-hidden="true">⚖️</div>
           <div class="trust-content">
-            <p class="trust-label">No kickbacks.</p>
-            <p class="trust-copy">No contractor kickbacks.</p>
+            <p class="trust-label">No ads.</p>
+            <p class="trust-copy">Your home record is ad-free. By design.</p>
           </div>
         </div>
         <div class="trust-statement">
-          <div class="trust-icon" aria-hidden="true">✅</div>
           <div class="trust-content">
             <p class="trust-label">You control.</p>
             <p class="trust-copy">You control who sees your home record.</p>
@@ -547,411 +907,532 @@
     </div>
   </div>
 
-  <!-- Value Props Cards -->
-  <section style="max-width: 1100px; width: 100%; margin: 0 auto; padding: 80px 40px;">
-    <div style="display: flex; gap: 24px; flex-direction: column;" class="md:!flex-row">
-      <!-- Card 1: Know it. -->
-      <div style="flex: 1; min-width: 0; padding: 32px; background: #FFFFFF; border-radius: 16px; border: none; box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06); display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0, 163, 133, 0.1);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
+
+  <!-- ============================================================ -->
+  <!-- SECTION: HOW IT WORKS                                        -->
+  <!-- ============================================================ -->
+  <section style="padding: 80px 40px; margin-top: 0;">
+    <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+      <!-- Headline -->
+      <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; margin: 0 0 16px 0; line-height: 1.2;">Your Home. Under Control.</h2>
+      <!-- Subhead -->
+      <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; color: #6b7c85; line-height: 1.6; max-width: 560px; margin: 0 auto 40px auto;">See what you own, what needs attention, and what to do next. All from one photo.</p>
+
+      <!-- Three columns -->
+      <div style="display: flex; flex-direction: column; gap: 48px; align-items: stretch;" class="md:!flex-row md:!gap-12">
+
+        <!-- Card 1: Understand -->
+        <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
+          <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Understand</p>
+          <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture anything in your home.</p>
+          <div style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+          <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">See what it is, how old it is, what it's worth, and its condition. Instantly.</p>
         </div>
-        <h3 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #063340; margin-top: 20px; margin-bottom: 12px; line-height: 1.2;">Know it.</h3>
-        <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.65; margin: 0;">Point your phone at anything in your home. Jackknife tells you what it is, how old it is, what shape it's in, and what it's worth -in seconds.</p>
-      </div>
-      <!-- Card 2: Fix it. -->
-      <div style="flex: 1; min-width: 0; padding: 32px; background: #FFFFFF; border-radius: 16px; border: none; box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06); display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0, 163, 133, 0.1);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.35-4.35"/>
-            <path d="m9 11 2 2 4-4"/>
-          </svg>
+
+        <!-- Card 2: Fix -->
+        <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
+          <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Fix</p>
+          <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture what's not working.</p>
+          <div style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+          <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Get a diagnosis, cost range, and clear next steps — before you call anyone.</p>
         </div>
-        <h3 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #063340; margin-top: 20px; margin-bottom: 12px; line-height: 1.2;">Fix it.</h3>
-        <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.65; margin: 0;">Something's off? Get a diagnosis, a cost range, and whether it's DIY -before you call anyone.</p>
-      </div>
-      <!-- Card 3: Prove it. -->
-      <div style="flex: 1; min-width: 0; padding: 32px; background: #FFFFFF; border-radius: 16px; border: none; box-shadow: 0 2px 12px rgba(6, 51, 64, 0.06); display: flex; flex-direction: column; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0, 163, 133, 0.1);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
+
+        <!-- Card 3: Protect -->
+        <div style="flex: 1; text-align: left; display: flex; flex-direction: column;">
+          <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Protect</p>
+          <p class="hiw-input" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #063340; line-height: 1.4; margin: 0 0 12px 0;">Capture a receipt, label, or document.</p>
+          <div style="width: 48px; height: 2px; background: #00A385; margin: 0 0 14px 0;"></div>
+          <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #6b7c85; line-height: 1.6; margin: 0;">Your proof is stored and ready before anything goes wrong.</p>
         </div>
-        <h3 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #063340; margin-top: 20px; margin-bottom: 12px; line-height: 1.2;">Prove it.</h3>
-        <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.65; margin: 0;">Every photo becomes a record. Insurance claims, home sales, warranty disputes -your proof is already built.</p>
+
       </div>
+    </div>
+  </section>
+
+  <!-- Pillar Tabs: Understand it. Fix it. Prove it. -->
+  <section class="pillar-section" id="pillar-tabs">
+    <!-- Tab Bar -->
+    <div class="pillar-tabs" role="tablist">
+      <button class="pillar-tab active" role="tab" aria-selected="true" data-tab="0" onclick="switchPillarTab(0)">
+        Understand.
+      </button>
+      <button class="pillar-tab" role="tab" aria-selected="false" data-tab="1" onclick="switchPillarTab(1)">
+        Fix.
+      </button>
+      <button class="pillar-tab" role="tab" aria-selected="false" data-tab="2" onclick="switchPillarTab(2)">
+        Protect.
+      </button>
+      <div class="tab-indicator" id="tab-indicator"></div>
+    </div>
+
+    <!-- Tab Panels -->
+    <div class="pillar-panels" id="pillar-panels">
+
+      <!-- Panel 0: Understand it. -->
+      <div class="pillar-panel active" role="tabpanel" data-panel="0">
+        <div class="panel-content">
+          <div class="panel-benefits">
+            <div class="benefit-block">
+              <h3>Your Home, Explained.</h3>
+              <p>Snap an inventory item. Jackknife tracks your appliances and systems, flags risks, and reminds you at the right time.</p>
+              <p class="benefit-closer">No guesswork.</p>
+            </div>
+            <div class="benefit-block">
+              <h3>Never Miss a Warranty or Rebate</h3>
+              <p>Snap a photo. Jackknife captures warranties, finds rebates, and tracks deadlines.</p>
+              <p class="benefit-closer">Nothing slips through the cracks.</p>
+            </div>
+            <div class="benefit-block">
+              <h3>No Drawers. No Folders. No Digging.</h3>
+              <p>All your items, documents, and details in one place. Search and find them instantly.</p>
+              <p class="benefit-closer">Your home, finally organized.</p>
+            </div>
+          </div>
+          <div class="panel-phone">
+            <div>
+              <div class="tab-phone-frame">
+                <div class="tab-phone-notch"></div>
+                <div class="tab-phone-screen" data-phone="0">
+                  <!-- Step 1: Camera scan -->
+                  <div class="anim-step active" data-step="0">
+                    <div class="anim-step-label">Step 1</div>
+                    <div class="anim-step-title">Point &amp; Identify</div>
+                    <div class="anim-card">
+                      <div style="width: 100%; height: 80px; background: linear-gradient(135deg, #e8f5f0 0%, #d4eee6 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                      </div>
+                      <div class="anim-card-title">Scanning...</div>
+                      <div class="anim-card-sm">Water heater detected</div>
+                    </div>
+                  </div>
+                  <!-- Step 2: Item details -->
+                  <div class="anim-step" data-step="1">
+                    <div class="anim-step-label">Step 2</div>
+                    <div class="anim-step-title">Instant Details</div>
+                    <div class="anim-card">
+                      <div class="anim-card-title">AO Smith ProMax</div>
+                      <div class="anim-card-sm" style="margin-bottom: 6px;">50-Gal Gas Water Heater</div>
+                      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span class="anim-badge anim-badge-navy">Age: 8 yrs</span>
+                        <span class="anim-badge anim-badge-teal">Fair condition</span>
+                      </div>
+                    </div>
+                    <div class="anim-card" style="margin-top: 4px;">
+                      <div class="anim-card-title">Estimated Value</div>
+                      <div style="font-family: Montserrat; font-weight: 800; font-size: 18px; color: #063340;">$420</div>
+                    </div>
+                  </div>
+                  <!-- Step 3: Warranty alerts -->
+                  <div class="anim-step" data-step="2">
+                    <div class="anim-step-label">Step 3</div>
+                    <div class="anim-step-title">Alerts &amp; Reminders</div>
+                    <div class="anim-card">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <div class="anim-card-title">Warranty</div>
+                        <span class="anim-badge anim-badge-coral">Expiring Soon</span>
+                      </div>
+                      <div class="anim-card-sm">Expires Dec 2026 - 9 months left</div>
+                    </div>
+                    <div class="anim-card">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <div class="anim-card-title">Rebate Available</div>
+                        <span class="anim-badge anim-badge-teal">$750</span>
+                      </div>
+                      <div class="anim-card-sm">Energy Star upgrade rebate - your utility</div>
+                    </div>
+                    <div class="anim-card">
+                      <div class="anim-card-title">Maintenance Due</div>
+                      <div class="anim-card-sm">Flush tank - recommended annually</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="phone-dots" data-dots="0">
+                <div class="phone-dot active"></div>
+                <div class="phone-dot"></div>
+                <div class="phone-dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 1: Fix it. -->
+      <div class="pillar-panel" role="tabpanel" data-panel="1">
+        <div class="panel-content">
+          <div class="panel-benefits">
+            <div class="benefit-block">
+              <h3>Stop Googling. Start Knowing.</h3>
+              <p>Point your phone at the problem. Jackknife tells you what's wrong, how to fix it, or who to call - in seconds.</p>
+              <p class="benefit-closer">Point at the Problem. Get the Answer.</p>
+            </div>
+            <div class="benefit-block">
+              <h3>Access to the Pros Your Neighbors Already Trust.</h3>
+              <p>Jackknife shows you the contractors your neighbors rely on. Every review is verified and tied to actual work, so you know who to trust.</p>
+              <p class="benefit-closer">Real Homes. Real Jobs. Real Reviews.</p>
+            </div>
+            <div class="benefit-block">
+              <h3>All Your Projects, Organized From Start to Finish</h3>
+              <p>From simple fixes to major upgrades, Jackknife lays out the plan and keeps every step on track.</p>
+              <p class="benefit-closer">No confusion. No delays. No stress.</p>
+            </div>
+          </div>
+          <div class="panel-phone">
+            <div>
+              <div class="tab-phone-frame">
+                <div class="tab-phone-notch"></div>
+                <div class="tab-phone-screen" data-phone="1">
+                  <!-- Step 1: Diagnosis -->
+                  <div class="anim-step active" data-step="0">
+                    <div class="anim-step-label">Step 1</div>
+                    <div class="anim-step-title">Instant Diagnosis</div>
+                    <div class="anim-card">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <div class="anim-card-title">Dishwasher Door</div>
+                        <span class="anim-badge anim-badge-coral">Issue Found</span>
+                      </div>
+                      <div class="anim-card-sm" style="margin-bottom: 6px;">Hinge spring broken. Door won't stay open during loading.</div>
+                      <div class="anim-card-sm" style="color: #063340; font-weight: 600;">Urgency: Moderate</div>
+                    </div>
+                    <div class="anim-card" style="margin-top: 4px;">
+                      <div class="anim-card-title">Recommendation</div>
+                      <div style="display: flex; gap: 6px; margin-top: 4px;">
+                        <span class="anim-badge anim-badge-teal">DIY Possible</span>
+                        <span class="anim-badge anim-badge-navy">Pro Recommended</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Step 2: Pro Network -->
+                  <div class="anim-step" data-step="1">
+                    <div class="anim-step-label">Step 2</div>
+                    <div class="anim-step-title">Your Neighbor's Pro</div>
+                    <div class="anim-card">
+                      <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: #063340; display: flex; align-items: center; justify-content: center; color: white; font-family: Montserrat; font-weight: 700; font-size: 13px;">JP</div>
+                        <div>
+                          <div class="anim-card-title" style="margin-bottom: 1px;">John Paul Appliances</div>
+                          <div class="anim-card-sm">4.9 stars - 127 verified jobs</div>
+                        </div>
+                      </div>
+                      <span class="anim-badge anim-badge-teal" style="margin-bottom: 8px; display: inline-block;">Your neighbors' pick</span>
+                      <div style="background: #f0f8fa; border-radius: 8px; padding: 8px 10px; margin-top: 4px;">
+                        <div class="anim-card-sm" style="font-style: italic;">"Fixed our dishwasher same day. Honest pricing."</div>
+                        <div class="anim-card-sm" style="color: #063340; font-weight: 600; margin-top: 3px;">The Martins, Oak St</div>
+                      </div>
+                    </div>
+                    <div style="background: #00A385; color: white; text-align: center; padding: 10px; border-radius: 10px; font-family: Montserrat; font-weight: 700; font-size: 12px; margin-top: 8px; cursor: pointer;">View Profile</div>
+                  </div>
+                  <!-- Step 3: Project Management -->
+                  <div class="anim-step" data-step="2">
+                    <div class="anim-step-label">Step 3</div>
+                    <div class="anim-step-title">Project Tracker</div>
+                    <div style="display: flex; flex-direction: column; gap: 0;">
+                      <!-- Timeline steps -->
+                      <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div class="anim-card-sm" style="color: #063340; font-weight: 600;">Issue Analyzed</div>
+                      </div>
+                      <div style="width: 2px; height: 6px; background: #00A385; margin-left: 9px;"></div>
+                      <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div class="anim-card-sm" style="color: #063340; font-weight: 600;">Pro Selected</div>
+                      </div>
+                      <div style="width: 2px; height: 6px; background: #00A385; margin-left: 9px;"></div>
+                      <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0; background: rgba(0,163,133,0.08); border-radius: 8px; padding-left: 4px; padding-right: 8px;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(0,163,133,0.2);">
+                          <div style="width: 6px; height: 6px; border-radius: 50%; background: white;"></div>
+                        </div>
+                        <div>
+                          <div class="anim-card-sm" style="color: #00A385; font-weight: 700;">Service Confirmed</div>
+                          <div class="anim-card-sm" style="font-size: 9px;">Mon, May 26 - 3 PM</div>
+                        </div>
+                      </div>
+                      <div style="width: 2px; height: 6px; background: #e8edf0; margin-left: 9px;"></div>
+                      <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid #e8edf0;"></div>
+                        <div class="anim-card-sm" style="color: #6b7c85;">Confirm Completion</div>
+                      </div>
+                      <div style="width: 2px; height: 6px; background: #e8edf0; margin-left: 9px;"></div>
+                      <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid #e8edf0;"></div>
+                        <div class="anim-card-sm" style="color: #6b7c85;">Rate Your Pro</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="phone-dots" data-dots="1">
+                <div class="phone-dot active"></div>
+                <div class="phone-dot"></div>
+                <div class="phone-dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Prove it. -->
+      <div class="pillar-panel" role="tabpanel" data-panel="2">
+        <div class="panel-content">
+          <div class="panel-benefits">
+            <div class="benefit-block">
+              <h3>Every Photo Becomes Proof</h3>
+              <p>Snap a photo. Jackknife timestamps it, categorizes it, and files it into your home record automatically.</p>
+              <p class="benefit-closer">Point your phone. Your record grows.</p>
+            </div>
+            <div class="benefit-block">
+              <h3>Your Record Is Already Built</h3>
+              <p>Every appliance documented. Every repair logged. Every receipt stored.</p>
+              <p class="benefit-closer">No scrambling. No missing proof.</p>
+            </div>
+            <div class="benefit-block">
+              <h3>Your Home Protection Score</h3>
+              <p>One number that shows how protected your home is. Coverage gaps. Overdue inspections. Expiring warranties.</p>
+              <p class="benefit-closer">Know where you stand.</p>
+            </div>
+          </div>
+          <div class="panel-phone">
+            <div>
+              <div class="tab-phone-frame">
+                <div class="tab-phone-notch"></div>
+                <div class="tab-phone-screen" data-phone="2">
+                  <!-- Step 1: Record created -->
+                  <div class="anim-step active" data-step="0">
+                    <div class="anim-step-label">Step 1</div>
+                    <div class="anim-step-title">Record Created</div>
+                    <div class="anim-card">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <div class="anim-card-title">Water Heater</div>
+                        <span class="anim-badge anim-badge-teal">Documented</span>
+                      </div>
+                      <div class="anim-card-sm">Photo captured Mar 23, 2026 at 2:14 PM</div>
+                      <div class="anim-card-sm" style="margin-top: 4px;">Condition, value, and location recorded</div>
+                    </div>
+                    <div class="anim-card">
+                      <div class="anim-card-title">Total Records</div>
+                      <div style="font-family: Montserrat; font-weight: 800; font-size: 22px; color: #00A385;">47 items</div>
+                    </div>
+                  </div>
+                  <!-- Step 2: Claim evidence -->
+                  <div class="anim-step" data-step="1">
+                    <div class="anim-step-label">Step 2</div>
+                    <div class="anim-step-title">Organized and Ready to Share</div>
+                    <div class="anim-card">
+                      <div class="anim-card-title">Insurance Packet</div>
+                      <div class="anim-card-sm" style="margin-bottom: 8px;">Auto-generated from your records</div>
+                      <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;"><span style="color: white; font-size: 8px;">&#10003;</span></div>
+                          <span class="anim-card-sm">Photos with timestamps</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;"><span style="color: white; font-size: 8px;">&#10003;</span></div>
+                          <span class="anim-card-sm">Condition assessments</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;"><span style="color: white; font-size: 8px;">&#10003;</span></div>
+                          <span class="anim-card-sm">Replacement values</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Step 3: Protection score -->
+                  <div class="anim-step" data-step="2">
+                    <div class="anim-step-label">Step 3</div>
+                    <div class="anim-step-title">Protection Score</div>
+                    <div class="anim-card" style="text-align: center; padding: 16px;">
+                      <div style="width: 80px; height: 80px; border-radius: 50%; border: 6px solid #00A385; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">
+                        <div>
+                          <div style="font-family: Montserrat; font-weight: 800; font-size: 22px; color: #063340; line-height: 1;">82</div>
+                          <div style="font-family: Montserrat; font-weight: 700; font-size: 8px; color: #00A385; text-transform: uppercase; letter-spacing: 1px;">Good</div>
+                        </div>
+                      </div>
+                      <div class="anim-card-sm">Your home is well-documented</div>
+                    </div>
+                    <div class="anim-card">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="anim-card-sm">Coverage documented</div>
+                        <span class="anim-badge anim-badge-teal">92%</span>
+                      </div>
+                    </div>
+                    <div class="anim-card">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="anim-card-sm">Maintenance current</div>
+                        <span class="anim-badge anim-badge-coral">1 overdue</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="phone-dots" data-dots="2">
+                <div class="phone-dot active"></div>
+                <div class="phone-dot"></div>
+                <div class="phone-dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile swipe dots -->
+    <div class="tab-dots" id="tab-dots">
+      <div class="tab-dot active" onclick="switchPillarTab(0)"></div>
+      <div class="tab-dot" onclick="switchPillarTab(1)"></div>
+      <div class="tab-dot" onclick="switchPillarTab(2)"></div>
     </div>
   </section>
 </main>
 
 <!-- ============================================================ -->
-<!-- SECTION 2: KNOW IT                                           -->
+<!-- SECTION: FAQ                                                  -->
 <!-- ============================================================ -->
-<section class="pb-24 md:pb-40 overflow-hidden" id="know-it">
-  <div class="max-w-7xl mx-auto px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-      <!-- Left Column: Visual -->
-      <div class="relative flex justify-center lg:justify-start">
-        <div class="absolute -top-12 -left-12 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-12 right-12 w-80 h-80 bg-primary-container/10 rounded-full blur-3xl"></div>
-        <div class="relative z-10 w-full max-w-[320px] md:max-w-[380px]">
-          <div class="relative rounded-[3rem] border-8 border-on-surface overflow-hidden shadow-2xl bg-surface-container-lowest">
-            <div class="relative aspect-[9/19.5]">
-              <img alt="Smartphone scanning a home appliance" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQi-nii4Lw2eSy804lpnShHkL4z1lY8UK7vbFwqEFejgIal3EYLFzuzhnvF5XPStat4hzyeCTJ3budwldxX1cok5vQQDyH7X3Z5h_O56njEsPeDnm-ZyxRFzIsK7F-LaVmvnbyTmeLWH1LI9aLR72CzOQNU6UWZgFzERC1nGChNQNaOO_iStfKV2Z3r49_Fgqtk6v7AhC5VS6HR0LCRHRLeFtmxGlJVmuw4erUIArrABIZXRtNgLWtBS-Tj25D1rDkPyc6SolbAQg"/>
-              <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6">
-                <div class="glass-effect bg-surface/70 rounded-xl p-4 shadow-xl border border-white/20 mb-4">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary">
-                      <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                    </div>
-                    <div>
-                      <p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Identified</p>
-                      <p class="text-sm font-bold text-on-surface">Rheem Performance Platinum</p>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-on-surface/5">
-                    <div>
-                      <p class="text-[8px] text-on-surface/60 uppercase">Model</p>
-                      <p class="text-[10px] font-semibold">XE50T12CS45U0</p>
-                    </div>
-                    <div>
-                      <p class="text-[8px] text-on-surface/60 uppercase">Installed</p>
-                      <p class="text-[10px] font-semibold">Oct 2021</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-secondary-container shadow-[0_0_15px_rgba(187,247,225,0.8)]"></div>
-              </div>
-            </div>
-          </div>
-          <div class="absolute -right-8 top-1/4 z-20 hidden md:block w-56">
-            <div class="bg-surface-container-lowest p-5 rounded-xl shadow-xl border-l-4 border-secondary">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="material-symbols-outlined text-secondary text-lg">info</span>
-                <span class="text-xs font-bold text-on-surface">Insight</span>
-              </div>
-              <p class="text-xs text-on-surface/80 leading-relaxed">Filter replacement recommended in 14 days based on usage patterns.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Right Column: Content -->
-      <div>
-        <div class="space-y-6 lg:max-w-xl">
-          <span class="inline-block text-primary font-bold text-sm tracking-[0.2em] uppercase font-headline">Know It</span>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-on-surface font-headline leading-[1.1] tracking-tight">
-            Every Appliance. <br/>
-            Every Repair. <br/>
-            Every Receipt. <br/>
-            <span class="text-primary-container">One Place.</span>
-          </h2>
-          <div class="space-y-6 pt-4">
-            <p class="text-lg md:text-xl text-on-surface/80 leading-relaxed">
-              Snap a photo. Jackknife identifies it -brand, model, serial number, condition, value.
-            </p>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <span class="material-symbols-outlined text-secondary mt-1">remove_circle_outline</span>
-                <span class="text-on-surface/70 font-medium">No typing. No spreadsheets. No digging through drawers.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="material-symbols-outlined text-secondary mt-1">insights</span>
-                <span class="text-on-surface/70 font-medium">You'll know more about your home in sixty seconds than most homeowners learn in a decade.</span>
-              </li>
-            </ul>
-          </div>
-          <div class="pt-8">
-            <button class="bg-primary text-on-primary px-10 py-5 rounded-full font-label font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20 flex items-center gap-3">
-              Scan My First Item
-              <span class="material-symbols-outlined">camera_enhance</span>
-            </button>
-          </div>
-        </div>
+<section style="max-width: 800px; width: 100%; margin: 0 auto; padding: 80px 40px;">
+  <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; color: #063340; text-align: center; margin: 0 0 48px 0;">What Homeowners Want to Know</h2>
+
+  <div class="faq-list" style="display: flex; flex-direction: column; gap: 0;">
+
+    <!-- FAQ 1 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">IS JACKKNIFE ACTUALLY FREE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Yes. Actually free. Not "free for 14 days." Not "free until you hit a paywall." Free for homeowners. Forever.</p>
       </div>
     </div>
+
+    <!-- FAQ 2 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">IS MY HOME DATA TRULY PRIVATE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Your home record is visible only to you and anyone you choose to share it with. Contractors see nothing unless you allow it. There are no advertisers on Jackknife. That's by design.</p>
+      </div>
+    </div>
+
+    <!-- FAQ: Contractor calls -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">WILL CONTRACTORS START CALLING ME IF I SIGN UP?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">No. We don't sell your info to five contractors and let them fight over you. You pick the pro. You start the conversation (you choose - call, text, or email). We don't even share your real phone number with them.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">DO I NEED TO BE HANDY TO USE JACKKNIFE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Not even a little. Jackknife was built by someone who has to hire other people to assemble IKEA furniture. Point your phone at the thing. We'll tell you what it is, what shape it's in, and what to do about it.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 4 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">IF IT'S FREE, DOESN'T THAT MEAN I'M THE PRODUCT?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">No. Jackknife was built by a homeowner who got tired of bad advice, fake reviews, and wasted weekends. Here's how it works: when you need a pro, we connect you with contractors your neighbors trust. They pay for that introduction. You don't. Your data stays yours.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 5 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">WHAT DO YOU DO WITH MY DATA?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Nothing. We don't sell it. We don't share it. We don't use it for ads. Your home data belongs to you.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 6 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">DO I NEED TO PHOTOGRAPH EVERYTHING?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">No. Start with one photo. Your record grows as you go.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 7 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">HOW DOES JACKKNIFE MAKE MONEY?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Contractors pay a fee. That's it. No bidding wars. No pay-to-rank. No "boost your listing" upsells. If that sounds refreshingly simple, that's because every other platform made it complicated on purpose.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 8 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #063340; letter-spacing: 0.3px;">WHAT IF I SELL MY HOME?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Your Jackknife record becomes one of the most valuable things you hand the buyer: a complete, documented history of everything in the home. Maintenance records, repair history, appliance ages, contractor work. Think of it as the Carfax for your house. Buyers love it. It didn't cost you a minute of extra work. And you choose exactly what gets shared.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
+
 <!-- ============================================================ -->
-<!-- SECTION 3: FIX IT                                            -->
+<!-- SECTION: BRAND STATEMENT                                      -->
 <!-- ============================================================ -->
-<section class="pb-24 md:pb-40 overflow-hidden" id="fix-it">
-  <div class="max-w-7xl mx-auto px-8 lg:px-12">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-      <!-- Left Column: Copy -->
-      <div class="lg:col-span-6 order-2 lg:order-1">
-        <span class="inline-block font-label text-primary font-bold tracking-widest text-xs uppercase mb-6">
-          The moment it clicks
-        </span>
-        <h2 class="font-headline text-4xl md:text-5xl lg:text-6xl text-primary font-black tracking-tight leading-[1.1] mb-8">
-          Stop Googling Symptoms. <br/>
-          <span class="text-secondary">Start Knowing.</span>
-        </h2>
-        <div class="space-y-6 mb-12">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined">chat_bubble</span>
-            </div>
-            <div>
-              <p class="font-body text-lg font-medium text-on-surface leading-tight">What's wrong -in plain English</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined">payments</span>
-            </div>
-            <div>
-              <p class="font-body text-lg font-medium text-on-surface leading-tight">What it should cost -before anyone shows up</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined">handyman</span>
-            </div>
-            <div>
-              <p class="font-body text-lg font-medium text-on-surface leading-tight">Whether it's DIY or time to call a pro</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined">verified</span>
-            </div>
-            <div>
-              <p class="font-body text-lg font-medium text-on-surface leading-tight">Whether it's under warranty or recall</p>
-            </div>
-          </div>
-        </div>
-        <div class="relative mb-12">
-          <div class="absolute -left-4 top-0 bottom-0 w-1 bg-secondary rounded-full opacity-40"></div>
-          <p class="font-headline text-2xl font-bold text-on-surface pl-4 italic leading-snug">
-            "One photo. Sixty seconds. You stopped guessing."
-          </p>
-        </div>
-        <button class="group relative inline-flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-full font-label text-lg font-bold shadow-lg shadow-primary/20 hover:bg-primary-container active:scale-95 transition-all duration-200">
-          Get My Free Diagnosis
-          <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </button>
-      </div>
-      <!-- Right Column: Phone Mockup -->
-      <div class="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end">
-        <div class="relative w-full max-w-[420px]">
-          <div class="absolute -top-10 -right-10 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
-          <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-          <div class="relative bg-on-surface p-3 rounded-[3rem] editorial-shadow transform lg:rotate-2 hover:rotate-0 transition-transform duration-700">
-            <div class="bg-surface overflow-hidden rounded-[2.2rem] aspect-[9/19.5] relative">
-              <div class="absolute inset-0">
-                <img alt="Ceiling water stain diagnosis scan" class="w-full h-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-zHvPFKAmIqiLwyRmVvx7qskX_ZAdetei8RDojBR41kLCaUkMVS2-RAeeIF_O13ww_brdSMHk8NtyByyAHyeRyFcwCuJjlr4sNMLviVTNq_69HVjNtD9JFQ3pNVQhWkLPCR2Ee5-OlkycOQJyuzbTRGHb8BTaj52qoTUQxv9PmikErcCfiKRu56AQh1cuoKQudBCD_iTfANcjE2hc1t4VQ8aH1N16m1Ztu42xHi5COnq_EChwDRPGKMQ9NSFJjldlc8EBjmXgS6w"/>
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div class="w-48 h-48 border-2 border-white/50 rounded-3xl border-dashed"></div>
-                </div>
-              </div>
-              <div class="absolute bottom-6 left-4 right-4 z-20">
-                <div class="bg-surface-container-lowest p-5 rounded-2xl shadow-2xl border-l-4 border-secondary">
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">AI Analysis Active</span>
-                    <span class="text-on-surface/40 text-[10px]">60s remaining</span>
-                  </div>
-                  <h3 class="font-headline text-lg font-extrabold text-on-surface mb-1">Active Leak Detected</h3>
-                  <p class="font-body text-xs text-on-surface-variant mb-4 leading-relaxed">Source: Upstairs bathroom supply line. Moderate severity.</p>
-                  <div class="grid grid-cols-2 gap-2 mb-4">
-                    <div class="bg-surface-container-low p-2 rounded-lg">
-                      <p class="text-[9px] uppercase font-bold text-on-surface/40 mb-1">Repair Cost</p>
-                      <p class="text-sm font-bold text-primary">$150 - $220</p>
-                    </div>
-                    <div class="bg-surface-container-low p-2 rounded-lg">
-                      <p class="text-[9px] uppercase font-bold text-on-surface/40 mb-1">Effort</p>
-                      <p class="text-sm font-bold text-primary">Pro Needed</p>
-                    </div>
-                  </div>
-                  <div class="w-full bg-primary text-on-primary py-2 rounded-xl text-center text-xs font-bold font-label">
-                    Book Expert Repair
-                  </div>
-                </div>
-              </div>
-              <div class="absolute top-0 w-full p-6 flex justify-between items-center bg-gradient-to-b from-black/40 to-transparent">
-                <span class="material-symbols-outlined text-white">close</span>
-                <span class="material-symbols-outlined text-white">flashlight_on</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<section style="background: #f0f8fa; width: 100%; padding: 100px 40px; display: flex; justify-content: center;" class="brand-statement-section">
+  <div style="max-width: 900px; width: 100%; display: flex; gap: 32px; align-items: flex-start;">
+    <!-- Teal vertical accent bar -->
+    <div style="width: 4px; flex-shrink: 0; background: linear-gradient(180deg, #00A385 0%, rgba(0, 163, 133, 0.15) 100%); border-radius: 2px; align-self: stretch;"></div>
+    <!-- Text content -->
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(26px, 3.5vw, 44px); line-height: 1.2; color: #063340; margin: 0 0 24px 0; letter-spacing: -0.5px;">Owning a home shouldn't feel like a second job.</h2>
+      <p style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(17px, 2vw, 22px); line-height: 1.5; color: #00A385; margin: 0; max-width: 640px;">Understand, fix, and protect your home. All from one photo.</p>
     </div>
   </div>
 </section>
-
-<!-- ============================================================ -->
-<!-- SECTION 4: PROVE IT                                          -->
-<!-- ============================================================ -->
-<section class="pb-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto" id="prove-it">
-  <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-    <!-- Left Column: Copy -->
-    <div class="space-y-8">
-      <div class="space-y-4">
-        <span class="inline-block text-[#32849e] font-label font-bold text-sm tracking-widest uppercase">Your home record</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold font-headline leading-tight text-on-surface tracking-tight">
-          When the Pipe Bursts, Your Insurer Doesn't Want Your Memory. <span class="text-primary">They Want a Record.</span>
-        </h2>
-      </div>
-      <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed max-w-xl">
-        <p class="flex items-start gap-4">
-          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-          <span>Insurance claims get denied for lack of documentation.</span>
-        </p>
-        <p class="flex items-start gap-4">
-          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-          <span>Home sales lose value because buyers can't verify what's been maintained.</span>
-        </p>
-        <p class="flex items-start gap-4">
-          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-          <span>Warranties expire because nobody tracked the date.</span>
-        </p>
-        <p class="pt-4 border-l-4 border-secondary/20 pl-6 italic">
-          Jackknife builds the proof as you go. Every photo becomes a timestamped record. Every receipt gets pulled and filed. Every repair is logged.
-        </p>
-        <p class="text-on-surface font-bold text-xl pt-2">
-          That's the difference between a denied claim and a paid one.
-        </p>
-      </div>
-      <div class="space-y-4 pt-4">
-        <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-          <span class="font-label font-medium">Claim-ready files for every item -timestamped and verified</span>
-        </div>
-        <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-          <span class="font-label font-medium">Complete maintenance history -searchable by system, date, or contractor</span>
-        </div>
-        <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-          <span class="font-label font-medium">One-tap export for insurance, sale, or legal</span>
-        </div>
-      </div>
-    </div>
-    <!-- Right Column: App Mockup -->
-    <div class="relative flex justify-center lg:justify-end">
-      <div class="absolute -top-12 -right-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10"></div>
-      <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
-      <div class="relative w-[320px] h-[640px] bg-on-surface rounded-[3rem] p-3 shadow-2xl border-[8px] border-on-surface-variant/20 overflow-hidden ring-1 ring-black/5">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-on-surface rounded-b-2xl z-20"></div>
-        <div class="bg-surface h-full w-full rounded-[2.2rem] overflow-hidden flex flex-col relative">
-          <div class="pt-10 px-6 pb-4 bg-white shadow-sm flex justify-between items-center">
-            <span class="font-headline font-bold text-lg">Inventory</span>
-            <span class="material-symbols-outlined text-primary">add_circle</span>
-          </div>
-          <div class="flex-1 overflow-y-auto p-4 space-y-4">
-            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
-              <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
-              <div class="flex justify-between items-start mb-2">
-                <div>
-                  <h4 class="font-bold text-sm">Carrier HVAC System</h4>
-                  <p class="text-[10px] text-on-surface-variant">Serial: #CN45290X</p>
-                </div>
-                <span class="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold">VERIFIED</span>
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-[10px] mb-3">
-                <div class="bg-surface-container p-2 rounded-lg">
-                  <span class="block opacity-60">Installed</span>
-                  <span class="font-semibold">Oct 2021</span>
-                </div>
-                <div class="bg-surface-container p-2 rounded-lg">
-                  <span class="block opacity-60">Warranty</span>
-                  <span class="font-semibold text-tertiary">10yr (2031)</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 pt-2 border-t border-outline-variant/20">
-                <span class="material-symbols-outlined text-sm opacity-40">receipt_long</span>
-                <span class="text-[9px] font-medium">$8,400 Maintenance Logged</span>
-              </div>
-            </div>
-            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
-              <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
-              <div class="flex justify-between items-start mb-2">
-                <div>
-                  <h4 class="font-bold text-sm">Rheem Hybrid Heater</h4>
-                  <p class="text-[10px] text-on-surface-variant">Unit 40 Gal</p>
-                </div>
-                <span class="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold">VERIFIED</span>
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-[10px] mb-3">
-                <div class="bg-surface-container p-2 rounded-lg">
-                  <span class="block opacity-60">Installed</span>
-                  <span class="font-semibold">Jan 2023</span>
-                </div>
-                <div class="bg-surface-container p-2 rounded-lg">
-                  <span class="block opacity-60">Tax Credit</span>
-                  <span class="font-semibold">$2,000 Filed</span>
-                </div>
-              </div>
-            </div>
-            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden opacity-80">
-              <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
-              <div class="flex justify-between items-start mb-2">
-                <div>
-                  <h4 class="font-bold text-sm">GAF Timberline Shingles</h4>
-                  <p class="text-[10px] text-on-surface-variant">Full Replacement</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 pt-2 text-[10px]">
-                <span class="material-symbols-outlined text-sm text-primary">photo_camera</span>
-                <span class="font-medium">12 Post-Storm Records</span>
-              </div>
-            </div>
-          </div>
-          <div class="h-16 bg-white border-t border-outline-variant/10 flex justify-around items-center px-4">
-            <span class="material-symbols-outlined text-on-surface-variant">home</span>
-            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
-            <span class="material-symbols-outlined text-on-surface-variant">shield</span>
-            <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
-          </div>
-        </div>
-      </div>
-      <div class="absolute bottom-12 -right-8 md:-right-16 bg-white p-4 rounded-xl shadow-2xl max-w-[180px] border border-surface-container rotate-3">
-        <div class="flex items-center gap-3 mb-2">
-          <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
-            <span class="material-symbols-outlined text-on-secondary-container text-sm">description</span>
-          </div>
-          <span class="font-bold text-[10px]">Contractor Invoice</span>
-        </div>
-        <div class="h-1.5 w-full bg-surface-container rounded-full mb-1"></div>
-        <div class="h-1.5 w-3/4 bg-surface-container rounded-full mb-3"></div>
-        <div class="text-[9px] text-on-surface-variant flex justify-between">
-          <span>Verified Timestamp</span>
-          <span class="font-bold text-secondary font-label">LOGGED</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============================================================ -->
 <!-- SECTION 5: FINAL CTA                                         -->
 <!-- ============================================================ -->
-<section class="bg-cta-custom text-white py-24 px-6 md:py-32 overflow-hidden relative" id="cta">
-  <div class="max-w-5xl mx-auto text-center relative z-10">
-    <h2 class="font-headline text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight">
-      One Photo. That's All It Takes.
+<section class="bg-cta-custom text-white px-6 overflow-hidden relative" id="cta" style="padding: 80px 24px 80px 24px;">
+  <div class="mx-auto text-center relative z-10" style="max-width: 900px;">
+    <h2 class="font-headline font-extrabold tracking-tight leading-tight text-white" style="font-size: clamp(26px, 4vw, 42px); margin: 0 0 24px 0;">
+      The most expensive thing you own is the one thing you know the least about.
     </h2>
-    <div class="max-w-2xl mx-auto space-y-6">
-      <p class="font-body text-lg md:text-xl text-[#e5e7eb] leading-relaxed">
-        Pick the thing in your home you know the least about. Point your phone at it. Jackknife handles the rest.
-      </p>
-      <p class="font-body text-xl md:text-2xl font-medium text-accent-green leading-snug">
-        You'll know more about your home in sixty seconds than most homeowners learn in a decade.
-      </p>
-      <div class="pt-8">
-        <button class="font-label font-semibold text-lg md:text-xl px-10 py-5 bg-white text-[#063340] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
-          Start My Free Home Scan
-        </button>
-      </div>
-      <p class="font-body text-sm text-[#9ca3af] mt-12 tracking-wide uppercase">
-        Now launching in Essex County, MA.
-      </p>
+    <p class="font-headline font-extrabold tracking-tight leading-snug" style="font-size: clamp(20px, 3vw, 30px); color: #00A385; margin: 0 0 48px 0;">
+      And you're managing it with a junk drawer.
+    </p>
+    <div>
+      <button class="font-headline font-semibold text-lg md:text-xl px-10 py-5 bg-white text-[#063340] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
+        Get Jackknife (It's Free)
+      </button>
     </div>
+    <p class="font-body text-sm text-[#9ca3af] tracking-wide uppercase" style="margin-top: 48px;">
+      Available in Essex County, MA
+    </p>
   </div>
   <div class="absolute -right-20 -bottom-20 opacity-10 pointer-events-none hidden lg:block">
     <div class="w-96 h-96 rounded-full border-[40px] border-white"></div>
@@ -961,18 +1442,18 @@
 <!-- ============================================================ -->
 <!-- SHARED FOOTER                                                -->
 <!-- ============================================================ -->
-<footer class="w-full pt-16 pb-8 bg-[#063340]">
+<footer class="w-full pt-16 pb-24 bg-[#063340]">
   <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
     <div class="text-[#d1d5db] font-body text-sm order-3 md:order-1">
       &copy; 2026 Jackknife &middot; Essex County, MA
     </div>
     <div class="flex gap-6 order-2 md:order-2">
-      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#1da485] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
-      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#1da485] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
     </div>
     <div class="order-1 md:order-3">
-      <a class="font-label font-bold text-[#1da485] hover:underline decoration-[#1da485] underline-offset-4 transition-opacity opacity-80 hover:opacity-100 flex items-center gap-2" href="#">
-        Are you a contractor? Learn about JK Pro
+      <a class="font-label font-bold text-[#00A385] hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100 flex items-center gap-2" href="#">
+        Are you a contractor? Learn about Jackknife Pro
         <span class="material-symbols-outlined text-sm">arrow_forward</span>
       </a>
     </div>
@@ -997,8 +1478,8 @@
       <p class="font-headline font-bold text-on-surface text-sm">Ready to know your home?</p>
       <p class="font-body text-on-surface-variant text-xs">Free forever. 60-second setup.</p>
     </div>
-    <button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-label px-8 py-3 rounded-full text-sm font-semibold hover:brightness-110 transition-all active:scale-95 flex items-center gap-2 sm:ml-auto">
-      Start My Free Home Scan
+    <button class="bg-[#00A385] hover:bg-[#009474] text-white font-headline px-8 py-3 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2 sm:ml-auto">
+      Get Jackknife (It's Free)
       <span class="material-symbols-outlined text-sm">arrow_forward</span>
     </button>
   </div>
@@ -1088,6 +1569,197 @@
     }
 
     setInterval(transition, CYCLE);
+  })();
+
+  // ===== Pillar Tabs =====
+  var activePillar = 0;
+  var phoneTimers = [null, null, null];
+  var phoneSteps = [0, 0, 0];
+  var PHONE_STEP_INTERVAL = 3000;
+
+  // FAQ Accordion
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var answer = item.querySelector('.faq-answer');
+    var chevron = item.querySelector('.faq-chevron');
+    var isOpen = item.classList.contains('faq-open');
+
+    // Close all others
+    document.querySelectorAll('.faq-item.faq-open').forEach(function(openItem) {
+      if (openItem !== item) {
+        openItem.classList.remove('faq-open');
+        openItem.querySelector('.faq-answer').style.maxHeight = '0';
+        openItem.querySelector('.faq-answer').style.paddingTop = '0';
+        openItem.querySelector('.faq-chevron').style.transform = 'rotate(0deg)';
+      }
+    });
+
+    if (isOpen) {
+      item.classList.remove('faq-open');
+      answer.style.maxHeight = '0';
+      answer.style.paddingTop = '0';
+      chevron.style.transform = 'rotate(0deg)';
+    } else {
+      item.classList.add('faq-open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      chevron.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  function switchPillarTab(index) {
+    if (index === activePillar) return;
+    var tabs = document.querySelectorAll('.pillar-tab');
+    var panels = document.querySelectorAll('.pillar-panel');
+    var dots = document.querySelectorAll('.tab-dot');
+
+    // Deactivate current
+    tabs[activePillar].classList.remove('active');
+    tabs[activePillar].setAttribute('aria-selected', 'false');
+    panels[activePillar].classList.remove('active');
+    panels[activePillar].style.display = 'none';
+    if (dots[activePillar]) dots[activePillar].classList.remove('active');
+
+    // Stop old phone animation
+    if (phoneTimers[activePillar]) {
+      clearInterval(phoneTimers[activePillar]);
+      phoneTimers[activePillar] = null;
+    }
+
+    // Activate new
+    activePillar = index;
+    tabs[index].classList.add('active');
+    tabs[index].setAttribute('aria-selected', 'true');
+    panels[index].style.display = 'flex';
+    // Force reflow for fade
+    panels[index].offsetWidth;
+    panels[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
+
+    // Move indicator
+    updateTabIndicator(index);
+
+    // Reset and start phone animation for new tab
+    resetPhoneAnim(index);
+    startPhoneAnim(index);
+  }
+
+  function updateTabIndicator(index) {
+    var tabs = document.querySelectorAll('.pillar-tab');
+    var indicator = document.getElementById('tab-indicator');
+    if (!indicator || !tabs[index]) return;
+    var tab = tabs[index];
+    var tabBar = tab.parentElement;
+    var barRect = tabBar.getBoundingClientRect();
+    var tabRect = tab.getBoundingClientRect();
+    indicator.style.left = (tabRect.left - barRect.left) + 'px';
+    indicator.style.width = tabRect.width + 'px';
+  }
+
+  function syncBenefitHighlight(tabIndex, stepIndex) {
+    var panel = document.querySelector('[data-panel="' + tabIndex + '"]');
+    if (!panel) return;
+    var blocks = panel.querySelectorAll('.benefit-block');
+    blocks.forEach(function(b, i) {
+      b.classList.toggle('active-benefit', i === stepIndex);
+    });
+  }
+
+  function resetPhoneAnim(tabIndex) {
+    var screen = document.querySelector('[data-phone="' + tabIndex + '"]');
+    if (!screen) return;
+    var steps = screen.querySelectorAll('.anim-step');
+    var dotContainer = document.querySelector('[data-dots="' + tabIndex + '"]');
+    var phoneDots = dotContainer ? dotContainer.querySelectorAll('.phone-dot') : [];
+    steps.forEach(function(s, i) {
+      s.classList.toggle('active', i === 0);
+    });
+    phoneDots.forEach(function(d, i) {
+      d.classList.toggle('active', i === 0);
+    });
+    phoneSteps[tabIndex] = 0;
+    syncBenefitHighlight(tabIndex, 0);
+  }
+
+  function startPhoneAnim(tabIndex) {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
+    phoneTimers[tabIndex] = setInterval(function() {
+      var screen = document.querySelector('[data-phone="' + tabIndex + '"]');
+      if (!screen) return;
+      var steps = screen.querySelectorAll('.anim-step');
+      var dotContainer = document.querySelector('[data-dots="' + tabIndex + '"]');
+      var phoneDots = dotContainer ? dotContainer.querySelectorAll('.phone-dot') : [];
+      var total = steps.length;
+
+      // Deactivate current
+      steps[phoneSteps[tabIndex]].classList.remove('active');
+      if (phoneDots[phoneSteps[tabIndex]]) phoneDots[phoneSteps[tabIndex]].classList.remove('active');
+
+      // Advance
+      phoneSteps[tabIndex] = (phoneSteps[tabIndex] + 1) % total;
+
+      // Activate next
+      steps[phoneSteps[tabIndex]].classList.add('active');
+      if (phoneDots[phoneSteps[tabIndex]]) phoneDots[phoneSteps[tabIndex]].classList.add('active');
+      syncBenefitHighlight(tabIndex, phoneSteps[tabIndex]);
+    }, PHONE_STEP_INTERVAL);
+  }
+
+  // Mobile swipe support
+  (function() {
+    var panelsEl = document.getElementById('pillar-panels');
+    if (!panelsEl) return;
+    var startX = 0;
+    var startY = 0;
+    var threshold = 50;
+
+    panelsEl.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    panelsEl.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+        if (dx < 0 && activePillar < 2) {
+          switchPillarTab(activePillar + 1);
+        } else if (dx > 0 && activePillar > 0) {
+          switchPillarTab(activePillar - 1);
+        }
+      }
+    }, { passive: true });
+  })();
+
+  // Initialize on load
+  window.addEventListener('DOMContentLoaded', function() {
+    updateTabIndicator(0);
+    startPhoneAnim(0);
+  });
+  window.addEventListener('resize', function() {
+    updateTabIndicator(activePillar);
+  });
+
+  // Pause phone animation when not visible
+  (function() {
+    var section = document.getElementById('pillar-tabs');
+    if (!section || !('IntersectionObserver' in window)) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) {
+          if (phoneTimers[activePillar]) {
+            clearInterval(phoneTimers[activePillar]);
+            phoneTimers[activePillar] = null;
+          }
+        } else {
+          if (!phoneTimers[activePillar]) {
+            startPhoneAnim(activePillar);
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(section);
   })();
 </script>
 
