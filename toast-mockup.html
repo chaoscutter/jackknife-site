@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invite Toast Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+  }
+
+  .phone {
+    width: 375px;
+    height: 720px;
+    background: #fff;
+    border-radius: 40px;
+    border: 8px solid #1a1a1a;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+
+  .phone-label {
+    text-align: center;
+    font-weight: 700;
+    color: #063340;
+    font-size: 14px;
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .status-bar {
+    height: 44px;
+    background: linear-gradient(135deg, #e8f5f0 0%, #d4ece5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #063340;
+  }
+
+  .nav-bar {
+    height: 56px;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+  }
+  .nav-bar .back { font-size: 20px; color: #063340; }
+  .nav-bar .title { font-weight: 600; color: #063340; font-size: 16px; }
+
+  .screen-content {
+    padding: 20px 16px;
+    background: linear-gradient(180deg, #e8f5f0 0%, #f5faf8 40%, #fff 100%);
+    height: calc(100% - 44px - 56px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fake content cards */
+  .fake-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .fake-card .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #063340;
+    margin-bottom: 6px;
+  }
+  .fake-card .card-subtitle {
+    font-size: 12px;
+    color: #6b7c85;
+    line-height: 1.4;
+  }
+  .fake-card .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fake-card .badge {
+    background: #00A385;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+
+  /* ========== TOAST STYLES ========== */
+
+  /* Toast A: Bottom slide-up (minimal) */
+  .toast-bottom {
+    position: absolute;
+    bottom: 24px;
+    left: 16px;
+    right: 16px;
+    background: #063340;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(6,51,64,0.3);
+    animation: slideUp 0.4s ease-out;
+  }
+  .toast-bottom .toast-icon {
+    width: 36px;
+    height: 36px;
+    background: #00A385;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .toast-bottom .toast-text {
+    flex: 1;
+  }
+  .toast-bottom .toast-title {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .toast-bottom .toast-subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+  }
+  .toast-bottom .toast-action {
+    background: #00A385;
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  /* Toast B: Top drop-down (notification style) */
+  .toast-top {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,163,133,0.15);
+    animation: slideDown 0.4s ease-out;
+  }
+  .toast-top .toast-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #00A385, #008f74);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .toast-top .toast-text {
+    flex: 1;
+  }
+  .toast-top .toast-title {
+    color: #063340;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .toast-top .toast-subtitle {
+    color: #6b7c85;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .toast-top .toast-cta {
+    color: #00A385;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+
+  /* Toast C: Celebration / post-action (center bottom with confetti feel) */
+  .toast-celebration {
+    position: absolute;
+    bottom: 20px;
+    left: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%);
+    border-radius: 16px;
+    padding: 18px 16px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(6,51,64,0.35);
+    animation: slideUp 0.4s ease-out;
+    border: 1px solid rgba(0,163,133,0.2);
+  }
+  .toast-celebration .celebration-emoji {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .toast-celebration .toast-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .toast-celebration .toast-subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .toast-celebration .toast-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  .toast-celebration .btn-invite {
+    flex: 1;
+    background: #00A385;
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .toast-celebration .btn-dismiss {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-80px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Success state fake content */
+  .success-header {
+    text-align: center;
+    padding: 30px 0 20px;
+  }
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00A385, #008f74);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 12px;
+    box-shadow: 0 4px 16px rgba(0,163,133,0.3);
+  }
+  .success-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #063340;
+    margin-bottom: 4px;
+  }
+  .success-subtitle {
+    font-size: 13px;
+    color: #6b7c85;
+  }
+</style>
+</head>
+<body>
+
+<!-- PHONE A: Bottom toast on home screen -->
+<div>
+  <div class="phone">
+    <div class="status-bar">11:58</div>
+    <div class="nav-bar">
+      <span class="title">Home</span>
+    </div>
+    <div class="screen-content">
+      <div class="fake-card">
+        <div class="card-row">
+          <div>
+            <div class="card-title">Home Record Score</div>
+            <div class="card-subtitle">72 / 100 — Managing</div>
+          </div>
+          <div class="badge">Level 2</div>
+        </div>
+      </div>
+      <div class="fake-card">
+        <div class="card-title">Projects</div>
+        <div class="card-subtitle">2 active projects</div>
+      </div>
+      <div class="fake-card">
+        <div class="card-title">Inventory</div>
+        <div class="card-subtitle">47 items documented</div>
+      </div>
+      <div class="fake-card">
+        <div class="card-title">Pros</div>
+        <div class="card-subtitle">3 trusted contractors</div>
+      </div>
+
+      <!-- TOAST -->
+      <div class="toast-bottom">
+        <div class="toast-icon">🏡</div>
+        <div class="toast-text">
+          <div class="toast-title">Top 15% in Rowley!</div>
+          <div class="toast-subtitle">104 neighbors are building too</div>
+        </div>
+        <button class="toast-action">Invite</button>
+      </div>
+    </div>
+  </div>
+  <div class="phone-label">A. BOTTOM TOAST — HOME SCREEN</div>
+</div>
+
+<!-- PHONE B: Top notification-style toast -->
+<div>
+  <div class="phone">
+    <div class="status-bar">11:58</div>
+    <div class="nav-bar">
+      <span class="back">←</span>
+      <span class="title">Samsung Refrigerator</span>
+    </div>
+    <div class="screen-content">
+      <div class="fake-card" style="border-left: 3px solid #E85A4F;">
+        <div class="card-title" style="color: #E85A4F;">⚠️ Safety Recall Found</div>
+        <div class="card-subtitle">CPSC Recall #24-123 — Compressor overheating risk. Check remedy details.</div>
+      </div>
+      <div class="fake-card">
+        <div class="card-title">Item Details</div>
+        <div class="card-subtitle">Model: RF28R7351SR<br>Purchased: March 2023<br>Warranty: Active until 2028</div>
+      </div>
+      <div class="fake-card">
+        <div class="card-title">Documents</div>
+        <div class="card-subtitle">Receipt, Manual, Warranty card</div>
+      </div>
+
+      <!-- TOAST -->
+      <div class="toast-top">
+        <div class="toast-icon">🛡️</div>
+        <div class="toast-text">
+          <div class="toast-title">Your neighbor might have this too</div>
+          <div class="toast-subtitle">Share this recall with nearby homeowners</div>
+          <div class="toast-cta">Send Alert →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phone-label">B. TOP TOAST — POST-RECALL DISCOVERY</div>
+</div>
+
+<!-- PHONE C: Celebration toast after item capture -->
+<div>
+  <div class="phone">
+    <div class="status-bar">11:58</div>
+    <div class="nav-bar">
+      <span class="back">←</span>
+      <span class="title">Upload Complete</span>
+    </div>
+    <div class="screen-content">
+      <div class="success-header">
+        <div class="success-icon">✓</div>
+        <div class="success-title">5 Items Added!</div>
+        <div class="success-subtitle">Your home record is growing</div>
+      </div>
+      <div class="fake-card">
+        <div class="card-row">
+          <div class="card-subtitle">Home Record Score</div>
+          <div style="font-weight:700;color:#00A385;">72 → 78</div>
+        </div>
+      </div>
+      <div class="fake-card">
+        <div class="card-row">
+          <div class="card-subtitle">Items Documented</div>
+          <div style="font-weight:700;color:#063340;">47 total</div>
+        </div>
+      </div>
+      <div class="fake-card">
+        <div class="card-row">
+          <div class="card-subtitle">Safety Recalls</div>
+          <div style="font-weight:700;color:#063340;">0 found</div>
+        </div>
+      </div>
+
+      <!-- TOAST -->
+      <div class="toast-celebration">
+        <div class="celebration-emoji">🎉</div>
+        <div class="toast-title">You're ahead of 85% of homeowners</div>
+        <div class="toast-subtitle">Help a neighbor start their home record — it takes 60 seconds</div>
+        <div class="toast-buttons">
+          <button class="btn-invite">Invite a Neighbor</button>
+          <button class="btn-dismiss">Not now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phone-label">C. CELEBRATION TOAST — POST-CAPTURE</div>
+</div>
+
+</body>
+</html>

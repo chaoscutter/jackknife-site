@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jackknife Features - Everything Your Home Needs in One App</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00A385",
+          "surface": "#f0f8fa",
+          "on-surface": "#111827",
+        },
+        fontFamily: {
+          "headline": ["Montserrat", "system-ui", "sans-serif"],
+          "body": ["Inter", "system-ui", "sans-serif"],
+          "label": ["Poppins", "sans-serif"]
+        },
+      },
+    },
+  }
+</script>
+<style>
+  .bg-cta-custom {
+    background: linear-gradient(135deg, #063340 0%, #0a4a5c 50%, #063340 100%);
+  }
+
+  /* ===== Intelligence Layer Animation ===== */
+
+  .intelligence-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 5 / 6;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(6, 51, 64, 0.18);
+  }
+
+  /* Real photo as hero image */
+  .intelligence-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Scanning overlay — the "intelligence" pass */
+  .scan-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .scan-beam {
+    position: absolute;
+    top: -30%;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 163, 133, 0.03) 15%,
+      rgba(0, 163, 133, 0.10) 35%,
+      rgba(0, 163, 133, 0.25) 48%,
+      rgba(0, 163, 133, 0.35) 50%,
+      rgba(0, 163, 133, 0.25) 52%,
+      rgba(0, 163, 133, 0.10) 65%,
+      rgba(0, 163, 133, 0.03) 85%,
+      transparent 100%
+    );
+    filter: blur(6px);
+    will-change: transform;
+    animation: scanPass 14.4s cubic-bezier(0.2, 0.4, 0.4, 0.9) infinite;
+  }
+
+  /* Leading edge — horizontal line */
+  .scan-beam::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 45%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 163, 133, 0.5) 15%,
+      rgba(0, 163, 133, 0.9) 50%,
+      rgba(0, 163, 133, 0.5) 85%,
+      transparent 100%
+    );
+    filter: blur(1px);
+    box-shadow: 0 0 14px rgba(0, 163, 133, 0.5);
+  }
+
+  /* Trailing glow particles */
+  .scan-beam::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    width: 100%;
+    height: 60%;
+    background:
+      radial-gradient(circle at 25% 30%, rgba(0, 163, 133, 0.20) 0%, transparent 8px),
+      radial-gradient(circle at 60% 50%, rgba(0, 163, 133, 0.18) 0%, transparent 6px),
+      radial-gradient(circle at 80% 25%, rgba(0, 163, 133, 0.15) 0%, transparent 7px),
+      radial-gradient(circle at 40% 70%, rgba(0, 163, 133, 0.20) 0%, transparent 5px),
+      radial-gradient(circle at 15% 60%, rgba(0, 163, 133, 0.16) 0%, transparent 6px);
+  }
+
+  /* Detection callout boxes that appear after scan passes */
+  .detection-callout {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #00A385;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0a4a5c;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    transform: scale(0.92) translateY(4px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(6, 51, 64, 0.15);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .detection-callout.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .detection-callout .callout-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #00A385;
+    font-weight: 800;
+    margin-bottom: 3px;
+  }
+
+  .callout-1 { top: 12%; right: 6%; }
+  .callout-2 { top: 35%; left: 6%; }
+  .callout-3 { top: 55%; right: 6%; }
+  .callout-4 { top: 78%; left: 6%; }
+
+  /* Scan beam: top-to-bottom */
+  @keyframes scanPass {
+    0% {
+      transform: translateY(-10%);
+      opacity: 0;
+    }
+    2% {
+      opacity: 1;
+    }
+    54% {
+      opacity: 1;
+    }
+    56% {
+      transform: translateY(430%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(430%);
+      opacity: 0;
+    }
+  }
+
+  /* Ambient corner glow */
+  .intelligence-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    box-shadow: inset 0 0 40px rgba(0, 163, 133, 0.06);
+    pointer-events: none;
+  }
+
+  /* Reduced motion: static glow frame */
+  @media (prefers-reduced-motion: reduce) {
+    .scan-beam {
+      animation: none;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0.08;
+      filter: none;
+      background: rgba(0, 163, 133, 0.08);
+    }
+    .scan-beam::before,
+    .scan-beam::after {
+      display: none;
+    }
+    .detection-callout {
+      animation: none;
+      opacity: 1;
+      transform: scale(1);
+    }
+    .intelligence-container {
+      box-shadow:
+        0 24px 64px rgba(6, 51, 64, 0.18),
+        0 0 0 2px rgba(0, 163, 133, 0.2);
+    }
+  }
+
+  /* Scanning text pulse — synced to beam sweep */
+  @keyframes scanPulse {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+  .scan-label-pulsing {
+    animation: scanPulse 1.5s ease-in-out infinite;
+  }
+  .scan-label-static {
+    animation: none;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  /* GSAP entrance hidden states */
+  .gsap-hero-copy { opacity: 0; }
+  .gsap-hero-image { opacity: 0; }
+  .gsap-s2-copy { opacity: 0; }
+  .gsap-s2-image { opacity: 0; }
+
+  /* Section 2 scan beam — paused until scroll triggers it */
+  .scan-beam-2 {
+    animation-play-state: paused;
+  }
+  .scan-beam-2.running {
+    animation-play-state: running;
+  }
+
+  /* ===== Section 3: Protection — Claim Export ===== */
+
+  .protection-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    aspect-ratio: 3 / 4;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(6, 51, 64, 0.18);
+  }
+
+  .protection-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Dark overlay for readability */
+  .protection-image-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.12);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Claim export overlay card */
+  .claim-card {
+    position: absolute;
+    top: 6%;
+    left: 6%;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 12px 40px rgba(6, 51, 64, 0.25);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .claim-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .claim-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .claim-card-header .check-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #00A385;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .claim-card-header .check-icon span {
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .claim-card-header p {
+    font-weight: 700;
+    font-size: 14px;
+    color: #0a4a5c;
+    margin: 0;
+  }
+
+  .claim-data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 4px 0;
+  }
+
+  .claim-data-row .label {
+    font-size: 11px;
+    color: #6b7c85;
+    font-weight: 500;
+  }
+
+  .claim-data-row .value {
+    font-size: 12px;
+    color: #0a4a5c;
+    font-weight: 700;
+  }
+
+  .claim-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #00A385;
+    color: white;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 12px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  .claim-divider {
+    border: none;
+    border-top: 1.5px dashed #d1d5db;
+    margin: 16px 0;
+  }
+
+  .claim-qa-question {
+    font-size: 12px;
+    color: #0a4a5c;
+    font-style: italic;
+    line-height: 1.4;
+    margin: 0 0 8px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .claim-qa-question::before {
+    content: '💬';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 12px;
+    font-style: normal;
+  }
+
+  .claim-qa-answer {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .claim-qa-answer .check-sm {
+    color: #00A385;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .claim-qa-answer p {
+    font-size: 11px;
+    color: #0a4a5c;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .claim-agent-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    color: #0a4a5c;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 9px;
+    border-radius: 8px;
+    border: 2px solid #0a4a5c;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  .claim-agent-info {
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .claim-agent-info p {
+    font-size: 10px;
+    color: #6b7c85;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Responsive: card sizing on mobile */
+  @media (max-width: 767px) {
+    .claim-card {
+      width: 260px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      bottom: 5%;
+    }
+    .claim-card.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .gsap-s3-copy { opacity: 0; }
+  .gsap-s3-image { opacity: 0; }
+</style>
+</head>
+<body class="bg-[#f0f8fa] text-[#111827] font-body antialiased">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#f0f8fa]/70 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center w-full px-4 sm:px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="select-none whitespace-nowrap">
+      <img src="images/jk-logo.png" alt="Jackknife" style="height: 36px; object-fit: contain;" />
+    </a>
+    <div class="flex items-center gap-3 sm:gap-8">
+      <a class="text-[#00A385] font-label text-xs sm:text-sm tracking-wide font-semibold" href="features.html">Features</a>
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="faq.html">FAQ</a>
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="about.html">Our Story</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== SECTION 1: Peace of Mind — Water Heater ===== -->
+<section id="features-peace" style="padding: 140px 24px 80px; background: #ffffff;">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 64px; flex-wrap: wrap;">
+
+    <!-- Left: Intelligence Layer Animation (reversed layout) -->
+    <div class="gsap-s2-image" style="flex: 1; min-width: 320px; display: flex; justify-content: center;">
+      <div class="intelligence-container" id="scan-container-2">
+        <img src="images/water-heater.jpg" alt="Water heater being analyzed by Jackknife AI — identifying age, replacement cost, and maintenance status" class="intelligence-image" />
+
+        <!-- Scanning beam overlay — constrained to water heater area (right side, top 2/3 to bottom) -->
+        <div class="scan-overlay" style="position: absolute; top: 20%; left: 62%; width: 38%; height: 80%; overflow: hidden; border-radius: 8px;">
+          <div class="scan-beam scan-beam-2"></div>
+        </div>
+
+        <!-- Detection callouts — aging water heater data (3 cards, no "identified") -->
+        <div class="detection-callout s2-callout" style="top: 22%; left: 62%;">
+          <div class="callout-label">Age</div>
+          Installed 2014 · 12 years old
+        </div>
+        <div class="detection-callout s2-callout" style="top: 45%; left: 62%;">
+          <div class="callout-label">Replacement Cost</div>
+          Est. $2,800–$3,400 installed
+        </div>
+        <div class="detection-callout s2-callout" style="top: 68%; left: 62%;">
+          <div class="callout-label">Status</div>
+          Routine flush recommended
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Copy -->
+    <div class="gsap-s2-copy" style="flex: 1; min-width: 320px;">
+      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 16px 0;">Peace of Mind</p>
+      <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4.5vw, 44px); color: #0a4a5c; margin: 0 0 20px 0; line-height: 1.15;">
+        Know what's aging<br>before it fails.
+      </h2>
+      <p style="font-family: Inter, sans-serif; font-size: clamp(16px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0 0 36px 0; max-width: 500px;">
+        Your water heater, furnace, roof. Jackknife tracks the age and condition of everything in your home and tells you what needs attention next.
+      </p>
+      <a href="#" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none; transition: all 200ms ease; box-shadow: 0 4px 16px rgba(6, 51, 64, 0.2);"
+         onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 8px 24px rgba(6,51,64,0.25)'"
+         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 16px rgba(6,51,64,0.2)'">
+        Try the First Photo
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SECTION 3: Protection — Claim Export ===== -->
+<section id="features-protection" style="padding: 80px 24px; background: #f0f8fa;">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 64px; flex-wrap: wrap;">
+
+    <!-- Left: Image with UI overlay -->
+    <div class="gsap-s3-image" style="flex: 1; min-width: 320px; display: flex; justify-content: center;">
+      <div class="protection-image-container">
+        <img src="images/flooded-room.jpg" alt="A flooded modern living room with standing water on the floor. A Jackknife insurance screen is overlaid showing 12 documented items ready for claim export, a policy question answered instantly, and one-tap access to call your insurance agent." />
+
+        <!-- Claim Export UI Overlay Card -->
+        <div class="claim-card" id="claim-card">
+          <!-- Header -->
+          <div class="claim-card-header">
+            <div class="check-icon"><span>✓</span></div>
+            <p>Insurance Claim Ready to Export</p>
+          </div>
+
+          <!-- Data rows -->
+          <div class="claim-data-row">
+            <span class="label">Items documented</span>
+            <span class="value">12</span>
+          </div>
+          <div class="claim-data-row">
+            <span class="label">Photos attached</span>
+            <span class="value">31</span>
+          </div>
+          <div class="claim-data-row">
+            <span class="label">Total value</span>
+            <span class="value">$14,200</span>
+          </div>
+
+          <!-- Export button -->
+          <button class="claim-btn">Export Claim (PDF)</button>
+
+          <!-- Divider -->
+          <hr class="claim-divider" />
+
+          <!-- Policy Q&A -->
+          <p class="claim-qa-question">"Am I covered for water damage to my floors?"</p>
+          <div class="claim-qa-answer">
+            <span class="check-sm">✓</span>
+            <p>Yes. Your policy covers sudden water damage. Deductible: $1,000.</p>
+          </div>
+
+          <!-- Divider -->
+          <hr class="claim-divider" />
+
+          <!-- Call Agent -->
+          <button class="claim-agent-btn">📞 Call Your Agent</button>
+          <div class="claim-agent-info">
+            <p>Sarah Chen · Arbella Insurance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Copy -->
+    <div class="gsap-s3-copy" style="flex: 1; min-width: 320px;">
+      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 16px 0;">Protection</p>
+      <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4.5vw, 44px); color: #0a4a5c; margin: 0 0 20px 0; line-height: 1.15;">
+        Built for the moment<br>you hope never comes.
+      </h2>
+      <p style="font-family: Inter, sans-serif; font-size: clamp(16px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0 0 36px 0; max-width: 500px;">
+        Every item you've captured is insurance-ready. Export a complete claim, ask questions about your policy, or call your agent. All from one screen.
+      </p>
+      <a href="#" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none; transition: all 200ms ease; box-shadow: 0 4px 16px rgba(6, 51, 64, 0.2);"
+         onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 8px 24px rgba(6,51,64,0.25)'"
+         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 16px rgba(6,51,64,0.2)'">
+        Try the First Photo
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- RECALL PROTECTION                                             -->
+<!-- ============================================================ -->
+<section id="features-recalls" style="padding: 80px 24px; background: #ffffff;">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 64px; flex-wrap: wrap;">
+
+    <!-- Left: Copy -->
+    <div style="flex: 1; min-width: 320px;">
+      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 16px 0;">Recall Alerts</p>
+      <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4.5vw, 44px); color: #0a4a5c; margin: 0 0 20px 0; line-height: 1.15;">
+        90% of recalled products are never returned.<br>They're still in someone's home.
+      </h2>
+      <p style="font-family: Inter, sans-serif; font-size: clamp(16px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0 0 36px 0; max-width: 500px;">
+        Most people never find out about a recall until something goes wrong. Jackknife checks every item you've captured against the federal recall database - automatically. If there's a match, you know immediately.
+      </p>
+      <a href="#" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none; transition: all 200ms ease; box-shadow: 0 4px 16px rgba(6, 51, 64, 0.2);"
+         onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 8px 24px rgba(6,51,64,0.25)'"
+         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 16px rgba(6,51,64,0.2)'">
+        Try the First Photo
+      </a>
+    </div>
+
+    <!-- Right: Phone Placeholder -->
+    <div style="flex: 1; min-width: 320px; display: flex; justify-content: center;">
+      <div style="width: 260px; position: relative;">
+        <div style="background: #063340; border-radius: 40px; padding: 6px; box-shadow: 0 24px 64px rgba(6, 51, 64, 0.25);">
+          <!-- Dynamic Island -->
+          <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 72px; height: 18px; background: #000; border-radius: 20px; z-index: 20;"></div>
+          <!-- Screen -->
+          <div style="background: #f5f7f8; border-radius: 34px; overflow: hidden; position: relative;">
+            <!-- Status bar -->
+            <div style="height: 28px; background: white;"></div>
+            <!-- App bar -->
+            <div style="background: white; padding: 8px 16px 10px; border-bottom: 1px solid #e8edf0; display: flex; align-items: center; justify-content: space-between;">
+              <img src="images/jk-logo.png" alt="Jackknife" style="height: 18px; object-fit: contain;" />
+              <p style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10px; color: #E85A4F; margin: 0; letter-spacing: 0.5px;">⚠ Safety Alert</p>
+            </div>
+            <!-- Phone screen content: recall alert -->
+            <div style="padding: 20px; font-family: Montserrat, sans-serif;">
+              <!-- Alert banner -->
+              <div style="background: rgba(232,90,79,0.08); border-radius: 10px; padding: 12px; border-left: 3px solid #E85A4F; margin-bottom: 16px;">
+                <p style="font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #E85A4F; margin: 0 0 6px 0;">PRODUCT RECALL</p>
+                <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0 0 4px 0;">GE Gas Range — Fire Hazard</p>
+                <p style="font-weight: 400; font-size: 11px; color: #6b7c85; margin: 0;">CPSC Recall #24-123 · Posted 2 days ago</p>
+              </div>
+              <!-- Hazard card -->
+              <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 12px;">
+                <p style="font-weight: 700; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #E85A4F; margin: 0 0 6px 0;">HAZARD</p>
+                <p style="font-weight: 400; font-size: 12px; color: #0a4a5c; line-height: 1.5; margin: 0;">Gas valve may fail to close fully, posing a fire risk during oven self-clean cycle.</p>
+              </div>
+              <!-- Remedy card -->
+              <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 12px;">
+                <p style="font-weight: 700; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #00A385; margin: 0 0 6px 0;">REMEDY</p>
+                <p style="font-weight: 400; font-size: 12px; color: #0a4a5c; line-height: 1.5; margin: 0;">Free in-home repair. Contact GE at 1-800-432-2737 or schedule online.</p>
+              </div>
+              <!-- Your item match -->
+              <div style="background: rgba(0,163,133,0.06); border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                <p style="font-weight: 700; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #6b7c85; margin: 0 0 6px 0;">YOUR ITEM</p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #E85A4F, #d4443a); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">GE</div>
+                  <div>
+                    <p style="font-weight: 700; font-size: 12px; color: #0a4a5c; margin: 0;">GE Profile Gas Range</p>
+                    <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">Kitchen · Model PGS930</p>
+                  </div>
+                </div>
+              </div>
+              <!-- CTA buttons -->
+              <div style="display: flex; gap: 8px;">
+                <div style="flex: 1; background: #E85A4F; color: white; font-weight: 700; font-size: 11px; border-radius: 8px; padding: 10px; text-align: center;">View on CPSC.gov</div>
+                <div style="flex: 1; background: #063340; color: white; font-weight: 700; font-size: 11px; border-radius: 8px; padding: 10px; text-align: center;">Schedule Repair</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BOTTOM CTA                                                    -->
+<!-- ============================================================ -->
+<section class="bg-cta-custom text-white px-6 overflow-hidden relative" style="padding: 80px 24px;">
+  <div class="mx-auto text-center relative z-10" style="max-width: 700px;">
+    <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 42px); color: white; margin: 0 0 16px 0; line-height: 1.2;">
+      Understand your home.<br>Fix your home.<br>Protect your home.
+    </h2>
+    <!-- removed -->
+    <button class="font-headline font-semibold text-lg px-10 py-5 bg-white text-[#0a4a5c] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
+      Get Jackknife. It's Free
+    </button>
+    <p style="font-family: Inter, sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 32px; letter-spacing: 1px; text-transform: uppercase;">
+      Available in Essex County, MA
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full pt-10 pb-12 bg-[#063340]" style="border-top: 1px solid rgba(255,255,255,0.1);">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+    <div class="text-[#d1d5db] font-body text-sm">
+      &copy; 2026 Jackknife &middot; Essex County, MA
+    </div>
+    <div class="text-2xl font-black tracking-tighter font-headline select-none">
+      <span class="text-white">jack</span><span class="text-[#00a385]">knife</span>
+    </div>
+    <div class="flex gap-6 text-[#d1d5db] font-body text-sm">
+      <a class="hover:text-white transition-colors" href="#">Privacy</a>
+      <a class="hover:text-white transition-colors" href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance animation
+  var heroTl = gsap.timeline({ delay: 0.3 });
+  heroTl
+    .to('.gsap-hero-copy', {
+      opacity: 1, y: 0, duration: 0.8,
+      ease: 'power2.out',
+      startAt: { y: 32 }
+    })
+    .to('.gsap-hero-image', {
+      opacity: 1, y: 0, duration: 0.8,
+      ease: 'power2.out',
+      startAt: { y: 24 }
+    }, '-=0.5');
+
+  // Reusable scan controller — tracks actual beam position via getBoundingClientRect
+  function createScanController(containerSelector, calloutSelector, opts) {
+    var CYCLE = opts.cycle || 16000;
+    var FADE_OUT_AT = opts.fadeOutAt || 12500;
+    var container = document.querySelector(containerSelector);
+    var beam = container ? container.querySelector('.scan-beam, .scan-beam-2') : null;
+    var callouts = document.querySelectorAll(calloutSelector);
+    var revealed = [];
+    var polling = false;
+    var rafId = null;
+
+    function resetCallouts() {
+      callouts.forEach(function(c) { c.classList.remove('visible'); });
+      revealed = [];
+      for (var i = 0; i < callouts.length; i++) revealed.push(false);
+    }
+
+    function pollBeamPosition() {
+      if (!beam || !container) return;
+      var containerRect = container.getBoundingClientRect();
+      var beamRect = beam.getBoundingClientRect();
+      // Leading edge is the ::before at bottom: 45% of beam — roughly middle of beam
+      var leadingEdgeY = beamRect.top + beamRect.height * 0.55;
+      var containerTop = containerRect.top;
+      var containerHeight = containerRect.height;
+
+      callouts.forEach(function(callout, i) {
+        if (revealed[i]) return;
+        var calloutRect = callout.getBoundingClientRect();
+        var calloutMidY = calloutRect.top + calloutRect.height * 0.5;
+        // Trigger when beam leading edge passes the callout's vertical midpoint
+        if (leadingEdgeY > calloutMidY) {
+          callout.classList.add('visible');
+          revealed[i] = true;
+        }
+      });
+
+      // Keep polling if not all revealed and beam is still in container
+      var allRevealed = revealed.every(function(r) { return r; });
+      if (!allRevealed && leadingEdgeY < containerTop + containerHeight + 50) {
+        rafId = requestAnimationFrame(pollBeamPosition);
+      }
+    }
+
+    function runCycle() {
+      resetCallouts();
+      // Start polling beam position on next frame
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(function startPoll() {
+        pollBeamPosition();
+        // Continue polling for the duration of the sweep
+        var pollDuration = CYCLE * 0.6; // poll for 60% of cycle (sweep portion)
+        var startTime = performance.now();
+        function continuePoll() {
+          if (performance.now() - startTime < pollDuration) {
+            pollBeamPosition();
+            rafId = requestAnimationFrame(continuePoll);
+          }
+        }
+        rafId = requestAnimationFrame(continuePoll);
+      });
+      // Fade out all callouts after sweep + hold time
+      setTimeout(function() {
+        callouts.forEach(function(c) { c.classList.remove('visible'); });
+      }, FADE_OUT_AT);
+    }
+
+    return { start: function(delay) {
+      setTimeout(function() {
+        runCycle();
+        setInterval(runCycle, CYCLE);
+      }, delay || 0);
+    }};
+  }
+
+  // Section 1 — washer/dryer (starts on page load)
+  var scan1 = createScanController('#features-hero', '#features-hero .detection-callout', {
+    cycle: 14400, fadeOutAt: 11250
+  });
+  scan1.start(1200);
+
+  // Sync "Scanning..." label pulse to beam cycle
+  (function() {
+    var CYCLE = 14400;
+    var SWEEP_END = 8060;  // 56% of 14.4s — beam exits
+    var label = document.getElementById('scan-label');
+    if (!label) return;
+
+    function runLabelCycle() {
+      // Sweep phase: pulse
+      label.className = 'scan-label-pulsing';
+      // Dead time: go static
+      setTimeout(function() {
+        label.className = 'scan-label-static';
+      }, SWEEP_END);
+    }
+
+    setTimeout(function() {
+      runLabelCycle();
+      setInterval(runLabelCycle, CYCLE);
+    }, 1200);  // same delay as scan1
+  })();
+
+  // Section 2 — water heater (starts on scroll)
+  ScrollTrigger.create({
+    trigger: '#features-peace',
+    start: 'top 75%',
+    once: true,
+    onEnter: function() {
+      // GSAP entrance
+      var s2Tl = gsap.timeline();
+      s2Tl
+        .to('.gsap-s2-image', {
+          opacity: 1, y: 0, duration: 0.8,
+          ease: 'power2.out',
+          startAt: { y: 32 }
+        })
+        .to('.gsap-s2-copy', {
+          opacity: 1, y: 0, duration: 0.8,
+          ease: 'power2.out',
+          startAt: { y: 24 }
+        }, '-=0.5');
+
+      // Start scan beam animation
+      var beam2 = document.querySelector('.scan-beam-2');
+      if (beam2) beam2.classList.add('running');
+
+      // Start callout controller after entrance completes
+      var scan2 = createScanController('#features-peace', '#features-peace .detection-callout', {
+        cycle: 14400, fadeOutAt: 11250
+      });
+      scan2.start(800);
+    }
+  });
+
+  // Section 3 — Protection (scroll-triggered, no scan line)
+  ScrollTrigger.create({
+    trigger: '#features-protection',
+    start: 'top 75%',
+    once: true,
+    onEnter: function() {
+      // Image fades in first
+      gsap.to('.gsap-s3-image', {
+        opacity: 1, y: 0, duration: 0.6,
+        ease: 'power2.out',
+        startAt: { y: 32 }
+      });
+      // Copy fades in alongside
+      gsap.to('.gsap-s3-copy', {
+        opacity: 1, y: 0, duration: 0.8,
+        ease: 'power2.out',
+        startAt: { y: 24 },
+        delay: 0.15
+      });
+      // Claim card appears 500ms after image — the timing gap is intentional
+      setTimeout(function() {
+        var card = document.getElementById('claim-card');
+        if (card) card.classList.add('visible');
+      }, 800);
+    }
+  });
+</script>
+
+</body>
+</html>

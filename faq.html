@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jackknife - Homeowner FAQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00A385",
+          "surface": "#f0f8fa",
+          "on-surface": "#111827",
+        },
+        fontFamily: {
+          "headline": ["Montserrat", "system-ui", "sans-serif"],
+          "body": ["Inter", "system-ui", "sans-serif"],
+          "label": ["Poppins", "sans-serif"]
+        },
+      },
+    },
+  }
+</script>
+<style>
+  .bg-cta-custom {
+    background: linear-gradient(135deg, #063340 0%, #0a4a5c 50%, #063340 100%);
+  }
+</style>
+</head>
+<body class="bg-[#f0f8fa] text-[#111827] font-body antialiased">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#f0f8fa]/70 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center w-full px-4 sm:px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="select-none whitespace-nowrap">
+      <img src="images/jk-logo.png" alt="Jackknife" style="height: 36px; object-fit: contain;" />
+    </a>
+    <div class="flex items-center gap-3 sm:gap-8">
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="features.html">Features</a>
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="faq.html">FAQ</a>
+      <a class="text-[#00A385] font-label text-xs sm:text-sm tracking-wide font-semibold" href="about.html">Our Story</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div style="padding: 140px 24px 40px; text-align: center;">
+  <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #00A385; margin: 0 0 16px 0;">Homeowner FAQ</p>
+  <h1 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(32px, 5vw, 44px); color: #0a4a5c; margin: 0; line-height: 1.15;">What Homeowners Want to Know</h1>
+</div>
+
+<!-- FAQ Section -->
+<section style="max-width: 800px; width: 100%; margin: 0 auto; padding: 32px 40px 56px;">
+  <div class="faq-list" style="display: flex; flex-direction: column; gap: 0;">
+
+    <!-- FAQ 1 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">IS JACKKNIFE ACTUALLY FREE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Yes. Actually free. Not "free for 14 days." Not "free until you hit a paywall." Free for homeowners.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 2 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">IS MY HOME DATA TRULY PRIVATE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Your home record is visible only to you and anyone you choose to share it with. You approve every detail before sending a job request to a contractor. Every time. No surprises. Your home, your data, fully in your control.</p>
+      </div>
+    </div>
+
+    <!-- FAQ: Contractor calls -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">WILL CONTRACTORS START CALLING ME IF I SIGN UP?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">No. We don't sell your info to five contractors and let them fight over you (like other major home service platforms). You pick the pro. You start the conversation. You choose how to communicate (call, text, or email). We don't even share your real phone number with contractors. Did we mention that we take privacy seriously?</p>
+      </div>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">DO I NEED TO BE HANDY TO USE JACKKNIFE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Not even a little. Jackknife was built by someone who has to hire other people to assemble IKEA furniture. Point your phone at the thing. We'll tell you what it is, what shape it's in, and what to do about it.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 4 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">IF IT'S FREE, DOESN'T THAT MEAN I'M THE PRODUCT?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">No. Jackknife was built by a homeowner who got tired of bad advice, fake reviews, and wasted weekends. Here's how it works: when you need a pro, we connect you with contractors your neighbors trust. The contractor pays for that introduction. You don't. Your data stays yours.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 5 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">WHAT DO YOU DO WITH MY DATA?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Nothing. We don't sell it. We don't share it unless you ask us to. We don't use it for ads. Your home data belongs to you.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 6 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">DO I NEED TO PHOTOGRAPH EVERYTHING ALL AT ONCE?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">No. Start with one item. Your inventory builds over time, at your pace.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 7 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">HOW DOES JACKKNIFE MAKE MONEY?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Contractors pay a small fee when they accept your job request. That's it. No bidding wars. No pay-to-rank. No "boost your listing" upsells. If that sounds refreshingly simple, that's because every other platform made it complicated on purpose so they could resell the same job multiple times and squeeze every ounce of profit they can. We make money by being the company homeowners trust.</p>
+      </div>
+    </div>
+
+    <!-- FAQ 8 -->
+    <div class="faq-item" style="border-bottom: 1px solid #e8edf0;">
+      <button class="faq-question" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left;">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: #0a4a5c; letter-spacing: 0.3px;">WHAT IF I SELL MY HOME?</span>
+        <svg class="faq-chevron" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.3s ease; color: #00A385;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 0 0 0;">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; color: #6b7c85; line-height: 1.7; margin: 0; padding-bottom: 24px;">Your Jackknife record becomes one of the most valuable things you hand the buyer: a complete, documented history of everything in the home. Maintenance records, repair history, appliance ages, contractor work. Think of it as the Carfax for your house. Buyers love it. It didn't cost you a minute of extra work. And you choose exactly what gets shared.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="bg-cta-custom text-white px-6 overflow-hidden relative" style="padding: 80px 24px;">
+  <div class="mx-auto text-center relative z-10" style="max-width: 700px;">
+    <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 42px); color: white; margin: 0 0 16px 0; line-height: 1.2;">
+      Coming home shouldn't feel like a second job.
+    </h2>
+    <div style="margin: 0 0 40px 0;"></div>
+    <button class="font-headline font-semibold text-lg px-10 py-5 bg-white text-[#0a4a5c] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
+      Get Jackknife (It's Free)
+    </button>
+    <p style="font-family: Inter, sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 32px; letter-spacing: 1px; text-transform: uppercase;">
+      Available in Essex County, MA
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full pt-10 pb-12 bg-[#063340]" style="border-top: 1px solid rgba(255,255,255,0.1);">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+    <div class="text-[#d1d5db] font-body text-sm">
+      &copy; 2026 Jackknife &middot; Essex County, MA
+    </div>
+    <div class="text-2xl font-black tracking-tighter font-headline select-none">
+      <span class="text-white">jack</span><span class="text-[#00a385]">knife</span>
+    </div>
+    <div class="flex gap-6 text-[#d1d5db] font-body text-sm">
+      <a class="hover:text-white transition-colors" href="#">Privacy</a>
+      <a class="hover:text-white transition-colors" href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ Accordion
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var answer = item.querySelector('.faq-answer');
+    var chevron = item.querySelector('.faq-chevron');
+    var isOpen = item.classList.contains('faq-open');
+
+    // Close all others
+    document.querySelectorAll('.faq-item.faq-open').forEach(function(openItem) {
+      if (openItem !== item) {
+        openItem.classList.remove('faq-open');
+        openItem.querySelector('.faq-answer').style.maxHeight = '0';
+        openItem.querySelector('.faq-answer').style.paddingTop = '0';
+        openItem.querySelector('.faq-chevron').style.transform = 'rotate(0deg)';
+      }
+    });
+
+    if (isOpen) {
+      item.classList.remove('faq-open');
+      answer.style.maxHeight = '0';
+      answer.style.paddingTop = '0';
+      chevron.style.transform = 'rotate(0deg)';
+    } else {
+      item.classList.add('faq-open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      chevron.style.transform = 'rotate(180deg)';
+    }
+  }
+</script>
+
+</body>
+</html>
