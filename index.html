@@ -2377,9 +2377,44 @@ document.getElementById('banner-close').addEventListener('click', function() {
       .hwc-detail-text { display: none !important; }
       .hwc-phone-col { width: 100% !important; }
     }
+
+    /* Typewriter cursor */
+    @keyframes hwcCursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .hwc-cursor {
+      display: inline-block;
+      width: 1.5px;
+      height: 1em;
+      background: #00A385;
+      margin-left: 1px;
+      vertical-align: text-bottom;
+      animation: hwcCursorBlink 530ms step-end infinite;
+    }
+
+    /* CTA pulse */
+    @keyframes hwcCtaPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    /* Confirm card glow */
+    @keyframes hwcConfirmGlow {
+      0% { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+      50% { box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 12px rgba(0,163,133,0.3); }
+      100% { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    }
+
+    /* Detail text crossfade positioning */
+    .hwc-detail-container { position: relative; }
+
     @media (prefers-reduced-motion: reduce) {
-      [data-hwcframe], .hwc-diagnosis, .hwc-best-match,
-      .hwc-second-card, .hwc-title, .hwc-dot {
+      [data-hwcseqframe], .hwc-diagnosis, .hwc-best-match,
+      .hwc-second-card, .hwc-title, .hwc-dot,
+      .hwc-cursor, .hwc-msg-row, .hwc-stepper-circle,
+      .hwc-confirm-card, .hwc-pt-cta, .hwc-pt-check,
+      .hwc-pt-second, .hwc-stepper-line, .hwc-detail-text {
         transition: none !important;
         animation: none !important;
       }
