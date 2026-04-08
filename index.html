@@ -187,11 +187,46 @@
     opacity: 0;
   }
 
+  /* Confidence Shimmer — horizontal light sweep after snap */
+  .confidence-shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+  }
+  .confidence-shimmer.active {
+    opacity: 1;
+  }
+  .confidence-shimmer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 60px;
+    top: -60px;
+    background: linear-gradient(
+      180deg,
+      rgba(0,163,133,0) 0%,
+      rgba(0,163,133,0.10) 35%,
+      rgba(0,163,133,0.18) 50%,
+      rgba(0,163,133,0.10) 65%,
+      rgba(0,163,133,0) 100%
+    );
+    transition: none;
+  }
+  .confidence-shimmer.sweep::before {
+    transition: top 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: calc(100% + 60px);
+  }
+
   /* Reduced motion: skip all animation, just crossfade badges */
   @media (prefers-reduced-motion: reduce) {
     .intelligence-image.soft { filter: none; }
     .focus-brackets { display: none; }
     .camera-flash { display: none; }
+    .confidence-shimmer { display: none; }
     .detection-callout { transition: opacity 0.6s ease; transform: none; }
   }
   .detection-callout {
@@ -507,28 +542,7 @@
 
   /* ===== 3D Phone Perspective & Floating Badges ===== */
   .phone-3d-scene {
-    perspective: 1200px;
     position: relative;
-  }
-  .phone-3d-tilt {
-    transform-style: preserve-3d;
-    will-change: transform;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  /* Screen glare that shifts with tilt */
-  .phone-screen-glare {
-    position: absolute;
-    inset: 6px;
-    border-radius: 34px;
-    background: linear-gradient(115deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 40%);
-    pointer-events: none;
-    z-index: 30;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-  .phone-3d-tilt:hover .phone-screen-glare,
-  .phone-3d-active .phone-screen-glare {
-    opacity: 1;
   }
 
   /* Floating glass badges */
@@ -1454,21 +1468,20 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <!-- Right: Phone Mockup with CTA below -->
       <div id="one-photo-phone" style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; overflow: visible;">
         <div class="phone-3d-scene" style="overflow: visible;">
-          <div class="hero-phone-inner phone-3d-tilt" id="phone-3d-tilt" style="width: 280px; position: relative;">
+          <div class="hero-phone-inner" style="width: 280px; position: relative;">
             <div style="background: #063340; border-radius: 40px; padding: 6px; box-shadow: 0 24px 64px rgba(6, 51, 64, 0.25), 0 8px 24px rgba(6, 51, 64, 0.15);">
-              <div class="phone-screen-glare"></div>
               <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 72px; height: 18px; background: #000; border-radius: 20px; z-index: 20;"></div>
               <div style="background: #f5f7f8; border-radius: 34px; overflow: hidden; position: relative;">
                 <div style="height: 28px; background: white;"></div>
-                <div style="background: white; padding: 8px 16px 10px; border-bottom: 1px solid #e8edf0; display: flex; align-items: center; justify-content: space-between;">
+                <div style="background: white; padding: 8px 16px 10px; border-bottom: 1px solid #e8edf0; display: flex; align-items: center;">
                   <img src="images/jk-logo.png" alt="Jackknife" style="height: 17px; object-fit: contain;" />
-                  <p id="home-scan-label" class="scan-label-hidden" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10px; color: #00A385; margin: 0; letter-spacing: 0.5px;">Scanning...</p>
                 </div>
                 <!-- Photo with scan beam and 4 animated callouts -->
                 <div class="intelligence-container" style="max-width: 100%; border-radius: 0; box-shadow: none; aspect-ratio: 9/16;">
                   <img src="images/lg-washtower.webp" alt="LG WashTower being analyzed by Jackknife AI" class="intelligence-image" />
                   <div class="focus-brackets"><div class="bracket-bottom"></div></div>
                   <div class="camera-flash"></div>
+                  <div class="confidence-shimmer"></div>
                   <div class="detection-callout hero-callout-1 jk-glass-callout">
                     <div class="jk-glass-inner">
                       <div>
@@ -1513,7 +1526,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <section style="padding: 64px 24px; background: #f0f8fa;" id="diagnose-home">
     <div style="max-width: 1200px; margin: 0 auto;">
       <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">When Something's Not Right</p>
-      <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 40px 0; line-height: 1.2;">From panic to plan.</h2>
+      <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 40px 0; line-height: 1.2;">From panic to plan. In seconds.</h2>
 
       <div class="sw-layout" style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
         <!-- Step title — centered above phone, synced to animation -->
@@ -1580,17 +1593,18 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     </div>
 
                     <!-- CTA -->
-                    <div class="sw-sheet-cta" style="background: linear-gradient(135deg, #063340, #0a4a5c); color: white; border-radius: 24px; padding: 10px; text-align: center; font-weight: 700; font-size: 12px; opacity: 0.3; transition: opacity 300ms ease;">Review Solutions</div>
+                    <div class="sw-sheet-cta" style="background: linear-gradient(135deg, #063340, #0a4a5c); color: white; border-radius: 24px; padding: 10px; text-align: center; font-weight: 700; font-size: 12px; opacity: 0.3; transition: opacity 600ms ease;">Review Solutions</div>
                   </div>
                 </div>
 
                 <!-- Step 3: Your Options (3 cards) -->
-                <div class="sw-step" data-sw="2" style="position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 400ms ease; padding: 10px 12px; font-family: Montserrat, sans-serif; overflow-y: auto; background: #f5f7f8; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+                <div class="sw-step" data-sw="2" style="position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 400ms ease; padding: 10px 12px; font-family: Montserrat, sans-serif; overflow-y: auto; background: #f5f7f8; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
 
                   <!-- Location + issue header -->
                   <div style="padding: 4px 4px 0; margin-bottom: 10px;">
-                    <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; color: #063340; margin: 0; line-height: 1.3;">Living Room <span style="padding: 0 4px; font-weight: 400; opacity: 0.5;">&middot;</span> Water Damage</p>
-                    <p style="font-family: Montserrat, sans-serif; font-weight: 400; font-size: 11px; color: #063340; opacity: 0.55; margin: 5px 0 0 0; line-height: 1.3;">How to handle it</p>
+                    <p style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10px; color: #1DA485; margin: 0; letter-spacing: 0.08em; text-transform: uppercase;">Living Room</p>
+                    <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; color: #063340; margin: 4px 0 0 0; line-height: 1.2;">Water Damage</p>
+                    <p style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10px; color: #6b7c85; margin: 6px 0 0 0; letter-spacing: 0.08em; text-transform: uppercase;">Choose how to handle it</p>
                   </div>
 
                   <!-- Card 1: DIY -->
@@ -1610,21 +1624,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
                       <div style="width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #32849e, #0a5c72); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2c-1.1 0-2 .9-2 2v1H7c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V7c0-1.1-.9-2-2-2h-3V4c0-1.1-.9-2-2-2zm0 1.5c.28 0 .5.22.5.5v1h-1V4c0-.28.22-.5.5-.5zM5 11v9c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-9H5zm7 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg>
                       </div>
-                      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; color: #063340; margin: 0;">9 Plumbers Near You</p>
+                      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; color: #063340; margin: 0;">9 Plumbers Nearby</p>
                     </div>
                     <div style="background: radial-gradient(100% 100% at 100% 49.59%, rgba(53, 203, 255, 0.4) 0%, rgba(13, 51, 64, 0.4) 100%), #0D3340; color: #f9fafb; border-radius: 200px; padding: 9px; text-align: center; font-family: Poppins, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.02em; box-shadow: 0px 4.95px 12px rgba(7, 86, 109, 0.2);">Hire a Pro</div>
                   </div>
 
-                  <!-- Card 3: Save for Later -->
-                  <div style="background: linear-gradient(176.35deg, rgba(107, 114, 128, 0.10) 2.89%, rgba(107, 114, 128, 0) 40.59%), #ffffff; border-radius: 20px; padding: 12px 14px; box-shadow: 0px 4.95px 12px rgba(7, 86, 109, 0.2); display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div style="width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #6B7280, #4B5563); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                      </div>
-                      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; color: #063340; margin: 0;">Save for Later</p>
-                    </div>
-                    <div style="background: #ffffff; color: #1DA485; border: 1px solid rgba(29, 164, 133, 0.2); border-radius: 200px; padding: 9px; text-align: center; font-family: Poppins, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.02em;">Save to Projects</div>
-                  </div>
+                  <!-- Save for Later — slim outline button -->
+                  <div style="background: #ffffff; color: #1DA485; border: 1.5px solid #1DA485; border-radius: 200px; padding: 9px; text-align: center; font-family: Poppins, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.02em;">Save for Later</div>
                 </div>
 
 
@@ -1718,6 +1724,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
       .sw-swipe-hint { display: block; }
     }
 
+    /* CTA press animation — simulates tap on "Review Solutions" */
+    .sw-sheet-cta.sw-cta-pressed {
+      transform: scale(0.95);
+      filter: brightness(0.85);
+      transition: transform 150ms ease, filter 150ms ease, opacity 300ms ease;
+    }
+
     /* Pro section toast cards — mobile only */
     .pro-toast-container {
       display: none;
@@ -1757,7 +1770,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <script>
   // Something's Wrong 3-step auto-cycle with crossfade reveal + pause controls
   (function() {
-    var DURATIONS = [3000, 8320, 6820]; // ms per step
+    var DURATIONS = [2000, 6400, 6820]; // ms per step
     var section = document.getElementById('diagnose-home');
     if (!section) return;
 
@@ -1786,6 +1799,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var STEP_TO_TEXT = [0, 1, 2];
 
     function setAnalyzingState() {
+      // Clear all step 1 timers
+      clearTimeout(sheetTimer);
+      clearTimeout(pillTimer);
+      clearTimeout(ctaTimer);
+      clearTimeout(ctaPressTimer);
+      clearTimeout(ctaAdvanceTimer);
+      // Reset CTA pressed state
+      var sheetCta = combinedStep.querySelector('.sw-sheet-cta');
+      if (sheetCta) sheetCta.classList.remove('sw-cta-pressed');
       // Instantly snap everything back (no transitions)
       revealEls.forEach(function(el) {
         el.style.transition = 'none';
@@ -1824,9 +1846,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
     // Phase 2: Reveal badge first, then slide up bottom sheet after delay
     var sheetTimer;
     var pillTimer;
+    var ctaTimer;
+    var ctaPressTimer;
+    var ctaAdvanceTimer;
     function setDiagnosedState() {
       clearTimeout(sheetTimer);
       clearTimeout(pillTimer);
+      clearTimeout(ctaTimer);
+      clearTimeout(ctaPressTimer);
+      clearTimeout(ctaAdvanceTimer);
       // Ensure analyzing is hidden and badge is visible
       analyzingBadge.style.opacity = '0';
       revealEls.forEach(function(el) {
@@ -1843,7 +1871,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
         selectablePill.style.fontWeight = '600';
         selectablePill.style.borderColor = '#e0eaed';
       }
-      if (sheetCta) sheetCta.style.opacity = '0.3';
+      if (sheetCta) {
+        sheetCta.style.opacity = '0.3';
+        sheetCta.classList.remove('sw-cta-pressed');
+      }
       // Force bottom sheet hidden with no transition
       bottomSheet.style.transition = 'none';
       bottomSheet.style.transform = 'translateY(100%)';
@@ -1858,7 +1889,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         void bottomSheet.offsetHeight;
         bottomSheet.style.transform = 'translateY(0)';
         bottomSheet.style.opacity = '1';
-        // After 1.5s more, select pill + activate CTA
+        // +1500ms: Pill turns green
         pillTimer = setTimeout(function() {
           if (selectablePill) {
             selectablePill.style.background = 'rgba(0,163,133,0.12)';
@@ -1866,8 +1897,20 @@ document.getElementById('banner-close').addEventListener('click', function() {
             selectablePill.style.fontWeight = '700';
             selectablePill.style.borderColor = '#00A385';
           }
-          if (sheetCta) sheetCta.style.opacity = '1';
         }, 1500);
+        // +2300ms: CTA fades to full opacity
+        ctaTimer = setTimeout(function() {
+          if (sheetCta) sheetCta.style.opacity = '1';
+        }, 2300);
+        // +3100ms: CTA gets pressed effect
+        ctaPressTimer = setTimeout(function() {
+          if (sheetCta) sheetCta.classList.add('sw-cta-pressed');
+        }, 3100);
+        // +3400ms: Release press, advance to step 2
+        ctaAdvanceTimer = setTimeout(function() {
+          if (sheetCta) sheetCta.classList.remove('sw-cta-pressed');
+          showStep(2);
+        }, 3400);
       }, 2700);
     }
 
@@ -2021,7 +2064,344 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
   <!-- ============================================================ -->
 
-  <!-- Find Your Pro section (Rotating) -->
+  <!-- NEW: Hire With Confidence — Trust Animation (2-frame crossfade) -->
+  <section id="hire-with-confidence" style="padding: 64px 24px; background: #ffffff;">
+      <!-- Two-column desktop layout -->
+      <div class="hwc-layout" style="display: flex; align-items: center; gap: 48px; max-width: 860px; margin: 0 auto;">
+
+        <!-- Left: Copy -->
+        <div class="hwc-text-col" style="flex: 1; max-width: 480px;">
+          <!-- Section label -->
+          <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Hire with Confidence</p>
+
+          <!-- H2 -->
+          <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 24px 0; line-height: 1.2;">Vetted by your street. Not an algorithm.</h2>
+
+          <!-- Step title crossfade -->
+          <div style="position: relative; height: 36px; width: 100%; margin-bottom: 24px;">
+            <span class="hwc-title" data-hwctitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">Real jobs. Real neighbors.</span>
+            <span class="hwc-title" data-hwctitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">Smart Match.</span>
+          </div>
+
+          <!-- Detail text (desktop only) -->
+          <p class="hwc-detail-text" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 0; max-width: 480px; line-height: 1.6;">Every review on Jackknife is tied to a real home and a real project. Anonymous for the homeowner. Verified for you.</p>
+        </div>
+
+        <!-- Right: Phone -->
+        <div class="hwc-phone-col" style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;">
+
+      <!-- Phone frame -->
+      <div style="display: inline-block; width: 280px; position: relative;">
+        <div style="background: #063340; border-radius: 40px; padding: 6px; box-shadow: 0 24px 64px rgba(6, 51, 64, 0.25), 0 8px 24px rgba(6, 51, 64, 0.15);">
+          <!-- Notch -->
+          <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 72px; height: 18px; background: #000; border-radius: 20px; z-index: 20;"></div>
+          <!-- Screen -->
+          <div style="background: #f5f7f8; border-radius: 34px; overflow: hidden; position: relative;">
+            <!-- Status bar -->
+            <div style="height: 28px; background: white;"></div>
+            <!-- Logo header -->
+            <div style="background: white; padding: 8px 16px 10px; border-bottom: 1px solid #e8edf0; display: flex; align-items: center;">
+              <img src="images/jk-logo.png" alt="Jackknife" style="height: 17px; object-fit: contain;" />
+            </div>
+            <!-- Screen content area -->
+            <div style="position: relative; height: 485px; overflow: hidden;">
+
+              <!-- FRAME 1: Trusted Local Pros -->
+              <div data-hwcframe="0" style="position: absolute; inset: 0; opacity: 1; transform: translateY(0); transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
+                <!-- Screen header -->
+                <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 4px 0; text-align: left;">Trusted Pros</p>
+                <!-- Subhead -->
+                <p style="font-size: 13px; font-weight: 400; color: #063340; margin: 0 0 14px 0; line-height: 1.4; text-align: left;">Hired and reviewed by homeowners on your street.</p>
+
+                <!-- Card 1 -->
+                <div style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">North Shore Drywall &amp; Paint</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.9 · 19 neighbor reviews</p>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Essex County Restoration</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · 24 neighbor reviews</p>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · 31 neighbor reviews</p>
+                  </div>
+                </div>
+                <!-- AI scan shimmer overlay -->
+                <div class="hwc-shimmer" style="position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0;">
+                  <div class="hwc-shimmer-line" style="position: absolute; left: 0; right: 0; height: 50px; top: -50px; background: linear-gradient(180deg, rgba(0,163,133,0) 0%, rgba(0,163,133,0.08) 35%, rgba(0,163,133,0.14) 50%, rgba(0,163,133,0.08) 65%, rgba(0,163,133,0) 100%);"></div>
+                </div>
+              </div>
+
+              <!-- FRAME 2: Smart Match -->
+              <div data-hwcframe="1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
+                <!-- Screen header with diagnosis context -->
+                <div class="hwc-diagnosis" style="margin-bottom: 12px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; text-align: left;">
+                  <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 2px 0;">Smart Match</p>
+                  <p style="font-size: 15px; font-weight: 700; color: #063340; margin: 0 0 2px 0;">Water Damage · Ceiling Stain</p>
+                  <p style="font-size: 11px; font-weight: 400; color: #6b7c85; margin: 0;">Based on your diagnosis</p>
+                </div>
+
+                <!-- Best Match card -->
+                <div class="hwc-best-match" style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 3px solid #00A385; display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; flex-wrap: wrap;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">North Shore Drywall &amp; Paint</p>
+                      <span style="font-size: 10px; font-weight: 600; color: #0F6E56; background: #E1F5EE; padding: 2px 8px; border-radius: 20px; white-space: nowrap;">Best Match</span>
+                    </div>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 0;">★ 4.9 · Water damage restoration specialist</p>
+                  </div>
+                </div>
+
+                <!-- Second specialist card -->
+                <div class="hwc-second-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Cape Ann General Contracting</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · Ceiling and drywall repair</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress dots -->
+      <div style="display: flex; justify-content: center; gap: 8px; padding: 16px 0;">
+        <div class="hwc-dot" data-hwcdot="0" style="width: 8px; height: 8px; border-radius: 50%; background: #00A385; transition: background 300ms ease; cursor: pointer;"></div>
+        <div class="hwc-dot" data-hwcdot="1" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
+      </div>
+
+        </div><!-- end hwc-phone-col -->
+      </div><!-- end hwc-layout -->
+  </section>
+
+  <!-- Hire With Confidence CSS -->
+  <style>
+    @keyframes hwcBestMatchGlow {
+      0%, 100% { box-shadow: 0 2px 8px rgba(0,163,133,0.15); }
+      50% { box-shadow: 0 4px 20px rgba(0,163,133,0.35), 0 0 12px rgba(0,163,133,0.15); }
+    }
+    .hwc-diagnosis.hwc-visible,
+    .hwc-best-match.hwc-visible,
+    .hwc-second-card.hwc-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .hwc-best-match.hwc-glow {
+      animation: hwcBestMatchGlow 2s ease-in-out infinite;
+    }
+    /* AI scan shimmer on Frame 1 */
+    .hwc-shimmer.hwc-shimmer-active {
+      opacity: 1;
+    }
+    .hwc-shimmer.hwc-shimmer-active .hwc-shimmer-line {
+      transition: top 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      top: calc(100% + 50px) !important;
+    }
+    @media (max-width: 768px) {
+      .hwc-layout {
+        flex-direction: column !important;
+        gap: 24px !important;
+        text-align: center !important;
+      }
+      .hwc-text-col { text-align: center !important; }
+      .hwc-title { text-align: center !important; }
+      .hwc-detail-text { display: none !important; }
+      .hwc-phone-col { width: 100% !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-hwcframe], .hwc-diagnosis, .hwc-best-match,
+      .hwc-second-card, .hwc-title, .hwc-dot {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+
+  <!-- Hire With Confidence JS Controller -->
+  <script>
+  (function() {
+    var section = document.getElementById('hire-with-confidence');
+    if (!section) return;
+
+    var frames = section.querySelectorAll('[data-hwcframe]');
+    var titles = section.querySelectorAll('.hwc-title');
+    var dots = section.querySelectorAll('.hwc-dot');
+    var diagnosis = section.querySelector('.hwc-diagnosis');
+    var bestMatch = section.querySelector('.hwc-best-match');
+    var secondCard = section.querySelector('.hwc-second-card');
+    var shimmer = section.querySelector('.hwc-shimmer');
+    var shimmerLine = section.querySelector('.hwc-shimmer-line');
+
+    var FRAME1_HOLD = 4000;
+    var FRAME2_HOLD = 4000;
+    var CROSSFADE = 1000;
+
+    var idx = 0;
+    var paused = false;
+    var holdTimer = null;
+    var seqTimers = [];
+
+    function clearAllTimers() {
+      clearTimeout(holdTimer);
+      seqTimers.forEach(function(t) { clearTimeout(t); });
+      seqTimers = [];
+    }
+
+    function resetFrame2Elements() {
+      if (diagnosis) { diagnosis.classList.remove('hwc-visible'); }
+      if (bestMatch) { bestMatch.classList.remove('hwc-visible', 'hwc-glow'); }
+      if (secondCard) { secondCard.classList.remove('hwc-visible'); }
+    }
+
+    function showFrame(i) {
+      clearAllTimers();
+      idx = i;
+
+      // Crossfade frames with subtle slide
+      frames.forEach(function(f, j) {
+        if (j === i) {
+          f.style.visibility = 'visible';
+          f.style.opacity = '1';
+          f.style.transform = 'translateY(0)';
+        } else {
+          f.style.opacity = '0';
+          f.style.transform = 'translateY(12px)';
+          setTimeout(function() { if (f.style.opacity === '0') f.style.visibility = 'hidden'; }, CROSSFADE);
+        }
+      });
+
+      // Crossfade titles
+      titles.forEach(function(t, j) {
+        t.style.opacity = j === i ? '1' : '0';
+      });
+
+      // Update dots
+      dots.forEach(function(d, j) {
+        d.style.background = j === i ? '#00A385' : '#d1d5db';
+      });
+
+      if (i === 0) {
+        resetFrame2Elements();
+        // Reset shimmer
+        if (shimmer) {
+          shimmer.classList.remove('hwc-shimmer-active');
+          if (shimmerLine) shimmerLine.style.transition = 'none';
+          if (shimmerLine) shimmerLine.style.top = '-50px';
+        }
+        // Trigger AI shimmer after 1s
+        seqTimers.push(setTimeout(function() {
+          if (shimmer) {
+            void shimmerLine.offsetHeight;
+            shimmer.classList.add('hwc-shimmer-active');
+          }
+        }, 1000));
+        // Clean up shimmer after sweep
+        seqTimers.push(setTimeout(function() {
+          if (shimmer) shimmer.classList.remove('hwc-shimmer-active');
+        }, 3200));
+        if (!paused) {
+          holdTimer = setTimeout(function() { showFrame(1); }, FRAME1_HOLD);
+        }
+      } else if (i === 1) {
+        // Reset shimmer when leaving Frame 1
+        if (shimmer) shimmer.classList.remove('hwc-shimmer-active');
+        runFrame2Sequence();
+      }
+    }
+
+    function runFrame2Sequence() {
+      resetFrame2Elements();
+
+      // +100ms: diagnosis card fades in
+      seqTimers.push(setTimeout(function() {
+        if (diagnosis) diagnosis.classList.add('hwc-visible');
+      }, 100));
+
+      // +900ms: best match fades in (100 + 300 transition + 500 pause)
+      seqTimers.push(setTimeout(function() {
+        if (bestMatch) bestMatch.classList.add('hwc-visible');
+        // +300ms: add glow after it's visible
+        seqTimers.push(setTimeout(function() {
+          if (bestMatch) bestMatch.classList.add('hwc-glow');
+        }, 300));
+      }, 900));
+
+      // +1500ms: second card fades in
+      seqTimers.push(setTimeout(function() {
+        if (secondCard) secondCard.classList.add('hwc-visible');
+      }, 1500));
+
+      // After internal sequence + hold, loop back
+      if (!paused) {
+        holdTimer = setTimeout(function() {
+          showFrame(0);
+        }, 1800 + FRAME2_HOLD);
+      }
+    }
+
+    // Dot click handlers
+    dots.forEach(function(d) {
+      d.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var target = parseInt(d.getAttribute('data-hwcdot'));
+        if (target !== idx) showFrame(target);
+      });
+    });
+
+    // Hover pause/resume (desktop)
+    section.addEventListener('mouseenter', function() {
+      paused = true;
+      clearAllTimers();
+    });
+    section.addEventListener('mouseleave', function() {
+      paused = false;
+      // Resume: schedule next transition from current frame
+      if (idx === 0) {
+        holdTimer = setTimeout(function() { showFrame(1); }, FRAME1_HOLD);
+      } else {
+        holdTimer = setTimeout(function() { showFrame(0); }, FRAME2_HOLD);
+      }
+    });
+
+    // Reduced motion: show Frame 1 static
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      showFrame(0);
+      paused = true;
+      return;
+    }
+
+    // IntersectionObserver: start when visible
+    var started = false;
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        showFrame(0);
+      }
+    }, { threshold: 0.3 });
+    obs.observe(section);
+  })();
+  </script>
+
+  <!-- ============================================================ -->
+
+  <!-- Find Your Pro section (Rotating) — OLD, kept for reference -->
   <section style="padding: 64px 24px; background: #ffffff;" id="find-pro-home">
     <div style="max-width: 1200px; margin: 0 auto;">
 
@@ -3007,21 +3387,23 @@ function animatePanelContent(panelIndex) {
 <script>
 (function() {
   // Timing constants
-  var CYCLE = 11500;
+  var CYCLE = 13000;
   var SOFT_START = 0;         // Image starts soft immediately
   var FOCUS_AT = 1000;        // Focus brackets snap in, image sharpens
   var BRACKETS_HOLD = 400;    // Brackets visible before flash
   var FLASH_IN = 200;         // Flash ramps up
   var FLASH_OUT = 350;        // Flash fades
-  var BADGE_APPEAR = FOCUS_AT + BRACKETS_HOLD + FLASH_IN; // ~1600ms — badges appear as flash peaks
-  var HOLD_TIME = 7500;       // Badges stay visible
-  var FADE_OUT_AT = BADGE_APPEAR + HOLD_TIME; // ~5100ms
+  var SHIMMER_DURATION = 1800; // ms — matches CSS transition
+  var BADGE_APPEAR = FOCUS_AT + BRACKETS_HOLD + FLASH_IN; // ~1600ms — shimmer starts after flash
+  var HOLD_TIME = 7500;       // Badges stay visible after shimmer
+  var FADE_OUT_AT = BADGE_APPEAR + SHIMMER_DURATION + HOLD_TIME; // badges appear at ~3400ms, fade at ~9700ms
 
   var container = document.getElementById('one-photo-phone');
   if (!container) return;
   var image = container.querySelector('.intelligence-image');
   var brackets = container.querySelector('.focus-brackets');
   var flash = container.querySelector('.camera-flash');
+  var shimmer = container.querySelector('.confidence-shimmer');
   var callouts = container.querySelectorAll('.detection-callout');
   var label = document.getElementById('home-scan-label');
 
@@ -3029,6 +3411,7 @@ function animatePanelContent(panelIndex) {
     if (image) image.classList.remove('soft');
     if (brackets) brackets.classList.remove('active');
     if (flash) { flash.classList.remove('fire', 'fade'); }
+    if (shimmer) shimmer.classList.remove('active', 'sweep');
     callouts.forEach(function(c) { c.classList.remove('visible'); });
     if (label) label.className = 'scan-label-hidden';
   }
@@ -3052,17 +3435,27 @@ function animatePanelContent(panelIndex) {
       if (label) label.className = 'scan-label-hidden';
     }, FOCUS_AT + BRACKETS_HOLD);
 
-    // Step 4: Flash fades, brackets disappear, badges appear
+    // Step 4: Flash fades, brackets disappear, shimmer begins
     setTimeout(function() {
       if (flash) { flash.classList.remove('fire'); flash.classList.add('fade'); }
       if (brackets) brackets.classList.remove('active');
-      callouts.forEach(function(c) { c.classList.add('visible'); });
+      // Start confidence shimmer
+      if (shimmer) {
+        shimmer.classList.add('active');
+        void shimmer.offsetHeight; // force reflow
+        shimmer.classList.add('sweep');
+      }
+      // All badges appear in unison after shimmer completes
+      setTimeout(function() {
+        callouts.forEach(function(c) { c.classList.add('visible'); });
+      }, SHIMMER_DURATION);
     }, BADGE_APPEAR);
 
-    // Clean up flash fade class
+    // Clean up flash + shimmer
     setTimeout(function() {
       if (flash) flash.classList.remove('fade');
-    }, BADGE_APPEAR + FLASH_OUT);
+      if (shimmer) shimmer.classList.remove('active', 'sweep');
+    }, BADGE_APPEAR + SHIMMER_DURATION + 400);
 
     // Step 5: Fade out badges before next cycle
     setTimeout(function() {
@@ -3144,72 +3537,6 @@ function animatePanelContent(panelIndex) {
 })();
 </script>
 
-<!-- 3D Phone Tilt + Floating Badge Controller -->
-<script>
-(function() {
-  var phone = document.getElementById('phone-3d-tilt');
-  var scene = phone ? phone.closest('.phone-3d-scene') : null;
-  if (!phone || !scene) return;
-
-  // --- 3D Mouse Tilt (desktop only) ---
-  var rafId = 0;
-  var currentRx = 0, currentRy = 0;
-  var targetRx = 0, targetRy = 0;
-
-  function lerpTilt() {
-    currentRx += (targetRx - currentRx) * 0.08;
-    currentRy += (targetRy - currentRy) * 0.08;
-    phone.style.transform = 'rotateX(' + currentRx + 'deg) rotateY(' + currentRy + 'deg)';
-    if (Math.abs(targetRx - currentRx) > 0.01 || Math.abs(targetRy - currentRy) > 0.01) {
-      rafId = requestAnimationFrame(lerpTilt);
-    }
-  }
-
-  if (window.innerWidth > 768) {
-    scene.addEventListener('mouseenter', function() {
-      phone.classList.add('phone-3d-active');
-      phone.style.transition = 'none';
-    });
-
-    scene.addEventListener('mousemove', function(e) {
-      var rect = scene.getBoundingClientRect();
-      var centerX = rect.left + rect.width / 2;
-      var centerY = rect.top + rect.height / 2;
-      var xPct = (e.clientX - centerX) / (rect.width / 2);
-      var yPct = (e.clientY - centerY) / (rect.height / 2);
-      // Clamp
-      xPct = Math.max(-1, Math.min(1, xPct));
-      yPct = Math.max(-1, Math.min(1, yPct));
-      targetRy = xPct * 12;   // left/right tilt
-      targetRx = -yPct * 8;   // up/down tilt (inverted)
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(lerpTilt);
-    });
-
-    scene.addEventListener('mouseleave', function() {
-      phone.classList.remove('phone-3d-active');
-      targetRx = 0;
-      targetRy = 0;
-      cancelAnimationFrame(rafId);
-      // Smooth return
-      phone.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
-      phone.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    });
-  }
-
-  // --- Subtle idle float animation via GSAP (if available) ---
-  if (typeof gsap !== 'undefined' && window.innerWidth > 768) {
-    gsap.to(phone, {
-      y: -6,
-      duration: 3,
-      ease: 'sine.inOut',
-      yoyo: true,
-      repeat: -1,
-      delay: 2
-    });
-  }
-})();
-</script>
 
 </body>
 </html>
