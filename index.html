@@ -2427,159 +2427,349 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var section = document.getElementById('hire-with-confidence');
     if (!section) return;
 
-    var frames = section.querySelectorAll('[data-hwcseqframe]');
-    var titles = section.querySelectorAll('.hwc-title');
-    var dots = section.querySelectorAll('.hwc-dot');
+    // === DOM refs ===
+    var allFrames = section.querySelectorAll('[data-hwcseqframe]');
+    var titles = section.querySelectorAll('[data-hwcseqtitle]');
+    var details = section.querySelectorAll('[data-hwcseqdetail]');
+    var dots = section.querySelectorAll('[data-hwcseqdot]');
+
+    // Seq 0 refs
+    var shimmer = section.querySelector('.hwc-shimmer');
+    var shimmerLine = section.querySelector('.hwc-shimmer-line');
     var diagnosis = section.querySelector('.hwc-diagnosis');
     var bestMatch = section.querySelector('.hwc-best-match');
     var secondCard = section.querySelector('.hwc-second-card');
-    var shimmer = section.querySelector('.hwc-shimmer');
-    var shimmerLine = section.querySelector('.hwc-shimmer-line');
 
-    var FRAME1_HOLD = 4000;
-    var FRAME2_HOLD = 4000;
+    // Seq 1, Frame 0 refs
+    var ptBestMatch = section.querySelector('.hwc-pt-bestmatch');
+    var ptCta = section.querySelector('.hwc-pt-cta');
+    var ptCheck = section.querySelector('.hwc-pt-check');
+    var ptSecond = section.querySelector('.hwc-pt-second');
+
+    // Seq 1, Frame 1 refs
+    var msgThread = section.querySelector('.hwc-msg-thread');
+    var msgRows = msgThread ? msgThread.querySelectorAll('.hwc-msg-row') : [];
+
+    // Seq 1, Frame 2 refs
+    var stepperLine = section.querySelector('.hwc-stepper-line');
+    var confirmCard = section.querySelector('.hwc-confirm-card');
+    var confirmDate = section.querySelector('.hwc-confirm-date');
+    var step3Circle = section.querySelector('.hwc-step3-circle');
+    var step3Check = section.querySelector('.hwc-step3-check');
+
+    // === Constants ===
     var CROSSFADE = 1000;
+    var SEQ_CONFIG = [
+      { frames: ['0-0', '0-1'], holds: [4000, 4000] },
+      { frames: ['1-0', '1-1', '1-2'], holds: [3000, 10000, 5000] }
+    ];
+    var NUM_SEQS = SEQ_CONFIG.length;
 
-    var idx = 0;
+    // === State ===
+    var currentSeq = 0;
+    var currentFrame = 0;
     var paused = false;
-    var holdTimer = null;
-    var seqTimers = [];
+    var allTimers = [];
+    var typewriterInterval = null;
 
+    // === Timer management ===
     function clearAllTimers() {
-      clearTimeout(holdTimer);
-      seqTimers.forEach(function(t) { clearTimeout(t); });
-      seqTimers = [];
+      allTimers.forEach(function(t) { clearTimeout(t); });
+      allTimers = [];
+      if (typewriterInterval) { clearInterval(typewriterInterval); typewriterInterval = null; }
     }
 
-    function resetFrame2Elements() {
-      if (diagnosis) { diagnosis.classList.remove('hwc-visible'); }
-      if (bestMatch) { bestMatch.classList.remove('hwc-visible', 'hwc-glow'); }
-      if (secondCard) { secondCard.classList.remove('hwc-visible'); }
+    function addTimer(fn, delay) {
+      var t = setTimeout(fn, delay);
+      allTimers.push(t);
+      return t;
     }
 
-    function showFrame(i) {
-      clearAllTimers();
-      idx = i;
-
-      // Crossfade frames with subtle slide
-      frames.forEach(function(f, j) {
-        if (j === i) {
+    // === Frame visibility ===
+    function showFrameEl(frameId) {
+      allFrames.forEach(function(f) {
+        var id = f.getAttribute('data-hwcseqframe');
+        if (id === frameId) {
           f.style.visibility = 'visible';
           f.style.opacity = '1';
           f.style.transform = 'translateY(0)';
         } else {
           f.style.opacity = '0';
           f.style.transform = 'translateY(12px)';
-          setTimeout(function() { if (f.style.opacity === '0') f.style.visibility = 'hidden'; }, CROSSFADE);
+          (function(el) {
+            addTimer(function() {
+              if (el.style.opacity === '0') el.style.visibility = 'hidden';
+            }, CROSSFADE);
+          })(f);
         }
       });
+    }
 
-      // Crossfade titles
+    // === Sequence-level UI ===
+    function updateSeqUI(seqIdx) {
       titles.forEach(function(t, j) {
-        t.style.opacity = j === i ? '1' : '0';
+        t.style.opacity = j === seqIdx ? '1' : '0';
       });
-
-      // Update dots
+      details.forEach(function(d, j) {
+        d.style.opacity = j === seqIdx ? '1' : '0';
+      });
       dots.forEach(function(d, j) {
-        d.style.background = j === i ? '#00A385' : '#d1d5db';
+        d.style.background = j === seqIdx ? '#00A385' : '#d1d5db';
       });
+    }
 
-      if (i === 0) {
-        resetFrame2Elements();
-        // Reset shimmer
-        if (shimmer) {
-          shimmer.classList.remove('hwc-shimmer-active');
-          if (shimmerLine) shimmerLine.style.transition = 'none';
-          if (shimmerLine) shimmerLine.style.top = '-50px';
+    // === Typewriter utility ===
+    function typewrite(textSpan, text, speed, onDone) {
+      textSpan.textContent = '';
+      var cursor = document.createElement('span');
+      cursor.className = 'hwc-cursor';
+      textSpan.parentNode.appendChild(cursor);
+
+      var i = 0;
+      typewriterInterval = setInterval(function() {
+        if (i < text.length) {
+          textSpan.textContent = text.substring(0, i + 1);
+          i++;
+        } else {
+          clearInterval(typewriterInterval);
+          typewriterInterval = null;
+          if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+          if (onDone) onDone();
         }
-        // Trigger AI shimmer after 1s
-        seqTimers.push(setTimeout(function() {
-          if (shimmer) {
-            void shimmerLine.offsetHeight;
-            shimmer.classList.add('hwc-shimmer-active');
-          }
-        }, 1000));
-        // Clean up shimmer after sweep
-        seqTimers.push(setTimeout(function() {
-          if (shimmer) shimmer.classList.remove('hwc-shimmer-active');
-        }, 3200));
-        if (!paused) {
-          holdTimer = setTimeout(function() { showFrame(1); }, FRAME1_HOLD);
+      }, speed);
+    }
+
+    // === Reset functions ===
+    function resetSeq0() {
+      if (diagnosis) diagnosis.classList.remove('hwc-visible');
+      if (bestMatch) { bestMatch.classList.remove('hwc-visible', 'hwc-glow'); }
+      if (secondCard) secondCard.classList.remove('hwc-visible');
+      if (shimmer) {
+        shimmer.classList.remove('hwc-shimmer-active');
+        if (shimmerLine) { shimmerLine.style.transition = 'none'; shimmerLine.style.top = '-50px'; }
+      }
+    }
+
+    function resetSeq1Frame0() {
+      if (ptCta) { ptCta.style.transform = ''; ptCta.style.filter = ''; ptCta.style.animation = ''; }
+      if (ptBestMatch) { ptBestMatch.style.transform = ''; ptBestMatch.style.boxShadow = ''; }
+      if (ptCheck) ptCheck.style.opacity = '0';
+      if (ptSecond) { ptSecond.style.opacity = '1'; ptSecond.style.transform = 'translateY(0)'; }
+    }
+
+    function resetSeq1Frame1() {
+      if (typewriterInterval) { clearInterval(typewriterInterval); typewriterInterval = null; }
+      msgRows.forEach(function(row) { row.style.opacity = '0'; });
+      var textSpans = section.querySelectorAll('.hwc-msg-text');
+      textSpans.forEach(function(s) { s.textContent = ''; });
+      var cursors = section.querySelectorAll('.hwc-cursor');
+      cursors.forEach(function(c) { if (c.parentNode) c.parentNode.removeChild(c); });
+    }
+
+    function resetSeq1Frame2() {
+      if (confirmCard) { confirmCard.style.maxHeight = '0'; confirmCard.style.opacity = '0'; confirmCard.style.boxShadow = ''; confirmCard.style.animation = ''; }
+      if (confirmDate) confirmDate.style.color = '#a0aeb5';
+      if (step3Circle) { step3Circle.style.background = '#f5f7f8'; step3Circle.style.borderColor = '#d1d5db'; }
+      if (step3Check) step3Check.style.opacity = '0';
+      if (stepperLine) stepperLine.style.height = '80px';
+    }
+
+    // === Frame animation functions ===
+
+    function animSeq0Frame0(onDone) {
+      resetSeq0();
+      addTimer(function() {
+        if (shimmer && shimmerLine) {
+          void shimmerLine.offsetHeight;
+          shimmerLine.style.transition = '';
+          shimmer.classList.add('hwc-shimmer-active');
         }
-      } else if (i === 1) {
-        // Reset shimmer when leaving Frame 1
+      }, 1000);
+      addTimer(function() {
         if (shimmer) shimmer.classList.remove('hwc-shimmer-active');
-        runFrame2Sequence();
-      }
+      }, 3200);
+      if (!paused) addTimer(onDone, SEQ_CONFIG[0].holds[0]);
     }
 
-    function runFrame2Sequence() {
-      resetFrame2Elements();
-
-      // +100ms: diagnosis card fades in
-      seqTimers.push(setTimeout(function() {
-        if (diagnosis) diagnosis.classList.add('hwc-visible');
-      }, 100));
-
-      // +900ms: best match fades in (100 + 300 transition + 500 pause)
-      seqTimers.push(setTimeout(function() {
+    function animSeq0Frame1(onDone) {
+      addTimer(function() { if (diagnosis) diagnosis.classList.add('hwc-visible'); }, 100);
+      addTimer(function() {
         if (bestMatch) bestMatch.classList.add('hwc-visible');
-        // +300ms: add glow after it's visible
-        seqTimers.push(setTimeout(function() {
-          if (bestMatch) bestMatch.classList.add('hwc-glow');
-        }, 300));
-      }, 900));
+        addTimer(function() { if (bestMatch) bestMatch.classList.add('hwc-glow'); }, 300);
+      }, 900);
+      addTimer(function() { if (secondCard) secondCard.classList.add('hwc-visible'); }, 1500);
+      if (!paused) addTimer(onDone, SEQ_CONFIG[0].holds[1]);
+    }
 
-      // +1500ms: second card fades in
-      seqTimers.push(setTimeout(function() {
-        if (secondCard) secondCard.classList.add('hwc-visible');
-      }, 1500));
+    function animSeq1Frame0(onDone) {
+      resetSeq1Frame0();
+      addTimer(function() {
+        if (ptCta) ptCta.style.animation = 'hwcCtaPulse 400ms ease';
+        addTimer(function() { if (ptCta) ptCta.style.animation = ''; }, 400);
+      }, 1000);
+      addTimer(function() {
+        if (ptCta) { ptCta.style.transform = 'scale(0.96)'; ptCta.style.filter = 'brightness(0.9)'; }
+        if (ptBestMatch) { ptBestMatch.style.transform = 'translateY(-2px)'; ptBestMatch.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)'; }
+        if (ptSecond) { ptSecond.style.opacity = '0'; ptSecond.style.transform = 'translateY(8px)'; }
+        addTimer(function() {
+          if (ptCta) { ptCta.style.transform = ''; ptCta.style.filter = ''; }
+        }, 150);
+      }, 1500);
+      addTimer(function() {
+        if (ptCheck) ptCheck.style.opacity = '1';
+      }, 2000);
+      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[0]);
+    }
 
-      // After internal sequence + hold, loop back
-      if (!paused) {
-        holdTimer = setTimeout(function() {
-          showFrame(0);
-        }, 1800 + FRAME2_HOLD);
+    function animSeq1Frame1(onDone) {
+      resetSeq1Frame1();
+      var msg1 = msgRows[0];
+      var msg2 = msgRows[1];
+      var msg3 = msgRows[2];
+      var text1 = msg1 ? msg1.querySelector('.hwc-msg-text') : null;
+      var text3 = msg3 ? msg3.querySelector('.hwc-msg-text') : null;
+      var fullText1 = text1 ? text1.getAttribute('data-fulltext') : '';
+      var fullText3 = text3 ? text3.getAttribute('data-fulltext') : '';
+
+      addTimer(function() {
+        if (msg1) msg1.style.opacity = '1';
+        if (text1) {
+          addTimer(function() {
+            typewrite(text1, fullText1, 40, function() {
+              addTimer(function() {
+                if (msg2) {
+                  msg2.style.transition = 'opacity 200ms ease';
+                  msg2.style.opacity = '1';
+                }
+                addTimer(function() {
+                  if (msg3) msg3.style.opacity = '1';
+                  if (text3) {
+                    addTimer(function() {
+                      typewrite(text3, fullText3, 40, null);
+                    }, 200);
+                  }
+                }, 1400);
+              }, 1200);
+            });
+          }, 200);
+        }
+      }, 800);
+
+      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
+    }
+
+    function animSeq1Frame2(onDone) {
+      resetSeq1Frame2();
+      addTimer(function() {
+        if (confirmCard) { confirmCard.style.maxHeight = '200px'; confirmCard.style.opacity = '1'; }
+        if (stepperLine) stepperLine.style.height = '180px';
+      }, 500);
+      addTimer(function() {
+        if (confirmCard) confirmCard.style.animation = 'hwcConfirmGlow 600ms ease';
+        if (confirmDate) confirmDate.style.color = '#00A385';
+        addTimer(function() { if (confirmCard) confirmCard.style.animation = ''; }, 600);
+      }, 900);
+      addTimer(function() {
+        if (step3Circle) { step3Circle.style.background = '#00A385'; step3Circle.style.borderColor = '#00A385'; }
+        if (step3Check) step3Check.style.opacity = '1';
+      }, 1500);
+      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[2]);
+    }
+
+    var ANIM_FNS = {
+      '0-0': animSeq0Frame0,
+      '0-1': animSeq0Frame1,
+      '1-0': animSeq1Frame0,
+      '1-1': animSeq1Frame1,
+      '1-2': animSeq1Frame2
+    };
+
+    // === Main playback ===
+    function playSequence(seqIdx) {
+      if (seqIdx >= NUM_SEQS) seqIdx = 0;
+      currentSeq = seqIdx;
+      currentFrame = 0;
+      updateSeqUI(seqIdx);
+      playFrame(seqIdx, 0);
+    }
+
+    function playFrame(seqIdx, frameIdx) {
+      clearAllTimers();
+      currentSeq = seqIdx;
+      currentFrame = frameIdx;
+
+      var config = SEQ_CONFIG[seqIdx];
+      var frameId = config.frames[frameIdx];
+      showFrameEl(frameId);
+
+      var animFn = ANIM_FNS[frameId];
+      if (animFn) {
+        animFn(function() {
+          if (paused) return;
+          var nextFrame = frameIdx + 1;
+          if (nextFrame < config.frames.length) {
+            playFrame(seqIdx, nextFrame);
+          } else {
+            playSequence((seqIdx + 1) % NUM_SEQS);
+          }
+        });
       }
     }
 
-    // Dot click handlers
+    // === Dot click handlers ===
     dots.forEach(function(d) {
       d.addEventListener('click', function(e) {
         e.stopPropagation();
         var target = parseInt(d.getAttribute('data-hwcseqdot'));
-        if (target !== idx) showFrame(target);
+        if (target !== currentSeq) {
+          resetSeq0();
+          resetSeq1Frame0();
+          resetSeq1Frame1();
+          resetSeq1Frame2();
+          playSequence(target);
+        }
       });
     });
 
-    // Hover pause/resume (desktop)
+    // === Hover pause/resume ===
     section.addEventListener('mouseenter', function() {
       paused = true;
       clearAllTimers();
     });
     section.addEventListener('mouseleave', function() {
       paused = false;
-      // Resume: schedule next transition from current frame
-      if (idx === 0) {
-        holdTimer = setTimeout(function() { showFrame(1); }, FRAME1_HOLD);
-      } else {
-        holdTimer = setTimeout(function() { showFrame(0); }, FRAME2_HOLD);
-      }
+      var config = SEQ_CONFIG[currentSeq];
+      var remaining = config.holds[currentFrame];
+      addTimer(function() {
+        var nextFrame = currentFrame + 1;
+        if (nextFrame < config.frames.length) {
+          playFrame(currentSeq, nextFrame);
+        } else {
+          playSequence((currentSeq + 1) % NUM_SEQS);
+        }
+      }, remaining);
     });
 
-    // Reduced motion: show Frame 1 static
+    // === Reduced motion ===
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      showFrame(0);
+      resetSeq1Frame2();
+      showFrameEl('1-2');
+      updateSeqUI(1);
+      if (confirmCard) { confirmCard.style.maxHeight = '200px'; confirmCard.style.opacity = '1'; }
+      if (confirmDate) confirmDate.style.color = '#00A385';
+      if (step3Circle) { step3Circle.style.background = '#00A385'; step3Circle.style.borderColor = '#00A385'; }
+      if (step3Check) step3Check.style.opacity = '1';
+      if (stepperLine) stepperLine.style.height = '180px';
       paused = true;
       return;
     }
 
-    // IntersectionObserver: start when visible
+    // === IntersectionObserver ===
     var started = false;
     var obs = new IntersectionObserver(function(entries) {
       if (entries[0].isIntersecting && !started) {
         started = true;
-        showFrame(0);
+        playSequence(0);
       }
     }, { threshold: 0.3 });
     obs.observe(section);
