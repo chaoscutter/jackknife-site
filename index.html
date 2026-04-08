@@ -2079,12 +2079,17 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
           <!-- Step title crossfade -->
           <div style="position: relative; height: 36px; width: 100%; margin-bottom: 24px;">
-            <span class="hwc-title" data-hwctitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">Real jobs. Real neighbors.</span>
-            <span class="hwc-title" data-hwctitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">Smart Match.</span>
+            <span class="hwc-title" data-hwcseqtitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">Real jobs. Real neighbors.</span>
+            <span class="hwc-title" data-hwcseqtitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">No more phone tag.</span>
+            <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; display: none; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;"></span>
           </div>
 
-          <!-- Detail text (desktop only) -->
-          <p class="hwc-detail-text" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 0; max-width: 480px; line-height: 1.6;">Every review on Jackknife is tied to a real home and a real project. Anonymous for the homeowner. Verified for you.</p>
+          <!-- Detail text (desktop only, crossfades with sequence) -->
+          <div class="hwc-detail-container" style="position: relative; min-height: 52px;">
+            <p class="hwc-detail-text" data-hwcseqdetail="0" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 0; max-width: 480px; line-height: 1.6; transition: opacity 800ms ease; opacity: 1;">Every review on Jackknife is tied to a real home and a real project. Anonymous for the homeowner. Verified for you.</p>
+            <p class="hwc-detail-text" data-hwcseqdetail="1" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 0; max-width: 480px; line-height: 1.6; transition: opacity 800ms ease; opacity: 0; position: absolute; top: 0; left: 0; right: 0;">Every message, update, and confirmation in one place. No callbacks. No runaround.</p>
+            <p class="hwc-detail-text" data-hwcseqdetail="2" style="display: none;"></p>
+          </div>
         </div>
 
         <!-- Right: Phone -->
@@ -2107,7 +2112,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
             <div style="position: relative; height: 485px; overflow: hidden;">
 
               <!-- FRAME 1: Trusted Local Pros -->
-              <div data-hwcframe="0" style="position: absolute; inset: 0; opacity: 1; transform: translateY(0); transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
+              <div data-hwcseqframe="0-0" style="position: absolute; inset: 0; opacity: 1; transform: translateY(0); transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
                 <!-- Screen header -->
                 <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 4px 0; text-align: left;">Trusted Pros</p>
                 <!-- Subhead -->
@@ -2146,7 +2151,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
               </div>
 
               <!-- FRAME 2: Smart Match -->
-              <div data-hwcframe="1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
+              <div data-hwcseqframe="0-1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
                 <!-- Screen header with diagnosis context -->
                 <div class="hwc-diagnosis" style="margin-bottom: 12px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; text-align: left;">
                   <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 2px 0;">Smart Match</p>
@@ -2183,8 +2188,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
       <!-- Progress dots -->
       <div style="display: flex; justify-content: center; gap: 8px; padding: 16px 0;">
-        <div class="hwc-dot" data-hwcdot="0" style="width: 8px; height: 8px; border-radius: 50%; background: #00A385; transition: background 300ms ease; cursor: pointer;"></div>
-        <div class="hwc-dot" data-hwcdot="1" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
+        <div class="hwc-dot" data-hwcseqdot="0" style="width: 8px; height: 8px; border-radius: 50%; background: #00A385; transition: background 300ms ease; cursor: pointer;"></div>
+        <div class="hwc-dot" data-hwcseqdot="1" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
+        <div class="hwc-dot" data-hwcseqdot="2" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer; display: none;"></div>
       </div>
 
         </div><!-- end hwc-phone-col -->
@@ -2240,7 +2246,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var section = document.getElementById('hire-with-confidence');
     if (!section) return;
 
-    var frames = section.querySelectorAll('[data-hwcframe]');
+    var frames = section.querySelectorAll('[data-hwcseqframe]');
     var titles = section.querySelectorAll('.hwc-title');
     var dots = section.querySelectorAll('.hwc-dot');
     var diagnosis = section.querySelector('.hwc-diagnosis');
@@ -2360,7 +2366,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     dots.forEach(function(d) {
       d.addEventListener('click', function(e) {
         e.stopPropagation();
-        var target = parseInt(d.getAttribute('data-hwcdot'));
+        var target = parseInt(d.getAttribute('data-hwcseqdot'));
         if (target !== idx) showFrame(target);
       });
     });
