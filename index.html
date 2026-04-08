@@ -2181,6 +2181,152 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 </div>
               </div>
 
+              <!-- SEQUENCE 1, FRAME 0: Contractor Selected -->
+              <div data-hwcseqframe="1-0" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
+                <!-- Screen header with diagnosis context -->
+                <div style="margin-bottom: 12px; text-align: left;">
+                  <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 2px 0;">Smart Match</p>
+                  <p style="font-size: 15px; font-weight: 700; color: #063340; margin: 0 0 2px 0;">Water Damage · Ceiling Stain</p>
+                  <p style="font-size: 11px; font-weight: 400; color: #6b7c85; margin: 0;">Based on your diagnosis</p>
+                </div>
+
+                <!-- Best Match card with CTA -->
+                <div class="hwc-pt-bestmatch" style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 3px solid #00A385; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; flex-wrap: wrap;">
+                        <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">North Shore Drywall &amp; Paint</p>
+                        <span style="font-size: 10px; font-weight: 600; color: #0F6E56; background: #E1F5EE; padding: 2px 8px; border-radius: 20px; white-space: nowrap;">Best Match</span>
+                      </div>
+                      <p style="font-size: 11px; color: #4a6a75; margin: 0;">★ 4.9 · Water damage restoration specialist</p>
+                    </div>
+                  </div>
+                  <!-- CTA button -->
+                  <div class="hwc-pt-cta" style="background: #00A385; color: white; border-radius: 200px; padding: 8px; text-align: center; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; margin-top: 10px; transition: transform 150ms ease, filter 150ms ease;">Share your issue</div>
+                  <!-- Checkmark (hidden initially) -->
+                  <div class="hwc-pt-check" style="position: absolute; top: 12px; right: 12px; width: 22px; height: 22px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+
+                <!-- Second specialist card (fades out on selection) -->
+                <div class="hwc-pt-second" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; transition: opacity 0.4s ease, transform 0.4s ease;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Cape Ann General Contracting</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · Ceiling and drywall repair</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SEQUENCE 1, FRAME 1: Messaging -->
+              <div data-hwcseqframe="1-1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
+                <!-- Header bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border-bottom: 1px solid #e8edf0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7c85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <p style="font-size: 14px; font-weight: 500; color: #063340; margin: 0;">North Shore Drywall &amp; Paint</p>
+                  <span style="font-size: 12px; color: #4a6a75; font-family: 'Courier New', monospace; letter-spacing: 0.5px;">29:42</span>
+                </div>
+
+                <!-- Info bar -->
+                <div style="background: #E1F5EE; padding: 8px 14px;">
+                  <p style="font-size: 11px; font-weight: 500; color: #0F6E56; margin: 0; line-height: 1.4;">Pro has 30 min to respond or we move to your next pick</p>
+                </div>
+
+                <!-- Message thread -->
+                <div class="hwc-msg-thread" style="flex: 1; padding: 12px 14px; overflow: hidden; display: flex; flex-direction: column; gap: 12px;">
+                  <!-- Message 1: Contractor -->
+                  <div class="hwc-msg-row hwc-msg-left" style="display: flex; justify-content: flex-start; opacity: 0;">
+                    <div style="max-width: 85%;">
+                      <p class="hwc-msg-label" style="font-size: 11px; color: #6b7c85; margin: 0 0 4px 0;">North Shore Drywall &amp; Paint</p>
+                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #ffffff; color: #063340; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5;">
+                        <span class="hwc-msg-text" data-fulltext="Hey — saw the photos of the ceiling. That's a straightforward patch and repaint, maybe 2 hours once it's dry."></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Message 2: Homeowner -->
+                  <div class="hwc-msg-row hwc-msg-right" style="display: flex; justify-content: flex-end; opacity: 0;">
+                    <div style="max-width: 85%;">
+                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5;">Great, anything else you need from me?</div>
+                    </div>
+                  </div>
+
+                  <!-- Message 3: Contractor -->
+                  <div class="hwc-msg-row hwc-msg-left" style="display: flex; justify-content: flex-start; opacity: 0;">
+                    <div style="max-width: 85%;">
+                      <p class="hwc-msg-label" style="font-size: 11px; color: #6b7c85; margin: 0 0 4px 0;">North Shore Drywall &amp; Paint</p>
+                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #ffffff; color: #063340; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5;">
+                        <span class="hwc-msg-text" data-fulltext="Nope — everything I need is in the Jackknife project. See you Monday the 26th at 3."></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SEQUENCE 1, FRAME 2: Project Timeline -->
+              <div data-hwcseqframe="1-2" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
+                <!-- Header bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border-bottom: 1px solid #e8edf0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7c85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <p style="font-size: 14px; font-weight: 500; color: #063340; margin: 0;">Water Damage · Ceiling Repair</p>
+                  <div style="width: 16px;"></div>
+                </div>
+
+                <!-- Stepper container -->
+                <div class="hwc-stepper" style="position: relative; padding: 20px 14px 14px 46px; flex: 1; overflow: hidden;">
+                  <!-- Teal vertical line -->
+                  <div class="hwc-stepper-line" style="position: absolute; left: 23px; top: 30px; width: 2px; background: #00A385; height: 80px; transition: height 400ms ease-out;"></div>
+
+                  <!-- Step 1: Issue Analyzed (completed) -->
+                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
+                    <div class="hwc-stepper-circle completed" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 2px 0;">Issue Analyzed &amp; Documented</p>
+                    <p style="font-size: 12px; color: #4a6a75; margin: 0;">Wed, May 14, 2026 · 10 AM</p>
+                  </div>
+
+                  <!-- Step 2: Select Your Pro (completed) -->
+                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
+                    <div class="hwc-stepper-circle completed" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 2px 0;">Select Your Pro</p>
+                    <p style="font-size: 12px; color: #00A385; margin: 0;">North Shore Drywall &amp; Paint</p>
+                  </div>
+
+                  <!-- Step 3: Service Date Confirmed (animates in) -->
+                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
+                    <div class="hwc-stepper-circle hwc-step3-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; display: flex; align-items: center; justify-content: center; transition: background 0.3s ease, border-color 0.3s ease;">
+                      <svg class="hwc-step3-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 0.3s ease;"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <!-- Expandable card -->
+                    <div class="hwc-confirm-card" style="background: #ffffff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 3px solid #00A385; overflow: hidden; max-height: 0; opacity: 0; transition: max-height 400ms ease-out, opacity 300ms ease, box-shadow 0.6s ease;">
+                      <div style="padding: 12px;">
+                        <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 4px 0;">Service Date Confirmed</p>
+                        <p class="hwc-confirm-date" style="font-size: 13px; color: #a0aeb5; margin: 0 0 4px 0; transition: color 0.4s ease;">Mon, May 26, 2026 · 3 PM</p>
+                        <p style="font-size: 12px; color: #4a6a75; margin: 0 0 10px 0; line-height: 1.4;">Your appointment is confirmed for the selected date and time.</p>
+                        <div style="background: #00A385; color: white; border-radius: 200px; padding: 8px; text-align: center; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px;">Reschedule</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 4: Confirm Completion (future) -->
+                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
+                    <div class="hwc-stepper-circle future" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #e0e5e8;"></div>
+                    <p style="font-size: 13px; font-weight: 500; color: #a0aeb5; margin: 0;">Confirm Completion</p>
+                  </div>
+
+                  <!-- Step 5: Rate Your Pro (future) -->
+                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 0;">
+                    <div class="hwc-stepper-circle future" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #e0e5e8;"></div>
+                    <p style="font-size: 13px; font-weight: 500; color: #a0aeb5; margin: 0;">Rate Your Pro</p>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
