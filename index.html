@@ -211,9 +211,9 @@
     background: linear-gradient(
       180deg,
       rgba(0,163,133,0) 0%,
-      rgba(0,163,133,0.10) 35%,
-      rgba(0,163,133,0.18) 50%,
-      rgba(0,163,133,0.10) 65%,
+      rgba(0,163,133,0.22) 35%,
+      rgba(0,163,133,0.38) 50%,
+      rgba(0,163,133,0.22) 65%,
       rgba(0,163,133,0) 100%
     );
     transition: none;
@@ -236,7 +236,7 @@
     font-family: 'Montserrat', sans-serif;
     opacity: 0;
     transform: translateY(6px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.58s ease, transform 0.58s ease;
   }
   .detection-callout.visible { opacity: 1; transform: translateY(0); }
   .hero-callout-1 { top: 7%; right: 6%; }
@@ -1201,7 +1201,7 @@
     .sw-text-sidebar { display: none !important; }
     .sw-mobile-only { display: block !important; }
     .sw-phone-wrapper { width: 100% !important; flex: none !important; flex-direction: column !important; align-items: center !important; }
-    .sw-phone-wrapper > div:first-child { width: 240px !important; }
+    .sw-phone-wrapper > div:not(.sw-step-title) { width: 240px !important; }
     .sw-phone-wrapper .sw-screen-area { min-height: 380px !important; }
     /* Badge font size +7% and enlarged badge cards on mobile */
     .sw-badge { padding: 12px 22px !important; gap: 12px !important; border-radius: 14px !important; }
@@ -1212,6 +1212,34 @@
     .sw-sheet-subtitle { font-size: 12px !important; }
     .sw-sheet-label { font-size: 10px !important; }
     .sw-sheet-pill { font-size: 11px !important; }
+    /* Solution cards: spaced horizontal on mobile */
+    [data-sw="2"] { gap: 14px !important; padding: 24px 14px 20px !important; justify-content: center !important; }
+    [data-sw="2"] > div:first-child { padding: 0 0 8px !important; }
+    [data-sw="2"] > div:first-child p:first-child { font-size: 15px !important; }
+    [data-sw="2"] > p { font-size: 10px !important; margin: 0 0 6px 0 !important; }
+    .sw-solution-card {
+      padding: 12px !important;
+      gap: 10px !important;
+    }
+    .sw-solution-card > div:first-child { width: 32px !important; height: 32px !important; border-radius: 9px !important; }
+    .sw-solution-card > div:first-child svg { width: 14px !important; height: 14px !important; }
+    .sw-solution-card > div:last-child { padding: 6px 12px !important; font-size: 9px !important; }
+    .sw-card-label { font-size: 13px !important; }
+    .sw-label-full { display: none !important; }
+    .sw-label-short { display: inline !important; }
+    /* Save card: mobile simplification — pill hidden, label becomes "Save to Projects" + chevron */
+    .sw-save-pill { display: none !important; }
+    .sw-save-label { font-weight: 500 !important; font-size: 13px !important; color: #00A385 !important; }
+    .sw-save-label::after { content: ' to Projects \203A'; }
+    /* Spatial badge: smaller icons on narrow screens */
+    .sw-knife-think { width: 18px !important; height: 18px !important; }
+    .sw-knife-insight { width: 18px !important; height: 18px !important; }
+    /* Bottom sheet: ensure pills don't clip on mobile */
+    .sw-bottom-sheet { padding-bottom: 24px !important; }
+    .sw-question-wrap { max-height: 180px !important; }
+    /* Source badge: prevent text wrapping */
+    .sw-source-summary p[style*="text-transform: uppercase"] { font-size: 11px !important; letter-spacing: 0.1px !important; }
+    .sw-source-summary div[style*="padding: 10px 12px"] { padding: 8px 10px !important; }
 
     /* Issue 4: Contractor Experience layout */
     .contractor-layout {
@@ -1505,6 +1533,11 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <div class="focus-brackets"><div class="bracket-bottom"></div></div>
                   <div class="camera-flash"></div>
                   <div class="confidence-shimmer"></div>
+                  <!-- Jackknife intelligence pill — replaces shimmer scan -->
+                  <div class="jk-scan-pill" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, rgba(6,51,64,0.85) 0%, rgba(10,74,92,0.85) 100%); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(0,163,133,0.35); border-radius: 14px; padding: 12px 20px; display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 500ms ease; z-index: 5; box-shadow: 0 8px 24px rgba(6,51,64,0.4), 0 0 16px rgba(0,163,133,0.15); pointer-events: none;">
+                    <svg width="28" height="28" viewBox="10 5 56 40" fill="none"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
+                    <span class="sw-spatial-dots jk-scan-dots"><span></span><span></span><span></span></span>
+                  </div>
                   <div class="detection-callout hero-callout-1 jk-glass-callout">
                     <div class="jk-glass-inner">
                       <div>
@@ -1591,7 +1624,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <!-- Detection photo — always present underneath -->
                   <img src="images/updated-green-squares.jpg" alt="Water damage detected" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%; display: block; z-index: 0;" />
                   <!-- Clean photo overlay — fades out to reveal detection squares -->
-                  <img class="sw-clean-photo" src="images/water-stain-ceiling.jpg" alt="Water damage on ceiling" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%; display: block; z-index: 0; opacity: 1; transition: opacity 1400ms ease;" />
+                  <img class="sw-clean-photo" src="images/water-stain-ceiling.jpg" alt="Water damage on ceiling" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%; display: block; z-index: 0; opacity: 1; transition: opacity 1750ms ease;" />
 
                   <!-- Dark overlay — fades in during diagnosis reveal -->
                   <div class="sw-dark-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.40); opacity: 0; transition: opacity 400ms ease; z-index: 1;"></div>
@@ -1611,9 +1644,23 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   </div>
 
                   <!-- Diagnostic badge — anchored above bottom sheet, reveals with confidence -->
-                  <div class="sw-reveal sw-badge sw-diag-badge" data-reveal="0" style="position: absolute; bottom: 52%; left: 50%; transform: translate(-50%, 0) translateY(8px); background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%); border: 1px solid rgba(0,163,133,0.4); border-radius: 14px; padding: 12px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; box-shadow: 0 6px 20px rgba(6,51,64,0.35), 0 0 12px rgba(0,163,133,0.15), inset 0 1px 1px rgba(255,255,255,0.08); opacity: 0; transition: opacity 600ms ease-in 0ms, transform 600ms ease-in 0ms; z-index: 3; -webkit-font-smoothing: antialiased;">
-                    <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: #e74c3c; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Water Damage Detected</p>
-                    <p class="sw-badge-subtext" style="font-family: Inter, sans-serif; font-weight: 500; font-size: 15px; color: #00A385; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Let's find the water source.</p>
+                  <div class="sw-reveal sw-badge sw-diag-badge" data-reveal="0" style="position: absolute; bottom: 52%; left: 50%; transform: translate(-50%, 0) translateY(8px); background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%); border: 1px solid rgba(0,163,133,0.4); border-radius: 14px; padding: 12px 20px; box-shadow: 0 6px 20px rgba(6,51,64,0.35), 0 0 12px rgba(0,163,133,0.15), inset 0 1px 1px rgba(255,255,255,0.08); opacity: 0; transition: opacity 600ms ease-in 0ms, transform 600ms ease-in 0ms, min-height 400ms ease, min-width 400ms ease; z-index: 3; -webkit-font-smoothing: antialiased; overflow: hidden; min-height: 0; min-width: 0; max-width: 94%;">
+                    <!-- Phase 1: Detection text (in flow — sizes the badge) -->
+                    <div class="sw-badge-detect" style="display: flex; flex-direction: column; align-items: center; gap: 6px; white-space: nowrap; transition: opacity 500ms ease;">
+                      <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: #e74c3c; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Water Damage Detected</p>
+                      <p class="sw-badge-subtext" style="font-family: Inter, sans-serif; font-weight: 500; font-size: 15px; color: #00A385; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Let's find the water source.</p>
+                    </div>
+                    <!-- Beat 1: Thinking — knife icon + "Checking home layout" + animated dots -->
+                    <div class="sw-badge-spatial-think" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; white-space: nowrap; padding: 0 14px 0 12px; min-height: 44px;">
+                      <svg class="sw-knife-icon sw-knife-think" width="22" height="22" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
+                      <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 12px; color: white; letter-spacing: 0.2px;">Checking home layout</span>
+                      <span class="sw-spatial-dots" style="margin-left: -6px;"><span></span><span></span><span></span></span>
+                    </div>
+                    <!-- Beat 2: Reveal — knife icon + "Bathroom found / directly above" -->
+                    <div class="sw-badge-spatial-insight" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; padding: 0 16px 0 12px; min-height: 44px;">
+                      <svg class="sw-knife-icon sw-knife-insight" width="22" height="22" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
+                      <span style="font-family: Inter, sans-serif; letter-spacing: 0.2px; font-size: 12px; line-height: 1.35; white-space: nowrap;"><span style="font-weight: 700; color: white;">Bathroom found</span><br><span style="font-weight: 400; color: #00A385;">directly above</span></span>
+                    </div>
                   </div>
 
                   <!-- Diagnosis bottom sheet — slides up from below -->
@@ -1623,16 +1670,16 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
                     <!-- Title -->
                     <div style="margin-bottom: 14px;">
-                      <p class="sw-sheet-title" style="font-weight: 800; font-size: 15px; color: #0a4a5c; margin: 0; line-height: 1.3;">Water Damage</p>
+                      <p class="sw-sheet-title" style="font-weight: 800; font-size: 15px; color: #0a4a5c; margin: 0; line-height: 1.3;">Inspect Upstairs Bathroom</p>
                     </div>
 
                     <!-- Identify water source (collapsible) -->
                     <div class="sw-question-wrap" style="margin-bottom: 12px; max-height: 160px; overflow: hidden; transition: max-height 400ms ease, opacity 300ms ease, margin 300ms ease;">
                       <p class="sw-sheet-label" style="font-size: 11px; font-weight: 700; color: #6b7c85; margin: 0 0 14px 0; text-transform: uppercase; letter-spacing: 0.8px;">Identify Water Source</p>
                       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Upstairs bathroom sink</span>
-                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Upstairs bathroom tub</span>
-                        <span class="sw-sheet-pill sw-pill-selectable" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Upstairs bathroom toilet</span>
+                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Sink</span>
+                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Tub</span>
+                        <span class="sw-sheet-pill sw-pill-selectable" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Toilet</span>
                         <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed;">Other</span>
                       </div>
                     </div>
@@ -1675,18 +1722,18 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <p style="font-size: 12px; font-weight: 700; color: #4a6a75; margin: 0; text-transform: uppercase; letter-spacing: 0.8px;">How do you want to handle it?</p>
 
                   <!-- DIY -->
-                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
+                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
                     <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #15846e); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                     </div>
                     <div style="flex: 1; min-width: 0;">
-                      <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0;">Do It Yourself</p>
+                      <p class="sw-card-label" style="font-size: 13px; font-weight: 600; color: #063340; margin: 0;"><span class="sw-label-full">Do It Yourself</span><span class="sw-label-short" style="display: none;">DIY</span></p>
                     </div>
                     <div style="background: #00A385; color: white; border-radius: 200px; padding: 6px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Start Guide</div>
                   </div>
 
                   <!-- Hire a Pro -->
-                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
+                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
                     <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
@@ -1697,14 +1744,14 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   </div>
 
                   <!-- Save for Later -->
-                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
+                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
                     <div style="width: 36px; height: 36px; border-radius: 10px; background: #e8edf0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4a6a75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div style="flex: 1; min-width: 0;">
-                      <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0;">Save for Later</p>
+                      <p class="sw-card-label sw-save-label" style="font-size: 13px; font-weight: 600; color: #063340; margin: 0;">Save</p>
                     </div>
-                    <div style="background: transparent; color: #00A385; border: 1.5px solid #00A385; border-radius: 200px; padding: 5px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Save to Projects</div>
+                    <div class="sw-save-pill" style="background: transparent; color: #00A385; border: 1.5px solid #00A385; border-radius: 200px; padding: 5px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Save to Projects</div>
                   </div>
                 </div>
 
@@ -1767,6 +1814,24 @@ document.getElementById('banner-close').addEventListener('click', function() {
       0%, 20% { opacity: 0; }
       40%, 60% { opacity: 1; }
       80%, 100% { opacity: 0; }
+    }
+
+    /* Spatial intelligence thinking dots */
+    .sw-spatial-dots span {
+      width: 10px; height: 10px; border-radius: 50%; background: #00A385; display: inline-block;
+      opacity: 0;
+    }
+    .sw-spatial-dots { display: flex; gap: 8px; }
+    .sw-spatial-dots.active span {
+      animation: swSpatialDotPulse 1.2s ease-in-out infinite;
+    }
+    .sw-spatial-dots.active span:nth-child(1) { animation-delay: 0s; }
+    .sw-spatial-dots.active span:nth-child(2) { animation-delay: 0.2s; }
+    .sw-spatial-dots.active span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes swSpatialDotPulse {
+      0%, 20% { opacity: 0; transform: scale(0.8); }
+      40%, 60% { opacity: 1; transform: scale(1); }
+      80%, 100% { opacity: 0; transform: scale(0.8); }
     }
 
     /* Shared toast content styles (used by pro section) */
@@ -1875,8 +1940,11 @@ document.getElementById('banner-close').addEventListener('click', function() {
     /* Reduced motion overrides */
     @media (prefers-reduced-motion: reduce) {
       .sw-thinking-dots.active span { animation: none; opacity: 1; }
+      .sw-spatial-dots.active span { animation: none; opacity: 1; }
       .sw-solution-card, .sw-followup-btn, .sw-source-summary,
       .sw-followup, .sw-thinking-dots, .sw-question-wrap { transition: none !important; }
+      .sw-badge-detect, .sw-badge-spatial-think, .sw-badge-spatial-insight,
+      .sw-insight-line1, .sw-insight-line2 { transition: none !important; }
     }
 
     /* Pro section toast cards — mobile only */
@@ -1918,7 +1986,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <script>
   // Something's Wrong 3-step auto-cycle with crossfade reveal + pause controls
   (function() {
-    var DURATIONS = [3200, 8000, 6820]; // ms per step (step 0: camera capture sequence)
+    var DURATIONS = [3000, 11100, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
     var section = document.getElementById('diagnose-home');
     if (!section) return;
 
@@ -1993,11 +2061,24 @@ document.getElementById('banner-close').addEventListener('click', function() {
       clearTimeout(btnStagger2Timer);
       clearTimeout(fixSelectTimer);
       clearTimeout(solutionAdvanceTimer);
+      clearTimeout(spatialATimer);
+      clearTimeout(spatialBTimer);
+      clearTimeout(spatialCTimer);
+      clearTimeout(spatialC2Timer);
+      clearTimeout(spatialDTimer);
       clearTimeout(captureTimer1);
       clearTimeout(captureTimer2);
       clearTimeout(captureTimer3);
       clearTimeout(captureTimer4);
       clearTimeout(captureTimer5);
+      // Reset spatial intelligence badge phases
+      if (badgeDetect) badgeDetect.style.opacity = '1';
+      if (badgeThink) { badgeThink.style.opacity = '0'; }
+      if (spatialDots) spatialDots.classList.remove('active');
+      if (badgeInsight) badgeInsight.style.opacity = '0';
+      if (insightLine1) { insightLine1.style.opacity = '0'; insightLine1.style.transform = 'translateY(4px)'; }
+      if (insightLine2) { insightLine2.style.opacity = '0'; insightLine2.style.transform = 'translateY(4px)'; }
+      if (diagBadge) { diagBadge.style.minHeight = '0'; diagBadge.style.minWidth = '0'; }
       // Reset step 1 elements
       if (questionWrap) { questionWrap.classList.remove('sw-collapsed'); questionWrap.style.maxHeight = '160px'; questionWrap.style.opacity = '1'; questionWrap.style.marginBottom = '12px'; }
       if (thinkingDots) { thinkingDots.classList.remove('active'); thinkingDots.style.opacity = '0'; thinkingDots.style.maxHeight = '0'; thinkingDots.style.padding = '0'; }
@@ -2031,7 +2112,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // Re-enable transitions after a frame
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
-          if (cleanPhoto) cleanPhoto.style.transition = 'opacity 1400ms ease';
+          if (cleanPhoto) cleanPhoto.style.transition = 'opacity 1750ms ease';
           if (cameraBar) cameraBar.style.transition = 'opacity 400ms ease';
           revealEls.forEach(function(el) {
             el.style.transition = 'opacity 600ms ease-in, transform 600ms ease-in';
@@ -2040,20 +2121,21 @@ document.getElementById('banner-close').addEventListener('click', function() {
         });
       });
 
-      // Camera capture animation sequence
-      // +300ms: Shutter press
+      // Camera capture animation sequence (compressed to fit 2000ms step)
+      // +200ms: Shutter press
       captureTimer1 = setTimeout(function() {
         if (swShutterBtn) swShutterBtn.classList.add('sw-pressed');
-      }, 300);
-      // +500ms: Shutter release
+      }, 200);
+      // +350ms: Shutter release + camera bar starts fading out
       captureTimer2 = setTimeout(function() {
         if (swShutterBtn) swShutterBtn.classList.remove('sw-pressed');
-      }, 500);
-      // +800ms: Green detection squares crossfade in
+        if (cameraBar) cameraBar.style.opacity = '0';
+      }, 350);
+      // +750ms: Green detection squares crossfade in (after camera bar has faded)
       captureTimer3 = setTimeout(function() {
         if (cleanPhoto) cleanPhoto.style.opacity = '0';
-      }, 800);
-      // +2200ms: Water Damage Detected badge rises in (after squares settle)
+      }, 750);
+      // +2200ms: Water Damage Detected badge rises in (extra 1s for green squares)
       captureTimer5 = setTimeout(function() {
         revealEls.forEach(function(el) {
           el.style.opacity = '1';
@@ -2061,10 +2143,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
           el.style.transform = isCentered ? 'translate(-50%, 0) translateY(0)' : 'translate(0, 0)';
         });
       }, 2200);
-      // +2800ms: Camera bar fades out (after badge is established)
-      captureTimer4 = setTimeout(function() {
-        if (cameraBar) cameraBar.style.opacity = '0';
-      }, 2800);
     }
 
     // Phase 1: Fade out Analyzing, fade up Water Damage badge (no text change)
@@ -2086,6 +2164,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var btnFix = combinedStep.querySelector('.sw-btn-fix');
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Spatial intelligence badge phases
+    var badgeDetect = combinedStep.querySelector('.sw-badge-detect');
+    var badgeThink = combinedStep.querySelector('.sw-badge-spatial-think');
+    var badgeInsight = combinedStep.querySelector('.sw-badge-spatial-insight');
+    var spatialDots = combinedStep.querySelector('.sw-spatial-dots');
+    var insightLine1 = combinedStep.querySelector('.sw-insight-line1');
+    var insightLine2 = combinedStep.querySelector('.sw-insight-line2');
+    var diagBadge = combinedStep.querySelector('.sw-diag-badge');
+
     // Phase 2: Reveal badge first, then slide up bottom sheet after delay
     var sheetTimer;
     var pillTimer;
@@ -2099,96 +2186,100 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var btnStagger2Timer;
     var fixSelectTimer;
     var solutionAdvanceTimer;
+    var spatialATimer, spatialBTimer, spatialCTimer, spatialC2Timer, spatialDTimer;
     function setDiagnosedState() {
       clearTimeout(sheetTimer);
       clearTimeout(pillTimer);
       clearTimeout(ctaTimer);
       clearTimeout(ctaPressTimer);
       clearTimeout(ctaAdvanceTimer);
+      clearTimeout(spatialATimer);
+      clearTimeout(spatialBTimer);
+      clearTimeout(spatialCTimer);
+      clearTimeout(spatialC2Timer);
+      clearTimeout(spatialDTimer);
       // Ensure capture elements are in post-capture state
       if (cleanPhoto) cleanPhoto.style.opacity = '0';
       if (cameraBar) cameraBar.style.opacity = '0';
       analyzingBadge.style.opacity = '0';
-      // Ensure badge is visible (already shown during step 0 capture)
+      // Ensure badge is visible with detection text (already shown during step 0 capture)
+      if (badgeDetect) badgeDetect.style.opacity = '1';
+      if (badgeThink) badgeThink.style.opacity = '0';
+      if (spatialDots) spatialDots.classList.remove('active');
+      if (badgeInsight) badgeInsight.style.opacity = '0';
+      if (insightLine1) { insightLine1.style.opacity = '0'; insightLine1.style.transform = 'translateY(4px)'; }
+      if (insightLine2) { insightLine2.style.opacity = '0'; insightLine2.style.transform = 'translateY(4px)'; }
+      if (diagBadge) diagBadge.style.minHeight = '0';
       revealEls.forEach(function(el) {
         el.style.opacity = '1';
         var isCentered = el.style.left === '50%';
         el.style.transform = isCentered ? 'translate(-50%, 0) translateY(0)' : 'translate(0, 0)';
       });
-      // Reset pill to initial state
-      var selectablePill = combinedStep.querySelector('.sw-pill-selectable');
-      if (selectablePill) {
-        selectablePill.style.background = '#f0f8fa';
-        selectablePill.style.color = '#6b7c85';
-        selectablePill.style.fontWeight = '600';
-        selectablePill.style.borderColor = '#e0eaed';
-      }
       // Force bottom sheet hidden with no transition
       bottomSheet.style.transition = 'none';
       bottomSheet.style.transform = 'translateY(100%)';
       bottomSheet.style.opacity = '0';
-      // After 1.2s, slide up sheet + fade out badge
-      sheetTimer = setTimeout(function() {
+      // Pre-configure modal: source already identified (spatial intelligence informed it)
+      if (questionWrap) { questionWrap.classList.add('sw-collapsed'); }
+      if (thinkingDots) { thinkingDots.style.opacity = '0'; thinkingDots.style.maxHeight = '0'; thinkingDots.style.padding = '0'; }
+      if (sourceSummary) { sourceSummary.style.opacity = '1'; sourceSummary.style.maxHeight = '75px'; sourceSummary.style.padding = '8px 0'; sourceSummary.style.marginBottom = '4px'; }
+      if (followup) { followup.style.opacity = '1'; followup.style.maxHeight = '200px'; }
+      if (btnDiagnose) { btnDiagnose.style.opacity = '1'; btnDiagnose.style.transform = 'none'; btnDiagnose.style.filter = ''; }
+      if (btnFix) { btnFix.style.opacity = '1'; btnFix.classList.remove('sw-selected'); btnFix.classList.remove('sw-pressed'); }
+
+      // === SPATIAL INTELLIGENCE ANIMATION SEQUENCE ===
+      // Two-beat design: Beat 1 (thinking ~2.2s) → Beat 2 (reveal ~2.2s)
+      // Total ~4.6s (+20% over previous 3.4s) + extra 500ms for detection text hold
+
+      // Phase A (+900ms): Crossfade out detection text — badge container stays
+      spatialATimer = setTimeout(function() {
+        if (badgeDetect) badgeDetect.style.opacity = '0';
+      }, 900);
+
+      // Beat 1 (+1400ms): "Checking home layout" + animated dots
+      spatialBTimer = setTimeout(function() {
+        if (badgeThink) badgeThink.style.opacity = '1';
+        if (spatialDots) spatialDots.classList.add('active');
+      }, 1400);
+
+      // Beat 2 (+3200ms): Thinking fades out, reveal fades in
+      spatialCTimer = setTimeout(function() {
+        if (badgeThink) badgeThink.style.opacity = '0';
+        if (spatialDots) spatialDots.classList.remove('active');
+        if (badgeInsight) badgeInsight.style.opacity = '1';
+      }, 3200);
+
+      spatialDTimer = setTimeout(function() {
         // Sidebar transitions to "Clarify the issue" as sheet appears
         updateSidebarText(1);
+        // Fade badge out
         revealEls.forEach(function(el) {
-          el.style.transition = 'opacity 400ms ease-out';
+          el.style.transition = 'opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)';
           el.style.opacity = '0';
         });
-        bottomSheet.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms ease';
+        // Slide up modal
+        bottomSheet.style.willChange = 'transform, opacity';
+        bottomSheet.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms cubic-bezier(0.4, 0, 0.2, 1)';
         void bottomSheet.offsetHeight;
         bottomSheet.style.transform = 'translateY(0)';
         bottomSheet.style.opacity = '1';
-        // +1500ms: Pill turns green
-        pillTimer = setTimeout(function() {
-          if (selectablePill) {
-            selectablePill.style.background = 'rgba(0,163,133,0.22)';
-            selectablePill.style.color = '#008a6f';
-            selectablePill.style.fontWeight = '700';
-            selectablePill.style.borderColor = '#00A385';
-          }
-        }, 1500);
 
-        // +2000ms: Show thinking dots
-        thinkingTimer = setTimeout(function() {
-          if (sheetCta) sheetCta.style.display = 'none';
-          if (thinkingDots) {
-            thinkingDots.style.opacity = '1';
-            thinkingDots.style.maxHeight = '30px';
-            thinkingDots.style.padding = '10px 0';
-            thinkingDots.classList.add('active');
-          }
-        }, 2000);
-
-        // +3200ms: Everything in unison — hide dots, collapse question, show source + follow-up
-        collapseTimer = setTimeout(function() {
-          // Hide thinking dots
-          if (thinkingDots) { thinkingDots.style.opacity = '0'; thinkingDots.style.maxHeight = '0'; thinkingDots.style.padding = '0'; thinkingDots.classList.remove('active'); }
-          // Collapse original question
-          if (questionWrap) { questionWrap.classList.add('sw-collapsed'); }
-          // Show source summary + follow-up + buttons — all at once
-          if (sourceSummary) { sourceSummary.style.opacity = '1'; sourceSummary.style.maxHeight = '75px'; sourceSummary.style.padding = '8px 0'; sourceSummary.style.marginBottom = '4px'; }
-          if (followup) { followup.style.opacity = '1'; followup.style.maxHeight = '200px'; }
-          if (btnDiagnose) { btnDiagnose.style.opacity = '1'; }
-          if (btnFix) { btnFix.style.opacity = '1'; }
-        }, 3200);
-
-        // +5200ms: Fix button press then fill navy, dim diagnose
+        // +2000ms after modal: Fix button auto-select
         fixSelectTimer = setTimeout(function() {
           if (btnFix) { btnFix.classList.add('sw-pressed'); }
           setTimeout(function() {
             if (btnFix) { btnFix.classList.remove('sw-pressed'); btnFix.classList.add('sw-selected'); }
             if (btnDiagnose) { btnDiagnose.style.filter = 'opacity(0.45)'; }
           }, 200);
-        }, 5200);
+        }, 2000);
 
-        // +6200ms: Pre-hide sheet, then advance to solution cards
+        // +3500ms after modal: Advance to solution cards
         solutionAdvanceTimer = setTimeout(function() {
           bottomSheet.style.transition = 'opacity 300ms ease';
           bottomSheet.style.opacity = '0';
           setTimeout(function() { showStep(2); }, 350);
-        }, 6200);
-      }, 1200);
+        }, 3500);
+      }, 5400);
     }
 
     function showStep(i, skipTimer) {
@@ -4106,7 +4197,7 @@ function animatePanelContent(panelIndex) {
   // Timing constants
   var CYCLE = 9000;
   var SOFT_START = 0;         // Image starts sharp
-  var SHIMMER_DURATION = 1000; // ms — matches CSS transition
+  var SHIMMER_DURATION = 2000; // ms — knife+dots pill duration
   var BADGE_APPEAR = 500;     // shimmer starts after short pause
   var HOLD_TIME = 6200;       // Badges stay visible after shimmer
   var FADE_OUT_AT = BADGE_APPEAR + SHIMMER_DURATION + HOLD_TIME; // badges appear at ~1500ms, fade at ~7700ms
@@ -4117,6 +4208,8 @@ function animatePanelContent(panelIndex) {
   var brackets = container.querySelector('.focus-brackets');
   var flash = container.querySelector('.camera-flash');
   var shimmer = container.querySelector('.confidence-shimmer');
+  var scanPill = container.querySelector('.jk-scan-pill');
+  var scanDots = container.querySelector('.jk-scan-dots');
   var callouts = container.querySelectorAll('.detection-callout');
   var label = document.getElementById('home-scan-label');
   var shutterBtn = container.querySelector('.shutter-btn');
@@ -4126,6 +4219,8 @@ function animatePanelContent(panelIndex) {
     if (brackets) brackets.classList.remove('active');
     if (flash) { flash.classList.remove('fire', 'fade'); }
     if (shimmer) shimmer.classList.remove('active', 'sweep');
+    if (scanPill) { scanPill.style.opacity = '0'; }
+    if (scanDots) scanDots.classList.remove('active');
     callouts.forEach(function(c) { c.classList.remove('visible'); });
     if (label) label.className = 'scan-label-hidden';
     if (shutterBtn) shutterBtn.classList.remove('pressed');
@@ -4142,26 +4237,22 @@ function animatePanelContent(panelIndex) {
       }, 200);
     }, 300);
 
-    // Step 1: Shimmer scan begins after short pause
+    // Step 1: Jackknife scan pill appears after short pause
     setTimeout(function() {
       if (label) label.className = 'scan-label-hidden';
-      // Start confidence shimmer
-      if (shimmer) {
-        shimmer.classList.add('active');
-        void shimmer.offsetHeight; // force reflow
-        shimmer.classList.add('sweep');
-      }
-      // All badges appear in unison after shimmer completes
+      // Show knife icon + pulsing dots pill
+      if (scanPill) scanPill.style.opacity = '1';
+      if (scanDots) scanDots.classList.add('active');
+      // After pill plays, fade it out and show badges
       setTimeout(function() {
-        callouts.forEach(function(c) { c.classList.add('visible'); });
+        if (scanPill) scanPill.style.opacity = '0';
+        if (scanDots) scanDots.classList.remove('active');
+        // Badges appear right after pill fades
+        setTimeout(function() {
+          callouts.forEach(function(c) { c.classList.add('visible'); });
+        }, 400);
       }, SHIMMER_DURATION);
     }, BADGE_APPEAR);
-
-    // Clean up flash + shimmer
-    setTimeout(function() {
-      if (flash) flash.classList.remove('fade');
-      if (shimmer) shimmer.classList.remove('active', 'sweep');
-    }, BADGE_APPEAR + SHIMMER_DURATION + 400);
 
     // Step 5: Fade out badges before next cycle
     setTimeout(function() {
