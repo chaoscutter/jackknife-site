@@ -1566,9 +1566,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   </div>
 
                   <!-- Diagnostic badge — anchored above bottom sheet, reveals with confidence -->
-                  <div class="sw-reveal sw-badge sw-diag-badge" data-reveal="0" style="position: absolute; bottom: 52%; left: 50%; transform: translate(-50%, 0) translateY(8px); background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%); border: 1px solid rgba(0,163,133,0.4); border-radius: 12px; padding: 10px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; box-shadow: 0 6px 20px rgba(6,51,64,0.35), 0 0 12px rgba(0,163,133,0.15), inset 0 1px 1px rgba(255,255,255,0.08); opacity: 0; transition: opacity 600ms ease-in 0ms, transform 600ms ease-in 0ms; z-index: 3; -webkit-font-smoothing: antialiased;">
-                    <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px; color: white; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Water Damage</p>
-                    <p class="sw-badge-subtext" style="font-family: Inter, sans-serif; font-weight: 500; font-size: 13px; color: #00A385; margin: 0; letter-spacing: 0.5px; line-height: 1; text-align: center;">Find the water source.</p>
+                  <div class="sw-reveal sw-badge sw-diag-badge" data-reveal="0" style="position: absolute; bottom: 52%; left: 50%; transform: translate(-50%, 0) translateY(8px); background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%); border: 1px solid rgba(0,163,133,0.4); border-radius: 14px; padding: 12px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; box-shadow: 0 6px 20px rgba(6,51,64,0.35), 0 0 12px rgba(0,163,133,0.15), inset 0 1px 1px rgba(255,255,255,0.08); opacity: 0; transition: opacity 600ms ease-in 0ms, transform 600ms ease-in 0ms; z-index: 3; -webkit-font-smoothing: antialiased;">
+                    <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Water Damage</p>
+                    <p class="sw-badge-subtext" style="font-family: Inter, sans-serif; font-weight: 500; font-size: 15px; color: #00A385; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Find the water source.</p>
                   </div>
 
                   <!-- Diagnosis bottom sheet — slides up from below -->
@@ -1598,39 +1598,44 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 </div>
 
                 <!-- Step 3: Your Options (3 cards) -->
-                <div class="sw-step" data-sw="2" style="position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 400ms ease; padding: 10px 12px; font-family: Montserrat, sans-serif; overflow-y: auto; background: #f5f7f8; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+                <div class="sw-step" data-sw="2" style="position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 400ms ease; padding: 16px 14px; font-family: Montserrat, sans-serif; overflow: hidden; background: #f5f7f8; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
 
-                  <!-- Location + issue header -->
-                  <div style="padding: 4px 4px 0; margin-bottom: 10px;">
-                    <p style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10px; color: #1DA485; margin: 0; letter-spacing: 0.08em; text-transform: uppercase;">Living Room</p>
-                    <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; color: #063340; margin: 4px 0 0 0; line-height: 1.2;">Water Damage</p>
-                    <p style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10px; color: #6b7c85; margin: 6px 0 0 0; letter-spacing: 0.08em; text-transform: uppercase;">Choose how to handle it</p>
-                  </div>
 
-                  <!-- Card 1: DIY -->
-                  <div style="background: linear-gradient(176.35deg, rgba(29, 164, 133, 0.15) 2.89%, rgba(29, 164, 133, 0) 40.59%), #ffffff; border-radius: 20px; padding: 12px 14px; box-shadow: 0px 4.95px 12px rgba(7, 86, 109, 0.2); display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div style="width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #1DA485, #15846e); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                      </div>
-                      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; color: #063340; margin: 0;">Do It Yourself</p>
+                  <!-- DIY -->
+                  <div style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #15846e); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                     </div>
-                    <div style="background: #1DA485; color: #f9fafb; border-radius: 200px; padding: 9px; text-align: center; font-family: Poppins, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.02em; box-shadow: 0px 4px 13.8px rgba(0, 0, 0, 0.1);">Begin Repair Guide</div>
-                  </div>
-
-                  <!-- Card 2: Hire a Pro -->
-                  <div style="background: linear-gradient(176.35deg, rgba(6, 51, 64, 0.12) 2.89%, rgba(6, 51, 64, 0) 40.59%), #ffffff; border-radius: 20px; padding: 12px 14px; box-shadow: 0px 4.95px 12px rgba(7, 86, 109, 0.2); display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div style="width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, #32849e, #0a5c72); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2c-1.1 0-2 .9-2 2v1H7c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V7c0-1.1-.9-2-2-2h-3V4c0-1.1-.9-2-2-2zm0 1.5c.28 0 .5.22.5.5v1h-1V4c0-.28.22-.5.5-.5zM5 11v9c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-9H5zm7 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg>
-                      </div>
-                      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; color: #063340; margin: 0;">9 Plumbers Nearby</p>
+                    <div style="flex: 1; min-width: 0;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">Do It Yourself</p>
+                      <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">Step-by-step repair guide</p>
                     </div>
-                    <div style="background: radial-gradient(100% 100% at 100% 49.59%, rgba(53, 203, 255, 0.4) 0%, rgba(13, 51, 64, 0.4) 100%), #0D3340; color: #f9fafb; border-radius: 200px; padding: 9px; text-align: center; font-family: Poppins, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.02em; box-shadow: 0px 4.95px 12px rgba(7, 86, 109, 0.2);">Hire a Pro</div>
+                    <div style="background: #00A385; color: white; border-radius: 200px; padding: 6px 14px; font-size: 11px; font-weight: 600; white-space: nowrap;">Start</div>
                   </div>
 
-                  <!-- Save for Later — slim outline button -->
-                  <div style="background: #ffffff; color: #1DA485; border: 1.5px solid #1DA485; border-radius: 200px; padding: 9px; text-align: center; font-family: Poppins, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.02em;">Save for Later</div>
+                  <!-- Hire a Pro -->
+                  <div style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">Hire a Pro</p>
+                      <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">12 drywall specialists nearby</p>
+                    </div>
+                    <div style="background: #063340; color: white; border-radius: 200px; padding: 6px 14px; font-size: 11px; font-weight: 600; white-space: nowrap;">Find</div>
+                  </div>
+
+                  <!-- Save for Later -->
+                  <div style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: #e8edf0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4a6a75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">Save for Later</p>
+                      <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">Add to your projects</p>
+                    </div>
+                    <div style="background: transparent; color: #4a6a75; border: 1.5px solid #d1d5db; border-radius: 200px; padding: 5px 14px; font-size: 11px; font-weight: 600; white-space: nowrap;">Save</div>
+                  </div>
                 </div>
 
 
@@ -2083,13 +2088,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
             <span class="hwc-title" data-hwcseqtitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">No more phone tag.</span>
             <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; display: none; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;"></span>
           </div>
-
-          <!-- Detail text (desktop only, crossfades with sequence) -->
-          <div class="hwc-detail-container" style="position: relative; min-height: 52px;">
-            <p class="hwc-detail-text" data-hwcseqdetail="0" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 0; max-width: 480px; line-height: 1.6; transition: opacity 800ms ease; opacity: 1;">Every review on Jackknife is tied to a real home and a real project. Anonymous for the homeowner. Verified for you.</p>
-            <p class="hwc-detail-text" data-hwcseqdetail="1" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 0; max-width: 480px; line-height: 1.6; transition: opacity 800ms ease; opacity: 0; position: absolute; top: 0; left: 0; right: 0;">Every message, update, and confirmation in one place. No callbacks. No runaround.</p>
-            <p class="hwc-detail-text" data-hwcseqdetail="2" style="display: none;"></p>
-          </div>
         </div>
 
         <!-- Right: Phone -->
@@ -2179,6 +2177,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · Ceiling and drywall repair</p>
                   </div>
                 </div>
+
+                <!-- Third specialist card -->
+                <div class="hwc-third-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · Interior drywall specialist</p>
+                  </div>
+                </div>
               </div>
 
               <!-- SEQUENCE 1, FRAME 0: Contractor Selected -->
@@ -2216,6 +2223,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <div style="flex: 1; min-width: 0; text-align: left;">
                     <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Cape Ann General Contracting</p>
                     <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · Ceiling and drywall repair</p>
+                  </div>
+                </div>
+
+                <!-- Third specialist card (fades out on selection) -->
+                <div class="hwc-pt-third" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; transition: opacity 0.4s ease, transform 0.4s ease;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
+                  <div style="flex: 1; min-width: 0; text-align: left;">
+                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
+                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · Interior drywall specialist</p>
                   </div>
                 </div>
               </div>
@@ -2351,7 +2367,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
     .hwc-diagnosis.hwc-visible,
     .hwc-best-match.hwc-visible,
-    .hwc-second-card.hwc-visible {
+    .hwc-second-card.hwc-visible,
+    .hwc-third-card.hwc-visible {
       opacity: 1 !important;
       transform: translateY(0) !important;
     }
@@ -2439,12 +2456,14 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var diagnosis = section.querySelector('.hwc-diagnosis');
     var bestMatch = section.querySelector('.hwc-best-match');
     var secondCard = section.querySelector('.hwc-second-card');
+    var thirdCard = section.querySelector('.hwc-third-card');
 
     // Seq 1, Frame 0 refs
     var ptBestMatch = section.querySelector('.hwc-pt-bestmatch');
     var ptCta = section.querySelector('.hwc-pt-cta');
     var ptCheck = section.querySelector('.hwc-pt-check');
     var ptSecond = section.querySelector('.hwc-pt-second');
+    var ptThird = section.querySelector('.hwc-pt-third');
 
     // Seq 1, Frame 1 refs
     var msgThread = section.querySelector('.hwc-msg-thread');
@@ -2544,6 +2563,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (diagnosis) diagnosis.classList.remove('hwc-visible');
       if (bestMatch) { bestMatch.classList.remove('hwc-visible', 'hwc-glow'); }
       if (secondCard) secondCard.classList.remove('hwc-visible');
+      if (thirdCard) thirdCard.classList.remove('hwc-visible');
       if (shimmer) {
         shimmer.classList.remove('hwc-shimmer-active');
         if (shimmerLine) { shimmerLine.style.transition = 'none'; shimmerLine.style.top = '-50px'; }
@@ -2555,6 +2575,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (ptBestMatch) { ptBestMatch.style.transform = ''; ptBestMatch.style.boxShadow = ''; }
       if (ptCheck) ptCheck.style.opacity = '0';
       if (ptSecond) { ptSecond.style.opacity = '1'; ptSecond.style.transform = 'translateY(0)'; }
+      if (ptThird) { ptThird.style.opacity = '1'; ptThird.style.transform = 'translateY(0)'; }
     }
 
     function resetSeq1Frame1() {
@@ -2598,6 +2619,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         addTimer(function() { if (bestMatch) bestMatch.classList.add('hwc-glow'); }, 300);
       }, 900);
       addTimer(function() { if (secondCard) secondCard.classList.add('hwc-visible'); }, 1500);
+      addTimer(function() { if (thirdCard) thirdCard.classList.add('hwc-visible'); }, 1700);
       if (!paused) addTimer(onDone, SEQ_CONFIG[0].holds[1]);
     }
 
@@ -2611,6 +2633,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         if (ptCta) { ptCta.style.transform = 'scale(0.96)'; ptCta.style.filter = 'brightness(0.9)'; }
         if (ptBestMatch) { ptBestMatch.style.transform = 'translateY(-2px)'; ptBestMatch.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)'; }
         if (ptSecond) { ptSecond.style.opacity = '0'; ptSecond.style.transform = 'translateY(8px)'; }
+        if (ptThird) { ptThird.style.opacity = '0'; ptThird.style.transform = 'translateY(8px)'; }
         addTimer(function() {
           if (ptCta) { ptCta.style.transform = ''; ptCta.style.filter = ''; }
         }, 150);
