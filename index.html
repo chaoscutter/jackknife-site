@@ -1177,6 +1177,8 @@
       gap: 16px !important;
       align-items: center !important;
     }
+    .sw-text-sidebar { display: none !important; }
+    .sw-mobile-only { display: block !important; }
     .sw-phone-wrapper { width: 100% !important; flex: none !important; flex-direction: column !important; align-items: center !important; }
     .sw-phone-wrapper > div:first-child { width: 240px !important; }
     .sw-phone-wrapper .sw-screen-area { min-height: 380px !important; }
@@ -1528,16 +1530,16 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">When Something's Not Right</p>
       <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 40px 0; line-height: 1.2;">From panic to plan. In seconds.</h2>
 
-      <div class="sw-layout" style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
-        <!-- Step title — centered above phone, synced to animation -->
-        <div class="sw-step-title" style="position: relative; height: 36px; width: 100%; text-align: center;">
+      <div class="sw-layout" style="display: flex; align-items: center; gap: 64px;">
+        <!-- Left: Phone Mockup -->
+        <div class="sw-phone-wrapper" style="flex: 0 0 auto; display: flex; justify-content: center;">
+
+        <!-- Step title — mobile only, centered above phone -->
+        <div class="sw-step-title sw-mobile-only" style="position: relative; height: 36px; width: 100%; text-align: center; display: none; margin-bottom: 16px;">
           <span data-steptitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 300ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385;">Snap the photo.</span>
           <span data-steptitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 300ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385;">Scan the diagnosis.</span>
           <span data-steptitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 300ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385;">Select the solution.</span>
         </div>
-
-        <!-- Phone Mockup -->
-        <div class="sw-phone-wrapper" style="flex: 0 0 auto; display: flex; justify-content: center;">
         <div style="width: 300px; position: relative;">
           <div style="background: #063340; border-radius: 40px; padding: 6px; box-shadow: 0 24px 64px rgba(6, 51, 64, 0.25);">
             <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 72px; height: 18px; background: #000; border-radius: 20px; z-index: 20;"></div>
@@ -1652,6 +1654,22 @@ document.getElementById('banner-close').addEventListener('click', function() {
           </div>
 
         </div>
+        </div>
+
+        <!-- Right: Text blocks synced to animation (desktop only) -->
+        <div class="sw-text-sidebar" style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 0;">
+          <div class="sw-text" data-swtext="0" style="padding: 20px 24px; border-left: 3px solid #00A385; transition: border-color 300ms ease; border-radius: 0 8px 8px 0;">
+            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; color: #00A385; transition: color 300ms ease;">Snap the photo.</p>
+            <p style="font-family: Inter, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5;">Point your phone at what's wrong. Jackknife identifies the issue, the severity, and how urgent it is.</p>
+          </div>
+          <div class="sw-text" data-swtext="1" style="padding: 20px 24px; border-left: 3px solid transparent; transition: border-color 300ms ease; border-radius: 0 8px 8px 0;">
+            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; color: #0a4a5c; transition: color 300ms ease;">Scan the diagnosis.</p>
+            <p style="font-family: Inter, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5;">AI pinpoints the root cause and walks you through confirming the source. No guesswork.</p>
+          </div>
+          <div class="sw-text" data-swtext="2" style="padding: 20px 24px; border-left: 3px solid transparent; transition: border-color 300ms ease; border-radius: 0 8px 8px 0;">
+            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; color: #0a4a5c; transition: color 300ms ease;">Select the solution.</p>
+            <p style="font-family: Inter, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5;">DIY with step-by-step instructions, hire a vetted pro your neighbors trust, or save it for later. Your call.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1945,10 +1963,23 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // Sync dots
       dots.forEach(function(d, j) { d.style.background = j === i ? '#00A385' : '#d1d5db'; });
 
-      // Sync step title above phone
+      // Sync step title above phone (mobile)
       var activeText = STEP_TO_TEXT[i];
       stepTitles.forEach(function(t, j) {
         t.style.opacity = j === activeText ? '1' : '0';
+      });
+
+      // Sync desktop text sidebar blocks
+      var textBlocks = section.querySelectorAll('.sw-text');
+      textBlocks.forEach(function(t, j) {
+        var title = t.querySelector('p:first-child');
+        if (j === activeText) {
+          t.style.borderLeftColor = '#00A385';
+          if (title) title.style.color = '#00A385';
+        } else {
+          t.style.borderLeftColor = 'transparent';
+          if (title) title.style.color = '#0a4a5c';
+        }
       });
 
       // Show/hide scan label on step 0
