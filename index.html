@@ -336,9 +336,7 @@
   .badge-action {
     font-weight: 400;
     color: #BFDBFE;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-decoration: none;
   }
   .badge-status-urgent {
     font-weight: 600;
@@ -847,6 +845,8 @@
     .hiw-input {
       min-height: 50px;
     }
+    .sw-spatial-text { font-size: 14px !important; }
+    .sw-step-solutions { padding-top: 32px !important; gap: 18px !important; }
   }
   /* Positioning bridge - mobile */
   @media (max-width: 767px) {
@@ -1229,53 +1229,18 @@
     .sw-label-short { display: inline !important; }
     /* Save card: mobile simplification — pill hidden, label becomes "Save to Projects" + chevron */
     .sw-save-pill { display: none !important; }
-    .sw-save-label { font-weight: 500 !important; font-size: 13px !important; color: #00A385 !important; }
+    .sw-save-label { font-weight: 500 !important; font-size: 13px !important; color: #F5B951 !important; }
     .sw-save-label::after { content: ' to Projects \203A'; }
-    /* Spatial badge: smaller icons on narrow screens */
-    .sw-knife-think { width: 18px !important; height: 18px !important; }
-    .sw-knife-insight { width: 18px !important; height: 18px !important; }
+    /* Spatial badge: icon size (32px visual anchor) */
+    .sw-knife-spatial { width: 32px !important; height: 32px !important; }
+    /* Spatial badge text: 12px mobile base, 14px on desktop */
+    .sw-spatial-text { font-size: 12px !important; }
     /* Bottom sheet: ensure pills don't clip on mobile */
-    .sw-bottom-sheet { padding-bottom: 24px !important; }
+    .sw-bottom-sheet { padding-bottom: 14px !important; }
     .sw-question-wrap { max-height: 180px !important; }
     /* Source badge: prevent text wrapping */
     .sw-source-summary p[style*="text-transform: uppercase"] { font-size: 11px !important; letter-spacing: 0.1px !important; }
     .sw-source-summary div[style*="padding: 10px 12px"] { padding: 8px 10px !important; }
-
-    /* Issue 4: Contractor Experience layout */
-    .contractor-layout {
-      flex-direction: column !important;
-      gap: 16px !important;
-    }
-    .contractor-layout > div { flex: none !important; width: 100% !important; }
-    .pro-text-sidebar { display: none !important; }
-    .pro-mobile-heading { display: block !important; }
-    .pro-phone-wrapper { flex-direction: column !important; align-items: center !important; }
-    .pro-phone-wrapper > div:first-child { width: 240px !important; height: 480px !important; }
-    .pro-toast-container {
-      display: block !important;
-      position: relative !important;
-      left: auto !important;
-      right: auto !important;
-      bottom: auto !important;
-      min-height: auto !important;
-      margin-top: 12px !important;
-      z-index: 10;
-      width: 280px !important;
-    }
-    .pro-toast {
-      position: relative !important;
-      display: none !important;
-      border-radius: 12px !important;
-    }
-    .pro-toast.pro-toast-active {
-      display: flex !important;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    .pro-toast .sw-toast-label { font-size: 8px !important; margin-bottom: 3px !important; }
-    .pro-toast .sw-toast-title { font-size: 13px !important; margin-bottom: 4px !important; }
-    .pro-toast .sw-toast-body { font-size: 11px !important; }
-    .pro-toast .sw-toast-content { padding: 12px 14px !important; }
 
     /* Issue 2: Save Money card grid */
     .save-money-grid {
@@ -1650,32 +1615,37 @@ document.getElementById('banner-close').addEventListener('click', function() {
                       <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: #e74c3c; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Water Damage Detected</p>
                       <p class="sw-badge-subtext" style="font-family: Inter, sans-serif; font-weight: 500; font-size: 15px; color: #00A385; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Let's find the water source.</p>
                     </div>
-                    <!-- Beat 1: Thinking — knife icon + "Checking home layout" + animated dots -->
-                    <div class="sw-badge-spatial-think" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; white-space: nowrap; padding: 0 14px 0 12px; min-height: 44px;">
-                      <svg class="sw-knife-icon sw-knife-think" width="22" height="22" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
-                      <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 12px; color: white; letter-spacing: 0.2px;">Checking home layout</span>
-                      <span class="sw-spatial-dots" style="margin-left: -6px;"><span></span><span></span><span></span></span>
-                    </div>
-                    <!-- Beat 2: Reveal — knife icon + "Bathroom found / directly above" -->
-                    <div class="sw-badge-spatial-insight" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; padding: 0 16px 0 12px; min-height: 44px;">
-                      <svg class="sw-knife-icon sw-knife-insight" width="22" height="22" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
-                      <span style="font-family: Inter, sans-serif; letter-spacing: 0.2px; font-size: 12px; line-height: 1.35; white-space: nowrap;"><span style="font-weight: 700; color: white;">Bathroom found</span><br><span style="font-weight: 400; color: #00A385;">directly above</span></span>
+                    <!-- Spatial badge: fixed icon + swappable text -->
+                    <div class="sw-badge-spatial" style="position: absolute; inset: 0; display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; padding: 0 16px 0 14px; min-height: 44px;">
+                      <!-- Icon: anchored, never moves -->
+                      <svg class="sw-knife-icon sw-knife-spatial" width="32" height="32" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
+                      <!-- Text area: only this content changes -->
+                      <div style="position: relative; flex: 1; min-width: 0; overflow: hidden;">
+                        <!-- Beat 1 text: loading -->
+                        <span class="sw-badge-spatial-think" style="display: flex; align-items: center; gap: 4px; opacity: 0; transition: opacity 300ms ease;">
+                          <span class="sw-spatial-text" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; color: white; letter-spacing: 0.3px; -webkit-font-smoothing: antialiased;">Checking home layout.</span>
+                        </span>
+                        <!-- Beat 2 text: result -->
+                        <span class="sw-badge-spatial-insight" style="position: absolute; inset: 0; display: flex; align-items: center; opacity: 0; transition: opacity 300ms ease;">
+                          <span class="sw-spatial-text" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; color: white; letter-spacing: 0.3px; line-height: 1.35; -webkit-font-smoothing: antialiased;">Bathroom found<br>directly above.</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
 
                   <!-- Diagnosis bottom sheet — slides up from below -->
-                  <div class="sw-bottom-sheet" style="position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 20px 20px 0 0; padding: 18px 16px 18px; box-shadow: 0 -8px 30px rgba(0,0,0,0.15); z-index: 3; transform: translateY(100%); opacity: 0; transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1) 200ms, opacity 400ms ease 200ms; min-height: 282px;">
+                  <div class="sw-bottom-sheet" style="position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 20px 20px 0 0; padding: 14px 14px 14px; box-shadow: 0 -8px 30px rgba(0,0,0,0.15); z-index: 3; transform: translateY(100%); opacity: 0; transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1) 200ms, opacity 400ms ease 200ms;">
                     <!-- Drag handle -->
-                    <div style="width: 36px; height: 4px; border-radius: 2px; background: #d1d5db; margin: 0 auto 12px;"></div>
+                    <div style="width: 36px; height: 4px; border-radius: 2px; background: #d1d5db; margin: 0 auto 8px;"></div>
 
                     <!-- Title -->
-                    <div style="margin-bottom: 14px;">
-                      <p class="sw-sheet-title" style="font-weight: 800; font-size: 15px; color: #0a4a5c; margin: 0; line-height: 1.3;">Inspect Upstairs Bathroom</p>
+                    <div style="margin-bottom: 10px;">
+                      <p class="sw-sheet-title" style="font-weight: 800; font-size: 14px; color: #0a4a5c; margin: 0; line-height: 1.3;">Inspect Upstairs Bathroom</p>
                     </div>
 
                     <!-- Identify water source (collapsible) -->
-                    <div class="sw-question-wrap" style="margin-bottom: 12px; max-height: 160px; overflow: hidden; transition: max-height 400ms ease, opacity 300ms ease, margin 300ms ease;">
-                      <p class="sw-sheet-label" style="font-size: 11px; font-weight: 700; color: #6b7c85; margin: 0 0 14px 0; text-transform: uppercase; letter-spacing: 0.8px;">Identify Water Source</p>
+                    <div class="sw-question-wrap" style="margin-bottom: 10px; max-height: 140px; overflow: hidden; transition: max-height 400ms ease, opacity 300ms ease, margin 300ms ease;">
+                      <p class="sw-sheet-label" style="font-size: 10px; font-weight: 700; color: #6b7c85; margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.8px;">Identify Water Source</p>
                       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                         <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Sink</span>
                         <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Tub</span>
@@ -1702,10 +1672,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
                     <!-- Follow-up question (hidden initially) -->
                     <div class="sw-followup" style="opacity: 0; max-height: 0; overflow: hidden; transition: opacity 400ms ease, max-height 400ms ease; padding-top: 0;">
-                      <p style="font-size: 11px; font-weight: 700; color: #6b7c85; margin: 14px 0 14px 0; text-transform: uppercase; letter-spacing: 0.8px;">What's your priority?</p>
-                      <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <div class="sw-followup-btn sw-btn-diagnose" style="background: transparent; color: #063340; border: 1.5px solid #d4e8e4; border-radius: 10px; padding: 12px 14px; font-size: 11px; font-weight: 600; text-align: center; opacity: 0; transition: all 300ms ease;">Find the Cause</div>
-                        <div class="sw-followup-btn sw-btn-fix" style="background: transparent; color: #063340; border: 1.5px solid #d4e8e4; border-radius: 10px; padding: 12px 14px; font-size: 11px; font-weight: 700; text-align: center; opacity: 0; transition: all 300ms ease;">Fix My Ceiling</div>
+                      <p style="font-size: 10px; font-weight: 700; color: #6b7c85; margin: 10px 0 10px 0; text-transform: uppercase; letter-spacing: 0.8px;">What's your priority?</p>
+                      <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div class="sw-followup-btn sw-btn-diagnose" style="background: transparent; color: #063340; border: 1.5px solid #d4e8e4; border-radius: 10px; padding: 10px 12px; font-size: 11px; font-weight: 600; text-align: center; opacity: 0; transition: all 300ms ease;">Find the Cause</div>
+                        <div class="sw-followup-btn sw-btn-fix" style="background: transparent; color: #063340; border: 1.5px solid #d4e8e4; border-radius: 10px; padding: 10px 12px; font-size: 11px; font-weight: 700; text-align: center; opacity: 0; transition: all 300ms ease;">Fix My Ceiling</div>
                       </div>
                     </div>
 
@@ -1713,13 +1683,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 </div>
 
                 <!-- Step 3: Solution Options -->
-                <div class="sw-step" data-sw="2" style="position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 400ms ease; padding: 20px 14px 16px; font-family: Montserrat, sans-serif; overflow: hidden; background: #f5f7f8; display: flex; flex-direction: column; justify-content: center; gap: 10px;">
+                <div class="sw-step sw-step-solutions" data-sw="2" style="position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 400ms ease; padding: 16px 14px 16px; font-family: Montserrat, sans-serif; overflow: hidden; background: #f5f7f8; display: flex; flex-direction: column; justify-content: flex-start; gap: 10px;">
                   <!-- Header -->
                   <div style="padding: 0 0 4px;">
                     <p style="font-size: 19px; font-weight: 800; color: #0a4a5c; margin: 0; line-height: 1.3;">Repair Damaged Ceiling</p>
                     <p style="font-size: 13px; font-weight: 600; color: #6b7c85; margin: 2px 0 0; letter-spacing: 0.3px;">Living Room</p>
                   </div>
-                  <p style="font-size: 12px; font-weight: 700; color: #4a6a75; margin: 0; text-transform: uppercase; letter-spacing: 0.8px;">How do you want to handle it?</p>
+                  <p style="font-size: 12px; font-weight: 700; color: #4a6a75; margin: 14px 0 0; text-transform: uppercase; letter-spacing: 0.8px;">How do you want to handle it?</p>
 
                   <!-- DIY -->
                   <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
@@ -1745,13 +1715,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
                   <!-- Save for Later -->
                   <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
-                    <div style="width: 36px; height: 36px; border-radius: 10px; background: #e8edf0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4a6a75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: #FEF5E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5B951" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div style="flex: 1; min-width: 0;">
-                      <p class="sw-card-label sw-save-label" style="font-size: 13px; font-weight: 600; color: #063340; margin: 0;">Save</p>
+                      <p class="sw-card-label sw-save-label" style="font-size: 13px; font-weight: 600; color: #F5B951; margin: 0;">Save</p>
                     </div>
-                    <div class="sw-save-pill" style="background: transparent; color: #00A385; border: 1.5px solid #00A385; border-radius: 200px; padding: 5px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Save to Projects</div>
+                    <div class="sw-save-pill" style="background: transparent; color: #F5B951; border: 1.5px solid #F5B951; border-radius: 200px; padding: 5px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Save to Projects</div>
                   </div>
                 </div>
 
@@ -1804,34 +1774,38 @@ document.getElementById('banner-close').addEventListener('click', function() {
       50% { box-shadow: 0 6px 24px rgba(6,51,64,0.4), 0 0 22px rgba(0,163,133,0.3), 0 0 40px rgba(0,163,133,0.1), inset 0 1px 1px rgba(255,255,255,0.08); }
     }
     .jk-dots span {
-      animation: jkDotFade 1.4s ease-in-out infinite;
+      animation: jkDotTypewriter 3s ease infinite;
       opacity: 0;
     }
     .jk-dots span:nth-child(1) { animation-delay: 0s; }
-    .jk-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .jk-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes jkDotFade {
-      0%, 20% { opacity: 0; }
-      40%, 60% { opacity: 1; }
-      80%, 100% { opacity: 0; }
+    .jk-dots span:nth-child(2) { animation-delay: 0.4s; }
+    .jk-dots span:nth-child(3) { animation-delay: 0.8s; }
+    @keyframes jkDotTypewriter {
+      0%   { opacity: 0; }
+      10%  { opacity: 1; }
+      60%  { opacity: 1; }
+      75%  { opacity: 0; }
+      100% { opacity: 0; }
     }
 
-    /* Spatial intelligence thinking dots */
+    /* Spatial intelligence dots — smooth typewriter: fade in one by one, hold, fade out together */
     .sw-spatial-dots span {
-      width: 10px; height: 10px; border-radius: 50%; background: #00A385; display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%; background: white; display: inline-block;
       opacity: 0;
     }
-    .sw-spatial-dots { display: flex; gap: 8px; }
+    .sw-spatial-dots { display: flex; gap: 5px; align-items: center; }
     .sw-spatial-dots.active span {
-      animation: swSpatialDotPulse 1.2s ease-in-out infinite;
+      animation: swDotTypewriter 3s ease infinite;
     }
     .sw-spatial-dots.active span:nth-child(1) { animation-delay: 0s; }
-    .sw-spatial-dots.active span:nth-child(2) { animation-delay: 0.2s; }
-    .sw-spatial-dots.active span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes swSpatialDotPulse {
-      0%, 20% { opacity: 0; transform: scale(0.8); }
-      40%, 60% { opacity: 1; transform: scale(1); }
-      80%, 100% { opacity: 0; transform: scale(0.8); }
+    .sw-spatial-dots.active span:nth-child(2) { animation-delay: 0.4s; }
+    .sw-spatial-dots.active span:nth-child(3) { animation-delay: 0.8s; }
+    @keyframes swDotTypewriter {
+      0%   { opacity: 0; }
+      10%  { opacity: 1; }
+      60%  { opacity: 1; }
+      75%  { opacity: 0; }
+      100% { opacity: 0; }
     }
 
     /* Shared toast content styles (used by pro section) */
@@ -1891,13 +1865,14 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
     .sw-thinking-dots span {
       width: 7px; height: 7px; border-radius: 50%; background: #00A385; display: inline-block;
+      opacity: 0;
     }
     .sw-thinking-dots.active span {
-      animation: swThinkingWave 1.2s ease-in-out infinite;
+      animation: swDotTypewriter 3s ease infinite;
     }
     .sw-thinking-dots.active span:nth-child(1) { animation-delay: 0s; }
-    .sw-thinking-dots.active span:nth-child(2) { animation-delay: 0.15s; }
-    .sw-thinking-dots.active span:nth-child(3) { animation-delay: 0.3s; }
+    .sw-thinking-dots.active span:nth-child(2) { animation-delay: 0.4s; }
+    .sw-thinking-dots.active span:nth-child(3) { animation-delay: 0.8s; }
 
     /* Question collapse */
     .sw-question-wrap.sw-collapsed {
@@ -1943,8 +1918,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
       .sw-spatial-dots.active span { animation: none; opacity: 1; }
       .sw-solution-card, .sw-followup-btn, .sw-source-summary,
       .sw-followup, .sw-thinking-dots, .sw-question-wrap { transition: none !important; }
-      .sw-badge-detect, .sw-badge-spatial-think, .sw-badge-spatial-insight,
-      .sw-insight-line1, .sw-insight-line2 { transition: none !important; }
+      .sw-badge-detect, .sw-badge-spatial, .sw-badge-spatial-think,
+      .sw-badge-spatial-insight { transition: none !important; }
     }
 
     /* Pro section toast cards — mobile only */
@@ -1986,7 +1961,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <script>
   // Something's Wrong 3-step auto-cycle with crossfade reveal + pause controls
   (function() {
-    var DURATIONS = [3000, 11100, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
+    var DURATIONS = [3000, 14500, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
     var section = document.getElementById('diagnose-home');
     if (!section) return;
 
@@ -2073,11 +2048,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
       clearTimeout(captureTimer5);
       // Reset spatial intelligence badge phases
       if (badgeDetect) badgeDetect.style.opacity = '1';
+      if (badgeSpatial) badgeSpatial.style.opacity = '0';
       if (badgeThink) { badgeThink.style.opacity = '0'; }
       if (spatialDots) spatialDots.classList.remove('active');
       if (badgeInsight) badgeInsight.style.opacity = '0';
-      if (insightLine1) { insightLine1.style.opacity = '0'; insightLine1.style.transform = 'translateY(4px)'; }
-      if (insightLine2) { insightLine2.style.opacity = '0'; insightLine2.style.transform = 'translateY(4px)'; }
       if (diagBadge) { diagBadge.style.minHeight = '0'; diagBadge.style.minWidth = '0'; }
       // Reset step 1 elements
       if (questionWrap) { questionWrap.classList.remove('sw-collapsed'); questionWrap.style.maxHeight = '160px'; questionWrap.style.opacity = '1'; questionWrap.style.marginBottom = '12px'; }
@@ -2166,11 +2140,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
     // Spatial intelligence badge phases
     var badgeDetect = combinedStep.querySelector('.sw-badge-detect');
+    var badgeSpatial = combinedStep.querySelector('.sw-badge-spatial');
     var badgeThink = combinedStep.querySelector('.sw-badge-spatial-think');
     var badgeInsight = combinedStep.querySelector('.sw-badge-spatial-insight');
     var spatialDots = combinedStep.querySelector('.sw-spatial-dots');
-    var insightLine1 = combinedStep.querySelector('.sw-insight-line1');
-    var insightLine2 = combinedStep.querySelector('.sw-insight-line2');
     var diagBadge = combinedStep.querySelector('.sw-diag-badge');
 
     // Phase 2: Reveal badge first, then slide up bottom sheet after delay
@@ -2204,11 +2177,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
       analyzingBadge.style.opacity = '0';
       // Ensure badge is visible with detection text (already shown during step 0 capture)
       if (badgeDetect) badgeDetect.style.opacity = '1';
+      if (badgeSpatial) badgeSpatial.style.opacity = '0';
       if (badgeThink) badgeThink.style.opacity = '0';
       if (spatialDots) spatialDots.classList.remove('active');
       if (badgeInsight) badgeInsight.style.opacity = '0';
-      if (insightLine1) { insightLine1.style.opacity = '0'; insightLine1.style.transform = 'translateY(4px)'; }
-      if (insightLine2) { insightLine2.style.opacity = '0'; insightLine2.style.transform = 'translateY(4px)'; }
       if (diagBadge) diagBadge.style.minHeight = '0';
       revealEls.forEach(function(el) {
         el.style.opacity = '1';
@@ -2228,30 +2200,31 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (btnFix) { btnFix.style.opacity = '1'; btnFix.classList.remove('sw-selected'); btnFix.classList.remove('sw-pressed'); }
 
       // === SPATIAL INTELLIGENCE ANIMATION SEQUENCE ===
-      // Two-beat design: Beat 1 (thinking ~2.2s) → Beat 2 (reveal ~2.2s)
-      // Total ~4.6s (+20% over previous 3.4s) + extra 500ms for detection text hold
+      // Two-beat design: Beat 1 (thinking 3.5s) → Beat 2 (reveal 4s)
+      // Total ~8.4s — gives user time to register loading + read result
 
       // Phase A (+900ms): Crossfade out detection text — badge container stays
       spatialATimer = setTimeout(function() {
         if (badgeDetect) badgeDetect.style.opacity = '0';
       }, 900);
 
-      // Beat 1 (+1400ms): "Checking home layout" + animated dots
+      // Beat 1 (+1400ms, holds 3.5s): Fade in spatial badge (icon + think text)
       spatialBTimer = setTimeout(function() {
+        if (badgeSpatial) badgeSpatial.style.opacity = '1';
         if (badgeThink) badgeThink.style.opacity = '1';
         if (spatialDots) spatialDots.classList.add('active');
+        // Switch sidebar to "Clarify the issue" when spatial badge appears
+        updateSidebarText(1);
       }, 1400);
 
-      // Beat 2 (+3200ms): Thinking fades out, reveal fades in
+      // Beat 2 (+4900ms, holds 4s): Icon stays, only text swaps
       spatialCTimer = setTimeout(function() {
         if (badgeThink) badgeThink.style.opacity = '0';
         if (spatialDots) spatialDots.classList.remove('active');
         if (badgeInsight) badgeInsight.style.opacity = '1';
-      }, 3200);
+      }, 4900);
 
       spatialDTimer = setTimeout(function() {
-        // Sidebar transitions to "Clarify the issue" as sheet appears
-        updateSidebarText(1);
         // Fade badge out
         revealEls.forEach(function(el) {
           el.style.transition = 'opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)';
@@ -2279,7 +2252,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
           bottomSheet.style.opacity = '0';
           setTimeout(function() { showStep(2); }, 350);
         }, 3500);
-      }, 5400);
+      }, 8900);
     }
 
     function showStep(i, skipTimer) {
@@ -2292,12 +2265,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
         var shouldShow = s.classList.contains('sw-combined') ? (i === 0 || i === 1) : (swIdx === i);
         if (shouldShow) {
           s.style.visibility = 'visible';
+          s.style.transition = 'opacity 400ms ease';
           s.style.opacity = '1';
           s.style.zIndex = '2';
         } else {
+          // Fade out faster to reduce crossfade bleed
+          s.style.transition = 'opacity 250ms ease';
           s.style.opacity = '0';
           s.style.zIndex = '1';
-          setTimeout(function() { if (s.style.opacity === '0') s.style.visibility = 'hidden'; }, 400);
+          setTimeout(function() { if (s.style.opacity === '0') s.style.visibility = 'hidden'; }, 300);
         }
       });
 
@@ -2315,7 +2291,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // Show/hide scan label on step 0
       if (scanLabel) scanLabel.style.opacity = i === 0 ? '1' : '0';
 
-      // Solution cards appear in unison on step 2 (pre-composed screen, not loading results)
+      // Solution cards stagger in on step 2
       if (i === 2) {
         var cards = section.querySelectorAll('.sw-solution-card');
         cards.forEach(function(card) {
@@ -2323,9 +2299,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
           card.style.opacity = '0';
           card.style.transform = 'translateY(8px)';
         });
-        setTimeout(function() {
-          cards.forEach(function(card) { card.classList.add('sw-card-visible'); });
-        }, 250);
+        // Wait for step fade-in to complete, then stagger cards
+        cards.forEach(function(card, j) {
+          setTimeout(function() { card.classList.add('sw-card-visible'); }, 400 + (j * 120));
+        });
       }
 
       clearTimeout(timer);
@@ -3208,364 +3185,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
   <!-- ============================================================ -->
 
-  <!-- Find Your Pro section (Rotating) — OLD, kept for reference -->
-  <section style="padding: 64px 24px; background: #ffffff;" id="find-pro-home">
-    <div style="max-width: 1200px; margin: 0 auto;">
-
-      <div class="contractor-layout" style="display: flex; align-items: flex-start; gap: 64px;">
-        <!-- Left: Heading + Clickable headlines (desktop only) -->
-        <div class="pro-text-sidebar" style="flex: 1; display: flex; flex-direction: column; gap: 0;">
-          <div style="padding: 0 24px 20px;">
-            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Hire with Confidence</p>
-            <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2;">Discover the pros your neighbors already trust.</h2>
-          </div>
-          <div class="pro-hl" data-pro="0" onclick="switchProHome(0)" style="cursor: pointer; padding: 20px 24px; border-left: 3px solid #00A385; transition: all 300ms ease;">
-            <p class="pro-subhead" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; transition: color 300ms ease; color: #00A385;">Discover the pros your neighbors already trust.</p>
-            <p class="pro-det" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5; max-height: 100px; overflow: hidden; transition: max-height 300ms ease, opacity 300ms ease; opacity: 1;">Jackknife connects you with contractors your actual neighbors have hired and reviewed.</p>
-          </div>
-          <div class="pro-hl" data-pro="1" onclick="switchProHome(1)" style="cursor: pointer; padding: 20px 24px; border-left: 3px solid transparent; transition: all 300ms ease;">
-            <p class="pro-subhead" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; transition: color 300ms ease; color: #0a4a5c;">Verified by address, not algorithms.</p>
-            <p class="pro-det" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height 300ms ease, opacity 300ms ease; opacity: 0;">Every review on Jackknife is tied to a real home and a real project. Anonymous for the homeowner. Verified for you.</p>
-          </div>
-          <div class="pro-hl" data-pro="2" onclick="switchProHome(2)" style="cursor: pointer; padding: 20px 24px; border-left: 3px solid transparent; transition: all 300ms ease;">
-            <p class="pro-subhead" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; transition: color 300ms ease; color: #0a4a5c;">Your contractor. Your terms.</p>
-            <p class="pro-det" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height 300ms ease, opacity 300ms ease; opacity: 0;">You choose who to contact, one pro at a time. You control exactly what information gets shared. Your phone number? Never. Contractors have 30 minutes to respond, or we move to your next pick.</p>
-          </div>
-          <div class="pro-hl" data-pro="3" onclick="switchProHome(3)" style="cursor: pointer; padding: 20px 24px; border-left: 3px solid transparent; transition: all 300ms ease;">
-            <p class="pro-subhead" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; margin: 0; transition: color 300ms ease; color: #0a4a5c;">Managed from start to finish.</p>
-            <p class="pro-det" style="font-family: Montserrat, sans-serif; font-size: 17px; color: #6b7c85; margin: 8px 0 0 0; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height 300ms ease, opacity 300ms ease; opacity: 0;">Every message, update, cost, and review in one place. No phone tag. No hassles.</p>
-          </div>
-        </div>
-
-        <!-- Mobile-only heading (sidebar hidden on mobile) -->
-        <div class="pro-mobile-heading" style="display: none;">
-          <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Hire with Confidence</p>
-          <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2;">Discover the pros your neighbors already trust.</h2>
-        </div>
-
-        <!-- Right: Phone with 4 rotating screens -->
-        <div class="pro-phone-wrapper" style="flex: 0.8; display: flex; justify-content: center; position: relative;">
-          <div class="relative" style="width: 280px; height: 560px;">
-            <div class="absolute inset-0 bg-[#063340] rounded-[28px] shadow-[0_24px_80px_rgba(6,51,64,0.2),0_8px_24px_rgba(6,51,64,0.1)]" style="padding: 8px;">
-              <div class="phone-notch"></div>
-              <div class="relative w-full h-full bg-[#f5f7f8] rounded-[20px] overflow-hidden">
-                <div class="h-9 bg-white flex items-end justify-center pb-1">
-                  <span class="font-headline text-[8px] font-bold tracking-[1px] text-[#0a4a5c] uppercase">Jackknife</span>
-                </div>
-                <div class="absolute top-9 inset-x-0 bottom-0 overflow-hidden">
-
-                  <!-- Screen 0: Placeholder — generic contractor list (photo TBD) -->
-                  <div class="pro-scr" data-pscreen="0" style="position: absolute; inset: 0; padding: 24px; font-family: Montserrat, sans-serif; opacity: 1; transition: opacity 400ms ease; overflow-y: auto;">
-                    <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">TRUSTED PROS</p>
-                    <p style="font-weight: 600; font-size: 11px; color: #6b7c85; margin: 0 0 12px 0;">Recommended in your neighborhood</p>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #067a63); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">SP</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Salem Plumbing & Heat</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.9 · 143 neighbor reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #2b6d85, #063340); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">BH</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Beverly Home Services</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.8 · 97 neighbor reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #b45309, #92400e); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">CE</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Cape Ann Electric</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.7 · 72 neighbor reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #4a90a4, #2b6d85); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">NR</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">North Reading Roofing</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.6 · 58 neighbor reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Screen 1: Proven by neighbors (Pro list with reviews) -->
-                  <div class="pro-scr" data-pscreen="1" style="position: absolute; inset: 0; padding: 24px; font-family: Montserrat, sans-serif; opacity: 0; transition: opacity 400ms ease; overflow-y: auto;">
-                    <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">PRO NETWORK</p>
-                    <p style="font-weight: 600; font-size: 11px; color: #6b7c85; margin: 0 0 12px 0;">Top rated near you for plumbing</p>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #067a63); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">MR</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Mike's Reliable Plumbing</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.9 · 127 neighbor reviews</p>
-                        </div>
-                      </div>
-                      <div style="display: flex; gap: 6px;">
-                        <span style="background: #f0f8fa; color: #0a4a5c; font-size: 9px; font-weight: 600; padding: 4px 8px; border-radius: 6px;">Licensed</span>
-                        <span style="background: #f0f8fa; color: #0a4a5c; font-size: 9px; font-weight: 600; padding: 4px 8px; border-radius: 6px;">Insured</span>
-                        <span style="background: rgba(0,163,133,0.1); color: #00A385; font-size: 9px; font-weight: 600; padding: 4px 8px; border-radius: 6px;">Neighbor Pick</span>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #2b6d85, #063340); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">AC</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Accurate Plumbing Co.</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.8 · 89 neighbor reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #b45309, #92400e); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">NE</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">North Shore Experts</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.7 · 64 neighbor reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Screen 2: Matched to your problem (Filtered specialists) -->
-                  <div class="pro-scr" data-pscreen="2" style="position: absolute; inset: 0; padding: 24px; font-family: Montserrat, sans-serif; opacity: 0; transition: opacity 400ms ease; overflow-y: auto;">
-                    <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">SMART MATCH</p>
-                    <div style="background: rgba(0,163,133,0.08); border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; border-left: 3px solid #00A385;">
-                      <p style="font-weight: 600; font-size: 10px; color: #6b7c85; margin: 0 0 2px 0;">BASED ON YOUR DIAGNOSIS</p>
-                      <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Water Heater · Sediment Buildup</p>
-                    </div>
-                    <p style="font-weight: 600; font-size: 10px; color: #6b7c85; margin: 0 0 10px 0; letter-spacing: 1px;">PLUMBING SPECIALISTS</p>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 2px solid #00A385; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #067a63); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">MR</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Mike's Reliable Plumbing</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.9 · Sediment flush specialist</p>
-                        </div>
-                      </div>
-                      <span style="background: rgba(0,163,133,0.1); color: #00A385; font-size: 9px; font-weight: 700; padding: 4px 8px; border-radius: 6px;">Best Match</span>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #2b6d85, #063340); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">AC</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Accurate Plumbing Co.</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">4.8 · Water heater services</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: #f0f8fa; border-radius: 10px; padding: 12px; text-align: center;">
-                      <p style="font-weight: 500; font-size: 11px; color: #6b7c85; margin: 0;">2 specialists filtered from 47 pros</p>
-                    </div>
-                  </div>
-
-                  <!-- Screen 3: Bring your own pros (Contact import) -->
-                  <div class="pro-scr" data-pscreen="3" style="position: absolute; inset: 0; padding: 24px; font-family: Montserrat, sans-serif; opacity: 0; transition: opacity 400ms ease; overflow-y: auto;">
-                    <p style="color: #00A385; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">YOUR NETWORK</p>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #4a90a4, #2b6d85); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">JD</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Joe's Deck & Fence</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">Added from contacts · Carpentry</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 10px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #b45309, #92400e); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">TS</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Tom Sullivan Electric</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">Added from contacts · Electrical</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf0; margin-bottom: 16px;">
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #067a63); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">RP</div>
-                        <div>
-                          <p style="font-weight: 700; font-size: 13px; color: #0a4a5c; margin: 0;">Rivera Painting</p>
-                          <p style="font-weight: 400; font-size: 10px; color: #6b7c85; margin: 0;">Added from contacts · Painting</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style="background: #00A385; border-radius: 12px; padding: 14px; text-align: center; cursor: pointer;">
-                      <p style="font-weight: 700; font-size: 13px; color: white; margin: 0;">+ Add from Contacts</p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- Progress dots -->
-            <div style="display: flex; justify-content: center; gap: 8px; padding: 12px 0 16px;">
-              <div class="pro-dot" data-pdot="0" style="width: 8px; height: 8px; border-radius: 50%; background: #00A385; transition: background 300ms ease; cursor: pointer;"></div>
-              <div class="pro-dot" data-pdot="1" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
-              <div class="pro-dot" data-pdot="2" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
-              <div class="pro-dot" data-pdot="3" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
-            </div>
-          </div>
-          <!-- Toast overlay cards for mobile -->
-          <div class="pro-toast-container">
-            <div class="pro-toast pro-toast-active" data-protoast="0">
-              <div class="sw-toast-content">
-                <p class="sw-toast-label">Discover</p>
-                <p class="sw-toast-title">Pros your neighbors already trust.</p>
-                <p class="sw-toast-body">Jackknife connects you with contractors <strong>your actual neighbors have hired</strong> and reviewed.</p>
-              </div>
-            </div>
-            <div class="pro-toast" data-protoast="1">
-              <div class="sw-toast-content">
-                <p class="sw-toast-label">Verified</p>
-                <p class="sw-toast-title">By address, not algorithms.</p>
-                <p class="sw-toast-body">Every review is tied to <strong>a real home and a real project</strong>. Anonymous for the homeowner. Verified for you.</p>
-              </div>
-            </div>
-            <div class="pro-toast" data-protoast="2">
-              <div class="sw-toast-content">
-                <p class="sw-toast-label">Control</p>
-                <p class="sw-toast-title">Your contractor. Your terms.</p>
-                <p class="sw-toast-body">You choose who to contact. You control what gets shared. Contractors have <strong>30 minutes to respond</strong>.</p>
-              </div>
-            </div>
-            <div class="pro-toast" data-protoast="3">
-              <div class="sw-toast-content">
-                <p class="sw-toast-label">Managed</p>
-                <p class="sw-toast-title">From start to finish.</p>
-                <p class="sw-toast-body"><strong>Every message, update, cost, and review</strong> in one place. No phone tag. No hassles.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-  // Pro rotation for homepage (4 screens + toast sync + pause controls)
-  (function() {
-    var idx = 0, timer = null, CYCLE = 5000, NUM_SCREENS = 4;
-    var hls = document.querySelectorAll('.pro-hl');
-    var scrs = document.querySelectorAll('.pro-scr');
-    var toasts = document.querySelectorAll('.pro-toast');
-    var proDots = document.querySelectorAll('.pro-dot');
-    var phoneWrapper = document.querySelector('.pro-phone-wrapper');
-    var paused = false;
-    var PAUSE_RESUME_DELAY = 8000;
-    var resumeTimer;
-
-    function switchProHome(i, skipTimer) {
-      idx = i;
-      hls.forEach(function(h, j) {
-        var title = h.querySelector('p:first-child');
-        var detail = h.querySelector('.pro-det');
-        if (j === i) {
-          h.style.borderLeftColor = '#00A385';
-          title.style.color = '#00A385';
-          detail.style.maxHeight = '100px';
-          detail.style.opacity = '1';
-        } else {
-          h.style.borderLeftColor = 'transparent';
-          title.style.color = '#0a4a5c';
-          detail.style.maxHeight = '0';
-          detail.style.opacity = '0';
-        }
-      });
-      scrs.forEach(function(s, j) { s.style.opacity = j === i ? '1' : '0'; });
-      // Sync toast cards
-      toasts.forEach(function(t, j) {
-        if (j === i) { t.classList.add('pro-toast-active'); }
-        else { t.classList.remove('pro-toast-active'); }
-      });
-      // Sync dots
-      proDots.forEach(function(d, j) { d.style.background = j === i ? '#00A385' : '#d1d5db'; });
-      clearInterval(timer);
-      if (!skipTimer && !paused) {
-        timer = setInterval(function() { switchProHome((idx + 1) % NUM_SCREENS); }, CYCLE);
-      }
-    }
-    window.switchProHome = switchProHome;
-
-    function pauseProCarousel() {
-      paused = true;
-      clearInterval(timer);
-      clearTimeout(resumeTimer);
-      proDots.forEach(function(d) { d.style.opacity = '0.5'; });
-    }
-
-    function resumeProCarousel() {
-      paused = false;
-      proDots.forEach(function(d) { d.style.opacity = '1'; });
-      clearInterval(timer);
-      timer = setInterval(function() { switchProHome((idx + 1) % NUM_SCREENS); }, CYCLE);
-    }
-
-    // Clickable dots — jump to screen + pause briefly
-    proDots.forEach(function(d) {
-      d.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var target = parseInt(d.getAttribute('data-pdot'));
-        pauseProCarousel();
-        switchProHome(target, true);
-        clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(resumeProCarousel, PAUSE_RESUME_DELAY);
-      });
-    });
-
-    // Sidebar text blocks — clickable to jump to animation chapter
-    hls.forEach(function(h, j) {
-      h.style.cursor = 'pointer';
-      h.addEventListener('click', function() {
-        pauseProCarousel();
-        switchProHome(j, true);
-        clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(resumeProCarousel, PAUSE_RESUME_DELAY);
-      });
-    });
-
-    var section = document.getElementById('find-pro-home');
-
-    // Hover to pause (desktop) — attached to entire section
-    if (section) {
-      section.addEventListener('mouseenter', function() { pauseProCarousel(); });
-      section.addEventListener('mouseleave', function() { clearTimeout(resumeTimer); resumeProCarousel(); });
-    }
-
-    // Mobile: tap phone to toggle pause
-    if (phoneWrapper) {
-      var lastTap = 0;
-      phoneWrapper.addEventListener('touchstart', function(e) {
-        if (e.target.classList.contains('pro-dot')) return;
-        var now = Date.now();
-        if (now - lastTap < 300) return;
-        lastTap = now;
-        if (paused) {
-          resumeProCarousel();
-        } else {
-          pauseProCarousel();
-          clearTimeout(resumeTimer);
-          resumeTimer = setTimeout(resumeProCarousel, PAUSE_RESUME_DELAY);
-        }
-      }, { passive: true });
-    }
-    var started = false;
-    var obs = new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting && !started) {
-        started = true;
-        timer = setInterval(function() { switchProHome((idx + 1) % NUM_SCREENS); }, CYCLE);
-      }
-    }, { threshold: 0.3 });
-    obs.observe(section);
-  })();
-  </script>
-
+  <!-- [REMOVED] Old "Find Your Pro" rotating section — replaced by Hire With Confidence trust animation above -->
 
   <!-- SECTION: SAVE MONEY / DIY PLANS                              -->
   <!-- ============================================================ -->
