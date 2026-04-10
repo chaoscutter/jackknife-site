@@ -308,18 +308,18 @@
     text-underline-offset: 2px;
     cursor: pointer;
   }
-  /* Badge status dots */
+  /* Badge status dots — used as inline separators between primary and secondary text */
   .badge-dot {
     display: inline-block;
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    margin-right: 6px;
+    margin: 0 8px;
     vertical-align: middle;
     flex-shrink: 0;
   }
-  .badge-dot--green { background: #4ADE80; }
-  .badge-dot--amber { background: #FBBF24; }
+  .badge-dot--green { background: #00A385; }
+  .badge-dot--amber { background: #BFDBFE; }
   .badge-dot--red {
     background: #F87171;
     animation: dotPulse 2s ease-in-out infinite;
@@ -341,10 +341,15 @@
   .badge-status-urgent {
     font-weight: 600;
     color: #F87171;
+    animation: dotPulse 2s ease-in-out infinite;
   }
   .badge-text-dim {
     font-weight: 400;
     color: rgba(255,255,255,0.8);
+  }
+  .badge-text-year {
+    font-weight: 600;
+    color: #00A385;
   }
   .intelligence-container::after {
     content: '';
@@ -1229,10 +1234,10 @@
     .sw-label-short { display: inline !important; }
     /* Save card: mobile simplification — pill hidden, label becomes "Save to Projects" + chevron */
     .sw-save-pill { display: none !important; }
-    .sw-save-label { font-weight: 500 !important; font-size: 13px !important; color: #F5B951 !important; }
+    .sw-save-label { font-weight: 500 !important; font-size: 13px !important; color: #4B5563 !important; }
     .sw-save-label::after { content: ' to Projects \203A'; }
-    /* Spatial badge: icon size (32px visual anchor) */
-    .sw-knife-spatial { width: 32px !important; height: 32px !important; }
+    /* Spatial badge: icon size (38px visual anchor, +20% from 32) */
+    .sw-knife-spatial { width: 38px !important; height: 38px !important; }
     /* Spatial badge text: 12px mobile base, 14px on desktop */
     .sw-spatial-text { font-size: 12px !important; }
     /* Bottom sheet: ensure pills don't clip on mobile */
@@ -1241,6 +1246,11 @@
     /* Source badge: prevent text wrapping */
     .sw-source-summary p[style*="text-transform: uppercase"] { font-size: 11px !important; letter-spacing: 0.1px !important; }
     .sw-source-summary div[style*="padding: 10px 12px"] { padding: 8px 10px !important; }
+    /* Leak + Source panels: tighten for narrow mobile width (~192px inner) */
+    .sw-leak-panel, .sw-source-panel { padding: 14px 14px 16px !important; }
+    .sw-leak-panel p[style*="font-size: 15px"],
+    .sw-source-panel p[style*="font-size: 15px"] { font-size: 13px !important; white-space: nowrap; }
+    .sw-leak-chip, .sw-fix-cta { padding: 9px 10px !important; font-size: 12px !important; }
 
     /* Issue 2: Save Money card grid */
     .save-money-grid {
@@ -1467,10 +1477,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div style="flex: 1; min-width: 280px;">
         <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13.65px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 16px 0;">How It Works</p>
         <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4.5vw, 44px); color: #0a4a5c; margin: 0 0 20px 0; line-height: 1.15;">
-          One photo. Everything you need to know.
+          Never guess about your home again.
         </h2>
         <p style="font-family: Montserrat, sans-serif; font-size: clamp(16px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0; max-width: 500px;">
-          Point your phone at anything in your home. Identify what it is, track its condition, and know what to do next.
+          Point your phone at anything. Get instant clarity on what it is and what comes next.
         </p>
         <div class="hero-cta-desktop">
           <a href="#" class="hero-cta-glow" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none;">
@@ -1498,16 +1508,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <div class="focus-brackets"><div class="bracket-bottom"></div></div>
                   <div class="camera-flash"></div>
                   <div class="confidence-shimmer"></div>
-                  <!-- Jackknife intelligence pill — replaces shimmer scan -->
-                  <div class="jk-scan-pill" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, rgba(6,51,64,0.85) 0%, rgba(10,74,92,0.85) 100%); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(0,163,133,0.35); border-radius: 14px; padding: 12px 20px; display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 500ms ease; z-index: 5; box-shadow: 0 8px 24px rgba(6,51,64,0.4), 0 0 16px rgba(0,163,133,0.15); pointer-events: none;">
-                    <svg width="28" height="28" viewBox="10 5 56 40" fill="none"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
-                    <span class="sw-spatial-dots jk-scan-dots"><span></span><span></span><span></span></span>
+                  <!-- Jackknife intelligence mark — navy disc + glowing knife -->
+                  <div class="jk-scan-pill" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle at center, #0a4a5c 0%, #063340 70%, #042530 100%); box-shadow: 0 8px 28px rgba(6,51,64,0.5), inset 0 1px 2px rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 500ms ease; z-index: 5; pointer-events: none;">
+                    <svg class="jk-ai-knife-glow" width="43" height="43" viewBox="10 5 56 40" fill="none"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
                   </div>
                   <div class="detection-callout hero-callout-1 jk-glass-callout">
                     <div class="jk-glass-inner">
                       <div>
                         <div class="jk-glass-label">Identified</div>
-                        <div class="jk-glass-body"><span class="badge-dot badge-dot--green"></span>LG WashTower<span class="badge-sep">&middot;</span><span class="badge-text-dim">2022</span></div>
+                        <div class="jk-glass-body">LG WashTower<span class="badge-dot badge-dot--green"></span><span class="badge-text-year">2022</span></div>
                       </div>
                     </div>
                   </div>
@@ -1515,7 +1524,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <div class="jk-glass-inner">
                       <div>
                         <div class="jk-glass-label">Value</div>
-                        <div class="jk-glass-body"><span class="badge-dot badge-dot--amber"></span>Est. $1,000<span class="badge-sep">&middot;</span><span class="badge-action">add receipt</span></div>
+                        <div class="jk-glass-body">Est. $1,000<span class="badge-dot badge-dot--amber"></span><span class="badge-action">add receipt</span></div>
                       </div>
                     </div>
                   </div>
@@ -1523,7 +1532,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <div class="jk-glass-inner">
                       <div>
                         <div class="jk-glass-label">Maintenance</div>
-                        <div class="jk-glass-body"><span class="badge-dot badge-dot--red"></span>Clean drain filter<span class="badge-sep">&middot;</span><span class="badge-status-urgent">overdue</span></div>
+                        <div class="jk-glass-body">Clean drain filter<span class="badge-dot badge-dot--red"></span><span class="badge-status-urgent">overdue</span></div>
                       </div>
                     </div>
                   </div>
@@ -1605,20 +1614,20 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
                   <!-- Analyzing badge — hidden initially, shown after capture -->
                   <div class="sw-analyzing jk-analyzing-badge sw-badge" style="position: absolute; bottom: 40%; left: 50%; transform: translate(-50%, 50%); background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%); border: 1px solid rgba(0,163,133,0.4); backdrop-filter: blur(12px); border-radius: 12px; padding: 10px 20px; box-shadow: 0 6px 20px rgba(6,51,64,0.35), 0 0 12px rgba(0,163,133,0.15), inset 0 1px 1px rgba(255,255,255,0.08); display: flex; align-items: center; opacity: 0; transition: opacity 400ms ease-out; z-index: 4;">
-                    <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12px; color: white; margin: 0; letter-spacing: 0.3px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;">Analyzing<span class="jk-dots"><span>.</span><span>.</span><span>.</span></span></p>
+                    <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12px; color: white; margin: 0; letter-spacing: 0.3px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;">Analyzing</p>
                   </div>
 
                   <!-- Diagnostic badge — anchored above bottom sheet, reveals with confidence -->
                   <div class="sw-reveal sw-badge sw-diag-badge" data-reveal="0" style="position: absolute; bottom: 52%; left: 50%; transform: translate(-50%, 0) translateY(8px); background: linear-gradient(135deg, #063340 0%, #0a4a5c 100%); border: 1px solid rgba(0,163,133,0.4); border-radius: 14px; padding: 12px 20px; box-shadow: 0 6px 20px rgba(6,51,64,0.35), 0 0 12px rgba(0,163,133,0.15), inset 0 1px 1px rgba(255,255,255,0.08); opacity: 0; transition: opacity 600ms ease-in 0ms, transform 600ms ease-in 0ms, min-height 400ms ease, min-width 400ms ease; z-index: 3; -webkit-font-smoothing: antialiased; overflow: hidden; min-height: 0; min-width: 0; max-width: 94%;">
                     <!-- Phase 1: Detection text (in flow — sizes the badge) -->
                     <div class="sw-badge-detect" style="display: flex; flex-direction: column; align-items: center; gap: 6px; white-space: nowrap; transition: opacity 500ms ease;">
-                      <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: #e74c3c; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Water Damage Detected</p>
-                      <p class="sw-badge-subtext" style="font-family: Inter, sans-serif; font-weight: 500; font-size: 15px; color: #00A385; margin: 0; letter-spacing: 0.3px; line-height: 1; text-align: center;">Let's find the water source.</p>
+                      <p class="sw-badge-text" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 15px; color: #e74c3c; margin: 0; letter-spacing: 0.3px; line-height: 1.3; text-align: center;">Water Damage Detected</p>
+                      <p class="sw-badge-subtext" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; color: white; margin: 0; letter-spacing: 0.3px; line-height: 1.35; text-align: center; -webkit-font-smoothing: antialiased;">Let's find the water source.</p>
                     </div>
                     <!-- Spatial badge: fixed icon + swappable text -->
                     <div class="sw-badge-spatial" style="position: absolute; inset: 0; display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; padding: 0 16px 0 14px; min-height: 44px;">
                       <!-- Icon: anchored, never moves -->
-                      <svg class="sw-knife-icon sw-knife-spatial" width="32" height="32" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
+                      <svg class="sw-knife-icon sw-knife-spatial jk-ai-knife-glow" width="38" height="38" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
                       <!-- Text area: only this content changes -->
                       <div style="position: relative; flex: 1; min-width: 0; overflow: hidden;">
                         <!-- Beat 1 text: loading -->
@@ -1627,55 +1636,47 @@ document.getElementById('banner-close').addEventListener('click', function() {
                         </span>
                         <!-- Beat 2 text: result -->
                         <span class="sw-badge-spatial-insight" style="position: absolute; inset: 0; display: flex; align-items: center; opacity: 0; transition: opacity 300ms ease;">
-                          <span class="sw-spatial-text" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; color: white; letter-spacing: 0.3px; line-height: 1.35; -webkit-font-smoothing: antialiased;">Bathroom found<br>directly above.</span>
+                          <span class="sw-spatial-text" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; color: white; letter-spacing: 0.3px; line-height: 1.35; white-space: nowrap; -webkit-font-smoothing: antialiased;">Bathroom above.</span>
                         </span>
                       </div>
                     </div>
                   </div>
 
                   <!-- Diagnosis bottom sheet — slides up from below -->
-                  <div class="sw-bottom-sheet" style="position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 20px 20px 0 0; padding: 14px 14px 14px; box-shadow: 0 -8px 30px rgba(0,0,0,0.15); z-index: 3; transform: translateY(100%); opacity: 0; transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1) 200ms, opacity 400ms ease 200ms;">
-                    <!-- Drag handle -->
-                    <div style="width: 36px; height: 4px; border-radius: 2px; background: #d1d5db; margin: 0 auto 8px;"></div>
+                  <div class="sw-bottom-sheet" style="position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 20px 20px 0 0; padding: 0; box-shadow: 0 -8px 30px rgba(0,0,0,0.15); z-index: 3; transform: translateY(100%); opacity: 0; transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1) 200ms, opacity 400ms ease 200ms; overflow: hidden;">
 
-                    <!-- Title -->
-                    <div style="margin-bottom: 10px;">
-                      <p class="sw-sheet-title" style="font-weight: 800; font-size: 14px; color: #0a4a5c; margin: 0; line-height: 1.3;">Inspect Upstairs Bathroom</p>
-                    </div>
-
-                    <!-- Identify water source (collapsible) -->
-                    <div class="sw-question-wrap" style="margin-bottom: 10px; max-height: 140px; overflow: hidden; transition: max-height 400ms ease, opacity 300ms ease, margin 300ms ease;">
-                      <p class="sw-sheet-label" style="font-size: 10px; font-weight: 700; color: #6b7c85; margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.8px;">Identify Water Source</p>
-                      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Sink</span>
-                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Tub</span>
-                        <span class="sw-sheet-pill sw-pill-selectable" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed; transition: all 300ms ease;">Bathroom Toilet</span>
-                        <span class="sw-sheet-pill" style="background: #f0f8fa; color: #6b7c85; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e0eaed;">Other</span>
+                    <!-- Panel 1: Find the Leak (primary, in-flow, sets sheet height) -->
+                    <div class="sw-leak-panel" style="padding: 18px 18px 20px; transition: opacity 300ms ease;">
+                      <div style="width: 36px; height: 4px; border-radius: 2px; background: #d1d5db; margin: 0 auto 12px;"></div>
+                      <div style="margin-bottom: 10px;">
+                        <p style="font-weight: 800; font-size: 15px; color: #0a4a5c; margin: 0; line-height: 1.3;">Find the leak.</p>
+                      </div>
+                      <p style="font-size: 10px; font-weight: 700; color: #6b7c85; margin: 0 0 14px 0; text-transform: uppercase; letter-spacing: 0.8px;">Identify Water Source</p>
+                      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <div class="sw-leak-chip" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Sink</div>
+                        <div class="sw-leak-chip" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Shower</div>
+                        <div class="sw-leak-chip sw-leak-chip-toilet" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Toilet</div>
+                        <div class="sw-leak-chip" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Tub</div>
+                        <div class="sw-leak-chip" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; grid-column: 1 / -1; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Something else</div>
                       </div>
                     </div>
 
-                    <!-- Thinking dots (hidden initially) -->
-                    <div class="sw-thinking-dots" style="display: flex; justify-content: center; gap: 6px; padding: 0; opacity: 0; max-height: 0; overflow: hidden; transition: opacity 400ms ease, max-height 400ms ease, padding 400ms ease;">
-                      <span></span><span></span><span></span>
-                    </div>
-
-                    <!-- Source summary (hidden initially) -->
-                    <div class="sw-source-summary" style="padding: 0; opacity: 0; max-height: 0; overflow: hidden; transition: opacity 400ms ease, max-height 300ms ease, padding 300ms ease; margin-bottom: 0;">
-                      <div style="background: rgba(0,163,133,0.08); border: 1px solid rgba(0,163,133,0.2); border-radius: 10px; padding: 10px 12px;">
+                    <!-- Panel 2: What do you want to fix? (hidden initially) -->
+                    <div class="sw-source-panel" style="position: absolute; inset: 0; padding: 18px 18px 20px; background: white; opacity: 0; transition: opacity 300ms ease; pointer-events: none;">
+                      <div style="width: 36px; height: 4px; border-radius: 2px; background: #d1d5db; margin: 0 auto 12px;"></div>
+                      <div style="margin-bottom: 12px;">
+                        <p style="font-weight: 800; font-size: 15px; color: #0a4a5c; margin: 0; line-height: 1.3;">What do you want to fix?</p>
+                      </div>
+                      <div style="background: rgba(0,163,133,0.08); border: 1px solid rgba(0,163,133,0.2); border-radius: 10px; padding: 10px 12px; margin-bottom: 14px;">
                         <div style="display: flex; align-items: center; gap: 5px;">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                           <span style="font-size: 10px; font-weight: 700; color: #00A385; text-transform: uppercase; letter-spacing: 0.8px;">Source Identified</span>
                         </div>
-                        <p style="font-size: 13px; font-weight: 800; color: #063340; margin: 4px 0 0; text-transform: uppercase; letter-spacing: 0.3px;">Upstairs Bathroom Toilet</p>
+                        <p style="font-size: 13px; font-weight: 800; color: #063340; margin: 4px 0 0; text-transform: uppercase; letter-spacing: 0.3px;">Bathroom Toilet</p>
                       </div>
-                    </div>
-
-                    <!-- Follow-up question (hidden initially) -->
-                    <div class="sw-followup" style="opacity: 0; max-height: 0; overflow: hidden; transition: opacity 400ms ease, max-height 400ms ease; padding-top: 0;">
-                      <p style="font-size: 10px; font-weight: 700; color: #6b7c85; margin: 10px 0 10px 0; text-transform: uppercase; letter-spacing: 0.8px;">What's your priority?</p>
                       <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div class="sw-followup-btn sw-btn-diagnose" style="background: transparent; color: #063340; border: 1.5px solid #d4e8e4; border-radius: 10px; padding: 10px 12px; font-size: 11px; font-weight: 600; text-align: center; opacity: 0; transition: all 300ms ease;">Find the Cause</div>
-                        <div class="sw-followup-btn sw-btn-fix" style="background: transparent; color: #063340; border: 1.5px solid #d4e8e4; border-radius: 10px; padding: 10px 12px; font-size: 11px; font-weight: 700; text-align: center; opacity: 0; transition: all 300ms ease;">Fix My Ceiling</div>
+                        <div class="sw-fix-cta" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Fix the Toilet</div>
+                        <div class="sw-fix-cta sw-fix-cta-ceiling" style="background: white; color: #00A385; border: 1.5px solid #00A385; border-radius: 10px; padding: 11px 12px; font-size: 13px; font-weight: 700; text-align: center; box-shadow: 0 1px 3px rgba(0,163,133,0.12), 0 1px 2px rgba(0,0,0,0.04); transition: all 300ms ease;">Repair the Ceiling</div>
                       </div>
                     </div>
 
@@ -1687,9 +1688,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <!-- Header -->
                   <div style="padding: 0 0 4px;">
                     <p style="font-size: 19px; font-weight: 800; color: #0a4a5c; margin: 0; line-height: 1.3;">Repair Damaged Ceiling</p>
-                    <p style="font-size: 13px; font-weight: 600; color: #6b7c85; margin: 2px 0 0; letter-spacing: 0.3px;">Living Room</p>
+                    <p style="font-size: 12px; font-weight: 600; color: #6b7c85; margin: 2px 0 0; letter-spacing: 0.3px;">Living Room</p>
                   </div>
-                  <p style="font-size: 12px; font-weight: 700; color: #4a6a75; margin: 14px 0 0; text-transform: uppercase; letter-spacing: 0.8px;">How do you want to handle it?</p>
+                  <p style="font-size: 10px; font-weight: 700; color: #6b7c85; margin: 14px 0 0; text-transform: uppercase; letter-spacing: 0.8px;">How do you want to handle it?</p>
 
                   <!-- DIY -->
                   <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
@@ -1715,13 +1716,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
                   <!-- Save for Later -->
                   <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
-                    <div style="width: 36px; height: 36px; border-radius: 10px; background: #FEF5E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5B951" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div style="flex: 1; min-width: 0;">
-                      <p class="sw-card-label sw-save-label" style="font-size: 13px; font-weight: 600; color: #F5B951; margin: 0;">Save</p>
+                      <p class="sw-card-label sw-save-label" style="font-size: 13px; font-weight: 600; color: #4B5563; margin: 0;">Save</p>
                     </div>
-                    <div class="sw-save-pill" style="background: transparent; color: #F5B951; border: 1.5px solid #F5B951; border-radius: 200px; padding: 5px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Save to Projects</div>
+                    <div class="sw-save-pill" style="background: transparent; color: #4B5563; border: 1.5px solid #D1D5DB; border-radius: 200px; padding: 5px 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">Save to Projects</div>
                   </div>
                 </div>
 
@@ -1875,35 +1876,73 @@ document.getElementById('banner-close').addEventListener('click', function() {
     .sw-thinking-dots.active span:nth-child(3) { animation-delay: 0.8s; }
 
     /* Question collapse */
-    .sw-question-wrap.sw-collapsed {
-      max-height: 0 !important;
-      opacity: 0 !important;
-      margin-bottom: 0 !important;
-      overflow: hidden;
-    }
+    /* (Old inspect modal CSS removed — consolidated into Find the Leak) */
 
-    /* Follow-up button press + selected states */
-    .sw-btn-fix.sw-pressed {
+    /* Find the Leak chip states */
+    .sw-leak-chip.sw-leak-pressed {
       transform: scale(0.96) !important;
       filter: brightness(0.95);
       transition: transform 120ms ease, filter 120ms ease !important;
     }
-    .sw-btn-fix.sw-selected {
+    .sw-leak-chip.sw-leak-selected {
       background: #00A385 !important;
-      color: white !important;
       border-color: #00A385 !important;
-      animation: btnSelectBounce 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-                 btnGlowPulse 600ms ease-out forwards !important;
+      color: white !important;
+      animation: leakChipBounce 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                 leakChipGlow 600ms ease-out forwards !important;
     }
-    @keyframes btnSelectBounce {
+    @keyframes leakChipBounce {
       0% { transform: scale(0.96); }
       50% { transform: scale(1.03); }
       100% { transform: scale(1); }
     }
-    @keyframes btnGlowPulse {
-      0% { box-shadow: 0 0 0 0 rgba(0,163,133,0.4); }
-      40% { box-shadow: 0 0 0 6px rgba(0,163,133,0.15); }
-      100% { box-shadow: 0 0 0 0 rgba(0,163,133,0); }
+    @keyframes leakChipGlow {
+      0% { box-shadow: 0 0 0 0 rgba(0,139,111,0.4), 0 1px 3px rgba(0,163,133,0.12); }
+      40% { box-shadow: 0 0 0 6px rgba(0,139,111,0.15), 0 2px 6px rgba(0,163,133,0.2); }
+      100% { box-shadow: 0 0 0 0 rgba(0,139,111,0), 0 2px 6px rgba(0,163,133,0.2); }
+    }
+
+    /* AI knife icon thinking glow — size-agnostic, reusable */
+    .jk-ai-knife-glow {
+      border-radius: 50%;
+      animation: knifeGlowPulse 1.6s ease-in-out infinite,
+                 knifeGlowDrift 3.2s ease-in-out infinite;
+      transform-origin: center center;
+    }
+    @keyframes knifeGlowPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0,163,133,0);
+        filter: brightness(1) drop-shadow(0 0 2px rgba(0,163,133,0.4));
+      }
+      50% {
+        box-shadow: 0 0 14px 5px rgba(0,163,133,0.55);
+        filter: brightness(1.15) drop-shadow(0 0 6px rgba(0,163,133,0.8));
+      }
+    }
+    @keyframes knifeGlowDrift {
+      0%, 100% { transform: rotate(-2deg); }
+      50%      { transform: rotate(2deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .jk-ai-knife-glow {
+        animation: none;
+        box-shadow: 0 0 8px 2px rgba(0,163,133,0.35);
+        filter: drop-shadow(0 0 3px rgba(0,163,133,0.6));
+      }
+    }
+
+    /* Fix CTA states (Fix the Toilet / Repair the Ceiling) */
+    .sw-fix-cta.sw-fix-pressed {
+      transform: scale(0.96) !important;
+      filter: brightness(0.95);
+      transition: transform 120ms ease, filter 120ms ease !important;
+    }
+    .sw-fix-cta.sw-fix-selected {
+      background: #00A385 !important;
+      border-color: #00A385 !important;
+      color: white !important;
+      animation: leakChipBounce 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                 leakChipGlow 600ms ease-out forwards !important;
     }
 
     /* Solution card stagger */
@@ -1916,8 +1955,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
     @media (prefers-reduced-motion: reduce) {
       .sw-thinking-dots.active span { animation: none; opacity: 1; }
       .sw-spatial-dots.active span { animation: none; opacity: 1; }
-      .sw-solution-card, .sw-followup-btn, .sw-source-summary,
-      .sw-followup, .sw-thinking-dots, .sw-question-wrap { transition: none !important; }
+      .sw-solution-card, .sw-leak-chip, .sw-fix-cta,
+      .sw-leak-panel, .sw-source-panel { transition: none !important; }
       .sw-badge-detect, .sw-badge-spatial, .sw-badge-spatial-think,
       .sw-badge-spatial-insight { transition: none !important; }
     }
@@ -1988,7 +2027,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var idx = 0;
     var timer;
     var paused = false;
-    var PAUSE_RESUME_DELAY = 8000;
+    var PAUSE_RESUME_DELAY = 25000;
     var resumeTimer;
 
     // Map logical steps to text/toast blocks: 1:1 mapping now
@@ -2046,23 +2085,23 @@ document.getElementById('banner-close').addEventListener('click', function() {
       clearTimeout(captureTimer3);
       clearTimeout(captureTimer4);
       clearTimeout(captureTimer5);
+      clearTimeout(leakPanelTimer);
+      clearTimeout(leakSelectTimer);
+      clearTimeout(leakSourceTimer);
+      clearTimeout(leakAdvanceTimer);
+      // Reset panels
+      if (leakPanel) { leakPanel.style.opacity = '1'; }
+      if (sourcePanel) { sourcePanel.style.opacity = '0'; sourcePanel.style.pointerEvents = 'none'; }
+      leakChips.forEach(function(c) { c.classList.remove('sw-leak-pressed'); c.classList.remove('sw-leak-selected'); c.style.background = 'white'; c.style.borderColor = '#00A385'; c.style.color = '#00A385'; });
+      if (fixCtas) fixCtas.forEach(function(c) { c.classList.remove('sw-fix-pressed'); c.classList.remove('sw-fix-selected'); c.style.background = 'white'; c.style.borderColor = '#00A385'; c.style.color = '#00A385'; });
       // Reset spatial intelligence badge phases
       if (badgeDetect) badgeDetect.style.opacity = '1';
       if (badgeSpatial) badgeSpatial.style.opacity = '0';
       if (badgeThink) { badgeThink.style.opacity = '0'; }
-      if (spatialDots) spatialDots.classList.remove('active');
       if (badgeInsight) badgeInsight.style.opacity = '0';
       if (diagBadge) { diagBadge.style.minHeight = '0'; diagBadge.style.minWidth = '0'; }
       // Reset step 1 elements
-      if (questionWrap) { questionWrap.classList.remove('sw-collapsed'); questionWrap.style.maxHeight = '160px'; questionWrap.style.opacity = '1'; questionWrap.style.marginBottom = '12px'; }
-      if (thinkingDots) { thinkingDots.classList.remove('active'); thinkingDots.style.opacity = '0'; thinkingDots.style.maxHeight = '0'; thinkingDots.style.padding = '0'; }
-      if (sourceSummary) { sourceSummary.style.opacity = '0'; sourceSummary.style.maxHeight = '0'; sourceSummary.style.padding = '0'; sourceSummary.style.marginBottom = '0'; }
-      if (followup) { followup.style.opacity = '0'; followup.style.maxHeight = '0'; }
-      if (btnDiagnose) { btnDiagnose.style.opacity = '0'; btnDiagnose.style.transform = 'translateY(6px)'; btnDiagnose.style.filter = ''; }
-      if (btnFix) { btnFix.style.opacity = '0'; btnFix.classList.remove('sw-selected'); btnFix.classList.remove('sw-pressed'); }
-      // Reset pill state
-      var pillReset = combinedStep.querySelector('.sw-pill-selectable');
-      if (pillReset) { pillReset.style.background = '#f0f8fa'; pillReset.style.color = '#6b7c85'; pillReset.style.fontWeight = '600'; pillReset.style.borderColor = '#e0eaed'; }
+      // (Inspect panel reset removed — elements consolidated into Find the Leak)
       // Reset solution cards
       var cards = section.querySelectorAll('.sw-solution-card');
       cards.forEach(function(c) { c.classList.remove('sw-card-visible'); c.style.opacity = '0'; c.style.transform = 'translateY(8px)'; });
@@ -2086,7 +2125,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // Re-enable transitions after a frame
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
-          if (cleanPhoto) cleanPhoto.style.transition = 'opacity 1750ms ease';
+          if (cleanPhoto) cleanPhoto.style.transition = 'opacity 1000ms ease';
           if (cameraBar) cameraBar.style.transition = 'opacity 400ms ease';
           revealEls.forEach(function(el) {
             el.style.transition = 'opacity 600ms ease-in, transform 600ms ease-in';
@@ -2109,14 +2148,14 @@ document.getElementById('banner-close').addEventListener('click', function() {
       captureTimer3 = setTimeout(function() {
         if (cleanPhoto) cleanPhoto.style.opacity = '0';
       }, 750);
-      // +2200ms: Water Damage Detected badge rises in (extra 1s for green squares)
+      // +1700ms: Water Damage Detected badge rises in (crossfade completes ~1750ms)
       captureTimer5 = setTimeout(function() {
         revealEls.forEach(function(el) {
           el.style.opacity = '1';
           var isCentered = el.style.left === '50%';
           el.style.transform = isCentered ? 'translate(-50%, 0) translateY(0)' : 'translate(0, 0)';
         });
-      }, 2200);
+      }, 1700);
     }
 
     // Phase 1: Fade out Analyzing, fade up Water Damage badge (no text change)
@@ -2130,12 +2169,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
 
     // New elements for steps 5b-5e
-    var questionWrap = combinedStep.querySelector('.sw-question-wrap');
-    var thinkingDots = combinedStep.querySelector('.sw-thinking-dots');
-    var sourceSummary = combinedStep.querySelector('.sw-source-summary');
-    var followup = combinedStep.querySelector('.sw-followup');
-    var btnDiagnose = combinedStep.querySelector('.sw-btn-diagnose');
-    var btnFix = combinedStep.querySelector('.sw-btn-fix');
+    // (Inspect panel elements removed — consolidated into Find the Leak)
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Spatial intelligence badge phases
@@ -2143,8 +2177,16 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var badgeSpatial = combinedStep.querySelector('.sw-badge-spatial');
     var badgeThink = combinedStep.querySelector('.sw-badge-spatial-think');
     var badgeInsight = combinedStep.querySelector('.sw-badge-spatial-insight');
-    var spatialDots = combinedStep.querySelector('.sw-spatial-dots');
     var diagBadge = combinedStep.querySelector('.sw-diag-badge');
+
+    // Find the Leak panels
+    // inspectContent removed — leak panel is now primary
+    var leakPanel = combinedStep.querySelector('.sw-leak-panel');
+    var toiletChip = combinedStep.querySelector('.sw-leak-chip-toilet');
+    var leakChips = combinedStep.querySelectorAll('.sw-leak-chip');
+    var sourcePanel = combinedStep.querySelector('.sw-source-panel');
+    var fixCeilingCta = combinedStep.querySelector('.sw-fix-cta-ceiling');
+    var fixCtas = combinedStep.querySelectorAll('.sw-fix-cta');
 
     // Phase 2: Reveal badge first, then slide up bottom sheet after delay
     var sheetTimer;
@@ -2160,6 +2202,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var fixSelectTimer;
     var solutionAdvanceTimer;
     var spatialATimer, spatialBTimer, spatialCTimer, spatialC2Timer, spatialDTimer;
+    var leakPanelTimer, leakSelectTimer, leakSourceTimer, leakAdvanceTimer;
     function setDiagnosedState() {
       clearTimeout(sheetTimer);
       clearTimeout(pillTimer);
@@ -2171,6 +2214,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
       clearTimeout(spatialCTimer);
       clearTimeout(spatialC2Timer);
       clearTimeout(spatialDTimer);
+      clearTimeout(leakPanelTimer);
+      clearTimeout(leakSelectTimer);
+      clearTimeout(leakSourceTimer);
+      clearTimeout(leakAdvanceTimer);
+      // Reset panels
+      if (leakPanel) { leakPanel.style.opacity = '1'; leakPanel.style.transition = 'opacity 300ms ease'; }
+      if (sourcePanel) { sourcePanel.style.opacity = '0'; sourcePanel.style.pointerEvents = 'none'; }
+      leakChips.forEach(function(c) { c.classList.remove('sw-leak-pressed'); c.classList.remove('sw-leak-selected'); c.style.background = 'white'; c.style.borderColor = '#00A385'; c.style.color = '#00A385'; });
+      if (fixCtas) fixCtas.forEach(function(c) { c.classList.remove('sw-fix-pressed'); c.classList.remove('sw-fix-selected'); c.style.background = 'white'; c.style.borderColor = '#00A385'; c.style.color = '#00A385'; });
       // Ensure capture elements are in post-capture state
       if (cleanPhoto) cleanPhoto.style.opacity = '0';
       if (cameraBar) cameraBar.style.opacity = '0';
@@ -2179,7 +2231,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (badgeDetect) badgeDetect.style.opacity = '1';
       if (badgeSpatial) badgeSpatial.style.opacity = '0';
       if (badgeThink) badgeThink.style.opacity = '0';
-      if (spatialDots) spatialDots.classList.remove('active');
       if (badgeInsight) badgeInsight.style.opacity = '0';
       if (diagBadge) diagBadge.style.minHeight = '0';
       revealEls.forEach(function(el) {
@@ -2191,14 +2242,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
       bottomSheet.style.transition = 'none';
       bottomSheet.style.transform = 'translateY(100%)';
       bottomSheet.style.opacity = '0';
-      // Pre-configure modal: source already identified (spatial intelligence informed it)
-      if (questionWrap) { questionWrap.classList.add('sw-collapsed'); }
-      if (thinkingDots) { thinkingDots.style.opacity = '0'; thinkingDots.style.maxHeight = '0'; thinkingDots.style.padding = '0'; }
-      if (sourceSummary) { sourceSummary.style.opacity = '1'; sourceSummary.style.maxHeight = '75px'; sourceSummary.style.padding = '8px 0'; sourceSummary.style.marginBottom = '4px'; }
-      if (followup) { followup.style.opacity = '1'; followup.style.maxHeight = '200px'; }
-      if (btnDiagnose) { btnDiagnose.style.opacity = '1'; btnDiagnose.style.transform = 'none'; btnDiagnose.style.filter = ''; }
-      if (btnFix) { btnFix.style.opacity = '1'; btnFix.classList.remove('sw-selected'); btnFix.classList.remove('sw-pressed'); }
-
       // === SPATIAL INTELLIGENCE ANIMATION SEQUENCE ===
       // Two-beat design: Beat 1 (thinking 3.5s) → Beat 2 (reveal 4s)
       // Total ~8.4s — gives user time to register loading + read result
@@ -2212,17 +2255,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
       spatialBTimer = setTimeout(function() {
         if (badgeSpatial) badgeSpatial.style.opacity = '1';
         if (badgeThink) badgeThink.style.opacity = '1';
-        if (spatialDots) spatialDots.classList.add('active');
         // Switch sidebar to "Clarify the issue" when spatial badge appears
         updateSidebarText(1);
       }, 1400);
 
-      // Beat 2 (+4900ms, holds 4s): Icon stays, only text swaps
+      // Beat 2 (+4400ms, holds 3s): Icon stays, only text swaps
       spatialCTimer = setTimeout(function() {
         if (badgeThink) badgeThink.style.opacity = '0';
-        if (spatialDots) spatialDots.classList.remove('active');
         if (badgeInsight) badgeInsight.style.opacity = '1';
-      }, 4900);
+      }, 4400);
 
       spatialDTimer = setTimeout(function() {
         // Fade badge out
@@ -2230,29 +2271,48 @@ document.getElementById('banner-close').addEventListener('click', function() {
           el.style.transition = 'opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)';
           el.style.opacity = '0';
         });
-        // Slide up modal
+        // Slide up "Find the leak" modal directly
         bottomSheet.style.willChange = 'transform, opacity';
         bottomSheet.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms cubic-bezier(0.4, 0, 0.2, 1)';
         void bottomSheet.offsetHeight;
         bottomSheet.style.transform = 'translateY(0)';
         bottomSheet.style.opacity = '1';
 
-        // +2000ms after modal: Fix button auto-select
-        fixSelectTimer = setTimeout(function() {
-          if (btnFix) { btnFix.classList.add('sw-pressed'); }
+        // +2600ms: Auto-select Toilet chip (give time to read all 5 options)
+        leakSelectTimer = setTimeout(function() {
+          if (toiletChip) toiletChip.classList.add('sw-leak-pressed');
           setTimeout(function() {
-            if (btnFix) { btnFix.classList.remove('sw-pressed'); btnFix.classList.add('sw-selected'); }
-            if (btnDiagnose) { btnDiagnose.style.filter = 'opacity(0.45)'; }
-          }, 200);
-        }, 2000);
+            if (toiletChip) {
+              toiletChip.classList.remove('sw-leak-pressed');
+              toiletChip.classList.add('sw-leak-selected');
+            }
 
-        // +3500ms after modal: Advance to solution cards
-        solutionAdvanceTimer = setTimeout(function() {
-          bottomSheet.style.transition = 'opacity 300ms ease';
-          bottomSheet.style.opacity = '0';
-          setTimeout(function() { showStep(2); }, 350);
-        }, 3500);
-      }, 8900);
+            // +1000ms after selection: crossfade to Source panel
+            leakSourceTimer = setTimeout(function() {
+              if (leakPanel) { leakPanel.style.opacity = '0'; }
+              if (sourcePanel) { sourcePanel.style.opacity = '1'; sourcePanel.style.pointerEvents = 'auto'; }
+
+              // +2000ms: Auto-select "Fix the Toilet" CTA
+              setTimeout(function() {
+                if (fixCeilingCta) fixCeilingCta.classList.add('sw-fix-pressed');
+                setTimeout(function() {
+                  if (fixCeilingCta) {
+                    fixCeilingCta.classList.remove('sw-fix-pressed');
+                    fixCeilingCta.classList.add('sw-fix-selected');
+                  }
+                }, 200);
+              }, 2000);
+
+              // +3500ms: read source + CTAs, then advance
+              leakAdvanceTimer = setTimeout(function() {
+                bottomSheet.style.transition = 'opacity 300ms ease';
+                bottomSheet.style.opacity = '0';
+                setTimeout(function() { showStep(2); }, 350);
+              }, 2800);
+            }, 1000);
+          }, 200);
+        }, 2600);
+      }, 6600);
     }
 
     function showStep(i, skipTimer) {
@@ -2313,6 +2373,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
           timer = setTimeout(function() {
             if (!paused) showStep(1); // Step 1: badge reveal + bottom sheet + "Clarify the issue"
           }, analyzingTime);
+        } else if (i === 1) {
+          // Step 1 advances via setDiagnosedState() animation chain — no competing timer
         } else {
           timer = setTimeout(function() { showStep((idx + 1) % 3); }, DURATIONS[i]);
         }
@@ -2331,7 +2393,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
       paused = false;
       dots.forEach(function(d) { d.style.opacity = '1'; });
       clearTimeout(timer);
-      timer = setTimeout(function() { showStep((idx + 1) % 3); }, DURATIONS[idx]);
+      // Step 1 advances via its own animation chain — don't set a competing timer
+      if (idx !== 1) {
+        timer = setTimeout(function() { showStep((idx + 1) % 3); }, DURATIONS[idx]);
+      }
     }
 
     // Clickable dots — jump to step + pause briefly
@@ -2346,17 +2411,19 @@ document.getElementById('banner-close').addEventListener('click', function() {
       });
     });
 
-    // Clickable sidebar text labels — jump to animation chapter
+    // Clickable sidebar text labels — jump to animation chapter and play through
     var textBlocks = section.querySelectorAll('.sw-text');
     textBlocks.forEach(function(block) {
       block.style.cursor = 'pointer';
       block.addEventListener('click', function(e) {
         e.stopPropagation();
         var target = parseInt(block.getAttribute('data-swtext'));
-        pauseCarousel();
-        showStep(target, true);
+        // Jump to target step and let the normal animation chain play
+        clearTimeout(timer);
         clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(resumeCarousel, PAUSE_RESUME_DELAY);
+        paused = false;
+        dots.forEach(function(d) { d.style.opacity = '1'; });
+        showStep(target);
       });
     });
 
@@ -2460,16 +2527,19 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <!-- Left: Copy -->
         <div class="hwc-text-col" style="flex: 1; max-width: 480px;">
           <!-- Section label -->
-          <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Hire with Confidence</p>
+          <p class="hwc-eyebrow" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 20px 0;">Hire with Confidence</p>
 
-          <!-- H2 -->
-          <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 24px 0; line-height: 1.2;">Vetted by your street. Not an algorithm.</h2>
+          <!-- H1 rotator (swaps per sequence) -->
+          <div class="hwc-h1-wrap" style="position: relative; min-height: 92px; margin: 0 0 20px 0;">
+            <h2 class="hwc-h1" data-hwcseqh1="0" style="position: absolute; top: 0; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Vetted by your street. Not an algorithm.</h2>
+            <h2 class="hwc-h1" data-hwcseqh1="1" style="position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">No more phone tag.</h2>
+          </div>
 
-          <!-- Step title crossfade -->
-          <div style="position: relative; height: 36px; width: 100%; margin-bottom: 24px;">
-            <span class="hwc-title" data-hwcseqtitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">Real jobs. Real neighbors.</span>
-            <span class="hwc-title" data-hwcseqtitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;">No more phone tag.</span>
-            <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; display: none; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #0a4a5c;"></span>
+          <!-- H2 subtitle rotator (swaps per sequence) -->
+          <div class="hwc-h2-wrap" style="position: relative; height: 36px; width: 100%; margin: 0 0 20px 0;">
+            <span class="hwc-title" data-hwcseqtitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Real Jobs. Real Reviews.</span>
+            <span class="hwc-title" data-hwcseqtitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Track your project in real time.</span>
+            <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; display: none; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;"></span>
           </div>
         </div>
 
@@ -2501,29 +2571,29 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <p style="font-size: 13px; font-weight: 400; color: #063340; margin: 0 0 14px 0; line-height: 1.4; text-align: left;">Hired and reviewed by homeowners on your street.</p>
 
                 <!-- Card 1 -->
-                <div style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                <div style="background: #ffffff; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
                   <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
                   <div style="flex: 1; min-width: 0; text-align: left;">
                     <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">North Shore Drywall &amp; Paint</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.9 · 19 neighbor reviews</p>
+                    <p class="hwc-trust-line" style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.9 · <span style="color: inherit; font-weight: 600;">32 jobs</span> · 19 reviews<span class="hwc-sparkle-burst"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></p>
                   </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                <div style="background: #ffffff; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
                   <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
                   <div style="flex: 1; min-width: 0; text-align: left;">
                     <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Essex County Restoration</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · 24 neighbor reviews</p>
+                    <p class="hwc-trust-line" style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · <span style="color: inherit; font-weight: 600;">41 jobs</span> · 24 reviews<span class="hwc-sparkle-burst"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></p>
                   </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
+                <div style="background: #ffffff; border-radius: 12px; padding: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
                   <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
                   <div style="flex: 1; min-width: 0; text-align: left;">
                     <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · 31 neighbor reviews</p>
+                    <p class="hwc-trust-line" style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · <span style="color: inherit; font-weight: 600;">54 jobs</span> · 31 reviews<span class="hwc-sparkle-burst"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></p>
                   </div>
                 </div>
                 <!-- AI scan shimmer overlay -->
@@ -2532,116 +2602,23 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 </div>
               </div>
 
-              <!-- FRAME 2: Smart Match -->
-              <div data-hwcseqframe="0-1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
-                <!-- Screen header with diagnosis context -->
-                <div class="hwc-diagnosis" style="margin-bottom: 12px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; text-align: left;">
-                  <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 2px 0;">Smart Match</p>
-                  <p style="font-size: 15px; font-weight: 700; color: #063340; margin: 0 0 2px 0;">Water Damage · Ceiling Stain</p>
-                  <p style="font-size: 11px; font-weight: 400; color: #6b7c85; margin: 0;">Based on your diagnosis</p>
-                </div>
-
-                <!-- Best Match card -->
-                <div class="hwc-best-match" style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 3px solid #00A385; display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; flex-wrap: wrap;">
-                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">North Shore Drywall &amp; Paint</p>
-                      <span style="font-size: 10px; font-weight: 600; color: #0F6E56; background: #E1F5EE; padding: 2px 8px; border-radius: 20px; white-space: nowrap;">Best Match</span>
-                    </div>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 0;">★ 4.9 · Water damage restoration specialist</p>
-                  </div>
-                </div>
-
-                <!-- Second specialist card -->
-                <div class="hwc-second-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Cape Ann General Contracting</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · Ceiling and drywall repair</p>
-                  </div>
-                </div>
-
-                <!-- Third specialist card -->
-                <div class="hwc-third-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · Interior drywall specialist</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SEQUENCE 1, FRAME 0: Contractor Selected -->
-              <div data-hwcseqframe="1-0" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
-                <!-- Screen header with diagnosis context -->
-                <div style="margin-bottom: 12px; text-align: left;">
-                  <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 2px 0;">Smart Match</p>
-                  <p style="font-size: 15px; font-weight: 700; color: #063340; margin: 0 0 2px 0;">Water Damage · Ceiling Stain</p>
-                  <p style="font-size: 11px; font-weight: 400; color: #6b7c85; margin: 0;">Based on your diagnosis</p>
-                </div>
-
-                <!-- Best Match card with CTA -->
-                <div class="hwc-pt-bestmatch" style="background: #ffffff; border-radius: 12px; padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 3px solid #00A385; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative;">
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                    <div style="flex: 1; min-width: 0; text-align: left;">
-                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; flex-wrap: wrap;">
-                        <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0;">North Shore Drywall &amp; Paint</p>
-                        <span style="font-size: 10px; font-weight: 600; color: #0F6E56; background: #E1F5EE; padding: 2px 8px; border-radius: 20px; white-space: nowrap;">Best Match</span>
-                      </div>
-                      <p style="font-size: 11px; color: #4a6a75; margin: 0;">★ 4.9 · Water damage restoration specialist</p>
-                    </div>
-                  </div>
-                  <!-- CTA button -->
-                  <div class="hwc-pt-cta" style="background: #00A385; color: white; border-radius: 200px; padding: 8px; text-align: center; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; margin-top: 10px; transition: transform 150ms ease, filter 150ms ease;">Share your issue</div>
-                  <!-- Checkmark (hidden initially) -->
-                  <div class="hwc-pt-check" style="position: absolute; top: 12px; right: 12px; width: 22px; height: 22px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                </div>
-
-                <!-- Second specialist card (fades out on selection) -->
-                <div class="hwc-pt-second" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; transition: opacity 0.4s ease, transform 0.4s ease;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Cape Ann General Contracting</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · Ceiling and drywall repair</p>
-                  </div>
-                </div>
-
-                <!-- Third specialist card (fades out on selection) -->
-                <div class="hwc-pt-third" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px; transition: opacity 0.4s ease, transform 0.4s ease;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
-                    <p style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · Interior drywall specialist</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SEQUENCE 1, FRAME 1: Messaging -->
-              <div data-hwcseqframe="1-1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
+              <!-- SEQUENCE 1, FRAME 0: Messaging -->
+              <div data-hwcseqframe="1-0" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
                 <!-- Header bar -->
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border-bottom: 1px solid #e8edf0;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7c85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                   <p style="font-size: 14px; font-weight: 500; color: #063340; margin: 0;">North Shore Drywall &amp; Paint</p>
-                  <span style="font-size: 12px; color: #4a6a75; font-family: 'Courier New', monospace; letter-spacing: 0.5px;">29:42</span>
-                </div>
-
-                <!-- Info bar -->
-                <div style="background: #E1F5EE; padding: 8px 14px;">
-                  <p style="font-size: 11px; font-weight: 500; color: #0F6E56; margin: 0; line-height: 1.4;">Pro has 30 min to respond or we move to your next pick</p>
+                  <div style="width: 16px;"></div>
                 </div>
 
                 <!-- Message thread -->
-                <div class="hwc-msg-thread" style="flex: 1; padding: 12px 14px; overflow: hidden; display: flex; flex-direction: column; gap: 12px;">
+                <div class="hwc-msg-thread" style="flex: 1; padding: 18px 14px; overflow: hidden; display: flex; flex-direction: column; gap: 18px;">
                   <!-- Message 1: Contractor -->
                   <div class="hwc-msg-row hwc-msg-left" style="display: flex; justify-content: flex-start; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <p class="hwc-msg-label" style="font-size: 11px; color: #6b7c85; margin: 0 0 4px 0;">North Shore Drywall &amp; Paint</p>
-                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #ffffff; color: #063340; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5;">
-                        <span class="hwc-msg-text" data-fulltext="Hey — saw the photos of the ceiling. That's a straightforward patch and repaint, maybe 2 hours once it's dry."></span>
+                      <p class="hwc-msg-label" style="font-size: 11px; color: #8E8E93; margin: 0 0 3px 8px; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">North Shore Drywall &amp; Paint</p>
+                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #E9E9EB; color: #000000; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">
+                        <span class="hwc-msg-text" data-fulltext="Saw your ceiling photos. Straightforward patch and repaint, roughly 2 hours once it dries."></span>
                       </div>
                     </div>
                   </div>
@@ -2649,24 +2626,31 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <!-- Message 2: Homeowner -->
                   <div class="hwc-msg-row hwc-msg-right" style="display: flex; justify-content: flex-end; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5;">Great, anything else you need from me?</div>
+                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Great, what time can you come by?</div>
                     </div>
                   </div>
 
                   <!-- Message 3: Contractor -->
                   <div class="hwc-msg-row hwc-msg-left" style="display: flex; justify-content: flex-start; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <p class="hwc-msg-label" style="font-size: 11px; color: #6b7c85; margin: 0 0 4px 0;">North Shore Drywall &amp; Paint</p>
-                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #ffffff; color: #063340; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5;">
-                        <span class="hwc-msg-text" data-fulltext="Nope — everything I need is in the Jackknife project. See you Monday the 26th at 3."></span>
+                      <p class="hwc-msg-label" style="font-size: 11px; color: #8E8E93; margin: 0 0 3px 8px; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">North Shore Drywall &amp; Paint</p>
+                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #E9E9EB; color: #000000; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">
+                        <span class="hwc-msg-text" data-fulltext="Does Monday the 26th at 3 p.m. work for you?"></span>
                       </div>
+                    </div>
+                  </div>
+
+                  <!-- Message 4: Homeowner -->
+                  <div class="hwc-msg-row hwc-msg-right" style="display: flex; justify-content: flex-end; opacity: 0;">
+                    <div style="max-width: 85%;">
+                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Works for me, see you Monday!</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- SEQUENCE 1, FRAME 2: Project Timeline -->
-              <div data-hwcseqframe="1-2" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
+              <!-- SEQUENCE 1, FRAME 1: Project Timeline -->
+              <div data-hwcseqframe="1-1" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
                 <!-- Header bar -->
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border-bottom: 1px solid #e8edf0;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7c85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -2745,20 +2729,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
   <!-- Hire With Confidence CSS -->
   <style>
-    @keyframes hwcBestMatchGlow {
-      0%, 100% { box-shadow: 0 2px 8px rgba(0,163,133,0.15); }
-      50% { box-shadow: 0 4px 20px rgba(0,163,133,0.35), 0 0 12px rgba(0,163,133,0.15); }
-    }
-    .hwc-diagnosis.hwc-visible,
-    .hwc-best-match.hwc-visible,
-    .hwc-second-card.hwc-visible,
-    .hwc-third-card.hwc-visible {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-    }
-    .hwc-best-match.hwc-glow {
-      animation: hwcBestMatchGlow 2s ease-in-out infinite;
-    }
     /* AI scan shimmer on Frame 1 */
     .hwc-shimmer.hwc-shimmer-active {
       opacity: 1;
@@ -2766,6 +2736,104 @@ document.getElementById('banner-close').addEventListener('click', function() {
     .hwc-shimmer.hwc-shimmer-active .hwc-shimmer-line {
       transition: top 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       top: calc(100% + 50px) !important;
+    }
+
+    /* Trust-line shimmer sweep — highlights the "★ 4.9 · 32 jobs · 19 reviews" line */
+    .hwc-trust-line {
+      position: relative;
+      isolation: isolate;
+      color: #4a6a75;
+    }
+    .hwc-trust-line::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      bottom: -3px;
+      left: 0;
+      width: 45%;
+      background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(200, 240, 225, 0.85) 45%,
+        rgba(220, 250, 235, 0.95) 50%,
+        rgba(200, 240, 225, 0.85) 55%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      mix-blend-mode: lighten;
+      pointer-events: none;
+      transform: translateX(-120%);
+      opacity: 0;
+      z-index: 2;
+    }
+    .hwc-trust-line.sweeping::after {
+      animation: hwcTrustSweep 1080ms cubic-bezier(0.3, 0, 0.3, 1) forwards;
+    }
+    .hwc-trust-line.sweeping {
+      animation: hwcTrustColorShift 1080ms cubic-bezier(0.3, 0, 0.3, 1) forwards;
+    }
+    @keyframes hwcTrustSweep {
+      0%   { transform: translateX(-120%); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateX(260%); opacity: 0; }
+    }
+    @keyframes hwcTrustColorShift {
+      0%, 28%  { color: #4a6a75; }
+      62%, 100% { color: #00A385; }
+    }
+
+    /* Sparkle burst — 4 particles radiating from the "jobs" number */
+    .hwc-sparkle-burst {
+      position: absolute;
+      top: 50%;
+      left: 52%;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .hwc-sparkle {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      margin: -4.5px 0 0 -4.5px;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    .hwc-trust-line.sweeping .hwc-sparkle {
+      animation-duration: 600ms;
+      animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+      animation-fill-mode: forwards;
+      animation-delay: 660ms;
+    }
+    .hwc-trust-line.sweeping .hwc-sparkle:nth-child(1) { animation-name: hwcSparkle1; }
+    .hwc-trust-line.sweeping .hwc-sparkle:nth-child(2) { animation-name: hwcSparkle2; }
+    .hwc-trust-line.sweeping .hwc-sparkle:nth-child(3) { animation-name: hwcSparkle3; }
+    .hwc-trust-line.sweeping .hwc-sparkle:nth-child(4) { animation-name: hwcSparkle4; }
+    @keyframes hwcSparkle1 {
+      0%   { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.3); }
+      20%  { opacity: 1; transform: translate(-6px, -5px) rotate(60deg) scale(1); }
+      100% { opacity: 0; transform: translate(-24px, -20px) rotate(200deg) scale(0.6); }
+    }
+    @keyframes hwcSparkle2 {
+      0%   { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.3); }
+      20%  { opacity: 1; transform: translate(7px, -6px) rotate(-60deg) scale(1); }
+      100% { opacity: 0; transform: translate(26px, -22px) rotate(-200deg) scale(0.6); }
+    }
+    @keyframes hwcSparkle3 {
+      0%   { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.3); }
+      20%  { opacity: 1; transform: translate(-6px, 6px) rotate(-60deg) scale(1); }
+      100% { opacity: 0; transform: translate(-22px, 22px) rotate(-200deg) scale(0.6); }
+    }
+    @keyframes hwcSparkle4 {
+      0%   { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.3); }
+      20%  { opacity: 1; transform: translate(7px, 6px) rotate(60deg) scale(1); }
+      100% { opacity: 0; transform: translate(25px, 24px) rotate(200deg) scale(0.6); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hwc-trust-line.sweeping::after,
+      .hwc-trust-line.sweeping .hwc-sparkle {
+        animation: none !important;
+      }
     }
     @media (max-width: 768px) {
       .hwc-layout {
@@ -2794,12 +2862,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
       animation: hwcCursorBlink 530ms step-end infinite;
     }
 
-    /* CTA pulse */
-    @keyframes hwcCtaPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
     /* Confirm card glow */
     @keyframes hwcConfirmGlow {
       0% { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
@@ -2811,11 +2873,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
     .hwc-detail-container { position: relative; }
 
     @media (prefers-reduced-motion: reduce) {
-      [data-hwcseqframe], .hwc-diagnosis, .hwc-best-match,
-      .hwc-second-card, .hwc-title, .hwc-dot,
+      [data-hwcseqframe], .hwc-title, .hwc-dot,
       .hwc-cursor, .hwc-msg-row, .hwc-stepper-circle,
-      .hwc-confirm-card, .hwc-pt-cta, .hwc-pt-check,
-      .hwc-pt-second, .hwc-stepper-line, .hwc-detail-text {
+      .hwc-confirm-card, .hwc-stepper-line, .hwc-detail-text {
         transition: none !important;
         animation: none !important;
       }
@@ -2831,29 +2891,20 @@ document.getElementById('banner-close').addEventListener('click', function() {
     // === DOM refs ===
     var allFrames = section.querySelectorAll('[data-hwcseqframe]');
     var titles = section.querySelectorAll('[data-hwcseqtitle]');
+    var h1s = section.querySelectorAll('[data-hwcseqh1]');
     var details = section.querySelectorAll('[data-hwcseqdetail]');
     var dots = section.querySelectorAll('[data-hwcseqdot]');
 
     // Seq 0 refs
     var shimmer = section.querySelector('.hwc-shimmer');
     var shimmerLine = section.querySelector('.hwc-shimmer-line');
-    var diagnosis = section.querySelector('.hwc-diagnosis');
-    var bestMatch = section.querySelector('.hwc-best-match');
-    var secondCard = section.querySelector('.hwc-second-card');
-    var thirdCard = section.querySelector('.hwc-third-card');
+    var trustLines = section.querySelectorAll('[data-hwcseqframe="0-0"] .hwc-trust-line');
 
-    // Seq 1, Frame 0 refs
-    var ptBestMatch = section.querySelector('.hwc-pt-bestmatch');
-    var ptCta = section.querySelector('.hwc-pt-cta');
-    var ptCheck = section.querySelector('.hwc-pt-check');
-    var ptSecond = section.querySelector('.hwc-pt-second');
-    var ptThird = section.querySelector('.hwc-pt-third');
-
-    // Seq 1, Frame 1 refs
+    // Seq 1, Frame 0 refs (Messaging)
     var msgThread = section.querySelector('.hwc-msg-thread');
     var msgRows = msgThread ? msgThread.querySelectorAll('.hwc-msg-row') : [];
 
-    // Seq 1, Frame 2 refs
+    // Seq 1, Frame 1 refs (Project Timeline)
     var stepperLine = section.querySelector('.hwc-stepper-line');
     var confirmCard = section.querySelector('.hwc-confirm-card');
     var confirmDate = section.querySelector('.hwc-confirm-date');
@@ -2863,8 +2914,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
     // === Constants ===
     var CROSSFADE = 1000;
     var SEQ_CONFIG = [
-      { frames: ['0-0', '0-1'], holds: [4000, 4000] },
-      { frames: ['1-0', '1-1', '1-2'], holds: [3000, 10000, 5000] }
+      { frames: ['0-0'], holds: [5500] },
+      { frames: ['1-0', '1-1'], holds: [10000, 5000] }
     ];
     var NUM_SEQS = SEQ_CONFIG.length;
 
@@ -2873,13 +2924,11 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var currentFrame = 0;
     var paused = false;
     var allTimers = [];
-    var typewriterInterval = null;
 
     // === Timer management ===
     function clearAllTimers() {
       allTimers.forEach(function(t) { clearTimeout(t); });
       allTimers = [];
-      if (typewriterInterval) { clearInterval(typewriterInterval); typewriterInterval = null; }
     }
 
     function addTimer(fn, delay) {
@@ -2910,6 +2959,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
     // === Sequence-level UI ===
     function updateSeqUI(seqIdx) {
+      h1s.forEach(function(h, j) {
+        h.style.opacity = j === seqIdx ? '1' : '0';
+      });
       titles.forEach(function(t, j) {
         t.style.opacity = j === seqIdx ? '1' : '0';
       });
@@ -2921,57 +2973,27 @@ document.getElementById('banner-close').addEventListener('click', function() {
       });
     }
 
-    // === Typewriter utility ===
-    function typewrite(textSpan, text, speed, onDone) {
-      textSpan.textContent = '';
-      var cursor = document.createElement('span');
-      cursor.className = 'hwc-cursor';
-      textSpan.parentNode.appendChild(cursor);
-
-      var i = 0;
-      typewriterInterval = setInterval(function() {
-        if (i < text.length) {
-          textSpan.textContent = text.substring(0, i + 1);
-          i++;
-        } else {
-          clearInterval(typewriterInterval);
-          typewriterInterval = null;
-          if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
-          if (onDone) onDone();
-        }
-      }, speed);
-    }
-
     // === Reset functions ===
     function resetSeq0() {
-      if (diagnosis) diagnosis.classList.remove('hwc-visible');
-      if (bestMatch) { bestMatch.classList.remove('hwc-visible', 'hwc-glow'); }
-      if (secondCard) secondCard.classList.remove('hwc-visible');
-      if (thirdCard) thirdCard.classList.remove('hwc-visible');
       if (shimmer) {
         shimmer.classList.remove('hwc-shimmer-active');
         if (shimmerLine) { shimmerLine.style.transition = 'none'; shimmerLine.style.top = '-50px'; }
       }
+      // Clear trust-line sweep state so it can re-fire on next loop
+      if (trustLines) trustLines.forEach(function(line) { line.classList.remove('sweeping'); });
     }
 
     function resetSeq1Frame0() {
-      if (ptCta) { ptCta.style.transform = ''; ptCta.style.filter = ''; ptCta.style.animation = ''; }
-      if (ptBestMatch) { ptBestMatch.style.transform = ''; ptBestMatch.style.boxShadow = ''; }
-      if (ptCheck) ptCheck.style.opacity = '0';
-      if (ptSecond) { ptSecond.style.opacity = '1'; ptSecond.style.transform = 'translateY(0)'; }
-      if (ptThird) { ptThird.style.opacity = '1'; ptThird.style.transform = 'translateY(0)'; }
+      msgRows.forEach(function(row) {
+        row.style.transition = 'none';
+        row.style.opacity = '0';
+        row.style.transform = 'translateY(8px)';
+      });
+      var textSpans = section.querySelectorAll('.hwc-msg-text');
+      textSpans.forEach(function(s) { s.textContent = ''; });
     }
 
     function resetSeq1Frame1() {
-      if (typewriterInterval) { clearInterval(typewriterInterval); typewriterInterval = null; }
-      msgRows.forEach(function(row) { row.style.opacity = '0'; });
-      var textSpans = section.querySelectorAll('.hwc-msg-text');
-      textSpans.forEach(function(s) { s.textContent = ''; });
-      var cursors = section.querySelectorAll('.hwc-cursor');
-      cursors.forEach(function(c) { if (c.parentNode) c.parentNode.removeChild(c); });
-    }
-
-    function resetSeq1Frame2() {
       if (confirmCard) { confirmCard.style.maxHeight = '0'; confirmCard.style.opacity = '0'; confirmCard.style.boxShadow = ''; confirmCard.style.animation = ''; }
       if (confirmDate) confirmDate.style.color = '#a0aeb5';
       if (step3Circle) { step3Circle.style.background = '#f5f7f8'; step3Circle.style.borderColor = '#d1d5db'; }
@@ -2993,80 +3015,52 @@ document.getElementById('banner-close').addEventListener('click', function() {
       addTimer(function() {
         if (shimmer) shimmer.classList.remove('hwc-shimmer-active');
       }, 3200);
+      // Trust-line shimmer + sparkle cascade — fires right as the H1 crossfade initiates
+      if (trustLines && trustLines.length) {
+        trustLines.forEach(function(line, i) {
+          addTimer(function() {
+            // Force a reflow so the animation restarts cleanly on each cycle
+            line.classList.remove('sweeping');
+            void line.offsetWidth;
+            line.classList.add('sweeping');
+          }, 150 + i * 180);
+        });
+      }
       if (!paused) addTimer(onDone, SEQ_CONFIG[0].holds[0]);
-    }
-
-    function animSeq0Frame1(onDone) {
-      addTimer(function() { if (diagnosis) diagnosis.classList.add('hwc-visible'); }, 100);
-      addTimer(function() {
-        if (bestMatch) bestMatch.classList.add('hwc-visible');
-        addTimer(function() { if (bestMatch) bestMatch.classList.add('hwc-glow'); }, 300);
-      }, 900);
-      addTimer(function() { if (secondCard) secondCard.classList.add('hwc-visible'); }, 1500);
-      addTimer(function() { if (thirdCard) thirdCard.classList.add('hwc-visible'); }, 1700);
-      if (!paused) addTimer(onDone, SEQ_CONFIG[0].holds[1]);
     }
 
     function animSeq1Frame0(onDone) {
       resetSeq1Frame0();
+      var msg1 = msgRows[0];
+      var msg2 = msgRows[1];
+      var msg3 = msgRows[2];
+      var msg4 = msgRows[3];
+      var text1 = msg1 ? msg1.querySelector('.hwc-msg-text') : null;
+      var text3 = msg3 ? msg3.querySelector('.hwc-msg-text') : null;
+
+      // Populate all message text up front — no typewriter
+      if (text1) text1.textContent = text1.getAttribute('data-fulltext') || '';
+      if (text3) text3.textContent = text3.getAttribute('data-fulltext') || '';
+
+      // Ensure each row has the fade-up transition and starting transform
+      msgRows.forEach(function(row) {
+        row.style.transition = 'opacity 400ms ease, transform 400ms ease';
+        row.style.transform = 'translateY(8px)';
+      });
+
+      // Unison fade-up — all four messages appear together for easier reading
       addTimer(function() {
-        if (ptCta) ptCta.style.animation = 'hwcCtaPulse 400ms ease';
-        addTimer(function() { if (ptCta) ptCta.style.animation = ''; }, 400);
-      }, 1000);
-      addTimer(function() {
-        if (ptCta) { ptCta.style.transform = 'scale(0.96)'; ptCta.style.filter = 'brightness(0.9)'; }
-        if (ptBestMatch) { ptBestMatch.style.transform = 'translateY(-2px)'; ptBestMatch.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)'; }
-        if (ptSecond) { ptSecond.style.opacity = '0'; ptSecond.style.transform = 'translateY(8px)'; }
-        if (ptThird) { ptThird.style.opacity = '0'; ptThird.style.transform = 'translateY(8px)'; }
-        addTimer(function() {
-          if (ptCta) { ptCta.style.transform = ''; ptCta.style.filter = ''; }
-        }, 150);
-      }, 1500);
-      addTimer(function() {
-        if (ptCheck) ptCheck.style.opacity = '1';
-      }, 2000);
+        if (msg1) { msg1.style.opacity = '1'; msg1.style.transform = 'translateY(0)'; }
+        if (msg2) { msg2.style.opacity = '1'; msg2.style.transform = 'translateY(0)'; }
+        if (msg3) { msg3.style.opacity = '1'; msg3.style.transform = 'translateY(0)'; }
+        if (msg4) { msg4.style.opacity = '1'; msg4.style.transform = 'translateY(0)'; }
+      }, 800);
+
       if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[0]);
     }
 
     function animSeq1Frame1(onDone) {
       resetSeq1Frame1();
-      var msg1 = msgRows[0];
-      var msg2 = msgRows[1];
-      var msg3 = msgRows[2];
-      var text1 = msg1 ? msg1.querySelector('.hwc-msg-text') : null;
-      var text3 = msg3 ? msg3.querySelector('.hwc-msg-text') : null;
-      var fullText1 = text1 ? text1.getAttribute('data-fulltext') : '';
-      var fullText3 = text3 ? text3.getAttribute('data-fulltext') : '';
-
-      addTimer(function() {
-        if (msg1) msg1.style.opacity = '1';
-        if (text1) {
-          addTimer(function() {
-            typewrite(text1, fullText1, 40, function() {
-              addTimer(function() {
-                if (msg2) {
-                  msg2.style.transition = 'opacity 200ms ease';
-                  msg2.style.opacity = '1';
-                }
-                addTimer(function() {
-                  if (msg3) msg3.style.opacity = '1';
-                  if (text3) {
-                    addTimer(function() {
-                      typewrite(text3, fullText3, 40, null);
-                    }, 200);
-                  }
-                }, 1400);
-              }, 1200);
-            });
-          }, 200);
-        }
-      }, 800);
-
-      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
-    }
-
-    function animSeq1Frame2(onDone) {
-      resetSeq1Frame2();
       addTimer(function() {
         if (confirmCard) { confirmCard.style.maxHeight = '200px'; confirmCard.style.opacity = '1'; }
         if (stepperLine) stepperLine.style.height = '180px';
@@ -3080,15 +3074,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
         if (step3Circle) { step3Circle.style.background = '#00A385'; step3Circle.style.borderColor = '#00A385'; }
         if (step3Check) step3Check.style.opacity = '1';
       }, 1500);
-      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[2]);
+      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
     }
 
     var ANIM_FNS = {
       '0-0': animSeq0Frame0,
-      '0-1': animSeq0Frame1,
       '1-0': animSeq1Frame0,
-      '1-1': animSeq1Frame1,
-      '1-2': animSeq1Frame2
+      '1-1': animSeq1Frame1
     };
 
     // === Main playback ===
@@ -3132,7 +3124,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
           resetSeq0();
           resetSeq1Frame0();
           resetSeq1Frame1();
-          resetSeq1Frame2();
           playSequence(target);
         }
       });
@@ -3159,8 +3150,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
     // === Reduced motion ===
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      resetSeq1Frame2();
-      showFrameEl('1-2');
+      resetSeq1Frame1();
+      showFrameEl('1-1');
       updateSeqUI(1);
       if (confirmCard) { confirmCard.style.maxHeight = '200px'; confirmCard.style.opacity = '1'; }
       if (confirmDate) confirmDate.style.color = '#00A385';
@@ -3594,7 +3585,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <div class="max-w-7xl mx-auto flex items-center justify-center sm:justify-between">
     <div class="hidden sm:block">
       <p class="font-headline font-bold text-on-surface text-sm">Ready to know your home?</p>
-      <p class="font-body text-on-surface-variant text-xs">No setup required.</p>
+      <p class="font-body text-on-surface-variant text-xs">No credit cards or signup required.</p>
     </div>
     <button class="sticky-cta-glow bg-[#00A385] text-white font-headline px-8 py-3 rounded-full text-sm font-semibold active:scale-95 flex items-center gap-2 sm:ml-auto" style="position: relative; overflow: hidden; transition: all 500ms ease; box-shadow: 0 4px 16px rgba(0, 163, 133, 0.25), 0 0 20px rgba(0, 163, 133, 0.15);">
       Try the First Photo
