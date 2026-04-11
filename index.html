@@ -2531,8 +2531,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
           <!-- H1 rotator (swaps per sequence) -->
           <div class="hwc-h1-wrap" style="position: relative; min-height: 92px; margin: 0 0 20px 0;">
-            <h2 class="hwc-h1" data-hwcseqh1="0" style="position: absolute; top: 0; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Vetted by your street. Not an algorithm.</h2>
-            <h2 class="hwc-h1" data-hwcseqh1="1" style="position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">No more phone tag.</h2>
+            <h2 class="hwc-h1" data-hwcseqh1="0" style="position: absolute; bottom: 0; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Vetted by your street. Not an algorithm.</h2>
+            <h2 class="hwc-h1" data-hwcseqh1="1" style="position: absolute; bottom: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">No more phone tag.</h2>
           </div>
 
           <!-- H2 subtitle rotator (swaps per sequence) -->
@@ -2565,36 +2565,51 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
               <!-- FRAME 1: Trusted Local Pros -->
               <div data-hwcseqframe="0-0" style="position: absolute; inset: 0; opacity: 1; transform: translateY(0); transition: opacity 1s ease, transform 1s ease; padding: 16px 14px; font-family: Montserrat, sans-serif;">
-                <!-- Screen header -->
-                <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #00A385; margin: 0 0 4px 0; text-align: left;">Trusted Pros</p>
-                <!-- Subhead -->
-                <p style="font-size: 13px; font-weight: 400; color: #063340; margin: 0 0 14px 0; line-height: 1.4; text-align: left;">Hired and reviewed by homeowners on your street.</p>
+                <!-- Screen H1 -->
+                <p style="font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; color: #063340; margin: 0 0 14px 0; line-height: 1.2; text-align: left;">Trusted Local Pros</p>
 
                 <!-- Card 1 -->
-                <div style="background: #ffffff; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">North Shore Drywall &amp; Paint</p>
-                    <p class="hwc-trust-line" style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.9 · <span style="color: inherit; font-weight: 600;">32 jobs</span> · 19 reviews<span class="hwc-sparkle-burst"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></p>
+                <div style="background: #ffffff; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+                  <div style="padding: 12px 14px 10px; display: flex; align-items: flex-end; gap: 10px;">
+                    <div style="width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8 L15 8 L15 14 L2 14 Z"/><path d="M15 11 L18 11"/><path d="M18 9 L22 9 L22 13 L18 13 Z"/></svg></div>
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">North Shore Drywall &amp; Paint</p>
+                    </div>
                   </div>
+                  <p class="hwc-trust-line" style="font-size: 14px; font-weight: 700; color: #4a6a75; margin: 0; padding: 8px 14px; border-top: 1px solid #eef2f4; line-height: 1.3; display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; font-variant-numeric: tabular-nums;"><span style="white-space: nowrap;"><span style="font-size: 17px; line-height: 1; vertical-align: -1px;">★</span> 4.9</span><span class="hwc-trust-dot"></span><span style="white-space: nowrap; position: relative;">32 jobs<span class="hwc-sparkle-burst" style="left: 50%;"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></span><span class="hwc-trust-dot"></span><span style="white-space: nowrap;">19 reviews</span></p>
                 </div>
 
                 <!-- Card 2 -->
-                <div style="background: #ffffff; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Essex County Restoration</p>
-                    <p class="hwc-trust-line" style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.8 · <span style="color: inherit; font-weight: 600;">41 jobs</span> · 24 reviews<span class="hwc-sparkle-burst"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></p>
+                <div style="background: #ffffff; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+                  <div style="padding: 12px 14px 10px; display: flex; align-items: flex-end; gap: 10px;">
+                    <div style="width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8 L15 8 L15 14 L2 14 Z"/><path d="M15 11 L18 11"/><path d="M18 9 L22 9 L22 13 L18 13 Z"/></svg></div>
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Essex County Restoration</p>
+                    </div>
                   </div>
+                  <p class="hwc-trust-line" style="font-size: 14px; font-weight: 700; color: #4a6a75; margin: 0; padding: 8px 14px; border-top: 1px solid #eef2f4; line-height: 1.3; display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; font-variant-numeric: tabular-nums;"><span style="white-space: nowrap;"><span style="font-size: 17px; line-height: 1; vertical-align: -1px;">★</span> 4.8</span><span class="hwc-trust-dot"></span><span style="white-space: nowrap; position: relative;">41 jobs<span class="hwc-sparkle-burst" style="left: 50%;"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></span><span class="hwc-trust-dot"></span><span style="white-space: nowrap;">24 reviews</span></p>
                 </div>
 
                 <!-- Card 3 -->
-                <div style="background: #ffffff; border-radius: 12px; padding: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v3a2 2 0 0 0 2 2h1v7a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-7h1a2 2 0 0 0 2-2V8"/></svg></div>
-                  <div style="flex: 1; min-width: 0; text-align: left;">
-                    <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
-                    <p class="hwc-trust-line" style="font-size: 11px; color: #4a6a75; margin: 2px 0 0 0;">★ 4.7 · <span style="color: inherit; font-weight: 600;">54 jobs</span> · 31 reviews<span class="hwc-sparkle-burst"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></p>
+                <div style="background: #ffffff; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+                  <div style="padding: 12px 14px 10px; display: flex; align-items: flex-end; gap: 10px;">
+                    <div style="width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8 L15 8 L15 14 L2 14 Z"/><path d="M15 11 L18 11"/><path d="M18 9 L22 9 L22 13 L18 13 Z"/></svg></div>
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Merrimack General Contracting</p>
+                    </div>
                   </div>
+                  <p class="hwc-trust-line" style="font-size: 14px; font-weight: 700; color: #4a6a75; margin: 0; padding: 8px 14px; border-top: 1px solid #eef2f4; line-height: 1.3; display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; font-variant-numeric: tabular-nums;"><span style="white-space: nowrap;"><span style="font-size: 17px; line-height: 1; vertical-align: -1px;">★</span> 4.7</span><span class="hwc-trust-dot"></span><span style="white-space: nowrap; position: relative;">54 jobs<span class="hwc-sparkle-burst" style="left: 50%;"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></span><span class="hwc-trust-dot"></span><span style="white-space: nowrap;">31 reviews</span></p>
+                </div>
+
+                <!-- Card 4 -->
+                <div style="background: #ffffff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+                  <div style="padding: 12px 14px 10px; display: flex; align-items: flex-end; gap: 10px;">
+                    <div style="width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8 L15 8 L15 14 L2 14 Z"/><path d="M15 11 L18 11"/><path d="M18 9 L22 9 L22 13 L18 13 Z"/></svg></div>
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                      <p style="font-size: 14px; font-weight: 600; color: #063340; margin: 0; line-height: 1.3;">Plaster &amp; Paint Pros</p>
+                    </div>
+                  </div>
+                  <p class="hwc-trust-line" style="font-size: 14px; font-weight: 700; color: #4a6a75; margin: 0; padding: 8px 14px; border-top: 1px solid #eef2f4; line-height: 1.3; display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; font-variant-numeric: tabular-nums;"><span style="white-space: nowrap;"><span style="font-size: 17px; line-height: 1; vertical-align: -1px;">★</span> 4.8</span><span class="hwc-trust-dot"></span><span style="white-space: nowrap; position: relative;">47 jobs<span class="hwc-sparkle-burst" style="left: 50%;"><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span><span class="hwc-sparkle"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" fill="#00A385"/></svg></span></span></span><span class="hwc-trust-dot"></span><span style="white-space: nowrap;">28 reviews</span></p>
                 </div>
                 <!-- AI scan shimmer overlay -->
                 <div class="hwc-shimmer" style="position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0;">
@@ -2616,8 +2631,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <!-- Message 1: Contractor -->
                   <div class="hwc-msg-row hwc-msg-left" style="display: flex; justify-content: flex-start; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <p class="hwc-msg-label" style="font-size: 11px; color: #8E8E93; margin: 0 0 3px 8px; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">North Shore Drywall &amp; Paint</p>
-                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #E9E9EB; color: #000000; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">
+                      <p class="hwc-msg-label" style="font-size: 12px; color: #8E8E93; margin: 0 0 4px 10px; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">North Shore Drywall &amp; Paint</p>
+                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #E9E9EB; color: #000000; padding: 11px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">
                         <span class="hwc-msg-text" data-fulltext="Saw your ceiling photos. Straightforward patch and repaint, roughly 2 hours once it dries."></span>
                       </div>
                     </div>
@@ -2626,15 +2641,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <!-- Message 2: Homeowner -->
                   <div class="hwc-msg-row hwc-msg-right" style="display: flex; justify-content: flex-end; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Great, what time can you come by?</div>
+                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Great, what time can you come by?</div>
                     </div>
                   </div>
 
                   <!-- Message 3: Contractor -->
                   <div class="hwc-msg-row hwc-msg-left" style="display: flex; justify-content: flex-start; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <p class="hwc-msg-label" style="font-size: 11px; color: #8E8E93; margin: 0 0 3px 8px; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">North Shore Drywall &amp; Paint</p>
-                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #E9E9EB; color: #000000; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">
+                      <p class="hwc-msg-label" style="font-size: 12px; color: #8E8E93; margin: 0 0 4px 10px; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">North Shore Drywall &amp; Paint</p>
+                      <div class="hwc-msg-bubble hwc-msg-contractor" style="background: #E9E9EB; color: #000000; padding: 11px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">
                         <span class="hwc-msg-text" data-fulltext="Does Monday the 26th at 3 p.m. work for you?"></span>
                       </div>
                     </div>
@@ -2643,7 +2658,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <!-- Message 4: Homeowner -->
                   <div class="hwc-msg-row hwc-msg-right" style="display: flex; justify-content: flex-end; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 13px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Works for me, see you Monday!</div>
+                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Works for me, see you Monday!</div>
                     </div>
                   </div>
                 </div>
@@ -2659,55 +2674,62 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 </div>
 
                 <!-- Stepper container -->
-                <div class="hwc-stepper" style="position: relative; padding: 20px 14px 14px 46px; flex: 1; overflow: hidden;">
-                  <!-- Teal vertical line -->
-                  <div class="hwc-stepper-line" style="position: absolute; left: 23px; top: 30px; width: 2px; background: #00A385; height: 80px; transition: height 400ms ease-out;"></div>
+                <div class="hwc-stepper" style="position: relative; padding: 16px 14px 12px 46px; flex: 1; overflow: hidden;">
+                  <!-- Teal vertical line (grows as steps activate) -->
+                  <div class="hwc-stepper-line" style="position: absolute; left: 23px; top: 20px; width: 2px; background: #00A385; height: 0; transition: height 400ms ease-out;"></div>
 
-                  <!-- Step 1: Issue Analyzed (completed) -->
-                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
-                    <div class="hwc-stepper-circle completed" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <!-- Step 1: Issue Documented (starts gray, activates in Act 1) -->
+                  <div class="hwc-stepper-step hwc-step" data-step="1" style="position: relative; padding-bottom: 14px;">
+                    <div class="hwc-step-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: background 400ms ease-out, border-color 400ms ease-out;">
+                      <svg class="hwc-step-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transform: scale(0.5); transition: opacity 300ms ease-out 100ms, transform 300ms ease-out 100ms;"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
-                    <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 2px 0;">Issue Analyzed &amp; Documented</p>
-                    <p style="font-size: 12px; color: #4a6a75; margin: 0;">Wed, May 14, 2026 · 10 AM</p>
+                    <p class="hwc-step-title" style="font-size: 13px; font-weight: 600; color: #a0aeb5; margin: 0 0 2px 0; transition: color 400ms ease-out;">Issue Documented</p>
+                    <p class="hwc-step-date" style="font-size: 12px; color: #a0aeb5; margin: 0; transition: color 400ms ease-out;">May 14</p>
                   </div>
 
-                  <!-- Step 2: Select Your Pro (completed) -->
-                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
-                    <div class="hwc-stepper-circle completed" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #00A385; display: flex; align-items: center; justify-content: center;">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <!-- Step 2: Select Your Pro (starts gray, activates in Act 1) -->
+                  <div class="hwc-stepper-step hwc-step" data-step="2" style="position: relative; padding-bottom: 14px;">
+                    <div class="hwc-step-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: background 400ms ease-out, border-color 400ms ease-out;">
+                      <svg class="hwc-step-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transform: scale(0.5); transition: opacity 300ms ease-out 100ms, transform 300ms ease-out 100ms;"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
-                    <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 2px 0;">Select Your Pro</p>
-                    <p style="font-size: 12px; color: #00A385; margin: 0;">North Shore Drywall &amp; Paint</p>
+                    <p class="hwc-step-title" style="font-size: 13px; font-weight: 600; color: #a0aeb5; margin: 0 0 2px 0; transition: color 400ms ease-out;">Select Your Pro</p>
+                    <p class="hwc-step-subtitle" style="font-size: 12px; color: #a0aeb5; margin: 0; transition: color 400ms ease-out;">North Shore Drywall &amp; Paint</p>
                   </div>
 
-                  <!-- Step 3: Service Date Confirmed (animates in) -->
-                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
-                    <div class="hwc-stepper-circle hwc-step3-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; display: flex; align-items: center; justify-content: center; transition: background 0.3s ease, border-color 0.3s ease;">
-                      <svg class="hwc-step3-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 0.3s ease;"><polyline points="20 6 9 17 4 12"/></svg>
+                  <!-- Step 3: Service Date Confirmed (starts gray, activates with card expand) -->
+                  <div class="hwc-stepper-step hwc-step" data-step="3" style="position: relative; padding-bottom: 14px;">
+                    <div class="hwc-step-circle hwc-step3-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: background 400ms ease-out, border-color 400ms ease-out;">
+                      <svg class="hwc-step-check hwc-step3-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transform: scale(0.5); transition: opacity 300ms ease-out 100ms, transform 300ms ease-out 100ms;"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
-                    <!-- Expandable card -->
+                    <!-- Expandable card: heading + date/time only (no Reschedule button, no description) -->
                     <div class="hwc-confirm-card" style="background: #ffffff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 3px solid #00A385; overflow: hidden; max-height: 0; opacity: 0; transition: max-height 400ms ease-out, opacity 300ms ease, box-shadow 0.6s ease;">
-                      <div style="padding: 12px;">
-                        <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 4px 0;">Service Date Confirmed</p>
-                        <p class="hwc-confirm-date" style="font-size: 13px; color: #a0aeb5; margin: 0 0 4px 0; transition: color 0.4s ease;">Mon, May 26, 2026 · 3 PM</p>
-                        <p style="font-size: 12px; color: #4a6a75; margin: 0 0 10px 0; line-height: 1.4;">Your appointment is confirmed for the selected date and time.</p>
-                        <div style="background: #00A385; color: white; border-radius: 200px; padding: 8px; text-align: center; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px;">Reschedule</div>
+                      <div style="padding: 10px 12px;">
+                        <p style="font-size: 13px; font-weight: 600; color: #063340; margin: 0 0 3px 0;">Service Date Confirmed</p>
+                        <p class="hwc-confirm-date" style="font-size: 12px; color: #a0aeb5; margin: 0; transition: color 0.4s ease;">Mon, May 26, 2026 · 3 PM</p>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Step 4: Confirm Completion (future) -->
-                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 20px;">
-                    <div class="hwc-stepper-circle future" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #e0e5e8;"></div>
-                    <p style="font-size: 13px; font-weight: 500; color: #a0aeb5; margin: 0;">Confirm Completion</p>
+                  <!-- Step 4: Confirm Completion (starts gray, activates in Act 3) -->
+                  <div class="hwc-stepper-step hwc-step" data-step="4" style="position: relative; padding-bottom: 14px;">
+                    <div class="hwc-step-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: background 400ms ease-out, border-color 400ms ease-out;">
+                      <svg class="hwc-step-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transform: scale(0.5); transition: opacity 300ms ease-out 100ms, transform 300ms ease-out 100ms;"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="hwc-step-title" style="font-size: 13px; font-weight: 600; color: #a0aeb5; margin: 0; transition: color 400ms ease-out;">Confirm Completion</p>
                   </div>
 
-                  <!-- Step 5: Rate Your Pro (future) -->
-                  <div class="hwc-stepper-step" style="position: relative; padding-bottom: 0;">
-                    <div class="hwc-stepper-circle future" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #e0e5e8;"></div>
-                    <p style="font-size: 13px; font-weight: 500; color: #a0aeb5; margin: 0;">Rate Your Pro</p>
+                  <!-- Step 5: Rate Your Pro (starts gray, activates in Act 3) -->
+                  <div class="hwc-stepper-step hwc-step" data-step="5" style="position: relative; padding-bottom: 14px;">
+                    <div class="hwc-step-circle" style="position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #f5f7f8; border: 2px solid #d1d5db; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: background 400ms ease-out, border-color 400ms ease-out;">
+                      <svg class="hwc-step-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transform: scale(0.5); transition: opacity 300ms ease-out 100ms, transform 300ms ease-out 100ms;"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="hwc-step-title" style="font-size: 13px; font-weight: 600; color: #a0aeb5; margin: 0; transition: color 400ms ease-out;">Rate Your Pro</p>
                   </div>
+
+                  <!-- Add to Home Record CTA (slides up after Act 3) -->
+                  <button class="hwc-add-cta" type="button" style="display: flex; align-items: center; justify-content: center; width: calc(100% + 32px); margin-left: -32px; margin-top: 4px; height: 44px; padding: 0 16px; background: #00A385; color: #ffffff; border: none; border-radius: 22px; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; opacity: 0; transform: translateY(20px); transition: opacity 400ms ease-out, transform 400ms ease-out, background 300ms ease-out;">
+                    Add to Home Record
+                  </button>
                 </div>
               </div>
 
@@ -2743,6 +2765,15 @@ document.getElementById('banner-close').addEventListener('click', function() {
       position: relative;
       isolation: isolate;
       color: #4a6a75;
+    }
+    /* Verification row separator dots (not the sequence dots) */
+    .hwc-trust-dot {
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: currentColor;
+      justify-self: center;
+      flex-shrink: 0;
     }
     .hwc-trust-line::after {
       content: '';
@@ -2862,11 +2893,63 @@ document.getElementById('banner-close').addEventListener('click', function() {
       animation: hwcCursorBlink 530ms step-end infinite;
     }
 
-    /* Confirm card glow */
+    /* Confirm card seal moment — flash a brighter teal outer glow + ring to feel like a stamp */
     @keyframes hwcConfirmGlow {
-      0% { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-      50% { box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 12px rgba(0,163,133,0.3); }
-      100% { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+      0% {
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        border-left-color: #00A385;
+      }
+      20% {
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 3px rgba(0,163,133,0.18), 0 0 22px rgba(0,163,133,0.4);
+        border-left-color: #00D4A8;
+      }
+      50% {
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,163,133,0.12), 0 0 14px rgba(0,163,133,0.3);
+        border-left-color: #00B892;
+      }
+      100% {
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        border-left-color: #00A385;
+      }
+    }
+
+    /* Timeline step — active state transitions */
+    .hwc-step.active .hwc-step-circle {
+      background: #00A385 !important;
+      border-color: #00A385 !important;
+    }
+    .hwc-step.active .hwc-step-check {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .hwc-step.active .hwc-step-title {
+      color: #063340 !important;
+    }
+    .hwc-step.active .hwc-step-date {
+      color: #4a6a75 !important;
+    }
+    .hwc-step.active .hwc-step-subtitle {
+      color: #00A385 !important;
+    }
+
+    /* Add to Home Record CTA — appears, tap interaction, terminal added state */
+    .hwc-add-cta.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .hwc-add-cta.pressed {
+      transform: translateY(0) scale(0.96) !important;
+      transition: transform 100ms ease-out, background 300ms ease-out !important;
+    }
+    .hwc-add-cta.added {
+      background: #063340 !important;
+      transform: translateY(0) scale(1) !important;
+      transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), background 300ms ease-out !important;
+      animation: hwcCtaPulse 500ms ease-out;
+    }
+    @keyframes hwcCtaPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(0, 163, 133, 0.4); }
+      100% { box-shadow: 0 0 0 8px rgba(0, 163, 133, 0); }
     }
 
     /* Detail text crossfade positioning */
@@ -2905,19 +2988,21 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var msgRows = msgThread ? msgThread.querySelectorAll('.hwc-msg-row') : [];
 
     // Seq 1, Frame 1 refs (Project Timeline)
+    var stepperContainer = section.querySelector('.hwc-stepper');
     var stepperLine = section.querySelector('.hwc-stepper-line');
+    var timelineSteps = section.querySelectorAll('.hwc-stepper .hwc-step');
     var confirmCard = section.querySelector('.hwc-confirm-card');
     var confirmDate = section.querySelector('.hwc-confirm-date');
-    var step3Circle = section.querySelector('.hwc-step3-circle');
-    var step3Check = section.querySelector('.hwc-step3-check');
+    var addCta = section.querySelector('.hwc-add-cta');
 
     // === Constants ===
     var CROSSFADE = 1000;
     var SEQ_CONFIG = [
       { frames: ['0-0'], holds: [5500] },
-      { frames: ['1-0', '1-1'], holds: [10000, 5000] }
+      { frames: ['1-0', '1-1'], holds: [6000, 9000] }
     ];
     var NUM_SEQS = SEQ_CONFIG.length;
+    var timelineTerminal = false; // one-shot: true once Act 4 completes, resets on IO re-entry
 
     // === State ===
     var currentSeq = 0;
@@ -2994,11 +3079,21 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
 
     function resetSeq1Frame1() {
+      // Reset all steps to inactive (gray)
+      if (timelineSteps) timelineSteps.forEach(function(s) { s.classList.remove('active'); });
       if (confirmCard) { confirmCard.style.maxHeight = '0'; confirmCard.style.opacity = '0'; confirmCard.style.boxShadow = ''; confirmCard.style.animation = ''; }
       if (confirmDate) confirmDate.style.color = '#a0aeb5';
-      if (step3Circle) { step3Circle.style.background = '#f5f7f8'; step3Circle.style.borderColor = '#d1d5db'; }
-      if (step3Check) step3Check.style.opacity = '0';
-      if (stepperLine) stepperLine.style.height = '80px';
+      // Reset progress line to 0
+      if (stepperLine) {
+        stepperLine.style.transition = 'none';
+        stepperLine.style.height = '0px';
+        void stepperLine.offsetHeight;
+      }
+      // Reset CTA
+      if (addCta) {
+        addCta.classList.remove('visible', 'pressed', 'added');
+        addCta.textContent = 'Add to Home Record';
+      }
     }
 
     // === Frame animation functions ===
@@ -3059,22 +3154,119 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[0]);
     }
 
+    // Measure a step circle's y-position relative to the stepper container (for the line)
+    function getStepLineY(stepIdx) {
+      if (!timelineSteps || !timelineSteps[stepIdx] || !stepperContainer) return 0;
+      var stepRect = timelineSteps[stepIdx].getBoundingClientRect();
+      var containerRect = stepperContainer.getBoundingClientRect();
+      // Return y offset of circle center (10px = half of 20px circle)
+      return (stepRect.top + 10) - containerRect.top;
+    }
+
+    function activateStep(idx) {
+      if (!timelineSteps || !timelineSteps[idx]) return;
+      timelineSteps[idx].classList.add('active');
+    }
+
+    function setLineHeight(px, durationMs, easing) {
+      if (!stepperLine) return;
+      stepperLine.style.transition = 'height ' + durationMs + 'ms ' + (easing || 'cubic-bezier(0, 0, 0.2, 1)');
+      stepperLine.style.height = px + 'px';
+    }
+
     function animSeq1Frame1(onDone) {
       resetSeq1Frame1();
+
+      // Position line top at step 1's circle center, height 0
       addTimer(function() {
+        if (stepperLine && timelineSteps && timelineSteps[0]) {
+          var y0 = getStepLineY(0);
+          stepperLine.style.transition = 'none';
+          stepperLine.style.top = y0 + 'px';
+          stepperLine.style.height = '0px';
+          void stepperLine.offsetHeight;
+        }
+      }, 0);
+
+      // Helper: set line height to stretch from step 0 → step N's circle
+      function lineToStep(targetIdx, durationMs, easing) {
+        if (!timelineSteps[0] || !timelineSteps[targetIdx]) return;
+        var h = getStepLineY(targetIdx) - getStepLineY(0);
+        setLineHeight(Math.max(0, h), durationMs, easing);
+      }
+
+      // ═══════ ACT 1 — Setup (steady rhythm, ~500ms stagger, ease-out) ═══════
+
+      // Beat 1 at t=200: Issue Documented circle+check activates, line fills step 1→2
+      addTimer(function() {
+        activateStep(0);
+        lineToStep(1, 400, 'cubic-bezier(0, 0, 0.2, 1)');
+      }, 200);
+
+      // Beat 2 at t=700: Select Your Pro activates, line fills step 2→3
+      addTimer(function() {
+        activateStep(1);
+        lineToStep(2, 400, 'cubic-bezier(0, 0, 0.2, 1)');
+      }, 700);
+
+      // Beat 3 at t=1200: Service Date Confirmed activates + card expands + seal flash
+      // (Line does NOT grow during beat 3 — step 3→4 is Act 2's slow fill)
+      addTimer(function() {
+        activateStep(2);
         if (confirmCard) { confirmCard.style.maxHeight = '200px'; confirmCard.style.opacity = '1'; }
-        if (stepperLine) stepperLine.style.height = '180px';
-      }, 500);
-      addTimer(function() {
-        if (confirmCard) confirmCard.style.animation = 'hwcConfirmGlow 600ms ease';
         if (confirmDate) confirmDate.style.color = '#00A385';
-        addTimer(function() { if (confirmCard) confirmCard.style.animation = ''; }, 600);
-      }, 900);
+        addTimer(function() {
+          if (confirmCard) confirmCard.style.animation = 'hwcConfirmGlow 600ms ease';
+        }, 150);
+        addTimer(function() {
+          if (confirmCard) confirmCard.style.animation = '';
+        }, 850);
+      }, 1200);
+
+      // ═══════ ACT 2 — The Wait (slow linear line fill, breaks the rhythm) ═══════
+      // After beat 3 settles (~1700ms), crawl the line from step 3 → step 4 over 2500ms linear
       addTimer(function() {
-        if (step3Circle) { step3Circle.style.background = '#00A385'; step3Circle.style.borderColor = '#00A385'; }
-        if (step3Check) step3Check.style.opacity = '1';
-      }, 1500);
-      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
+        lineToStep(3, 2500, 'linear');
+      }, 1700);
+
+      // ═══════ ACT 3 — Payoff (tighter 300ms stagger, ease-out) ═══════
+
+      // Beat 5 at t=4200: Confirm Completion activates, line fills step 4→5
+      addTimer(function() {
+        activateStep(3);
+        lineToStep(4, 400, 'cubic-bezier(0, 0, 0.2, 1)');
+      }, 4200);
+
+      // Beat 6 at t=4500: Rate Your Pro activates (300ms stagger — momentum)
+      addTimer(function() {
+        activateStep(4);
+      }, 4500);
+
+      // ═══════ ACT 4 — The Action ═══════
+
+      // Beat 7 at t=5100: "Add to Home Record" CTA slides up (600ms after beat 6 starts)
+      addTimer(function() {
+        if (addCta) addCta.classList.add('visible');
+      }, 5100);
+
+      // Beat 8: Auto-tap the CTA at t=6800 (1700ms after it appears — viewer has time to read)
+      addTimer(function() {
+        if (addCta) addCta.classList.add('pressed');
+      }, 6800);
+      addTimer(function() {
+        if (addCta) {
+          addCta.classList.remove('pressed');
+          addCta.classList.add('added');
+          addCta.textContent = 'Added \u2713';
+        }
+      }, 6920);
+
+      // Mark terminal at t=7500
+      addTimer(function() {
+        timelineTerminal = true;
+      }, 7500);
+
+      // Do NOT call onDone — the timeline is terminal (one-shot).
     }
 
     var ANIM_FNS = {
@@ -3105,11 +3297,18 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (animFn) {
         animFn(function() {
           if (paused) return;
+          // Timeline (1-1) is terminal — do not advance past it
+          if (frameId === '1-1') return;
           var nextFrame = frameIdx + 1;
           if (nextFrame < config.frames.length) {
             playFrame(seqIdx, nextFrame);
           } else {
-            playSequence((seqIdx + 1) % NUM_SEQS);
+            // Advance to next sequence, but don't loop past seq 1 (which ends in 1-1)
+            var nextSeq = seqIdx + 1;
+            if (nextSeq < NUM_SEQS) {
+              playSequence(nextSeq);
+            }
+            // Else: stay on current final frame (1-1 handles its own terminal state)
           }
         });
       }
@@ -3162,13 +3361,25 @@ document.getElementById('banner-close').addEventListener('click', function() {
       return;
     }
 
-    // === IntersectionObserver ===
-    var started = false;
+    // === IntersectionObserver — play on entry, replay after scrolling away and back ===
+    var wasInView = false;
     var obs = new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting && !started) {
-        started = true;
+      var inView = entries[0].isIntersecting;
+      if (inView && !wasInView) {
+        // Entered view — start/restart the full sequence from the beginning
+        clearAllTimers();
+        paused = false;
+        timelineTerminal = false;
+        resetSeq0();
+        resetSeq1Frame0();
+        resetSeq1Frame1();
         playSequence(0);
+      } else if (!inView && wasInView) {
+        // Left view — pause and clear any running timers
+        paused = true;
+        clearAllTimers();
       }
+      wasInView = inView;
     }, { threshold: 0.3 });
     obs.observe(section);
   })();
@@ -3373,7 +3584,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <!-- Panel: Inventory -->
       <div class="so-tab-panel active" role="tabpanel" id="so-panel-inventory" aria-labelledby="so-tab-inventory">
         <div class="so-tab-card">
-          <h3>What you own, what it's worth.</h3>
+          <h3>Know what you own and what it's worth.</h3>
           <p class="so-body">Every item, document, and receipt. Organized by room, searchable instantly, and ready for insurance when you need it.</p>
           <div style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
