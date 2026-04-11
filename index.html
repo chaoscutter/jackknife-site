@@ -2530,16 +2530,17 @@ document.getElementById('banner-close').addEventListener('click', function() {
           <p class="hwc-eyebrow" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 10px 0;">Hire with Confidence</p>
 
           <!-- H1 rotator (swaps per sequence) -->
-          <div class="hwc-h1-wrap" style="position: relative; min-height: 92px; margin: 0 0 20px 0;">
+          <div class="hwc-h1-wrap" style="position: relative; height: 92px; margin: 0 0 20px 0; transition: height 600ms cubic-bezier(0.4, 0, 0.2, 1);">
             <h2 class="hwc-h1" data-hwcseqh1="0" style="position: absolute; top: 0; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Vetted by your street. Not an algorithm.</h2>
             <h2 class="hwc-h1" data-hwcseqh1="1" style="position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">No more phone tag.</h2>
+            <h2 class="hwc-h1" data-hwcseqh1="2" style="position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Every receipt is money at resale.</h2>
           </div>
 
           <!-- H2 subtitle rotator (swaps per sequence) -->
           <div class="hwc-h2-wrap" style="position: relative; height: 36px; width: 100%; margin: 0 0 20px 0;">
             <span class="hwc-title" data-hwcseqtitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Real Jobs. Real Reviews.</span>
             <span class="hwc-title" data-hwcseqtitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Track your project in real time.</span>
-            <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; display: none; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;"></span>
+            <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Your home's history, captured.</span>
           </div>
         </div>
 
@@ -2733,10 +2734,70 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     </div>
                   </div>
 
-                  <!-- Add to Home Record CTA (slides up after Act 3) -->
-                  <button class="hwc-add-cta" type="button" style="display: flex; align-items: center; justify-content: center; width: calc(100% + 32px); margin-left: -32px; margin-top: 4px; height: 44px; padding: 0 16px; background: #00A385; color: #ffffff; border: none; border-radius: 22px; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; opacity: 0; transform: translateY(20px); transition: opacity 400ms ease-out, transform 400ms ease-out, background 300ms ease-out;">
-                    Add to Home Record
+                  <!-- Save Project to Home History CTA (slides up after Act 3) -->
+                  <button class="hwc-add-cta" type="button" style="display: flex; align-items: center; justify-content: center; width: calc(100% + 32px); margin-left: -32px; margin-top: 28px; height: 44px; padding: 0 16px; background: #00A385; color: #ffffff; border: none; border-radius: 22px; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; opacity: 0; transform: translateY(20px); transition: opacity 400ms ease-out, transform 400ms ease-out, background 300ms ease-out;">
+                    Save project to home history
                   </button>
+                </div>
+              </div>
+
+              <!-- SEQUENCE 2, FRAME 0: Invoice Upload -->
+              <div data-hwcseqframe="2-0" style="position: absolute; inset: 0; opacity: 0; transform: translateY(12px); visibility: hidden; transition: opacity 1s ease, transform 1s ease; font-family: Montserrat, sans-serif; display: flex; flex-direction: column;">
+                <!-- Header bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border-bottom: 1px solid #e8edf0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7c85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <p style="font-size: 14px; font-weight: 500; color: #063340; margin: 0;">Home History &middot; Invoice</p>
+                  <div style="width: 16px;"></div>
+                </div>
+
+                <!-- Invoice stage -->
+                <div class="hwc-invoice-stage" style="position: relative; flex: 1; overflow: hidden; background: #f5f7f8;">
+
+                  <!-- Invoice card (holds the image, blur transitions from 24px -> 0) -->
+                  <div class="hwc-invoice-card" style="position: absolute; top: 16px; left: 16px; right: 16px; bottom: 76px; background: white; border-radius: 12px; box-shadow: 0 4px 16px rgba(6,51,64,0.08); overflow: hidden; opacity: 0; transform: scale(0.96); transition: opacity 500ms ease, transform 500ms ease;">
+                    <img class="hwc-invoice-img" src="images/north-shore-drywall-invoice.jpeg" alt="North Shore Drywall invoice receipt" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: blur(22px); transition: filter 900ms cubic-bezier(0.2, 0.8, 0.2, 1);" />
+
+                    <!-- Camera viewfinder overlay (brackets + vignette) -->
+                    <div class="hwc-camera-overlay" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 400ms ease;">
+                      <!-- Vignette to darken edges like a camera -->
+                      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.28) 100%);"></div>
+                      <!-- Four corner brackets -->
+                      <span class="hwc-vf-bracket hwc-vf-tl"></span>
+                      <span class="hwc-vf-bracket hwc-vf-tr"></span>
+                      <span class="hwc-vf-bracket hwc-vf-bl"></span>
+                      <span class="hwc-vf-bracket hwc-vf-br"></span>
+                      <!-- Focus ring pulse -->
+                      <div class="hwc-focus-ring" aria-hidden="true"></div>
+                    </div>
+
+                    <!-- Snap flash overlay -->
+                    <div class="hwc-snap-flash" aria-hidden="true" style="position: absolute; inset: 0; background: #ffffff; opacity: 0; pointer-events: none;"></div>
+                  </div>
+
+                  <!-- Upload-in-progress indicator (doc icon + pulsing green glow) -->
+                  <div class="hwc-upload-indicator" aria-hidden="true" style="position: absolute; top: 30px; right: 30px; width: 44px; height: 44px; border-radius: 50%; background: #0a4a5c; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8); transition: opacity 300ms ease, transform 300ms ease; z-index: 5; box-shadow: 0 4px 14px rgba(6,51,64,0.25);">
+                    <svg class="hwc-upload-doc" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: opacity 250ms ease;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                    <svg class="hwc-upload-check" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; opacity: 0; transition: opacity 250ms ease;"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+
+                  <!-- "Add Receipt" CTA (initial, before camera launches) -->
+                  <button class="hwc-invoice-cta" type="button" style="position: absolute; left: 16px; right: 16px; bottom: 20px; height: 48px; background: #00A385; color: #ffffff; border: none; border-radius: 24px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.2px; cursor: pointer; opacity: 0; transform: translateY(10px); transition: opacity 400ms ease, transform 400ms ease, background 250ms ease; z-index: 12; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 20px rgba(0,163,133,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 5l1.5-2h5L16 5"/></svg>
+                    Add Receipt
+                  </button>
+
+                  <!-- Success toast (slides up from bottom at the end) -->
+                  <div class="hwc-invoice-toast" aria-hidden="true" style="position: absolute; left: 12px; right: 12px; bottom: 14px; background: #ffffff; border-radius: 14px; padding: 14px 14px; box-shadow: 0 16px 36px rgba(6,51,64,0.22), 0 2px 8px rgba(6,51,64,0.08); opacity: 0; transform: translateY(140%); transition: opacity 400ms ease, transform 560ms cubic-bezier(0.2, 0.85, 0.25, 1); z-index: 18;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                      <div style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #e6f7f2; display: flex; align-items: center; justify-content: center;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <div style="flex: 1; min-width: 0;">
+                        <p style="font-size: 13px; font-weight: 700; color: #063340; margin: 0 0 4px 0; line-height: 1.3;">Added to your home history.</p>
+                        <p style="font-size: 11px; font-weight: 500; color: #6b7c85; margin: 0; line-height: 1.45;">Buyers, appraisers, and inspectors trust homes with real records. This one's yours now, saved for good.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -2749,7 +2810,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div style="display: flex; justify-content: center; gap: 8px; padding: 16px 0;">
         <div class="hwc-dot" data-hwcseqdot="0" style="width: 8px; height: 8px; border-radius: 50%; background: #00A385; transition: background 300ms ease; cursor: pointer;"></div>
         <div class="hwc-dot" data-hwcseqdot="1" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
-        <div class="hwc-dot" data-hwcseqdot="2" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer; display: none;"></div>
+        <div class="hwc-dot" data-hwcseqdot="2" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
       </div>
 
         </div><!-- end hwc-phone-col -->
@@ -2970,7 +3031,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       color: #00A385 !important;
     }
 
-    /* Add to Home Record CTA — appears, tap interaction, terminal added state */
+    /* Save project to home history CTA — appears, tap interaction, terminal added state */
     .hwc-add-cta.visible {
       opacity: 1 !important;
       transform: translateY(0) !important;
@@ -2988,6 +3049,106 @@ document.getElementById('banner-close').addEventListener('click', function() {
     @keyframes hwcCtaPulse {
       0%   { box-shadow: 0 0 0 0 rgba(0, 163, 133, 0.4); }
       100% { box-shadow: 0 0 0 8px rgba(0, 163, 133, 0); }
+    }
+
+    /* ============================================================ */
+    /* SEQUENCE 2 — Invoice upload flow                              */
+    /* ============================================================ */
+
+    /* Camera viewfinder corner brackets */
+    .hwc-vf-bracket {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 3px solid #ffffff;
+      pointer-events: none;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+    }
+    .hwc-vf-tl { top: 14px; left: 14px; border-right: none; border-bottom: none; border-top-left-radius: 4px; }
+    .hwc-vf-tr { top: 14px; right: 14px; border-left: none; border-bottom: none; border-top-right-radius: 4px; }
+    .hwc-vf-bl { bottom: 14px; left: 14px; border-right: none; border-top: none; border-bottom-left-radius: 4px; }
+    .hwc-vf-br { bottom: 14px; right: 14px; border-left: none; border-top: none; border-bottom-right-radius: 4px; }
+
+    /* Focus ring — sits center, pulses once when focus locks */
+    .hwc-focus-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 58px;
+      height: 58px;
+      margin: -29px 0 0 -29px;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      border-radius: 4px;
+      opacity: 0;
+      transform: scale(1.25);
+      transition: opacity 280ms ease, transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      filter: drop-shadow(0 0 6px rgba(0, 163, 133, 0.45));
+    }
+    .hwc-focus-ring.locked {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Snap flash — set .flashing to play the keyframe once */
+    .hwc-snap-flash.flashing {
+      animation: hwcSnapFlash 260ms ease-out forwards;
+    }
+    @keyframes hwcSnapFlash {
+      0%   { opacity: 0; }
+      18%  { opacity: 0.95; }
+      100% { opacity: 0; }
+    }
+
+    /* Upload indicator pulsing glow (in-progress state) */
+    .hwc-upload-indicator.uploading {
+      animation: hwcUploadPulse 1400ms ease-in-out infinite;
+    }
+    @keyframes hwcUploadPulse {
+      0%, 100% { box-shadow: 0 4px 14px rgba(6,51,64,0.25), 0 0 0 0 rgba(0, 163, 133, 0.55); }
+      50%      { box-shadow: 0 4px 14px rgba(6,51,64,0.25), 0 0 0 12px rgba(0, 163, 133, 0); }
+    }
+
+    /* Visible state for the upload indicator (fades/scales in) */
+    .hwc-upload-indicator.visible {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    /* Upload complete — swap doc for check */
+    .hwc-upload-indicator.complete {
+      background: #00A385 !important;
+    }
+    .hwc-upload-indicator.complete .hwc-upload-doc { opacity: 0; }
+    .hwc-upload-indicator.complete .hwc-upload-check { opacity: 1; }
+
+    /* Invoice card visible state */
+    .hwc-invoice-card.visible {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    /* Invoice image focused state — blur drops to 0 */
+    .hwc-invoice-img.focused {
+      filter: blur(0) !important;
+    }
+
+    /* Camera overlay visible state */
+    .hwc-camera-overlay.visible {
+      opacity: 1 !important;
+    }
+
+    /* Invoice CTA visible state */
+    .hwc-invoice-cta.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .hwc-invoice-cta.pressed {
+      transform: translateY(0) scale(0.96) !important;
+      transition: transform 120ms ease-out, background 200ms ease-out !important;
+    }
+
+    /* Success toast visible state */
+    .hwc-invoice-toast.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
 
     /* Detail text crossfade positioning */
@@ -3034,11 +3195,22 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var confirmDate = section.querySelector('.hwc-confirm-date');
     var addCta = section.querySelector('.hwc-add-cta');
 
+    // Seq 2, Frame 0 refs (Invoice upload)
+    var invoiceCard      = section.querySelector('.hwc-invoice-card');
+    var invoiceImg       = section.querySelector('.hwc-invoice-img');
+    var cameraOverlay    = section.querySelector('.hwc-camera-overlay');
+    var focusRing        = section.querySelector('.hwc-focus-ring');
+    var snapFlash        = section.querySelector('.hwc-snap-flash');
+    var uploadIndicator  = section.querySelector('.hwc-upload-indicator');
+    var invoiceCta       = section.querySelector('.hwc-invoice-cta');
+    var invoiceToast     = section.querySelector('.hwc-invoice-toast');
+
     // === Constants ===
     var CROSSFADE = 1000;
     var SEQ_CONFIG = [
       { frames: ['0-0'], holds: [7000] },
-      { frames: ['1-0', '1-1'], holds: [6000, 9000] }
+      { frames: ['1-0', '1-1'], holds: [6000, 9000] },
+      { frames: ['2-0'], holds: [12000] }
     ];
     var NUM_SEQS = SEQ_CONFIG.length;
     var timelineTerminal = false; // one-shot: true once Act 4 completes, resets on IO re-entry
@@ -3082,7 +3254,24 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
 
     // === Sequence-level UI ===
+    var h1Wrap = section.querySelector('.hwc-h1-wrap');
     function updateSeqUI(seqIdx) {
+      // Size the H1 wrap to match the active H1's natural height so that
+      // short rotating variants don't leave dead vertical space above the H2.
+      if (h1Wrap && h1s[seqIdx]) {
+        var activeH1 = h1s[seqIdx];
+        // Temporarily force visibility to measure natural height.
+        var prevVis = activeH1.style.visibility;
+        var prevOpacity = activeH1.style.opacity;
+        activeH1.style.visibility = 'hidden';
+        activeH1.style.opacity = '0';
+        activeH1.style.position = 'static';
+        var naturalH = activeH1.offsetHeight;
+        activeH1.style.position = 'absolute';
+        activeH1.style.visibility = prevVis;
+        activeH1.style.opacity = prevOpacity;
+        if (naturalH > 0) h1Wrap.style.height = naturalH + 'px';
+      }
       h1s.forEach(function(h, j) {
         h.style.opacity = j === seqIdx ? '1' : '0';
       });
@@ -3135,7 +3324,34 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // Reset CTA
       if (addCta) {
         addCta.classList.remove('visible', 'pressed', 'added');
-        addCta.textContent = 'Add to Home Record';
+        addCta.textContent = 'Save project to home history';
+      }
+    }
+
+    function resetSeq2Frame0() {
+      if (invoiceCard) {
+        invoiceCard.classList.remove('visible');
+      }
+      if (invoiceImg) {
+        invoiceImg.classList.remove('focused');
+      }
+      if (cameraOverlay) {
+        cameraOverlay.classList.remove('visible');
+      }
+      if (focusRing) {
+        focusRing.classList.remove('locked');
+      }
+      if (snapFlash) {
+        snapFlash.classList.remove('flashing');
+      }
+      if (uploadIndicator) {
+        uploadIndicator.classList.remove('visible', 'uploading', 'complete');
+      }
+      if (invoiceCta) {
+        invoiceCta.classList.remove('visible', 'pressed');
+      }
+      if (invoiceToast) {
+        invoiceToast.classList.remove('visible');
       }
     }
 
@@ -3308,7 +3524,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
       // ═══════ ACT 4 — The Action ═══════
 
-      // Beat 7 at t=5100: "Add to Home Record" CTA slides up (600ms after beat 6 starts)
+      // Beat 7 at t=5100: "Save project to home history" CTA slides up (600ms after beat 6 starts)
       addTimer(function() {
         if (addCta) addCta.classList.add('visible');
       }, 5100);
@@ -3330,13 +3546,93 @@ document.getElementById('banner-close').addEventListener('click', function() {
         timelineTerminal = true;
       }, 7500);
 
-      // Do NOT call onDone — the timeline is terminal (one-shot).
+      // Give the "Added ✓" state breathing room, then advance to Seq 2.
+      if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
+    }
+
+    function animSeq2Frame0(onDone) {
+      resetSeq2Frame0();
+
+      // Pre-stage the invoice card + image so focus pull has something to reveal.
+      // Card fades in simultaneously with the CTA — the blurred image is visible
+      // behind it to make the camera moment feel grounded.
+      addTimer(function() {
+        if (invoiceCard) invoiceCard.classList.add('visible');
+      }, 400);
+
+      // t=800ms: "Add Receipt" CTA fades/slides in
+      addTimer(function() {
+        if (invoiceCta) invoiceCta.classList.add('visible');
+      }, 800);
+
+      // t=2100ms: Auto-tap press state
+      addTimer(function() {
+        if (invoiceCta) invoiceCta.classList.add('pressed');
+      }, 2100);
+
+      // t=2280ms: Release + hide CTA, reveal camera viewfinder
+      addTimer(function() {
+        if (invoiceCta) {
+          invoiceCta.classList.remove('pressed');
+          invoiceCta.classList.remove('visible');
+        }
+        if (cameraOverlay) cameraOverlay.classList.add('visible');
+      }, 2280);
+
+      // t=3100ms: Focus pulls — blur animates from 22px -> 0 (900ms ease per CSS)
+      addTimer(function() {
+        if (invoiceImg) invoiceImg.classList.add('focused');
+      }, 3100);
+
+      // t=3600ms: Focus ring locks in (pulse to full size)
+      addTimer(function() {
+        if (focusRing) focusRing.classList.add('locked');
+      }, 3600);
+
+      // t=4200ms: Snap flash fires
+      addTimer(function() {
+        if (snapFlash) {
+          snapFlash.classList.remove('flashing');
+          void snapFlash.offsetWidth; // reflow to allow re-play
+          snapFlash.classList.add('flashing');
+        }
+      }, 4200);
+
+      // t=4500ms: Camera overlay fades out, exposing the captured invoice
+      addTimer(function() {
+        if (cameraOverlay) cameraOverlay.classList.remove('visible');
+        if (focusRing) focusRing.classList.remove('locked');
+      }, 4500);
+
+      // t=4850ms: Upload indicator appears with pulsing glow
+      addTimer(function() {
+        if (uploadIndicator) {
+          uploadIndicator.classList.add('visible', 'uploading');
+        }
+      }, 4850);
+
+      // t=6600ms: Upload completes — doc icon swaps to check, pulse stops
+      addTimer(function() {
+        if (uploadIndicator) {
+          uploadIndicator.classList.remove('uploading');
+          uploadIndicator.classList.add('complete');
+        }
+      }, 6600);
+
+      // t=7000ms: Success toast slides up from bottom
+      addTimer(function() {
+        if (invoiceToast) invoiceToast.classList.add('visible');
+      }, 7000);
+
+      // Do NOT call onDone — Seq 2 Frame 0 is the new terminal state.
+      // Viewer scrolling away and returning triggers a full replay via IO.
     }
 
     var ANIM_FNS = {
       '0-0': animSeq0Frame0,
       '1-0': animSeq1Frame0,
-      '1-1': animSeq1Frame1
+      '1-1': animSeq1Frame1,
+      '2-0': animSeq2Frame0
     };
 
     // === Main playback ===
@@ -3361,18 +3657,17 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (animFn) {
         animFn(function() {
           if (paused) return;
-          // Timeline (1-1) is terminal — do not advance past it
-          if (frameId === '1-1') return;
           var nextFrame = frameIdx + 1;
           if (nextFrame < config.frames.length) {
             playFrame(seqIdx, nextFrame);
           } else {
-            // Advance to next sequence, but don't loop past seq 1 (which ends in 1-1)
+            // Advance to next sequence. Seq 2 (frame 2-0) is terminal — its
+            // animFn never calls onDone, so playback stops there until the
+            // viewer scrolls away and back (IO replays from seq 0).
             var nextSeq = seqIdx + 1;
             if (nextSeq < NUM_SEQS) {
               playSequence(nextSeq);
             }
-            // Else: stay on current final frame (1-1 handles its own terminal state)
           }
         });
       }
@@ -3387,6 +3682,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
           resetSeq0();
           resetSeq1Frame0();
           resetSeq1Frame1();
+          resetSeq2Frame0();
           playSequence(target);
         }
       });
@@ -3413,12 +3709,14 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
     // === Reduced motion ===
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      resetSeq1Frame1();
-      showFrameEl('1-1');
-      updateSeqUI(1);
-      // Activate every step so cards and circles show their full-strength state
-      if (timelineSteps) timelineSteps.forEach(function(s) { s.classList.add('active'); });
-      if (stepperLine) stepperLine.style.height = '180px';
+      resetSeq2Frame0();
+      showFrameEl('2-0');
+      updateSeqUI(2);
+      // Jump Seq 2 to its final rest state: invoice focused, upload complete, toast visible.
+      if (invoiceCard)      invoiceCard.classList.add('visible');
+      if (invoiceImg)       invoiceImg.classList.add('focused');
+      if (uploadIndicator)  uploadIndicator.classList.add('visible', 'complete');
+      if (invoiceToast)     invoiceToast.classList.add('visible');
       paused = true;
       return;
     }
@@ -3435,6 +3733,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         resetSeq0();
         resetSeq1Frame0();
         resetSeq1Frame1();
+        resetSeq2Frame0();
         playSequence(0);
       } else if (!inView && wasInView) {
         // Left view — pause and clear any running timers
@@ -3523,7 +3822,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">INVENTORY</p>
+                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">INVENTORY</p>
                   <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">🔥</div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Water Heater</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$1,200 · Good</p></div>
@@ -3533,8 +3832,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">HVAC System</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$4,800 · Good</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">🧊</div>
+                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Refrigerator</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$2,400 · Good</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">🏠</div>
-                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$12,000 · Fair</p></div>
+                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$14,000 · Fair</p></div>
                   </div>
                   <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; color: white;">
                     <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
@@ -3562,14 +3865,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">PROJECTS</p>
-                  <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Bathroom Reno</p>
-                      <span style="background: rgba(0,163,133,0.1); color: #00A385; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Active</span>
-                    </div>
-                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$4,200–$5,800 · 65%</p>
-                  </div>
+                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">PROJECTS</p>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -3577,12 +3873,26 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     </div>
                     <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$800–$1,200 · High priority</p>
                   </div>
+                  <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Gutter Cleaning</p>
+                      <span style="background: rgba(180,83,9,0.1); color: #b45309; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Planned</span>
+                    </div>
+                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$150–$250 · Seasonal</p>
+                  </div>
+                  <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Dryer Vent Cleaning</p>
+                      <span style="background: rgba(180,83,9,0.1); color: #b45309; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Planned</span>
+                    </div>
+                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$90–$150 · High priority</p>
+                  </div>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Window Replace</p>
+                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Replace Doorbell</p>
                       <span style="background: rgba(107,124,133,0.1); color: #6b7c85; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Estimate</span>
                     </div>
-                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">3 windows · Medium priority</p>
+                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$80–$250 · Low priority</p>
                   </div>
                 </div>
               </div>
@@ -3656,7 +3966,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">INVENTORY</p>
+                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">INVENTORY</p>
                   <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x1F525;</div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Water Heater</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$1,200 &middot; Good</p></div>
@@ -3666,8 +3976,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">HVAC System</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$4,800 &middot; Good</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x1F9CA;</div>
+                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Refrigerator</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$2,400 &middot; Good</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x1F3E0;</div>
-                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$12,000 &middot; Fair</p></div>
+                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$14,000 &middot; Fair</p></div>
                   </div>
                   <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; color: white;">
                     <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
@@ -3694,14 +4008,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">PROJECTS</p>
-                  <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Bathroom Reno</p>
-                      <span style="background: rgba(0,163,133,0.1); color: #00A385; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Active</span>
-                    </div>
-                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$4,200&ndash;$5,800 &middot; 65%</p>
-                  </div>
+                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">PROJECTS</p>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -3709,12 +4016,26 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     </div>
                     <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$800&ndash;$1,200 &middot; High priority</p>
                   </div>
+                  <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Gutter Cleaning</p>
+                      <span style="background: rgba(180,83,9,0.1); color: #b45309; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Planned</span>
+                    </div>
+                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$150&ndash;$250 &middot; Seasonal</p>
+                  </div>
+                  <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Dryer Vent Cleaning</p>
+                      <span style="background: rgba(180,83,9,0.1); color: #b45309; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Planned</span>
+                    </div>
+                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$90&ndash;$150 &middot; High priority</p>
+                  </div>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Window Replace</p>
+                      <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Replace Doorbell</p>
                       <span style="background: rgba(107,124,133,0.1); color: #6b7c85; font-size: 7px; font-weight: 700; padding: 3px 6px; border-radius: 4px;">Estimate</span>
                     </div>
-                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">3 windows &middot; Medium priority</p>
+                    <p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$80&ndash;$250 &middot; Low priority</p>
                   </div>
                 </div>
               </div>
