@@ -2417,15 +2417,16 @@ document.getElementById('banner-close').addEventListener('click', function() {
       }
     }
 
-    // Clickable dots — jump to step + pause briefly
+    // Clickable dots — jump to step and play through
     dots.forEach(function(d) {
       d.addEventListener('click', function(e) {
         e.stopPropagation();
         var target = parseInt(d.getAttribute('data-dot'));
-        pauseCarousel();
-        showStep(target, true);
+        clearTimeout(timer);
         clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(resumeCarousel, PAUSE_RESUME_DELAY);
+        paused = false;
+        dots.forEach(function(dd) { dd.style.opacity = '1'; });
+        showStep(target);
       });
     });
 
@@ -2483,10 +2484,11 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
         if (isSwiping && Math.abs(dx) > SWIPE_THRESHOLD && dt < SWIPE_MAX_TIME) {
           var target = dx < 0 ? (idx + 1) % 3 : (idx - 1 + 3) % 3;
-          pauseCarousel();
-          showStep(target, true);
+          clearTimeout(timer);
           clearTimeout(resumeTimer);
-          resumeTimer = setTimeout(resumeCarousel, PAUSE_RESUME_DELAY);
+          paused = false;
+          dots.forEach(function(dd) { dd.style.opacity = '1'; });
+          showStep(target);
           var hint = section.querySelector('.sw-swipe-hint');
           if (hint) hint.style.opacity = '0';
         } else if (!isSwiping) {
@@ -2817,15 +2819,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
                   <!-- Success toast (slides up from bottom at the end) -->
                   <div class="hwc-invoice-toast" aria-hidden="true" style="position: absolute; left: 10px; right: 10px; bottom: 12px; background: #ffffff; border-radius: 16px; padding: 16px 16px; box-shadow: 0 16px 36px rgba(6,51,64,0.22), 0 2px 8px rgba(6,51,64,0.08); opacity: 0; transform: translateY(140%); transition: opacity 400ms ease, transform 560ms cubic-bezier(0.2, 0.85, 0.25, 1); z-index: 18;">
-                    <div style="display: flex; align-items: flex-start; gap: 12px;">
-                      <div style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: #e6f7f2; display: flex; align-items: center; justify-content: center;">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00A385" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      </div>
-                      <div style="flex: 1; min-width: 0;">
-                        <p style="font-size: 15px; font-weight: 800; color: #063340; margin: 0 0 4px 0; line-height: 1.25; font-family: Montserrat, sans-serif;">Saved to your home record.</p>
-                        <p style="font-size: 12px; font-weight: 500; color: #4a6a75; margin: 0; line-height: 1.4;">This receipt builds your home's resale story. Buyers and appraisers trust documented repairs.</p>
-                      </div>
-                    </div>
+                    <p style="font-size: 15px; font-weight: 800; color: #063340; margin: 0 0 5px 0; line-height: 1.25; font-family: Montserrat, sans-serif;">Saved to your home record.</p>
+                    <p style="font-size: 14px; font-weight: 500; color: #4a6a75; margin: 0; line-height: 1.4;">This receipt builds your home's resale story. Buyers and appraisers trust documented repairs.</p>
                   </div>
                 </div>
               </div>
@@ -3345,6 +3340,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var currentFrame = 0;
     var paused = false;
     var allTimers = [];
+    var userClicked = false;
 
     // === Timer management ===
     function clearAllTimers() {
@@ -3612,6 +3608,16 @@ document.getElementById('banner-close').addEventListener('click', function() {
       stepperLine.style.height = px + 'px';
     }
 
+    // Helper: activate a step and play the glow animation on its card
+    function activateStepWithGlow(idx) {
+      activateStep(idx);
+      var card = timelineSteps[idx] && timelineSteps[idx].querySelector('.hwc-step-card');
+      if (card) {
+        addTimer(function() { card.style.animation = 'hwcConfirmGlow 600ms ease'; }, 150);
+        addTimer(function() { card.style.animation = ''; }, 850);
+      }
+    }
+
     function animSeq1Frame1(onDone) {
       resetSeq1Frame1();
 
@@ -3627,82 +3633,68 @@ document.getElementById('banner-close').addEventListener('click', function() {
       }, 0);
 
       // Helper: set line height to stretch from step 0 → step N's circle
-      function lineToStep(targetIdx, durationMs, easing) {
+      function lineToStep(targetIdx, durationMs) {
         if (!timelineSteps[0] || !timelineSteps[targetIdx]) return;
         var h = getStepLineY(targetIdx) - getStepLineY(0);
-        setLineHeight(Math.max(0, h), durationMs, easing);
+        setLineHeight(Math.max(0, h), durationMs, 'linear');
       }
 
-      // ═══════ ACT 1 — Setup (steady rhythm, ~500ms stagger, ease-out) ═══════
+      // ═══════ UNIFORM PACING — ~900ms stagger, linear line, glow on every card ═══════
 
-      // Beat 1 at t=200: Issue Documented circle+check activates, line fills step 1→2
+      // Step 0 at t=200: Issue Documented activates + glow, line to step 1
       addTimer(function() {
-        activateStep(0);
-        lineToStep(1, 400, 'cubic-bezier(0, 0, 0.2, 1)');
+        activateStepWithGlow(0);
+        lineToStep(1, 700);
       }, 200);
 
-      // Beat 2 at t=700: Select Your Pro activates, line fills step 2→3
+      // Step 1 at t=1100: Select Your Pro activates + glow, line to step 2
       addTimer(function() {
-        activateStep(1);
-        lineToStep(2, 400, 'cubic-bezier(0, 0, 0.2, 1)');
-      }, 700);
+        activateStepWithGlow(1);
+        lineToStep(2, 700);
+      }, 1100);
 
-      // Beat 3 at t=1200: Service Date Confirmed activates + seal flash on the card
-      // (Line does NOT grow during beat 3 — step 3→4 is Act 2's slow fill)
+      // Step 2 at t=2000: Service Date Confirmed activates + glow, line to step 3
       addTimer(function() {
-        activateStep(2);
-        addTimer(function() {
-          if (confirmCard) confirmCard.style.animation = 'hwcConfirmGlow 600ms ease';
-        }, 150);
-        addTimer(function() {
-          if (confirmCard) confirmCard.style.animation = '';
-        }, 850);
-      }, 1200);
+        activateStepWithGlow(2);
+        lineToStep(3, 700);
+      }, 2000);
 
-      // ═══════ ACT 2 — The Wait (slow linear line fill, breaks the rhythm) ═══════
-      // After beat 3 settles (~1700ms), crawl the line from step 3 → step 4 over 2500ms linear
+      // Step 3 at t=2900: Confirm Completion activates + glow, line to step 4
       addTimer(function() {
-        lineToStep(3, 2500, 'linear');
-      }, 1700);
+        activateStepWithGlow(3);
+        lineToStep(4, 700);
+      }, 2900);
 
-      // ═══════ ACT 3 — Payoff (tighter 300ms stagger, ease-out) ═══════
-
-      // Beat 5 at t=4200: Confirm Completion activates, line fills step 4→5
+      // Step 4 at t=3800: Rate Your Pro activates + glow
       addTimer(function() {
-        activateStep(3);
-        lineToStep(4, 400, 'cubic-bezier(0, 0, 0.2, 1)');
-      }, 4200);
+        activateStepWithGlow(4);
+      }, 3800);
 
-      // Beat 6 at t=4500: Rate Your Pro activates (300ms stagger — momentum)
-      addTimer(function() {
-        activateStep(4);
-      }, 4500);
+      // ═══════ CTA ═══════
 
-      // ═══════ ACT 4 — The Action ═══════
-
-      // Beat 7 at t=5100: "Save project to home history" CTA slides up (600ms after beat 6 starts)
+      // t=4400: "Save project to home history" CTA slides up
       addTimer(function() {
         if (addCta) addCta.classList.add('visible');
-      }, 5100);
+      }, 4400);
 
-      // Beat 8: Auto-tap the CTA at t=6800 (1700ms after it appears — viewer has time to read)
+      // t=6100: Auto-tap the CTA
       addTimer(function() {
         if (addCta) addCta.classList.add('pressed');
-      }, 6800);
+      }, 6100);
       addTimer(function() {
         if (addCta) {
           addCta.classList.remove('pressed');
           addCta.classList.add('added');
           addCta.textContent = 'Added \u2713';
         }
-      }, 6920);
+      }, 6220);
 
-      // Mark terminal at t=7500
+      // Mark terminal at t=6800
       addTimer(function() {
         timelineTerminal = true;
-      }, 7500);
+      }, 6800);
 
-      // Give the "Added ✓" state breathing room, then advance to Seq 2.
+      // Advance to Seq 2
       if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
     }
 
@@ -3834,22 +3826,54 @@ document.getElementById('banner-close').addEventListener('click', function() {
       d.addEventListener('click', function(e) {
         e.stopPropagation();
         var target = parseInt(d.getAttribute('data-hwcseqdot'));
-        if (target !== currentSeq) {
-          resetSeq0();
-          resetSeq1Frame0();
-          resetSeq1Frame1();
-          resetSeq2Frame0();
-          playSequence(target);
-        }
+        clearAllTimers();
+        paused = false;
+        userClicked = true;
+        resetSeq0();
+        resetSeq1Frame0();
+        resetSeq1Frame1();
+        resetSeq2Frame0();
+        playSequence(target);
       });
     });
 
+    // === Mobile swipe detection ===
+    var phoneCol = section.querySelector('.hwc-phone-col');
+    if (phoneCol) {
+      var swTouchStartX = 0, swTouchStartY = 0, swTouchStartTime = 0, swIsSwiping = false;
+      phoneCol.addEventListener('touchstart', function(e) {
+        if (e.target.classList.contains('hwc-dot')) return;
+        swTouchStartX = e.touches[0].clientX;
+        swTouchStartY = e.touches[0].clientY;
+        swTouchStartTime = Date.now();
+        swIsSwiping = false;
+      }, { passive: true });
+      phoneCol.addEventListener('touchmove', function(e) {
+        var dx = Math.abs(e.touches[0].clientX - swTouchStartX);
+        var dy = Math.abs(e.touches[0].clientY - swTouchStartY);
+        if (dx > 10 && dx > dy) { swIsSwiping = true; e.preventDefault(); }
+      }, { passive: false });
+      phoneCol.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - swTouchStartX;
+        var dt = Date.now() - swTouchStartTime;
+        if (swIsSwiping && Math.abs(dx) > 50 && dt < 600) {
+          var target = dx < 0 ? (currentSeq + 1) % NUM_SEQS : (currentSeq - 1 + NUM_SEQS) % NUM_SEQS;
+          clearAllTimers();
+          paused = false;
+          resetSeq0(); resetSeq1Frame0(); resetSeq1Frame1(); resetSeq2Frame0();
+          playSequence(target);
+        }
+      }, { passive: true });
+    }
+
     // === Hover pause/resume ===
     section.addEventListener('mouseenter', function() {
+      if (userClicked) return;
       paused = true;
       clearAllTimers();
     });
     section.addEventListener('mouseleave', function() {
+      if (userClicked) { userClicked = false; return; }
       paused = false;
       var config = SEQ_CONFIG[currentSeq];
       var remaining = config.holds[currentFrame];
