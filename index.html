@@ -564,6 +564,24 @@
     max-width: 360px;
   }
 
+  /* Stay Organized phone mockups — fade bottom into card background so the
+     cutoff reads as "fades into more" rather than "chopped off". Card bg is
+     #f0f8fa (.so-tab-card and the desktop grid card containers). */
+  .so-phone-wrap {
+    position: relative;
+  }
+  .so-phone-wrap::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 64px;
+    background: linear-gradient(to bottom, rgba(240, 248, 250, 0) 0%, rgba(240, 248, 250, 1) 85%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
   /* ===== 3D Phone Perspective & Floating Badges ===== */
   .phone-3d-scene {
     position: relative;
@@ -2618,6 +2636,17 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div class="hwc-shimmer" style="position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0;">
                   <div class="hwc-shimmer-line" style="position: absolute; left: 0; right: 0; height: 50px; top: -50px; background: linear-gradient(180deg, rgba(0,163,133,0) 0%, rgba(0,163,133,0.08) 35%, rgba(0,163,133,0.14) 50%, rgba(0,163,133,0.08) 65%, rgba(0,163,133,0) 100%);"></div>
                 </div>
+                <!-- Confirmation popup overlay (appears after card selection) -->
+                <div class="hwc-confirm-popup" aria-hidden="true">
+                  <div class="hwc-confirm-backdrop"></div>
+                  <div class="hwc-confirm-sheet">
+                    <p class="hwc-confirm-title">Hire North Shore Drywall &amp; Paint?</p>
+                    <p class="hwc-confirm-sub">We'll send them the job details and notify you when they reply.</p>
+                    <button class="hwc-confirm-btn hwc-confirm-btn--primary" type="button">Send Job Request</button>
+                    <button class="hwc-confirm-btn" type="button">Review Job Info</button>
+                    <button class="hwc-confirm-btn hwc-confirm-btn--cancel" type="button">Back to Pros List</button>
+                  </div>
+                </div>
               </div>
 
               <!-- SEQUENCE 1, FRAME 0: Messaging -->
@@ -2658,10 +2687,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     </div>
                   </div>
 
-                  <!-- Message 4: Homeowner -->
+                  <!-- Message 4: Homeowner (typed out live) -->
                   <div class="hwc-msg-row hwc-msg-right" style="display: flex; justify-content: flex-end; opacity: 0;">
                     <div style="max-width: 85%;">
-                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;">Works for me, see you Monday!</div>
+                      <div class="hwc-msg-bubble hwc-msg-homeowner" style="background: #00A385; color: #ffffff; padding: 11px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif; min-height: 20px;"><span class="hwc-msg-text" data-fulltext="Works for me, see you Monday!"></span></div>
                     </div>
                   </div>
                 </div>
@@ -2884,6 +2913,121 @@ document.getElementById('banner-close').addEventListener('click', function() {
       .hwc-trust-line.sweeping::after {
         animation: none !important;
       }
+    }
+
+    /* === H1/H2 wrap grid-stacking (responsive crossfade, no fixed heights) === */
+    .hwc-h1-wrap {
+      display: grid !important;
+      height: auto !important;
+      min-height: 92px;
+      transition: none !important;
+    }
+    .hwc-h1-wrap .hwc-h1 {
+      grid-column: 1;
+      grid-row: 1;
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+    }
+    .hwc-h2-wrap {
+      display: grid;
+      height: auto !important;
+      min-height: 36px;
+    }
+    .hwc-h2-wrap .hwc-title {
+      grid-column: 1;
+      grid-row: 1;
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+    }
+
+    /* === Confirmation popup (appears over pro list after card selection) === */
+    .hwc-confirm-popup {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease;
+      z-index: 5;
+    }
+    .hwc-confirm-popup.visible {
+      opacity: 1;
+    }
+    .hwc-confirm-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 51, 64, 0.55);
+      opacity: 0;
+      transition: opacity 450ms ease;
+    }
+    .hwc-confirm-popup.visible .hwc-confirm-backdrop {
+      opacity: 1;
+    }
+    .hwc-confirm-sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #ffffff;
+      border-radius: 18px 18px 0 0;
+      padding: 18px 14px 16px;
+      box-shadow: 0 -8px 24px rgba(6, 51, 64, 0.18);
+      transform: translateY(100%);
+      transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .hwc-confirm-popup.visible .hwc-confirm-sheet {
+      transform: translateY(0);
+    }
+    .hwc-confirm-title {
+      font-family: Montserrat, sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #063340;
+      margin: 0 0 4px 0;
+      text-align: center;
+    }
+    .hwc-confirm-sub {
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      color: #6b7c85;
+      margin: 0 0 14px 0;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .hwc-confirm-btn {
+      display: block;
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid #e8edf0;
+      color: #063340;
+      border-radius: 12px;
+      height: 42px;
+      font-family: Montserrat, sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition:
+        background 250ms ease,
+        border-color 250ms ease,
+        color 250ms ease,
+        transform 150ms ease;
+    }
+    .hwc-confirm-btn--cancel {
+      margin-top: 6px;
+      margin-bottom: 0;
+      border-color: transparent;
+      color: #6b7c85;
+    }
+    .hwc-confirm-btn--primary.selected {
+      background: #00A385;
+      border-color: #00A385;
+      color: #ffffff;
+      transform: scale(0.98);
+      box-shadow: 0 4px 14px rgba(0, 163, 133, 0.3);
     }
 
     /* === Pro card selection states === */
@@ -3182,6 +3326,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var shimmerLine = section.querySelector('.hwc-shimmer-line');
     var trustLines = section.querySelectorAll('[data-hwcseqframe="0-0"] .hwc-trust-line');
     var proCards = section.querySelectorAll('[data-hwcseqframe="0-0"] .hwc-pro-card');
+    var confirmPopup = section.querySelector('.hwc-confirm-popup');
+    var confirmPrimaryBtn = section.querySelector('.hwc-confirm-btn--primary');
 
     // Seq 1, Frame 0 refs (Messaging)
     var msgThread = section.querySelector('.hwc-msg-thread');
@@ -3208,7 +3354,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     // === Constants ===
     var CROSSFADE = 1000;
     var SEQ_CONFIG = [
-      { frames: ['0-0'], holds: [7000] },
+      { frames: ['0-0'], holds: [6500] },
       { frames: ['1-0', '1-1'], holds: [6000, 9000] },
       { frames: ['2-0'], holds: [12000] }
     ];
@@ -3298,6 +3444,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (proCards) proCards.forEach(function(card) {
         card.classList.remove('pressing', 'selected', 'dimmed');
       });
+      // Clear confirmation popup state so it can re-fire on next loop
+      if (confirmPopup) confirmPopup.classList.remove('visible');
+      if (confirmPrimaryBtn) confirmPrimaryBtn.classList.remove('selected');
     }
 
     function resetSeq1Frame0() {
@@ -3401,7 +3550,27 @@ document.getElementById('banner-close').addEventListener('click', function() {
           }
         }, 2920);
       }
+      // t=3500ms: Confirmation popup slides up from bottom
+      addTimer(function() {
+        if (confirmPopup) confirmPopup.classList.add('visible');
+      }, 3500);
+      // t=4700ms: "Send Job Request" auto-taps — button transitions white -> green
+      addTimer(function() {
+        if (confirmPrimaryBtn) confirmPrimaryBtn.classList.add('selected');
+      }, 4700);
       if (!paused) addTimer(onDone, SEQ_CONFIG[0].holds[0]);
+    }
+
+    function typewriter(el, text, perCharMs) {
+      if (!el) return;
+      var i = 0;
+      function tick() {
+        if (paused) return;
+        i++;
+        el.textContent = text.slice(0, i);
+        if (i < text.length) addTimer(tick, perCharMs);
+      }
+      addTimer(tick, 0);
     }
 
     function animSeq1Frame0(onDone) {
@@ -3412,10 +3581,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
       var msg4 = msgRows[3];
       var text1 = msg1 ? msg1.querySelector('.hwc-msg-text') : null;
       var text3 = msg3 ? msg3.querySelector('.hwc-msg-text') : null;
+      var text4 = msg4 ? msg4.querySelector('.hwc-msg-text') : null;
 
-      // Populate all message text up front — no typewriter
+      // Populate contractor bubbles (msg1, msg3) up front — they fade up instantly
       if (text1) text1.textContent = text1.getAttribute('data-fulltext') || '';
       if (text3) text3.textContent = text3.getAttribute('data-fulltext') || '';
+      // Leave msg4 (homeowner's final reply) empty — it will type out live
 
       // Ensure each row has the fade-up transition and starting transform
       msgRows.forEach(function(row) {
@@ -3423,13 +3594,19 @@ document.getElementById('banner-close').addEventListener('click', function() {
         row.style.transform = 'translateY(8px)';
       });
 
-      // Unison fade-up — all four messages appear together for easier reading
+      // Unison fade-up — messages 1-3 appear together. Msg 4 bubble shell
+      // fades up empty and the text types out live starting at t=1500ms.
       addTimer(function() {
         if (msg1) { msg1.style.opacity = '1'; msg1.style.transform = 'translateY(0)'; }
         if (msg2) { msg2.style.opacity = '1'; msg2.style.transform = 'translateY(0)'; }
         if (msg3) { msg3.style.opacity = '1'; msg3.style.transform = 'translateY(0)'; }
         if (msg4) { msg4.style.opacity = '1'; msg4.style.transform = 'translateY(0)'; }
       }, 800);
+
+      // t=1500ms: start typing the homeowner's final reply character-by-character
+      addTimer(function() {
+        if (text4) typewriter(text4, text4.getAttribute('data-fulltext') || '', 35);
+      }, 1500);
 
       if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[0]);
     }
@@ -3814,35 +3991,35 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">What you own, what it's worth.</h3>
         <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Every item, document, and receipt. Organized by room, searchable instantly, and ready for insurance when you need it.</p>
         <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end;">
-          <div style="width: 220px; height: 380px; position: relative;">
+          <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
               <div style="width: 100%; height: 100%; background: #f5f7f8; border-radius: 18px 18px 0 0; overflow: hidden;">
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">INVENTORY</p>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">🔥</div>
+                <div style="padding: 14px 14px 16px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your home, organized.</h1>
+                  <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
+                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
+                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
+                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Insurance Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Water Heater</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$1,200 · Good</p></div>
                   </div>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">❄️</div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">HVAC System</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$4,800 · Good</p></div>
                   </div>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">🧊</div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M20 16l-4-4 4-4"/><path d="M4 8l4 4-4 4"/><path d="M16 4l-4 4-4-4"/><path d="M8 20l4-4 4 4"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Refrigerator</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$2,400 · Good</p></div>
                   </div>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">🏠</div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$14,000 · Fair</p></div>
-                  </div>
-                  <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; color: white;">
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Docs</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
                   </div>
                 </div>
               </div>
@@ -3857,7 +4034,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">Your home, documented as you go.</h3>
         <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Purchases, repairs, and renovations. Every project adds to your home's history and resale value.</p>
         <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end;">
-          <div style="width: 220px; height: 380px; position: relative;">
+          <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
               <div style="width: 100%; height: 100%; background: #f5f7f8; border-radius: 18px 18px 0 0; overflow: hidden;">
@@ -3865,7 +4042,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">PROJECTS</p>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Your projects, tracked.</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -3907,34 +4084,43 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">The small stuff. Handled.</h3>
         <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Seasonal upkeep, filter changes, inspections. Jackknife knows what's due and reminds you before it's overdue.</p>
         <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end;">
-          <div style="width: 220px; height: 380px; position: relative;">
+          <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
               <div style="width: 100%; height: 100%; background: #f5f7f8; border-radius: 18px 18px 0 0; overflow: hidden;">
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">TASKS</p>
-                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                <div style="padding: 14px 14px 14px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your upkeep, handled.</h1>
+                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <span style="color: white; font-size: 10px;">✓</span>
                     </div>
                     <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0; text-decoration: line-through; opacity: 0.5;">Smoke detectors</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Monthly</p></div>
                   </div>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
-                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Replace HVAC filter</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Every 90 days · Due today</p></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Replace HVAC filter</p><p style="font-weight: 400; font-size: 8px; color: #00A385; margin: 0;">Every 90 days · Due today</p></div>
                   </div>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">This Week</p>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Inspect dryer vent</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Every 6 months · Laundry</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
                     <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Clean gutters</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Seasonal · Spring</p></div>
                   </div>
-                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">This Week</p>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
+                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">This Month</p>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
-                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Test sump pump</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Seasonal · Basement</p></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Flush water heater</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Annual · Basement</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Trim hedges</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Seasonal · Spring</p></div>
                   </div>
                 </div>
               </div>
@@ -3958,35 +4144,35 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <div class="so-tab-card">
           <h3>Know what you own and what it's worth.</h3>
           <p class="so-body">Every item, document, and receipt. Organized by room, searchable instantly, and ready for insurance when you need it.</p>
-          <div style="width: 220px; height: 380px; position: relative;">
+          <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
               <div style="width: 100%; height: 100%; background: #f5f7f8; border-radius: 18px 18px 0 0; overflow: hidden;">
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">INVENTORY</p>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x1F525;</div>
+                <div style="padding: 14px 14px 16px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your home, organized.</h1>
+                  <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
+                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
+                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
+                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Insurance Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Water Heater</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$1,200 &middot; Good</p></div>
                   </div>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x2744;&#xFE0F;</div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">HVAC System</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$4,800 &middot; Good</p></div>
                   </div>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x1F9CA;</div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M20 16l-4-4 4-4"/><path d="M4 8l4 4-4 4"/><path d="M16 4l-4 4-4-4"/><path d="M8 20l4-4 4 4"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Refrigerator</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$2,400 &middot; Good</p></div>
                   </div>
-                  <div style="background: white; border-radius: 10px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #e8edf0, #d1d5db); display: flex; align-items: center; justify-content: center; font-size: 14px;">&#x1F3E0;</div>
+                  <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$14,000 &middot; Fair</p></div>
-                  </div>
-                  <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; color: white;">
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0;">Docs</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
                   </div>
                 </div>
               </div>
@@ -4000,7 +4186,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <div class="so-tab-card">
           <h3>Your home, documented as you go.</h3>
           <p class="so-body">Purchases, repairs, and renovations. Every project adds to your home's history and resale value.</p>
-          <div style="width: 220px; height: 380px; position: relative;">
+          <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
               <div style="width: 100%; height: 100%; background: #f5f7f8; border-radius: 18px 18px 0 0; overflow: hidden;">
@@ -4008,7 +4194,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 10.8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">PROJECTS</p>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Your projects, tracked.</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4049,34 +4235,43 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <div class="so-tab-card">
           <h3>The small stuff. Handled.</h3>
           <p class="so-body">Seasonal upkeep, filter changes, inspections. Jackknife knows what's due and reminds you before it's overdue.</p>
-          <div style="width: 220px; height: 380px; position: relative;">
+          <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
               <div style="width: 100%; height: 100%; background: #f5f7f8; border-radius: 18px 18px 0 0; overflow: hidden;">
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <p style="color: #00A385; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">TASKS</p>
-                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                <div style="padding: 14px 14px 14px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your upkeep, handled.</h1>
+                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <span style="color: white; font-size: 10px;">&#x2713;</span>
                     </div>
                     <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0; text-decoration: line-through; opacity: 0.5;">Smoke detectors</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Monthly</p></div>
                   </div>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
-                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Replace HVAC filter</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Every 90 days &middot; Due today</p></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Replace HVAC filter</p><p style="font-weight: 400; font-size: 8px; color: #00A385; margin: 0;">Every 90 days &middot; Due today</p></div>
                   </div>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">This Week</p>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Inspect dryer vent</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Every 6 months &middot; Laundry</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
                     <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Clean gutters</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Seasonal &middot; Spring</p></div>
                   </div>
-                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">This Week</p>
-                  <div style="background: white; border-radius: 8px; padding: 10px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
+                  <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">This Month</p>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
-                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Test sump pump</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Seasonal &middot; Basement</p></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Flush water heater</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Annual &middot; Basement</p></div>
+                  </div>
+                  <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Trim hedges</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Seasonal &middot; Spring</p></div>
                   </div>
                 </div>
               </div>
