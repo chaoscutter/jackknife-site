@@ -2818,8 +2818,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   </button>
 
                   <!-- Success toast (slides up from bottom at the end) -->
-                  <div class="hwc-invoice-toast" aria-hidden="true" style="position: absolute; left: 10px; right: 10px; bottom: 12px; background: #ffffff; border-radius: 16px; padding: 16px 16px; box-shadow: 0 16px 36px rgba(6,51,64,0.22), 0 2px 8px rgba(6,51,64,0.08); opacity: 0; transform: translateY(140%); transition: opacity 400ms ease, transform 560ms cubic-bezier(0.2, 0.85, 0.25, 1); z-index: 18;">
-                    <p style="font-size: 15px; font-weight: 800; color: #063340; margin: 0 0 5px 0; line-height: 1.25; font-family: Montserrat, sans-serif;">Saved to your home record.</p>
+                  <div class="hwc-invoice-toast" aria-hidden="true" style="position: absolute; left: 10px; right: 10px; bottom: 12px; background: #ffffff; border-radius: 16px; padding: 16px 16px 16px 16px; box-shadow: 0 16px 36px rgba(6,51,64,0.22), 0 2px 8px rgba(6,51,64,0.08); opacity: 0; transform: translateY(140%); transition: opacity 400ms ease, transform 560ms cubic-bezier(0.2, 0.85, 0.25, 1); z-index: 18; text-align: left;">
+                    <!-- JK icon — blue circle with knife, transitions to checkmark -->
+                    <div class="hwc-toast-icon" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: #0a4a5c; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(6,51,64,0.25); z-index: 2; transition: background 400ms ease;">
+                      <svg class="hwc-toast-knife" width="20" height="20" viewBox="10 5 56 40" fill="none" style="transition: opacity 300ms ease;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
+                      <svg class="hwc-toast-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; opacity: 0; transition: opacity 300ms ease;"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p style="font-size: 15px; font-weight: 800; color: #063340; margin: 0 0 5px 0; line-height: 1.25; font-family: Montserrat, sans-serif; padding-right: 30px;">Saved to your home record.</p>
                     <p style="font-size: 14px; font-weight: 500; color: #4a6a75; margin: 0; line-height: 1.4;">This receipt builds your home's resale story. Buyers and appraisers trust documented repairs.</p>
                   </div>
                 </div>
@@ -2916,6 +2921,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
     .hwc-h2-wrap {
       overflow: hidden;
+      transition: height 600ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* === Confirmation popup (appears over pro list after card selection) === */
@@ -3238,6 +3244,21 @@ document.getElementById('banner-close').addEventListener('click', function() {
     .hwc-upload-indicator.complete .hwc-upload-doc { opacity: 0; }
     .hwc-upload-indicator.complete .hwc-upload-check { opacity: 1; }
 
+    /* Toast icon — JK knife in blue circle, pulses once, then transitions to checkmark */
+    .hwc-toast-icon.pulse {
+      animation: hwcToastIconPulse 800ms ease-out 1;
+    }
+    @keyframes hwcToastIconPulse {
+      0%   { box-shadow: 0 4px 14px rgba(6,51,64,0.3), 0 0 0 0 rgba(0,163,133,0.5); }
+      50%  { box-shadow: 0 4px 14px rgba(6,51,64,0.3), 0 0 0 10px rgba(0,163,133,0); }
+      100% { box-shadow: 0 4px 14px rgba(6,51,64,0.3), 0 0 0 0 rgba(0,163,133,0); }
+    }
+    .hwc-toast-icon.complete {
+      background: #00A385 !important;
+    }
+    .hwc-toast-icon.complete .hwc-toast-knife { opacity: 0; }
+    .hwc-toast-icon.complete .hwc-toast-check { opacity: 1; }
+
     /* Invoice card visible state */
     .hwc-invoice-card.visible {
       opacity: 1 !important;
@@ -3324,13 +3345,14 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var uploadIndicator  = section.querySelector('.hwc-upload-indicator');
     var invoiceCta       = section.querySelector('.hwc-invoice-cta');
     var invoiceToast     = section.querySelector('.hwc-invoice-toast');
+    var toastIcon        = section.querySelector('.hwc-toast-icon');
 
     // === Constants ===
     var CROSSFADE = 1000;
     var SEQ_CONFIG = [
       { frames: ['0-0'], holds: [6500] },
       { frames: ['1-0', '1-1'], holds: [6000, 9000] },
-      { frames: ['2-0'], holds: [12000] }
+      { frames: ['2-0'], holds: [10000] }
     ];
     var NUM_SEQS = SEQ_CONFIG.length;
     var timelineTerminal = false; // one-shot: true once Act 4 completes, resets on IO re-entry
@@ -3376,22 +3398,19 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
     // === Sequence-level UI ===
     var h1Wrap = section.querySelector('.hwc-h1-wrap');
+    var h2Wrap = section.querySelector('.hwc-h2-wrap');
     function updateSeqUI(seqIdx) {
-      // Size the H1 wrap to match the active H1's natural height so that
-      // short rotating variants don't leave dead vertical space above the H2.
+      // Size the H1/H2 wraps to match the active item's rendered height.
+      // The items are position:absolute with left:0;right:0 so they already
+      // render at the parent's width — offsetHeight gives the true height
+      // including text wrapping at the current viewport width.
       if (h1Wrap && h1s[seqIdx]) {
-        var activeH1 = h1s[seqIdx];
-        // Temporarily force visibility to measure natural height.
-        var prevVis = activeH1.style.visibility;
-        var prevOpacity = activeH1.style.opacity;
-        activeH1.style.visibility = 'hidden';
-        activeH1.style.opacity = '0';
-        activeH1.style.position = 'static';
-        var naturalH = activeH1.offsetHeight;
-        activeH1.style.position = 'absolute';
-        activeH1.style.visibility = prevVis;
-        activeH1.style.opacity = prevOpacity;
+        var naturalH = h1s[seqIdx].offsetHeight;
         if (naturalH > 0) h1Wrap.style.height = naturalH + 'px';
+      }
+      if (h2Wrap && titles[seqIdx]) {
+        var naturalHT = titles[seqIdx].offsetHeight;
+        if (naturalHT > 0) h2Wrap.style.height = naturalHT + 'px';
       }
       h1s.forEach(function(h, j) {
         h.style.opacity = j === seqIdx ? '1' : '0';
@@ -3477,6 +3496,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (invoiceToast) {
         invoiceToast.classList.remove('visible');
       }
+      if (toastIcon) {
+        toastIcon.classList.remove('pulse', 'complete');
+      }
     }
 
     // === Frame animation functions ===
@@ -3495,14 +3517,21 @@ document.getElementById('banner-close').addEventListener('click', function() {
       }, 3200);
       // Trust-line shimmer cascade — fires right as the H1 crossfade initiates
       if (trustLines && trustLines.length) {
-        trustLines.forEach(function(line, i) {
-          addTimer(function() {
-            // Force a reflow so the animation restarts cleanly on each cycle
+        addTimer(function() {
+          trustLines.forEach(function(line) {
+            // Cancel any in-flight animation on the element itself (color shift)
+            line.style.animation = 'none';
             line.classList.remove('sweeping');
-            void line.offsetWidth;
-            line.classList.add('sweeping');
-          }, 150 + i * 180);
-        });
+          });
+          // rAF guarantees a paint cycle so the browser fully clears the
+          // ::after pseudo-element's animation state before restarting.
+          requestAnimationFrame(function() {
+            trustLines.forEach(function(line) {
+              line.style.animation = '';
+              line.classList.add('sweeping');
+            });
+          });
+        }, 150);
       }
       // Contractor selection choreography — fires after trust-line sweeps finish
       // Trust sweep window: starts 150ms, last card finishes ~150+3*180+1500 = 2190ms
@@ -3522,6 +3551,17 @@ document.getElementById('banner-close').addEventListener('click', function() {
           // Siblings dim in sync with lock-in
           for (var i = 1; i < proCards.length; i++) {
             proCards[i].classList.add('dimmed');
+          }
+          // Crossfade H1/H2 to next-stage text in sync with card selection
+          h1s.forEach(function(h, j) { h.style.opacity = j === 1 ? '1' : '0'; });
+          titles.forEach(function(t, j) { t.style.opacity = j === 1 ? '1' : '0'; });
+          if (h1Wrap && h1s[1]) {
+            var nh = h1s[1].offsetHeight;
+            if (nh > 0) h1Wrap.style.height = nh + 'px';
+          }
+          if (h2Wrap && titles[1]) {
+            var nt = titles[1].offsetHeight;
+            if (nt > 0) h2Wrap.style.height = nt + 'px';
           }
         }, 2920);
       }
@@ -3558,7 +3598,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       var text3 = msg3 ? msg3.querySelector('.hwc-msg-text') : null;
       var text4 = msg4 ? msg4.querySelector('.hwc-msg-text') : null;
 
-      // Populate contractor bubbles (msg1, msg3) up front — they fade up instantly
+      // Populate contractor bubbles (msg1, msg3) up front — text is ready when they appear
       if (text1) text1.textContent = text1.getAttribute('data-fulltext') || '';
       if (text3) text3.textContent = text3.getAttribute('data-fulltext') || '';
       // Leave msg4 (homeowner's final reply) empty — it will type out live
@@ -3569,19 +3609,29 @@ document.getElementById('banner-close').addEventListener('click', function() {
         row.style.transform = 'translateY(8px)';
       });
 
-      // Unison fade-up — messages 1-3 appear together. Msg 4 bubble shell
-      // fades up empty and the text types out live starting at t=1500ms.
+      // Staggered reveal — messages appear one at a time like a real conversation.
+      // t=600ms: Contractor's first message slides in
       addTimer(function() {
         if (msg1) { msg1.style.opacity = '1'; msg1.style.transform = 'translateY(0)'; }
-        if (msg2) { msg2.style.opacity = '1'; msg2.style.transform = 'translateY(0)'; }
-        if (msg3) { msg3.style.opacity = '1'; msg3.style.transform = 'translateY(0)'; }
-        if (msg4) { msg4.style.opacity = '1'; msg4.style.transform = 'translateY(0)'; }
-      }, 800);
+      }, 600);
 
-      // t=1500ms: start typing the homeowner's final reply character-by-character
+      // t=1800ms: Homeowner's quick reply slides in
+      addTimer(function() {
+        if (msg2) { msg2.style.opacity = '1'; msg2.style.transform = 'translateY(0)'; }
+      }, 1800);
+
+      // t=3000ms: Contractor's second message slides in
+      addTimer(function() {
+        if (msg3) { msg3.style.opacity = '1'; msg3.style.transform = 'translateY(0)'; }
+      }, 3000);
+
+      // t=4200ms: Homeowner's reply bubble appears, then types out live
+      addTimer(function() {
+        if (msg4) { msg4.style.opacity = '1'; msg4.style.transform = 'translateY(0)'; }
+      }, 4200);
       addTimer(function() {
         if (text4) typewriter(text4, text4.getAttribute('data-fulltext') || '', 35);
-      }, 1500);
+      }, 4500);
 
       if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[0]);
     }
@@ -3636,63 +3686,74 @@ document.getElementById('banner-close').addEventListener('click', function() {
       function lineToStep(targetIdx, durationMs) {
         if (!timelineSteps[0] || !timelineSteps[targetIdx]) return;
         var h = getStepLineY(targetIdx) - getStepLineY(0);
-        setLineHeight(Math.max(0, h), durationMs, 'linear');
+        setLineHeight(Math.max(0, h), durationMs, 'cubic-bezier(0.25, 0.46, 0.45, 0.94)');
       }
 
-      // ═══════ UNIFORM PACING — ~900ms stagger, linear line, glow on every card ═══════
+      // ═══════ WATERFALL PACING — tight 550ms stagger, ease-out line ═══════
 
-      // Step 0 at t=200: Issue Documented activates + glow, line to step 1
+      // Step 0 at t=200: Issue Documented activates, line starts flowing to step 1
       addTimer(function() {
         activateStepWithGlow(0);
-        lineToStep(1, 700);
+        lineToStep(1, 450);
       }, 200);
 
-      // Step 1 at t=1100: Select Your Pro activates + glow, line to step 2
+      // Step 1 at t=750: Select Your Pro activates as line arrives
       addTimer(function() {
         activateStepWithGlow(1);
-        lineToStep(2, 700);
-      }, 1100);
+        lineToStep(2, 450);
+      }, 750);
 
-      // Step 2 at t=2000: Service Date Confirmed activates + glow, line to step 3
+      // Step 2 at t=1300: Service Date Confirmed
       addTimer(function() {
         activateStepWithGlow(2);
-        lineToStep(3, 700);
-      }, 2000);
+        lineToStep(3, 450);
+      }, 1300);
 
-      // Step 3 at t=2900: Confirm Completion activates + glow, line to step 4
+      // Step 3 at t=1850: Confirm Completion
       addTimer(function() {
         activateStepWithGlow(3);
-        lineToStep(4, 700);
-      }, 2900);
+        lineToStep(4, 450);
+      }, 1850);
 
-      // Step 4 at t=3800: Rate Your Pro activates + glow
+      // Step 4 at t=2400: Rate Your Pro — cascade complete
       addTimer(function() {
         activateStepWithGlow(4);
-      }, 3800);
+      }, 2400);
 
       // ═══════ CTA ═══════
 
-      // t=4400: "Save project to home history" CTA slides up
+      // t=3200: "Save project to home history" CTA slides up (600ms beat after cascade)
       addTimer(function() {
         if (addCta) addCta.classList.add('visible');
-      }, 4400);
+      }, 3200);
 
-      // t=6100: Auto-tap the CTA
+      // t=5000: Auto-tap the CTA
       addTimer(function() {
         if (addCta) addCta.classList.add('pressed');
-      }, 6100);
+      }, 5000);
       addTimer(function() {
         if (addCta) {
           addCta.classList.remove('pressed');
           addCta.classList.add('added');
           addCta.textContent = 'Added \u2713';
         }
-      }, 6220);
+        // Crossfade H1/H2 to Seq 2 text when "Added" confirms
+        h1s.forEach(function(h, j) { h.style.opacity = j === 2 ? '1' : '0'; });
+        titles.forEach(function(t, j) { t.style.opacity = j === 2 ? '1' : '0'; });
+        if (h1Wrap && h1s[2]) {
+          var nh = h1s[2].offsetHeight;
+          if (nh > 0) h1Wrap.style.height = nh + 'px';
+        }
+        if (h2Wrap && titles[2]) {
+          var nt = titles[2].offsetHeight;
+          if (nt > 0) h2Wrap.style.height = nt + 'px';
+        }
+      }, 5120);
 
-      // Mark terminal at t=6800
+      // Mark terminal at t=5600
       addTimer(function() {
         timelineTerminal = true;
-      }, 6800);
+      }, 5600);
 
       // Advance to Seq 2
       if (!paused) addTimer(onDone, SEQ_CONFIG[1].holds[1]);
@@ -3752,28 +3813,34 @@ document.getElementById('banner-close').addEventListener('click', function() {
         if (focusRing) focusRing.classList.remove('locked');
       }, 4500);
 
-      // t=4850ms: Upload indicator appears with pulsing glow
-      addTimer(function() {
-        if (uploadIndicator) {
-          uploadIndicator.classList.add('visible', 'uploading');
-        }
-      }, 4850);
-
-      // t=6600ms: Upload completes — doc icon swaps to check, pulse stops
-      addTimer(function() {
-        if (uploadIndicator) {
-          uploadIndicator.classList.remove('uploading');
-          uploadIndicator.classList.add('complete');
-        }
-      }, 6600);
-
-      // t=7000ms: Success toast slides up from bottom
+      // t=5000ms: Success toast slides up with JK knife icon in top-right
       addTimer(function() {
         if (invoiceToast) invoiceToast.classList.add('visible');
-      }, 7000);
+      }, 5000);
 
-      // Do NOT call onDone — Seq 2 Frame 0 is the new terminal state.
-      // Viewer scrolling away and returning triggers a full replay via IO.
+      // t=5500ms: JK icon pulses once
+      addTimer(function() {
+        if (toastIcon) toastIcon.classList.add('pulse');
+      }, 5500);
+
+      // t=7200ms: Knife icon transitions to green checkmark
+      addTimer(function() {
+        if (toastIcon) toastIcon.classList.add('complete');
+        // Crossfade H1/H2 back to Seq 0 text ahead of the loop
+        h1s.forEach(function(h, j) { h.style.opacity = j === 0 ? '1' : '0'; });
+        titles.forEach(function(t, j) { t.style.opacity = j === 0 ? '1' : '0'; });
+        if (h1Wrap && h1s[0]) {
+          var nh = h1s[0].offsetHeight;
+          if (nh > 0) h1Wrap.style.height = nh + 'px';
+        }
+        if (h2Wrap && titles[0]) {
+          var nt = titles[0].offsetHeight;
+          if (nt > 0) h2Wrap.style.height = nt + 'px';
+        }
+      }, 7200);
+
+      // t=9200ms: Sequence complete — loop back to Seq 0
+      if (!paused) addTimer(onDone, SEQ_CONFIG[2].holds[0]);
     }
 
     var ANIM_FNS = {
@@ -3809,13 +3876,11 @@ document.getElementById('banner-close').addEventListener('click', function() {
           if (nextFrame < config.frames.length) {
             playFrame(seqIdx, nextFrame);
           } else {
-            // Advance to next sequence. Seq 2 (frame 2-0) is terminal — its
-            // animFn never calls onDone, so playback stops there until the
-            // viewer scrolls away and back (IO replays from seq 0).
-            var nextSeq = seqIdx + 1;
-            if (nextSeq < NUM_SEQS) {
-              playSequence(nextSeq);
-            }
+            // Advance to next sequence, wrapping back to Seq 0 after the last.
+            // All resets fire inside each animFn, so looping is seamless.
+            resetSeq0(); resetSeq1Frame0(); resetSeq1Frame1(); resetSeq2Frame0();
+            var nextSeq = (seqIdx + 1) % NUM_SEQS;
+            playSequence(nextSeq);
           }
         });
       }
@@ -3892,14 +3957,21 @@ document.getElementById('banner-close').addEventListener('click', function() {
       resetSeq2Frame0();
       showFrameEl('2-0');
       updateSeqUI(2);
-      // Jump Seq 2 to its final rest state: invoice focused, upload complete, toast visible.
+      // Jump Seq 2 to its final rest state: invoice focused, toast with checkmark visible.
       if (invoiceCard)      invoiceCard.classList.add('visible');
       if (invoiceImg)       invoiceImg.classList.add('focused');
-      if (uploadIndicator)  uploadIndicator.classList.add('visible', 'complete');
       if (invoiceToast)     invoiceToast.classList.add('visible');
+      if (toastIcon)        toastIcon.classList.add('complete');
       paused = true;
       return;
     }
+
+    // Re-measure H1/H2 wraps after web fonts load (initial measurement may
+    // use fallback font metrics, causing clipping on mobile).
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() { updateSeqUI(currentSeq); });
+    }
+    window.addEventListener('resize', function() { updateSeqUI(currentSeq); });
 
     // === IntersectionObserver — play on entry, replay after scrolling away and back ===
     var wasInView = false;
@@ -4002,7 +4074,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 14px 14px 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your home, organized.</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Inventory</h1>
                   <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
                     <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
                     <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
@@ -4045,7 +4117,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Your projects, tracked.</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Projects</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4095,7 +4167,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 14px 14px 14px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your upkeep, handled.</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Tasks</h1>
                   <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
@@ -4155,7 +4227,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 14px 14px 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your home, organized.</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Inventory</h1>
                   <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
                     <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
                     <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
@@ -4197,7 +4269,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Your projects, tracked.</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Projects</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4246,7 +4318,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 14px 14px 14px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Your upkeep, handled.</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Tasks</h1>
                   <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
