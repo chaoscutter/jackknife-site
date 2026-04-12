@@ -277,35 +277,36 @@
   /* Claim export overlay card */
   .claim-card {
     position: absolute;
-    top: 6%;
-    left: 6%;
-    width: 280px;
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 12px 40px rgba(6, 51, 64, 0.25);
+    top: 4%;
+    left: 50%;
+    width: 75%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 16px 48px rgba(6, 51, 64, 0.3);
     font-family: 'Montserrat', sans-serif;
     z-index: 2;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(-50%) translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
   .claim-card.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 
   .claim-card-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin-bottom: 20px;
   }
 
   .claim-card-header .check-icon {
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: #00A385;
     display: flex;
@@ -316,13 +317,13 @@
 
   .claim-card-header .check-icon span {
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
   }
 
   .claim-card-header p {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 17px;
     color: #0a4a5c;
     margin: 0;
   }
@@ -335,13 +336,13 @@
   }
 
   .claim-data-row .label {
-    font-size: 11px;
+    font-size: 13px;
     color: #6b7c85;
     font-weight: 500;
   }
 
   .claim-data-row .value {
-    font-size: 12px;
+    font-size: 15px;
     color: #0a4a5c;
     font-weight: 700;
   }
@@ -354,8 +355,8 @@
     color: white;
     font-family: Montserrat, sans-serif;
     font-weight: 700;
-    font-size: 12px;
-    padding: 10px;
+    font-size: 14px;
+    padding: 12px;
     border-radius: 8px;
     border: none;
     margin-top: 12px;
@@ -366,16 +367,16 @@
   .claim-divider {
     border: none;
     border-top: 1.5px dashed #d1d5db;
-    margin: 16px 0;
+    margin: 12px 0;
   }
 
   .claim-qa-question {
-    font-size: 12px;
+    font-size: 14px;
     color: #0a4a5c;
     font-style: italic;
     line-height: 1.4;
-    margin: 0 0 8px 0;
-    padding-left: 20px;
+    margin: 0 0 10px 0;
+    padding-left: 24px;
     position: relative;
   }
 
@@ -384,26 +385,26 @@
     position: absolute;
     left: 0;
     top: 0;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
   }
 
   .claim-qa-answer {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     align-items: flex-start;
   }
 
   .claim-qa-answer .check-sm {
     color: #00A385;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     flex-shrink: 0;
     margin-top: 1px;
   }
 
   .claim-qa-answer p {
-    font-size: 11px;
+    font-size: 13px;
     color: #0a4a5c;
     line-height: 1.5;
     margin: 0;
@@ -411,46 +412,45 @@
 
   .claim-agent-btn {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 2px;
     width: 100%;
     text-align: center;
     background: transparent;
     color: #0a4a5c;
     font-family: Montserrat, sans-serif;
     font-weight: 700;
-    font-size: 12px;
-    padding: 9px;
+    font-size: 14px;
+    padding: 12px;
     border-radius: 8px;
     border: 2px solid #0a4a5c;
     cursor: pointer;
     letter-spacing: 0.3px;
   }
 
-  .claim-agent-info {
-    text-align: center;
-    margin-top: 8px;
-  }
-
-  .claim-agent-info p {
-    font-size: 10px;
-    color: #6b7c85;
-    margin: 0;
-    line-height: 1.4;
-  }
-
   /* Responsive: card sizing on mobile */
   @media (max-width: 767px) {
     .claim-card {
-      width: 260px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
+      width: 88%;
+      max-width: 320px;
+      top: auto;
       bottom: 5%;
+      left: 50%;
+      padding: 20px;
+      transform: translate(-50%, 0) translateY(20px);
     }
     .claim-card.visible {
-      transform: translateX(-50%) translateY(0);
+      transform: translate(-50%, 0) translateY(0);
     }
+    .claim-card-header p { font-size: 14px; }
+    .claim-data-row .label { font-size: 11px; }
+    .claim-data-row .value { font-size: 12px; }
+    .claim-btn { font-size: 12px; padding: 10px; }
+    .claim-qa-question { font-size: 12px; }
+    .claim-qa-answer p { font-size: 11px; }
+    .claim-agent-btn { font-size: 12px; padding: 10px; }
   }
 
   .gsap-s3-copy { opacity: 0; }
@@ -488,17 +488,17 @@
         </div>
 
         <!-- Detection callouts — aging water heater data (3 cards, no "identified") -->
-        <div class="detection-callout s2-callout" style="top: 22%; left: 62%;">
+        <div class="detection-callout s2-callout" style="top: 22%; left: 48%; min-width: 48%;">
           <div class="callout-label">Age</div>
           Installed 2014 · 12 years old
         </div>
-        <div class="detection-callout s2-callout" style="top: 45%; left: 62%;">
+        <div class="detection-callout s2-callout" style="top: 45%; left: 48%; min-width: 48%;">
           <div class="callout-label">Replacement Cost</div>
-          Est. $2,800–$3,400 installed
+          Est. $2,800
         </div>
-        <div class="detection-callout s2-callout" style="top: 68%; left: 62%;">
+        <div class="detection-callout s2-callout" style="top: 68%; left: 48%; min-width: 48%;">
           <div class="callout-label">Status</div>
-          Routine flush recommended
+          Next routine flush due October 2026
         </div>
       </div>
     </div>
@@ -570,10 +570,7 @@
           <hr class="claim-divider" />
 
           <!-- Call Agent -->
-          <button class="claim-agent-btn">📞 Call Your Agent</button>
-          <div class="claim-agent-info">
-            <p>Sarah Chen · Arbella Insurance</p>
-          </div>
+          <button class="claim-agent-btn">📞 Call Your Agent<br><span style="font-weight: 500; font-size: 10px; color: #6b7c85;">Sarah Chen · Arbella Insurance</span></button>
         </div>
       </div>
     </div>
@@ -885,11 +882,11 @@
         startAt: { y: 24 },
         delay: 0.15
       });
-      // Claim card appears 500ms after image — the timing gap is intentional
+      // Claim card appears after the reader has time to register the flooded room
       setTimeout(function() {
         var card = document.getElementById('claim-card');
         if (card) card.classList.add('visible');
-      }, 800);
+      }, 2500);
     }
   });
 </script>

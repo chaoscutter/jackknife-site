@@ -1146,13 +1146,37 @@
     }
   }
 
+  /* Scroll cue arrow — appears after section animations complete */
+  .scroll-cue {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 0;
+    opacity: 0;
+  }
+  .scroll-cue svg {
+    width: 28px;
+    height: 28px;
+    color: #9cb5be;
+    animation: scroll-cue-bounce 2s ease-in-out infinite;
+  }
+  @keyframes scroll-cue-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  /* Reduced motion: no bounce */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue svg { animation: none; }
+    .scroll-cue { opacity: 1; }
+  }
+
   /* GSAP scroll animation - initial hidden state */
   .gsap-trust-bar, .gsap-trust-col,
   .gsap-bridge-l1, .gsap-bridge-l2,
   .gsap-hiw-h1, .gsap-hiw-h2, .gsap-hiw-columns > div, .gsap-hiw-divider,
   .gsap-faq-header, .faq-item,
   .gsap-brand-bar, .gsap-brand-h1, .gsap-brand-h2,
-  .gsap-cta-h1, .gsap-cta-punchline, .gsap-cta-button, .gsap-cta-footer {
+  .gsap-cta-h1, .gsap-cta-punchline, .gsap-cta-button, .gsap-cta-footer,
+  .hero-cta-desktop {
     opacity: 0;
   }
   /* Pillar section fades in as unit */
@@ -1164,7 +1188,8 @@
   .no-js .gsap-faq-header, .no-js .faq-item,
   .no-js .gsap-brand-bar, .no-js .gsap-brand-h1, .no-js .gsap-brand-h2,
   .no-js .gsap-cta-h1, .no-js .gsap-cta-punchline, .no-js .gsap-cta-button, .no-js .gsap-cta-footer,
-  .no-js .pillar-section {
+  .no-js .pillar-section,
+  .no-js .hero-cta-desktop {
     opacity: 1;
   }
   /* Reduced motion: show everything immediately */
@@ -1175,7 +1200,8 @@
     .gsap-faq-header, .faq-item,
     .gsap-brand-bar, .gsap-brand-h1, .gsap-brand-h2,
     .gsap-cta-h1, .gsap-cta-punchline, .gsap-cta-button, .gsap-cta-footer,
-    .pillar-section {
+    .pillar-section,
+    .hero-cta-desktop {
       opacity: 1 !important;
     }
   }
@@ -1575,6 +1601,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         </div>
       </div>
     </div>
+    <div class="scroll-cue scroll-cue-hero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
 
@@ -1781,6 +1808,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         </div>
       </div>
     </div>
+    <div class="scroll-cue scroll-cue-hiw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
   <style>
@@ -2844,6 +2872,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
         </div><!-- end hwc-phone-col -->
       </div><!-- end hwc-layout -->
+    <div class="scroll-cue scroll-cue-hwc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
   <!-- Hire With Confidence CSS -->
@@ -4047,6 +4076,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
       </div>
     </div>
+    <div class="scroll-cue scroll-cue-diy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
 
@@ -4073,12 +4103,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 14px 14px 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Inventory</h1>
-                  <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Insurance Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
+                <div style="padding: 22px 14px 16px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Home Inventory</h1>
+                  <div style="background: #063340; border-radius: 8px; padding: 12px 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0;">Insurance<br>Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
@@ -4116,8 +4146,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Projects</h1>
+                <div style="padding: 22px 16px 16px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Home Projects</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4166,8 +4196,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 14px 14px 14px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Tasks</h1>
+                <div style="padding: 22px 14px 14px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Tasks</h1>
                   <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
@@ -4226,12 +4256,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 14px 14px 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Inventory</h1>
-                  <div style="background: #063340; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
-                    <div><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0; white-space: nowrap;">Insurance Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
+                <div style="padding: 22px 14px 16px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Home Inventory</h1>
+                  <div style="background: #063340; border-radius: 8px; padding: 12px 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0;">Insurance<br>Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
@@ -4268,8 +4298,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px;">Home Projects</h1>
+                <div style="padding: 22px 16px 16px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Home Projects</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4317,8 +4347,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                 <div style="height: 7px; background: white; display: flex; align-items: center; justify-content: center; padding-bottom: 1px;">
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
-                <div style="padding: 14px 14px 14px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px;">Tasks</h1>
+                <div style="padding: 22px 14px 14px; font-family: Montserrat, sans-serif;">
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 8px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Tasks</h1>
                   <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">Today</p>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; background: #00A385; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
@@ -4355,6 +4385,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         </div>
       </div>
     </div>
+    <div class="scroll-cue scroll-cue-organized"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
 
@@ -4649,6 +4680,50 @@ document.documentElement.classList.remove("no-js");
     .from(".gsap-cta-punchline", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.3")
     .from(".gsap-cta-button", { opacity: 0, y: 16, duration: 0.5, ease: "power2.out" }, "-=0.2")
     .from(".gsap-cta-footer", { opacity: 0, duration: 0.4, ease: "power2.out" }, "-=0.1");
+
+  // --- Scroll cue arrows — fade in after each section's animations complete ---
+  // Each cue fades in after a delay that matches the section's animation duration
+  var scrollCueDefaults = { opacity: 0, y: -4, duration: 0.6, ease: "power2.out" };
+
+  // Hero: cue appears after hero phone animation settles (~2s)
+  gsap.from(".scroll-cue-hero", Object.assign({}, scrollCueDefaults, {
+    delay: 2.5,
+    scrollTrigger: { trigger: "#hero", start: "top 80%", once: true }
+  }));
+
+  // How It Works: after columns stagger in (~1.2s total)
+  gsap.from(".scroll-cue-hiw", Object.assign({}, scrollCueDefaults, {
+    delay: 1.5,
+    scrollTrigger: { trigger: "#diagnose-home", start: "top 60%", once: true }
+  }));
+
+  // Hire With Confidence: after phone carousel loads (~1.5s)
+  gsap.from(".scroll-cue-hwc", Object.assign({}, scrollCueDefaults, {
+    delay: 2,
+    scrollTrigger: { trigger: "#hire-with-confidence", start: "top 60%", once: true }
+  }));
+
+  // DIY Plans: after content fades in (~1s)
+  gsap.from(".scroll-cue-diy", Object.assign({}, scrollCueDefaults, {
+    delay: 1.5,
+    scrollTrigger: { trigger: "#diy-plans", start: "top 60%", once: true }
+  }));
+
+  // Stay Organized: after card grid appears (~1s)
+  gsap.from(".scroll-cue-organized", Object.assign({}, scrollCueDefaults, {
+    delay: 1.5,
+    scrollTrigger: { trigger: ".scroll-cue-organized", start: "top 90%", once: true }
+  }));
+
+  // --- Hero CTA entrance delay — CTA animates in as the finale ---
+  gsap.from(".hero-cta-desktop", {
+    opacity: 0,
+    y: 16,
+    duration: 0.6,
+    delay: 1.8,
+    ease: "power2.out",
+    scrollTrigger: { trigger: "#hero", start: "top 80%", once: true }
+  });
 
 })();
 
