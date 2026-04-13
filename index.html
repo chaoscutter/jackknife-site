@@ -2047,7 +2047,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <script>
   // Something's Wrong 3-step auto-cycle with crossfade reveal + pause controls
   (function() {
-    var DURATIONS = [2600, 10800, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
+    var DURATIONS = [2600, 6800, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
     var section = document.getElementById('diagnose-home');
     if (!section) return;
 
@@ -2076,6 +2076,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var paused = false;
     var PAUSE_RESUME_DELAY = 25000;
     var resumeTimer;
+    var hiwCycleComplete = false;
 
     // Map logical steps to text/toast blocks: 1:1 mapping now
     var STEP_TO_TEXT = [0, 1, 2];
@@ -2301,27 +2302,27 @@ document.getElementById('banner-close').addEventListener('click', function() {
       bottomSheet.style.transform = 'translateY(100%)';
       bottomSheet.style.opacity = '0';
       // === SPATIAL INTELLIGENCE ANIMATION SEQUENCE ===
-      // Two-beat design: Beat 1 (thinking 3.5s) → Beat 2 (reveal 4s)
-      // Total ~8.4s — gives user time to register loading + read result
+      // Two-beat design: Beat 1 (thinking 1.8s) → Beat 2 (reveal 1.4s)
+      // Total ~6.3s — snappy but readable
 
-      // Phase A (+300ms): Crossfade out detection text — badge container stays
+      // Phase A (+200ms): Crossfade out detection text — badge container stays
       spatialATimer = setTimeout(function() {
         if (badgeDetect) badgeDetect.style.opacity = '0';
-      }, 300);
+      }, 200);
 
-      // Beat 1 (+600ms, holds 2.6s): Fade in spatial badge (icon + think text)
+      // Beat 1 (+400ms, holds 1.8s): Fade in spatial badge (icon + think text)
       spatialBTimer = setTimeout(function() {
         if (badgeSpatial) badgeSpatial.style.opacity = '1';
         if (badgeThink) badgeThink.style.opacity = '1';
         // Switch sidebar to "Clarify the issue" when spatial badge appears
         updateSidebarText(1);
-      }, 600);
+      }, 400);
 
-      // Beat 2 (+3200ms, holds 1.8s): Icon stays, only text swaps
+      // Beat 2 (+2200ms, holds 1.4s): Icon stays, only text swaps
       spatialCTimer = setTimeout(function() {
         if (badgeThink) badgeThink.style.opacity = '0';
         if (badgeInsight) badgeInsight.style.opacity = '1';
-      }, 3200);
+      }, 2200);
 
       spatialDTimer = setTimeout(function() {
         // Fade badge out
@@ -2336,7 +2337,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         bottomSheet.style.transform = 'translateY(0)';
         bottomSheet.style.opacity = '1';
 
-        // +2600ms: Auto-select Toilet chip (give time to read all 5 options)
+        // +1400ms: Auto-select Toilet chip (enough time to scan options)
         leakSelectTimer = setTimeout(function() {
           if (toiletChip) toiletChip.classList.add('sw-leak-pressed');
           setTimeout(function() {
@@ -2345,12 +2346,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
               toiletChip.classList.add('sw-leak-selected');
             }
 
-            // +1000ms after selection: crossfade to Source panel
+            // +600ms after selection: crossfade to Source panel
             leakSourceTimer = setTimeout(function() {
               if (leakPanel) { leakPanel.style.opacity = '0'; }
               if (sourcePanel) { sourcePanel.style.opacity = '1'; sourcePanel.style.pointerEvents = 'auto'; }
 
-              // +1400ms: Auto-select "Fix the Toilet" CTA
+              // +1000ms: Auto-select "Fix the Toilet" CTA
               setTimeout(function() {
                 if (fixCeilingCta) fixCeilingCta.classList.add('sw-fix-pressed');
                 setTimeout(function() {
@@ -2359,21 +2360,27 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     fixCeilingCta.classList.add('sw-fix-selected');
                   }
                 }, 200);
-              }, 1400);
+              }, 1000);
 
-              // +3500ms: read source + CTAs, then advance
+              // +1600ms: read source + CTAs, then advance
               leakAdvanceTimer = setTimeout(function() {
                 bottomSheet.style.transition = 'opacity 300ms ease';
                 bottomSheet.style.opacity = '0';
                 setTimeout(function() { showStep(2); }, 350);
-              }, 2000);
-            }, 700);
+              }, 1600);
+            }, 600);
           }, 200);
-        }, 1800);
-      }, 5000);
+        }, 1400);
+      }, 3600);
     }
 
     function showStep(i, skipTimer) {
+      // Show scroll cue after first full cycle (Step 2 → Step 0 wrap)
+      if (i === 0 && started && !hiwCycleComplete) {
+        hiwCycleComplete = true;
+        var cue = document.querySelector('.scroll-cue-hiw');
+        if (cue) { cue.style.transition = 'opacity 0.6s ease-out'; cue.style.opacity = '1'; }
+      }
       idx = i;
 
       // Step visibility: combined step visible for logical steps 0 and 1
@@ -2429,7 +2436,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
           // Step 0 shows "Analyzing..." then transitions to step 1
           var analyzingTime = DURATIONS[0];
           timer = setTimeout(function() {
-            if (!paused) showStep(1); // Step 1: badge reveal + bottom sheet + "Clarify the issue"
+            showStep(1); // Step 1: badge reveal + bottom sheet + "Clarify the issue"
           }, analyzingTime);
         } else if (i === 1) {
           // Step 1 advances via setDiagnosedState() animation chain — no competing timer
@@ -2487,11 +2494,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
     });
 
     // Hover to pause (desktop), tap to toggle pause (mobile)
-    // Attach to the entire section so sidebar + phone both trigger it
-    var hoverTarget = section;
+    // Attach to the phone wrapper only — section is too broad and pauses on scroll-into-view
+    var hoverTarget = phoneWrapper;
+    var graceActive = true; // ignore hover during initial play-through (set false by IntersectionObserver)
     if (hoverTarget) {
-      hoverTarget.addEventListener('mouseenter', function() { pauseCarousel(); });
-      hoverTarget.addEventListener('mouseleave', function() { clearTimeout(resumeTimer); resumeCarousel(); });
+      hoverTarget.addEventListener('mouseenter', function() { if (!graceActive) pauseCarousel(); });
+      hoverTarget.addEventListener('mouseleave', function() { clearTimeout(resumeTimer); if (!graceActive) resumeCarousel(); });
 
       // Mobile swipe detection
       var touchStartX = 0;
@@ -2548,6 +2556,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
       if (entries[0].isIntersecting && !started) {
         started = true;
         showStep(0);
+        // Grace period: let first step play before hover-pause activates
+        setTimeout(function() { graceActive = false; }, DURATIONS[0] + 1000);
         // Dynamically position progress line to span dot centers
         requestAnimationFrame(function() {
           var sidebarDots = section.querySelectorAll('.sw-step-dot');
@@ -3173,9 +3183,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
       padding: 10px 12px;
       opacity: 0.7;
       transition:
-        opacity 400ms ease-out,
-        box-shadow 400ms ease-out,
-        border-left-color 400ms ease-out;
+        opacity 250ms ease-out,
+        box-shadow 250ms ease-out,
+        border-left-color 250ms ease-out;
     }
     .hwc-step.active .hwc-step-card {
       opacity: 1;
@@ -3414,6 +3424,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     var paused = false;
     var allTimers = [];
     var userClicked = false;
+    var hwcCycleComplete = false;
 
     // === Timer management ===
     function clearAllTimers() {
@@ -3759,30 +3770,30 @@ document.getElementById('banner-close').addEventListener('click', function() {
         setLineHeight(Math.max(0, h), durationMs, 'cubic-bezier(0.25, 0.46, 0.45, 0.94)');
       }
 
-      // ═══════ WATERFALL PACING — tight 550ms stagger, ease-out line ═══════
+      // ═══════ WATERFALL PACING — 550ms stagger, line synced to step activation ═══════
 
       // Step 0 at t=200: Issue Documented activates, line starts flowing to step 1
       addTimer(function() {
         activateStepWithGlow(0);
-        lineToStep(1, 450);
+        lineToStep(1, 550);
       }, 200);
 
       // Step 1 at t=750: Select Your Pro activates as line arrives
       addTimer(function() {
         activateStepWithGlow(1);
-        lineToStep(2, 450);
+        lineToStep(2, 550);
       }, 750);
 
       // Step 2 at t=1300: Service Date Confirmed
       addTimer(function() {
         activateStepWithGlow(2);
-        lineToStep(3, 450);
+        lineToStep(3, 550);
       }, 1300);
 
       // Step 3 at t=1850: Confirm Completion
       addTimer(function() {
         activateStepWithGlow(3);
-        lineToStep(4, 450);
+        lineToStep(4, 550);
       }, 1850);
 
       // Step 4 at t=2400: Rate Your Pro — cascade complete
@@ -3930,6 +3941,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
             // All resets fire inside each animFn, so looping is seamless.
             resetSeq0(); resetSeq1Frame0(); resetSeq1Frame1(); resetSeq2Frame0();
             var nextSeq = (seqIdx + 1) % NUM_SEQS;
+            // Show scroll cue after first full cycle completes
+            if (nextSeq === 0 && !hwcCycleComplete) {
+              hwcCycleComplete = true;
+              var cue = document.querySelector('.scroll-cue-hwc');
+              if (cue) { cue.style.transition = 'opacity 0.6s ease-out'; cue.style.opacity = '1'; }
+            }
             playSequence(nextSeq);
           }
         });
@@ -3999,13 +4016,17 @@ document.getElementById('banner-close').addEventListener('click', function() {
     }
 
     // === Hover pause/resume ===
-    section.addEventListener('mouseenter', function() {
-      if (userClicked) return;
+    // Attach to phone column only — section is too broad and pauses on scroll-into-view
+    var hwcHoverTarget = phoneCol || section;
+    var hwcGraceActive = true; // ignore hover during initial play-through
+    hwcHoverTarget.addEventListener('mouseenter', function() {
+      if (userClicked || hwcGraceActive) return;
       paused = true;
       clearAllTimers();
     });
-    section.addEventListener('mouseleave', function() {
+    hwcHoverTarget.addEventListener('mouseleave', function() {
       if (userClicked) { userClicked = false; return; }
+      if (hwcGraceActive) return;
       paused = false;
       var config = SEQ_CONFIG[currentSeq];
       var remaining = config.holds[currentFrame];
@@ -4054,6 +4075,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
         resetSeq1Frame1();
         resetSeq2Frame0();
         playSequence(0);
+        // Grace period: let first sequence play before hover-pause activates
+        hwcGraceActive = true;
+        setTimeout(function() { hwcGraceActive = false; }, SEQ_CONFIG[0].holds[0] + 1000);
 
         // Measure HWC sidebar dot positions for progress bar
         var hwcSidebarDots = section.querySelectorAll('.hwc-step-dot');
@@ -4748,17 +4772,8 @@ document.documentElement.classList.remove("no-js");
     scrollTrigger: { trigger: "#hero", start: "top 80%", once: true }
   }));
 
-  // How It Works: after columns stagger in (~1.2s total)
-  gsap.from(".scroll-cue-hiw", Object.assign({}, scrollCueDefaults, {
-    delay: 0.9,
-    scrollTrigger: { trigger: "#diagnose-home", start: "top 60%", once: true }
-  }));
-
-  // Hire With Confidence: after phone carousel loads (~1.5s)
-  gsap.from(".scroll-cue-hwc", Object.assign({}, scrollCueDefaults, {
-    delay: 1,
-    scrollTrigger: { trigger: "#hire-with-confidence", start: "top 60%", once: true }
-  }));
+  // How It Works (From Panic to Plan): scroll cue triggered by carousel JS after first cycle completes
+  // Hire With Confidence: scroll cue triggered by carousel JS after first cycle completes
 
   // DIY Plans: after content fades in (~1s)
   gsap.from(".scroll-cue-diy", Object.assign({}, scrollCueDefaults, {
