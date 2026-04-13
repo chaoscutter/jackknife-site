@@ -694,6 +694,9 @@
   .sticky-cta.visible {
     transform: translateY(0);
   }
+  @media (max-width: 768px) {
+    .sticky-cta { display: none !important; }
+  }
 
   /* Privacy Trust Bar */
   .privacy-trust-bar {
@@ -708,8 +711,8 @@
   .trust-bar-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    max-width: 1200px;
+    gap: 48px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   .trust-statement {
@@ -1156,7 +1159,7 @@
   .scroll-cue svg {
     width: 28px;
     height: 28px;
-    color: #9cb5be;
+    color: #4caf50;
     animation: scroll-cue-bounce 2s ease-in-out infinite;
   }
   @keyframes scroll-cue-bounce {
@@ -1356,7 +1359,7 @@
   @media (max-width: 768px) {
     .pro-subhead { font-size: 18px !important; }
     .feature-card-h3 { font-size: 18px !important; }
-    .privacy-h3 { font-size: 26px !important; }
+    .privacy-h3 { font-size: 20px !important; }
   }
 
   /* Hero CTA: left column on desktop, below phone on mobile */
@@ -1458,14 +1461,30 @@
     .cta-microcopy { font-size: 14px; margin-top: 8px; }
   }
 </style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyBJ2m9Hk4BEiQqA_jKlgTYZSlMqPauZApg",
+    authDomain: "jackknife-marketing.firebaseapp.com",
+    projectId: "jackknife-marketing",
+    storageBucket: "jackknife-marketing.firebasestorage.app",
+    messagingSenderId: "666676021582",
+    appId: "1:666676021582:web:25a6f06ba18aea6726761f",
+    measurementId: "G-9L0MQHEH7X"
+  });
+  var db = firebase.firestore();
+</script>
 </head>
 <body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container no-js">
 
 <!-- ============================================================ -->
 <!-- ANNOUNCEMENT BANNER                                          -->
 <!-- ============================================================ -->
-<div id="announce-banner" style="position: sticky; top: 0; z-index: 60; width: 100%; height: 40px; background: #063340; display: flex; align-items: center; justify-content: center; padding: 0 20px;">
-  <p style="font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 500; color: white; margin: 0; white-space: nowrap; text-align: center;">Just launched in Essex County, Massachusetts.</p>
+<div id="announce-banner" style="position: sticky; top: 0; z-index: 60; width: 100%; min-height: 40px; background: #063340; display: flex; align-items: center; justify-content: center; padding: 8px 40px 8px 20px;">
+  <p style="font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 500; color: white; margin: 0; text-align: center;">Now live in Essex County, MA — be one of the first 100 homeowners.</p>
   <button id="banner-close" aria-label="Dismiss banner" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 16px; cursor: pointer; padding: 4px 6px; line-height: 1; transition: color 0.2s ease;" onmouseover="this.style.color='rgba(255,255,255,1)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&times;</button>
 </div>
 <style>
@@ -1529,9 +1548,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
         </p>
         <div class="hero-cta-desktop">
           <a href="#" class="hero-cta-glow" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none;">
-            Try the First Photo
+            Get Early Access
           </a>
-          <p class="cta-microcopy">Free. No signup required.</p>
+          <p class="cta-microcopy">Limited spots in Essex County.</p>
         </div>
       </div>
 
@@ -1596,9 +1615,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
         </div>
         <div class="hero-cta-mobile">
           <a href="#" class="hero-cta-glow" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none;">
-            Try the First Photo
+            Get Early Access
           </a>
-          <p class="cta-microcopy">Free. No signup required.</p>
+          <p class="cta-microcopy">Limited spots in Essex County.</p>
         </div>
       </div>
     </div>
@@ -2901,6 +2920,13 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <div class="hwc-dot" data-hwcseqdot="2" style="width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 300ms ease; cursor: pointer;"></div>
       </div>
 
+        <!-- Mobile step caption (hidden on desktop) -->
+        <div class="hwc-mobile-caption" style="display: none; position: relative; height: 42px; overflow: hidden; margin-top: 8px; width: 100%;">
+          <p class="hwc-mobile-caption-text" data-hwccaption="0" style="position: absolute; inset: 0; margin: 0; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 18px; color: #00A385; text-align: center; line-height: 1.3; opacity: 1; transition: opacity 400ms ease;">Real jobs. Real reviews.</p>
+          <p class="hwc-mobile-caption-text" data-hwccaption="1" style="position: absolute; inset: 0; margin: 0; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 18px; color: #00A385; text-align: center; line-height: 1.3; opacity: 0; transition: opacity 400ms ease;">No more phone tag.</p>
+          <p class="hwc-mobile-caption-text" data-hwccaption="2" style="position: absolute; inset: 0; margin: 0; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 18px; color: #00A385; text-align: center; line-height: 1.3; opacity: 0; transition: opacity 400ms ease;">Build equity through documentation.</p>
+        </div>
+
         </div><!-- end hwc-phone-col -->
       </div><!-- end hwc-layout -->
     <div class="scroll-cue scroll-cue-hwc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
@@ -3137,6 +3163,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       .hwc-detail-text { display: none !important; }
       .hwc-phone-col { width: 100% !important; }
       .hwc-sidebar { display: none !important; }
+      .hwc-mobile-caption { display: block !important; }
     }
 
     /* Typewriter cursor */
@@ -3507,6 +3534,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
           if (dot) { dot.style.background = 'white'; dot.style.borderColor = '#d4e8e4'; }
           if (check) check.style.opacity = '0';
         }
+      });
+
+      // Update mobile caption crossfade
+      var mobileCaptions = section.querySelectorAll('.hwc-mobile-caption-text');
+      mobileCaptions.forEach(function(cap, j) {
+        cap.style.opacity = j === seqIdx ? '1' : '0';
       });
 
       // Update HWC progress fill
@@ -3897,8 +3930,12 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // t=7200ms: Knife icon transitions to green checkmark
       addTimer(function() {
         if (toastIcon) toastIcon.classList.add('complete');
-        // (headline rotation removed — static headlines now)
       }, 7200);
+
+      // t=8600ms: Toast fades out
+      addTimer(function() {
+        if (invoiceToast) invoiceToast.classList.remove('visible');
+      }, 8600);
 
       // t=9200ms: Sequence complete — loop back to Seq 0
       if (!paused) addTimer(onDone, SEQ_CONFIG[2].holds[0]);
@@ -4120,8 +4157,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <div style="flex: 1; min-width: 280px;">
           <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Save Money</p>
           <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 16px 0; line-height: 1.2;">Not every problem needs a contractor.</h2>
-          <p style="font-family: Montserrat, sans-serif; font-size: clamp(17px, 2vw, 20px); color: #6b7c85; margin: 0 0 28px 0; max-width: 500px; line-height: 1.6;">After Jackknife diagnoses the issue, it tells you whether it's a DIY fix or a job for a pro. If you can handle it, Jackknife handles the rest: a clear plan, matched to your skill level, from start to finish.</p>
-          <a href="#" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; color: #00A385; text-decoration: none; border-bottom: 2px solid #00A385; padding-bottom: 2px;">Try the First Photo →</a>
+          <p style="font-family: Montserrat, sans-serif; font-size: clamp(17px, 2vw, 20px); color: #6b7c85; margin: 0 0 28px 0; max-width: 500px; line-height: 1.6;">Issue diagnosed. Now Jackknife matches a DIY plan to your skill level, and walks you through every step.</p>
+          <a href="#" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none;">Get Early Access</a>
         </div>
 
         <!-- Right: Phone Mockup with DIY fix screenshot + play overlay -->
@@ -4174,7 +4211,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div style="background: #f0f8fa; border-radius: 16px; padding: 32px 24px 24px; overflow: visible; display: flex; flex-direction: column;">
         <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12.6px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 10px 0;">Inventory</p>
         <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">What you own, what it's worth.</h3>
-        <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Every item, document, and receipt. Organized by room, searchable instantly, and ready for insurance when you need it.</p>
+        <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Every item, document, and receipt, organized, searchable, and ready for insurance.</p>
         <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end;">
           <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
@@ -4217,7 +4254,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div style="background: #f0f8fa; border-radius: 16px; padding: 32px 24px 24px; overflow: visible; display: flex; flex-direction: column;">
         <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12.6px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 10px 0;">Projects</p>
         <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">Documented as you go.</h3>
-        <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Purchases, repairs, and renovations. Every project adds to your home's history and resale value.</p>
+        <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Purchases, repairs, and upgrades. Every project adds to your home's history and resale value.</p>
         <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end;">
           <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
@@ -4328,7 +4365,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div class="so-tab-panel active" role="tabpanel" id="so-panel-inventory" aria-labelledby="so-tab-inventory">
         <div class="so-tab-card">
           <h3>Know what you own and what it's worth.</h3>
-          <p class="so-body">Every item, document, and receipt. Organized by room, searchable instantly, and ready for insurance when you need it.</p>
+          <p class="so-body">Every item, document, and receipt, organized, searchable, and ready for insurance.</p>
           <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
@@ -4370,7 +4407,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div class="so-tab-panel" role="tabpanel" id="so-panel-projects" aria-labelledby="so-tab-projects">
         <div class="so-tab-card">
           <h3>Documented as you go.</h3>
-          <p class="so-body">Purchases, repairs, and renovations. Every project adds to your home's history and resale value.</p>
+          <p class="so-body">Purchases, repairs, and upgrades. Every project adds to your home's history and resale value.</p>
           <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
               <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #063340; border-radius: 0 0 12px 12px; z-index: 10;"></div>
@@ -4508,9 +4545,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
     <!-- punchline removed -->
     <div class="gsap-cta-button" style="display: flex; flex-direction: column; align-items: center;">
       <button class="font-headline font-semibold text-lg md:text-xl px-10 py-5 bg-white text-[#0a4a5c] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
-        Try the First Photo
+        Get Early Access
       </button>
-      <p class="cta-microcopy" style="color: rgba(255, 255, 255, 0.6);">Free. No signup required.</p>
+      <p class="cta-microcopy" style="color: rgba(255, 255, 255, 0.6);">Limited spots in Essex County.</p>
     </div>
     <p class="font-body text-sm text-[#9ca3af] tracking-wide italic gsap-cta-footer" style="margin-top: 48px;">
       Only available in Essex County, MA
@@ -4533,12 +4570,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="privacy.html">Privacy Policy</a>
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="terms.html">Terms of Service</a>
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="investors.html">Investors</a>
-    </div>
-    <div class="order-1 md:order-3">
-      <a class="font-label font-bold text-[#00A385] hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100 flex items-center gap-2" href="https://jackknifepro.com" target="_blank" rel="noopener noreferrer">
-        Are you a contractor? Learn about Jackknife Pro
-        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </a>
     </div>
   </div>
   <div class="max-w-7xl mx-auto px-12 mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-6 md:gap-4">
@@ -4564,7 +4595,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <p class="font-body text-on-surface-variant" style="font-size: 13px;">No credit cards or signup required.</p>
     </div>
     <button class="sticky-cta-glow bg-[#00A385] text-white font-headline px-8 py-3 rounded-full text-sm font-semibold active:scale-95 flex items-center gap-2 sm:ml-auto" style="position: relative; overflow: hidden; transition: all 500ms ease; box-shadow: 0 4px 16px rgba(0, 163, 133, 0.25), 0 0 20px rgba(0, 163, 133, 0.15);">
-      Try the First Photo
+      Get Early Access
       <span class="material-symbols-outlined text-sm">arrow_forward</span>
     </button>
   </div>
@@ -4956,6 +4987,190 @@ function animatePanelContent(panelIndex) {
 })();
 </script>
 
+
+<!-- ============================================================ -->
+<!-- Waitlist Modal -->
+<!-- ============================================================ -->
+<div id="waitlist-modal" style="display:none; position:fixed; inset:0; z-index:70; align-items:center; justify-content:center; padding:24px;">
+  <!-- Overlay -->
+  <div id="waitlist-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px); opacity:0; transition:opacity 300ms ease;"></div>
+  <!-- Card -->
+  <div id="waitlist-card" style="position:relative; width:100%; max-width:420px; background:linear-gradient(135deg,#063340 0%,#0a4a5c 100%); border-radius:20px; padding:40px 32px; box-shadow:0 24px 64px rgba(0,0,0,0.4); transform:scale(0.9); opacity:0; transition:transform 300ms cubic-bezier(0.2,0.85,0.25,1), opacity 300ms ease; text-align:center;">
+    <!-- Close button -->
+    <button id="waitlist-close" style="position:absolute; top:16px; right:16px; background:none; border:none; color:rgba(255,255,255,0.5); font-size:24px; cursor:pointer; padding:4px 8px; line-height:1; transition:color 200ms ease;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&times;</button>
+
+    <!-- Step 1: Location check -->
+    <div id="wl-step-location">
+      <img src="images/jk-logo-white.png" alt="Jackknife" style="height:28px; margin:0 auto 24px auto; display:block;" onerror="this.style.display='none'">
+      <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">Jackknife is live in Essex County, MA</h3>
+      <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 32px 0; line-height:1.5;">Where are you located?</p>
+      <button id="wl-btn-essex" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; margin:0 0 12px 0; transition:transform 150ms ease, box-shadow 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">I'm in Essex County</button>
+      <button id="wl-btn-other" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:14px 24px; border-radius:50px; cursor:pointer; transition:background 150ms ease;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">I'm somewhere else</button>
+    </div>
+
+    <!-- Step 2a: Essex County signup -->
+    <div id="wl-step-essex" style="display:none;">
+      <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">Get early access</h3>
+      <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 24px 0; line-height:1.5;">Be one of the first homeowners to try Jackknife.</p>
+      <form id="wl-form-essex" autocomplete="on">
+        <input id="wl-email-essex" type="email" placeholder="you@email.com" required autocomplete="email" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <button type="submit" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Get Early Access</button>
+      </form>
+      <p id="wl-error-essex" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ff6b6b; margin:8px 0 0 0;"></p>
+    </div>
+
+    <!-- Step 2b: Other location waitlist -->
+    <div id="wl-step-other" style="display:none;">
+      <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">We're expanding soon</h3>
+      <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 24px 0; line-height:1.5;">Drop your info and we'll let you know when Jackknife launches in your area.</p>
+      <form id="wl-form-other" autocomplete="on">
+        <input id="wl-email-other" type="email" placeholder="you@email.com" required autocomplete="email" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <input id="wl-zip" type="text" placeholder="Zip code" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <button type="submit" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Notify Me When Available</button>
+      </form>
+      <p id="wl-error-other" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ff6b6b; margin:8px 0 0 0;"></p>
+    </div>
+
+    <!-- Success state -->
+    <div id="wl-step-success" style="display:none;">
+      <div style="width:56px; height:56px; border-radius:50%; background:#00A385; display:flex; align-items:center; justify-content:center; margin:0 auto 20px auto;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 id="wl-success-title" style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;"></h3>
+      <p id="wl-success-body" style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0; line-height:1.5;"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var modal = document.getElementById('waitlist-modal');
+  var overlay = document.getElementById('waitlist-overlay');
+  var card = document.getElementById('waitlist-card');
+  var closeBtn = document.getElementById('waitlist-close');
+
+  var stepLocation = document.getElementById('wl-step-location');
+  var stepEssex = document.getElementById('wl-step-essex');
+  var stepOther = document.getElementById('wl-step-other');
+  var stepSuccess = document.getElementById('wl-step-success');
+
+  var btnEssex = document.getElementById('wl-btn-essex');
+  var btnOther = document.getElementById('wl-btn-other');
+
+  var formEssex = document.getElementById('wl-form-essex');
+  var formOther = document.getElementById('wl-form-other');
+
+  function showStep(step) {
+    stepLocation.style.display = step === 'location' ? 'block' : 'none';
+    stepEssex.style.display = step === 'essex' ? 'block' : 'none';
+    stepOther.style.display = step === 'other' ? 'block' : 'none';
+    stepSuccess.style.display = step === 'success' ? 'block' : 'none';
+  }
+
+  function openModal() {
+    showStep('location');
+    modal.style.display = 'flex';
+    // Trigger reflow then animate in
+    void card.offsetHeight;
+    overlay.style.opacity = '1';
+    card.style.opacity = '1';
+    card.style.transform = 'scale(1)';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.style.opacity = '0';
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.9)';
+    document.body.style.overflow = '';
+    setTimeout(function() { modal.style.display = 'none'; }, 300);
+  }
+
+  // Open triggers — all CTAs
+  document.querySelectorAll('.hero-cta-glow, .sticky-cta-glow, .gsap-cta-button button').forEach(function(el) {
+    el.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+  });
+  // DIY section CTA (no class, match by section)
+  var diySection = document.getElementById('diy-plans');
+  if (diySection) {
+    var diyCta = diySection.querySelector('a[href="#"]');
+    if (diyCta) diyCta.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+  }
+
+  // Close triggers
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+
+  // Step navigation
+  btnEssex.addEventListener('click', function() { showStep('essex'); });
+  btnOther.addEventListener('click', function() { showStep('other'); });
+
+  // Essex County form submit
+  formEssex.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('wl-email-essex').value.trim();
+    var errorEl = document.getElementById('wl-error-essex');
+    var submitBtn = formEssex.querySelector('button[type="submit"]');
+    if (!email) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving...';
+    errorEl.style.display = 'none';
+
+    db.collection('waitlist').add({
+      email: email,
+      location: 'essex_county',
+      source: 'marketing_site',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function() {
+      document.getElementById('wl-success-title').textContent = "You're in!";
+      document.getElementById('wl-success-body').textContent = "We'll be in touch soon with early access details.";
+      showStep('success');
+    }).catch(function(err) {
+      console.error('Waitlist error:', err);
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get Early Access';
+    });
+  });
+
+  // Other location form submit
+  formOther.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('wl-email-other').value.trim();
+    var zip = document.getElementById('wl-zip').value.trim();
+    var errorEl = document.getElementById('wl-error-other');
+    var submitBtn = formOther.querySelector('button[type="submit"]');
+    if (!email || !zip) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving...';
+    errorEl.style.display = 'none';
+
+    db.collection('waitlist').add({
+      email: email,
+      zipCode: zip,
+      location: 'other',
+      source: 'marketing_site',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function() {
+      document.getElementById('wl-success-title').textContent = "You're on the list!";
+      document.getElementById('wl-success-body').textContent = "We'll let you know when Jackknife launches in your area.";
+      showStep('success');
+    }).catch(function(err) {
+      console.error('Waitlist error:', err);
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Notify Me When Available';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
