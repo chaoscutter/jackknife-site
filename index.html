@@ -1327,6 +1327,7 @@
   .h1-glow-word {
     position: relative;
     display: inline-block;
+    color: #00A385;
   }
   .h1-glow-word::after {
     content: '';
@@ -1349,7 +1350,7 @@
   /* Hero H1 responsive sizing */
   .hero-h1-banner { font-size: 64px; }
   @media (max-width: 1024px) { .hero-h1-banner { font-size: 48px; } }
-  @media (max-width: 768px)  { .hero-h1-banner { font-size: 36px; } }
+  @media (max-width: 768px)  { .hero-h1-banner { font-size: 30px; } }
 
   /* Mobile font-size overrides for elements that don't scale down */
   @media (max-width: 768px) {
@@ -1464,7 +1465,7 @@
 <!-- ANNOUNCEMENT BANNER                                          -->
 <!-- ============================================================ -->
 <div id="announce-banner" style="position: sticky; top: 0; z-index: 60; width: 100%; height: 40px; background: #063340; display: flex; align-items: center; justify-content: center; padding: 0 20px;">
-  <p style="font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 500; color: white; margin: 0; white-space: nowrap; text-align: center;">Now launching in Essex County, Massachusetts.</p>
+  <p style="font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 500; color: white; margin: 0; white-space: nowrap; text-align: center;">Just launched in Essex County, Massachusetts.</p>
   <button id="banner-close" aria-label="Dismiss banner" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 16px; cursor: pointer; padding: 4px 6px; line-height: 1; transition: color 0.2s ease;" onmouseover="this.style.color='rgba(255,255,255,1)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&times;</button>
 </div>
 <style>
@@ -1510,7 +1511,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 <main id="main-content" class="pb-16 md:pb-8" style="overflow: visible; padding-top: 120px;">
   <!-- Above-hero headline -->
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px 32px; text-align: left;">
-    <h1 class="hero-h1-banner" style="font-family: Montserrat, sans-serif; font-weight: 800; color: #0a4a5c; margin: 0; line-height: 1.1;">Home <span class="h1-glow-word">intelligence.</span> Finally.</h1>
+    <h1 class="hero-h1-banner" style="font-family: Montserrat, sans-serif; font-weight: 800; color: #0a4a5c; margin: 0; line-height: 1.1;">Every homeowner deserves a home expert. <span class="h1-glow-word">Now you have one.</span></h1>
   </div>
 
   <!-- ONE PHOTO Hero -->
@@ -1524,7 +1525,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
           Never guess about your home again.
         </h2>
         <p style="font-family: Montserrat, sans-serif; font-size: clamp(16px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0; max-width: 500px;">
-          Point your phone at anything. Get instant clarity on what it is and what comes next.
+          Point your phone at anything. Get instant clarity on what it is, what shape it's in, and what to do about it.
         </p>
         <div class="hero-cta-desktop">
           <a href="#" class="hero-cta-glow" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #0a4a5c; padding: 16px 32px; border-radius: 50px; text-decoration: none;">
@@ -1670,7 +1671,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                       <p class="sw-badge-subtext" style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 12px; color: white; margin: 0; letter-spacing: 0.3px; line-height: 1.35; text-align: center; -webkit-font-smoothing: antialiased;">Let's find the water source.</p>
                     </div>
                     <!-- Spatial badge: fixed icon + swappable text -->
-                    <div class="sw-badge-spatial" style="position: absolute; inset: 0; display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; padding: 0 16px 0 14px; min-height: 44px;">
+                    <div class="sw-badge-spatial" style="position: absolute; inset: 0; display: flex; align-items: center; gap: 18px; opacity: 0; transition: opacity 400ms ease; pointer-events: none; padding: 0 16px 0 14px; min-height: 44px;">
                       <!-- Icon: anchored, never moves -->
                       <svg class="sw-knife-icon sw-knife-spatial jk-ai-knife-glow" width="38" height="38" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
                       <!-- Text area: only this content changes -->
@@ -1738,7 +1739,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <p style="font-size: 11px; font-weight: 700; color: #6b7c85; margin: 14px 0 0; text-transform: uppercase; letter-spacing: 0.8px;">How do you want to handle it?</p>
 
                   <!-- DIY -->
-                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
+                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 300ms ease, transform 300ms ease;">
                     <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #00A385, #15846e); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                     </div>
@@ -1749,7 +1750,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   </div>
 
                   <!-- Hire a Pro -->
-                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
+                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 300ms ease, transform 300ms ease;">
                     <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
@@ -1760,7 +1761,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   </div>
 
                   <!-- Save for Later -->
-                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;">
+                  <div class="sw-solution-card" style="background: #ffffff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity 300ms ease, transform 300ms ease;">
                     <div style="width: 36px; height: 36px; border-radius: 10px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
                     </div>
@@ -1794,16 +1795,16 @@ document.getElementById('banner-close').addEventListener('click', function() {
           <div class="sw-progress-fill" style="position: absolute; left: 14px; top: 76px; width: 2px; background: #00A385; border-radius: 1px; height: 0%; transition: height 400ms ease, top 400ms ease;"></div>
 
           <div class="sw-text" data-swtext="0" style="padding: 24px 24px 24px 40px; position: relative; transition: opacity 300ms ease; cursor: pointer;">
-            <span class="sw-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: #00A385; border: 2px solid #00A385; transition: background 300ms ease, border-color 300ms ease;"></span>
-            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #00A385; transition: color 300ms ease;">Snap the photo.</p>
+            <span class="sw-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: #00A385; border: 2px solid #00A385; display: flex; align-items: center; justify-content: center; transition: background 300ms ease, border-color 300ms ease;"><svg class="sw-dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 200ms ease;"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #00A385; transition: color 300ms ease, font-size 300ms ease;">Snap the photo.</p>
           </div>
           <div class="sw-text" data-swtext="1" style="padding: 24px 24px 24px 40px; position: relative; transition: opacity 300ms ease; opacity: 0.5; cursor: pointer;">
-            <span class="sw-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: white; border: 2px solid #d4e8e4; transition: background 300ms ease, border-color 300ms ease;"></span>
-            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #0a4a5c; transition: color 300ms ease;">Clarify the issue.</p>
+            <span class="sw-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: white; border: 2px solid #d4e8e4; display: flex; align-items: center; justify-content: center; transition: background 300ms ease, border-color 300ms ease;"><svg class="sw-dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 200ms ease;"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #0a4a5c; transition: color 300ms ease, font-size 300ms ease;">Clarify the issue.</p>
           </div>
           <div class="sw-text" data-swtext="2" style="padding: 24px 24px 24px 40px; position: relative; transition: opacity 300ms ease; opacity: 0.5; cursor: pointer;">
-            <span class="sw-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: white; border: 2px solid #d4e8e4; transition: background 300ms ease, border-color 300ms ease;"></span>
-            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #0a4a5c; transition: color 300ms ease;">Select the solution.</p>
+            <span class="sw-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: white; border: 2px solid #d4e8e4; display: flex; align-items: center; justify-content: center; transition: background 300ms ease, border-color 300ms ease;"><svg class="sw-dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 200ms ease;"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #0a4a5c; transition: color 300ms ease, font-size 300ms ease;">Select the solution.</p>
           </div>
         </div>
       </div>
@@ -2046,7 +2047,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   <script>
   // Something's Wrong 3-step auto-cycle with crossfade reveal + pause controls
   (function() {
-    var DURATIONS = [3000, 14500, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
+    var DURATIONS = [2600, 10800, 6820]; // ms per step (step 0: capture, step 1: spatial+diagnose, step 2: solutions)
     var section = document.getElementById('diagnose-home');
     if (!section) return;
 
@@ -2084,19 +2085,30 @@ document.getElementById('banner-close').addEventListener('click', function() {
       stepTitles.forEach(function(t, j) {
         t.style.opacity = j === activeText ? '1' : '0';
       });
-      // Sync desktop text sidebar blocks
+      // Sync desktop text sidebar blocks (3 states: active, completed, future)
       var textBlocks = section.querySelectorAll('.sw-text');
       textBlocks.forEach(function(t, j) {
         var title = t.querySelector('p');
         var dot = t.querySelector('.sw-step-dot');
+        var check = dot ? dot.querySelector('.sw-dot-check') : null;
         if (j === activeText) {
+          // ACTIVE — green dot, no check, enlarged text
           t.style.opacity = '1';
-          if (title) title.style.color = '#00A385';
+          if (title) { title.style.color = '#00A385'; title.style.fontSize = '30px'; }
           if (dot) { dot.style.background = '#00A385'; dot.style.borderColor = '#00A385'; }
+          if (check) check.style.opacity = '0';
+        } else if (j < activeText) {
+          // COMPLETED — green dot + white check, full opacity
+          t.style.opacity = '1';
+          if (title) { title.style.color = '#0a4a5c'; title.style.fontSize = '26px'; }
+          if (dot) { dot.style.background = '#00A385'; dot.style.borderColor = '#00A385'; }
+          if (check) check.style.opacity = '1';
         } else {
+          // FUTURE — white dot, dimmed
           t.style.opacity = '0.5';
-          if (title) title.style.color = '#0a4a5c';
+          if (title) { title.style.color = '#0a4a5c'; title.style.fontSize = '26px'; }
           if (dot) { dot.style.background = 'white'; dot.style.borderColor = '#d4e8e4'; }
+          if (check) check.style.opacity = '0';
         }
       });
       // Update progress line fill (pixel-based to match dot span)
@@ -2190,18 +2202,18 @@ document.getElementById('banner-close').addEventListener('click', function() {
         if (swShutterBtn) swShutterBtn.classList.remove('sw-pressed');
         if (cameraBar) cameraBar.style.opacity = '0';
       }, 350);
-      // +750ms: Green detection squares crossfade in (after camera bar has faded)
+      // +650ms: Green detection squares crossfade in (after camera bar has faded)
       captureTimer3 = setTimeout(function() {
         if (cleanPhoto) cleanPhoto.style.opacity = '0';
-      }, 750);
-      // +1700ms: Water Damage Detected badge rises in (crossfade completes ~1750ms)
+      }, 650);
+      // +1400ms: Water Damage Detected badge rises in (crossfade completes ~1750ms)
       captureTimer5 = setTimeout(function() {
         revealEls.forEach(function(el) {
           el.style.opacity = '1';
           var isCentered = el.style.left === '50%';
           el.style.transform = isCentered ? 'translate(-50%, 0) translateY(0)' : 'translate(0, 0)';
         });
-      }, 1700);
+      }, 1400);
     }
 
     // Phase 1: Fade out Analyzing, fade up Water Damage badge (no text change)
@@ -2292,24 +2304,24 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // Two-beat design: Beat 1 (thinking 3.5s) → Beat 2 (reveal 4s)
       // Total ~8.4s — gives user time to register loading + read result
 
-      // Phase A (+350ms): Crossfade out detection text — badge container stays
+      // Phase A (+300ms): Crossfade out detection text — badge container stays
       spatialATimer = setTimeout(function() {
         if (badgeDetect) badgeDetect.style.opacity = '0';
-      }, 350);
+      }, 300);
 
-      // Beat 1 (+800ms, holds 3.5s): Fade in spatial badge (icon + think text)
+      // Beat 1 (+600ms, holds 2.6s): Fade in spatial badge (icon + think text)
       spatialBTimer = setTimeout(function() {
         if (badgeSpatial) badgeSpatial.style.opacity = '1';
         if (badgeThink) badgeThink.style.opacity = '1';
         // Switch sidebar to "Clarify the issue" when spatial badge appears
         updateSidebarText(1);
-      }, 800);
+      }, 600);
 
-      // Beat 2 (+4400ms, holds 3s): Icon stays, only text swaps
+      // Beat 2 (+3200ms, holds 1.8s): Icon stays, only text swaps
       spatialCTimer = setTimeout(function() {
         if (badgeThink) badgeThink.style.opacity = '0';
         if (badgeInsight) badgeInsight.style.opacity = '1';
-      }, 4400);
+      }, 3200);
 
       spatialDTimer = setTimeout(function() {
         // Fade badge out
@@ -2338,7 +2350,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
               if (leakPanel) { leakPanel.style.opacity = '0'; }
               if (sourcePanel) { sourcePanel.style.opacity = '1'; sourcePanel.style.pointerEvents = 'auto'; }
 
-              // +2000ms: Auto-select "Fix the Toilet" CTA
+              // +1400ms: Auto-select "Fix the Toilet" CTA
               setTimeout(function() {
                 if (fixCeilingCta) fixCeilingCta.classList.add('sw-fix-pressed');
                 setTimeout(function() {
@@ -2347,18 +2359,18 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     fixCeilingCta.classList.add('sw-fix-selected');
                   }
                 }, 200);
-              }, 2000);
+              }, 1400);
 
               // +3500ms: read source + CTAs, then advance
               leakAdvanceTimer = setTimeout(function() {
                 bottomSheet.style.transition = 'opacity 300ms ease';
                 bottomSheet.style.opacity = '0';
                 setTimeout(function() { showStep(2); }, 350);
-              }, 2800);
-            }, 1000);
+              }, 2000);
+            }, 700);
           }, 200);
-        }, 2600);
-      }, 6600);
+        }, 1800);
+      }, 5000);
     }
 
     function showStep(i, skipTimer) {
@@ -2407,7 +2419,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         });
         // Wait for step fade-in to complete, then stagger cards
         cards.forEach(function(card, j) {
-          setTimeout(function() { card.classList.add('sw-card-visible'); }, 400 + (j * 120));
+          setTimeout(function() { card.classList.add('sw-card-visible'); }, 300 + (j * 120));
         });
       }
 
@@ -2577,18 +2589,27 @@ document.getElementById('banner-close').addEventListener('click', function() {
           <!-- Section label -->
           <p class="hwc-eyebrow" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 10px 0;">Hire with Confidence</p>
 
-          <!-- H1 rotator (swaps per sequence) -->
-          <div class="hwc-h1-wrap" style="position: relative; height: 92px; margin: 0 0 20px 0; transition: height 600ms cubic-bezier(0.4, 0, 0.2, 1);">
-            <h2 class="hwc-h1" data-hwcseqh1="0" style="position: absolute; top: 0; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Vetted by your street. Not an algorithm.</h2>
-            <h2 class="hwc-h1" data-hwcseqh1="1" style="position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">No more phone tag.</h2>
-            <h2 class="hwc-h1" data-hwcseqh1="2" style="position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0; line-height: 1.2; text-align: inherit;">Every receipt is money at resale.</h2>
-          </div>
+          <!-- Static H1 -->
+          <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 28px 0; line-height: 1.2;">Hire the pros your neighbors trust, on your terms.</h2>
 
-          <!-- H2 subtitle rotator (swaps per sequence) -->
-          <div class="hwc-h2-wrap" style="position: relative; height: 36px; width: 100%; margin: 0 0 20px 0;">
-            <span class="hwc-title" data-hwcseqtitle="0" style="position: absolute; left: 0; right: 0; opacity: 1; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Real Jobs. Real Reviews.</span>
-            <span class="hwc-title" data-hwcseqtitle="1" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Track your project in real time.</span>
-            <span class="hwc-title" data-hwcseqtitle="2" style="position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 800ms ease; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 28px); color: #00A385; text-align: inherit;">Your home's history, captured.</span>
+          <!-- Timeline sidebar -->
+          <div class="hwc-sidebar" style="display: flex; flex-direction: column; justify-content: center; gap: 0; position: relative; padding: 8px 0;">
+            <!-- Progress track -->
+            <div class="hwc-progress-line" style="position: absolute; left: 14px; width: 2px; background: #d4e8e4; border-radius: 1px;"></div>
+            <div class="hwc-progress-fill" style="position: absolute; left: 14px; width: 2px; background: #00A385; border-radius: 1px; height: 0%; transition: height 400ms ease;"></div>
+
+            <div class="hwc-step-label" data-hwcstep="0" style="padding: 16px 16px 16px 40px; position: relative; transition: opacity 300ms ease; cursor: pointer;">
+              <span class="hwc-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: #00A385; border: 2px solid #00A385; display: flex; align-items: center; justify-content: center; transition: background 300ms ease, border-color 300ms ease;"><svg class="hwc-dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 200ms ease;"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #00A385; transition: color 300ms ease, font-size 300ms ease;">Real jobs. Real reviews.</p>
+            </div>
+            <div class="hwc-step-label" data-hwcstep="1" style="padding: 16px 16px 16px 40px; position: relative; transition: opacity 300ms ease; opacity: 0.5; cursor: pointer;">
+              <span class="hwc-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: white; border: 2px solid #d4e8e4; display: flex; align-items: center; justify-content: center; transition: background 300ms ease, border-color 300ms ease;"><svg class="hwc-dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 200ms ease;"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #0a4a5c; transition: color 300ms ease, font-size 300ms ease;">No more phone tag.</p>
+            </div>
+            <div class="hwc-step-label" data-hwcstep="2" style="padding: 16px 16px 16px 40px; position: relative; transition: opacity 300ms ease; opacity: 0.5; cursor: pointer;">
+              <span class="hwc-step-dot" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: white; border: 2px solid #d4e8e4; display: flex; align-items: center; justify-content: center; transition: background 300ms ease, border-color 300ms ease;"><svg class="hwc-dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 200ms ease;"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; margin: 0; color: #0a4a5c; transition: color 300ms ease, font-size 300ms ease;">Build equity through documentation.</p>
+            </div>
           </div>
         </div>
 
@@ -3105,6 +3126,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       .hwc-title { text-align: center !important; }
       .hwc-detail-text { display: none !important; }
       .hwc-phone-col { width: 100% !important; }
+      .hwc-sidebar { display: none !important; }
     }
 
     /* Typewriter cursor */
@@ -3428,11 +3450,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
     // === Sequence-level UI ===
     var h1Wrap = section.querySelector('.hwc-h1-wrap');
     var h2Wrap = section.querySelector('.hwc-h2-wrap');
+    var hwcDotSpanPx = 0;
     function updateSeqUI(seqIdx) {
       // Size the H1/H2 wraps to match the active item's rendered height.
-      // The items are position:absolute with left:0;right:0 so they already
-      // render at the parent's width — offsetHeight gives the true height
-      // including text wrapping at the current viewport width.
       if (h1Wrap && h1s[seqIdx]) {
         var naturalH = h1s[seqIdx].offsetHeight;
         if (naturalH > 0) h1Wrap.style.height = naturalH + 'px';
@@ -3453,6 +3473,37 @@ document.getElementById('banner-close').addEventListener('click', function() {
       dots.forEach(function(d, j) {
         d.style.background = j === seqIdx ? '#00A385' : '#d1d5db';
       });
+
+      // Sync HWC sidebar timeline (active/completed/future states)
+      var hwcSteps = section.querySelectorAll('.hwc-step-label');
+      hwcSteps.forEach(function(step, j) {
+        var title = step.querySelector('p');
+        var dot = step.querySelector('.hwc-step-dot');
+        var check = dot ? dot.querySelector('.hwc-dot-check') : null;
+        if (j === seqIdx) {
+          step.style.opacity = '1';
+          if (title) { title.style.color = '#00A385'; title.style.fontSize = '30px'; }
+          if (dot) { dot.style.background = '#00A385'; dot.style.borderColor = '#00A385'; }
+          if (check) check.style.opacity = '0';
+        } else if (j < seqIdx) {
+          step.style.opacity = '1';
+          if (title) { title.style.color = '#0a4a5c'; title.style.fontSize = '26px'; }
+          if (dot) { dot.style.background = '#00A385'; dot.style.borderColor = '#00A385'; }
+          if (check) check.style.opacity = '1';
+        } else {
+          step.style.opacity = '0.5';
+          if (title) { title.style.color = '#0a4a5c'; title.style.fontSize = '26px'; }
+          if (dot) { dot.style.background = 'white'; dot.style.borderColor = '#d4e8e4'; }
+          if (check) check.style.opacity = '0';
+        }
+      });
+
+      // Update HWC progress fill
+      var hwcFill = section.querySelector('.hwc-progress-fill');
+      if (hwcFill && hwcDotSpanPx > 0) {
+        var frac = seqIdx === 0 ? 0 : seqIdx === 1 ? 0.5 : 1;
+        hwcFill.style.height = (frac * hwcDotSpanPx) + 'px';
+      }
     }
 
     // === Reset functions ===
@@ -3581,17 +3632,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
           for (var i = 1; i < proCards.length; i++) {
             proCards[i].classList.add('dimmed');
           }
-          // Crossfade H1/H2 to next-stage text in sync with card selection
-          h1s.forEach(function(h, j) { h.style.opacity = j === 1 ? '1' : '0'; });
-          titles.forEach(function(t, j) { t.style.opacity = j === 1 ? '1' : '0'; });
-          if (h1Wrap && h1s[1]) {
-            var nh = h1s[1].offsetHeight;
-            if (nh > 0) h1Wrap.style.height = nh + 'px';
-          }
-          if (h2Wrap && titles[1]) {
-            var nt = titles[1].offsetHeight;
-            if (nt > 0) h2Wrap.style.height = nt + 'px';
-          }
+          // (headline rotation removed — static headlines now)
         }, 2920);
       }
       // t=3500ms: Confirmation popup slides up from bottom
@@ -3766,17 +3807,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
           addCta.classList.add('added');
           addCta.textContent = 'Added \u2713';
         }
-        // Crossfade H1/H2 to Seq 2 text when "Added" confirms
-        h1s.forEach(function(h, j) { h.style.opacity = j === 2 ? '1' : '0'; });
-        titles.forEach(function(t, j) { t.style.opacity = j === 2 ? '1' : '0'; });
-        if (h1Wrap && h1s[2]) {
-          var nh = h1s[2].offsetHeight;
-          if (nh > 0) h1Wrap.style.height = nh + 'px';
-        }
-        if (h2Wrap && titles[2]) {
-          var nt = titles[2].offsetHeight;
-          if (nt > 0) h2Wrap.style.height = nt + 'px';
-        }
+        // (headline rotation removed — static headlines now)
       }, 5120);
 
       // Mark terminal at t=5600
@@ -3855,17 +3886,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       // t=7200ms: Knife icon transitions to green checkmark
       addTimer(function() {
         if (toastIcon) toastIcon.classList.add('complete');
-        // Crossfade H1/H2 back to Seq 0 text ahead of the loop
-        h1s.forEach(function(h, j) { h.style.opacity = j === 0 ? '1' : '0'; });
-        titles.forEach(function(t, j) { t.style.opacity = j === 0 ? '1' : '0'; });
-        if (h1Wrap && h1s[0]) {
-          var nh = h1s[0].offsetHeight;
-          if (nh > 0) h1Wrap.style.height = nh + 'px';
-        }
-        if (h2Wrap && titles[0]) {
-          var nt = titles[0].offsetHeight;
-          if (nt > 0) h2Wrap.style.height = nt + 'px';
-        }
+        // (headline rotation removed — static headlines now)
       }, 7200);
 
       // t=9200ms: Sequence complete — loop back to Seq 0
@@ -3920,6 +3941,23 @@ document.getElementById('banner-close').addEventListener('click', function() {
       d.addEventListener('click', function(e) {
         e.stopPropagation();
         var target = parseInt(d.getAttribute('data-hwcseqdot'));
+        clearAllTimers();
+        paused = false;
+        userClicked = true;
+        resetSeq0();
+        resetSeq1Frame0();
+        resetSeq1Frame1();
+        resetSeq2Frame0();
+        playSequence(target);
+      });
+    });
+
+    // === Sidebar step click handlers ===
+    var hwcStepLabels = section.querySelectorAll('.hwc-step-label');
+    hwcStepLabels.forEach(function(step) {
+      step.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var target = parseInt(step.getAttribute('data-hwcstep'));
         clearAllTimers();
         paused = false;
         userClicked = true;
@@ -4016,6 +4054,23 @@ document.getElementById('banner-close').addEventListener('click', function() {
         resetSeq1Frame1();
         resetSeq2Frame0();
         playSequence(0);
+
+        // Measure HWC sidebar dot positions for progress bar
+        var hwcSidebarDots = section.querySelectorAll('.hwc-step-dot');
+        var hwcProgressLine = section.querySelector('.hwc-progress-line');
+        var hwcProgressFillEl = section.querySelector('.hwc-progress-fill');
+        if (hwcSidebarDots.length >= 3 && hwcProgressLine) {
+          var sidebarEl = hwcProgressLine.parentElement;
+          var sidebarRect = sidebarEl.getBoundingClientRect();
+          var firstDotRect = hwcSidebarDots[0].getBoundingClientRect();
+          var lastDotRect = hwcSidebarDots[hwcSidebarDots.length - 1].getBoundingClientRect();
+          var lineTop = (firstDotRect.top + firstDotRect.height / 2) - sidebarRect.top;
+          var lineBottom = sidebarRect.bottom - (lastDotRect.top + lastDotRect.height / 2);
+          hwcProgressLine.style.top = lineTop + 'px';
+          hwcProgressLine.style.bottom = lineBottom + 'px';
+          if (hwcProgressFillEl) hwcProgressFillEl.style.top = lineTop + 'px';
+          hwcDotSpanPx = (lastDotRect.top + lastDotRect.height / 2) - (firstDotRect.top + firstDotRect.height / 2);
+        }
       } else if (!inView && wasInView) {
         // Left view — pause and clear any running timers
         paused = true;
@@ -4041,7 +4096,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
         <div style="flex: 1; min-width: 280px;">
           <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Save Money</p>
           <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 16px 0; line-height: 1.2;">Not every problem needs a contractor.</h2>
-          <p style="font-family: Montserrat, sans-serif; font-size: clamp(17px, 2vw, 20px); color: #6b7c85; margin: 0; max-width: 500px; line-height: 1.6;">After Jackknife diagnoses the issue, it tells you whether it's a DIY fix or a job for a pro. If you can handle it, Jackknife handles the rest: a clear plan, matched to your skill level, from start to finish.</p>
+          <p style="font-family: Montserrat, sans-serif; font-size: clamp(17px, 2vw, 20px); color: #6b7c85; margin: 0 0 28px 0; max-width: 500px; line-height: 1.6;">After Jackknife diagnoses the issue, it tells you whether it's a DIY fix or a job for a pro. If you can handle it, Jackknife handles the rest: a clear plan, matched to your skill level, from start to finish.</p>
+          <a href="#" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; color: #00A385; text-decoration: none; border-bottom: 2px solid #00A385; padding-bottom: 2px;">Try the First Photo →</a>
         </div>
 
         <!-- Right: Phone Mockup with DIY fix screenshot + play overlay -->
@@ -4085,7 +4141,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
     <div style="max-width: 1200px; margin: 0 auto; text-align: center; margin-bottom: 48px;">
       <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.75px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 12px 0;">Stay Organized</p>
       <h2 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 38px); color: #0a4a5c; margin: 0 0 16px 0; line-height: 1.2;">Stop remembering. Start living.</h2>
-      <p style="font-family: Montserrat, sans-serif; font-size: clamp(17px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0 auto; max-width: 640px;">Your home shouldn't live in your head. Jackknife tracks what you own, what you've done, and what's coming up next, so you don't have to.</p>
+      <p style="font-family: Montserrat, sans-serif; font-size: clamp(17px, 2vw, 20px); color: #6b7c85; line-height: 1.6; margin: 0 auto; max-width: 740px;">Your home shouldn't live in your head. Jackknife tracks what you own, what you've done, and what's coming up next, so you don't have to.</p>
     </div>
     <!-- Three-column grid -->
     <div class="stay-organized-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1200px; margin: 0 auto;">
@@ -4108,7 +4164,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <div style="background: #063340; border-radius: 8px; padding: 12px 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
                     <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
                     <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
-                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0;">Insurance<br>Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Insurance</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
@@ -4123,8 +4179,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Refrigerator</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$2,400 · Good</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$14,000 · Fair</p></div>
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 18 3 22 9 12 22 2 9"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="22" x2="8" y2="9"/><line x1="12" y1="22" x2="16" y2="9"/><line x1="6" y1="3" x2="8" y2="9"/><line x1="18" y1="3" x2="16" y2="9"/></svg></div>
+                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Diamond Ring</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$5,000</p></div>
                   </div>
                 </div>
               </div>
@@ -4136,7 +4192,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <!-- Projects -->
       <div style="background: #f0f8fa; border-radius: 16px; padding: 32px 24px 24px; overflow: visible; display: flex; flex-direction: column;">
         <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12.6px; letter-spacing: 2px; text-transform: uppercase; color: #00A385; margin: 0 0 10px 0;">Projects</p>
-        <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">Your home, documented as you go.</h3>
+        <h3 class="feature-card-h3" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px; color: #0a4a5c; margin: 0 0 8px 0; line-height: 1.3;">Documented as you go.</h3>
         <p style="font-family: Montserrat, sans-serif; font-size: 14px; color: #6b7c85; line-height: 1.5; margin: 0 0 24px 0;">Purchases, repairs, and renovations. Every project adds to your home's history and resale value.</p>
         <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end;">
           <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
@@ -4147,7 +4203,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 22px 16px 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Home Projects</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Projects</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4212,7 +4268,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">This Week</p>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
-                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Inspect dryer vent</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Every 6 months · Laundry</p></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Purchase new home insurance policy</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Due May 30 · Insurance</p></div>
                   </div>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
@@ -4261,7 +4317,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <div style="background: #063340; border-radius: 8px; padding: 12px 10px; display: flex; justify-content: space-between; gap: 6px; color: white; margin-bottom: 12px;">
                     <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Items</p><p style="font-size: 12px; font-weight: 800; margin: 0;">23</p></div>
                     <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Value</p><p style="font-size: 12px; font-weight: 800; margin: 0;">$47K</p></div>
-                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0;">Insurance<br>Ready</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
+                    <div style="text-align: center;"><p style="font-size: 7px; font-weight: 500; opacity: 0.7; margin: 0 0 4px 0; white-space: nowrap;">Insurance</p><p style="font-size: 12px; font-weight: 800; color: #00A385; margin: 0;">87%</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 7px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
@@ -4276,8 +4332,8 @@ document.getElementById('banner-close').addEventListener('click', function() {
                     <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Refrigerator</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$2,400 &middot; Good</p></div>
                   </div>
                   <div style="background: white; border-radius: 10px; padding: 9px; border: 1px solid #e8edf0; display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Roof Shingles</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$14,000 &middot; Fair</p></div>
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #063340, #0a4a5c); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 18 3 22 9 12 22 2 9"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="22" x2="8" y2="9"/><line x1="12" y1="22" x2="16" y2="9"/><line x1="6" y1="3" x2="8" y2="9"/><line x1="18" y1="3" x2="16" y2="9"/></svg></div>
+                    <div><p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Diamond Ring</p><p style="font-weight: 400; font-size: 9px; color: #6b7c85; margin: 0;">$5,000</p></div>
                   </div>
                 </div>
               </div>
@@ -4289,7 +4345,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <!-- Panel: Projects -->
       <div class="so-tab-panel" role="tabpanel" id="so-panel-projects" aria-labelledby="so-tab-projects">
         <div class="so-tab-card">
-          <h3>Your home, documented as you go.</h3>
+          <h3>Documented as you go.</h3>
           <p class="so-body">Purchases, repairs, and renovations. Every project adds to your home's history and resale value.</p>
           <div class="so-phone-wrap" style="width: 220px; height: 380px; position: relative;">
             <div style="position: absolute; inset: 0; background: #063340; border-radius: 24px 24px 0 0; padding: 6px 6px 0;">
@@ -4299,7 +4355,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <span style="font-family: Montserrat; font-size: 6px; font-weight: 700; letter-spacing: 1px; color: #0a4a5c; text-transform: uppercase;">Jackknife</span>
                 </div>
                 <div style="padding: 22px 16px 16px; font-family: Montserrat, sans-serif;">
-                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Home Projects</h1>
+                  <h1 style="font-weight: 800; font-size: 13px; color: #063340; margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.2px; text-align: center;">Projects</h1>
                   <div style="background: white; border-radius: 10px; padding: 12px; border: 1px solid #e8edf0; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                       <p style="font-weight: 700; font-size: 11px; color: #063340; margin: 0;">Deck Repair</p>
@@ -4363,7 +4419,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
                   <p style="font-weight: 700; font-size: 9px; color: #063340; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px;">This Week</p>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
-                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Inspect dryer vent</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Every 6 months &middot; Laundry</p></div>
+                    <div><p style="font-weight: 600; font-size: 10px; color: #063340; margin: 0;">Purchase new home insurance policy</p><p style="font-weight: 400; font-size: 8px; color: #6b7c85; margin: 0;">Due May 30 &middot; Insurance</p></div>
                   </div>
                   <div style="background: white; border-radius: 8px; padding: 9px; border: 1px solid #e8edf0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <div style="width: 18px; height: 18px; border-radius: 5px; border: 2px solid #d1d5db; flex-shrink: 0;"></div>
@@ -4403,7 +4459,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <div class="trust-statement gsap-trust-col">
         <div class="trust-content">
           <p class="trust-label">We don't sell your data.</p>
-          <p class="trust-copy">Contractors pay for qualified matches to homeowner job requests.</p>
+          <p class="trust-copy">We make money from contractors, not from you.</p>
         </div>
       </div>
       <div class="trust-statement gsap-trust-col">
@@ -4423,7 +4479,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 <section class="bg-cta-custom text-white px-6 overflow-hidden relative gsap-cta-section" id="cta" style="padding: 64px 24px;">
   <div class="mx-auto text-center relative z-10" style="max-width: 900px;">
     <h2 class="font-headline font-extrabold tracking-tight leading-tight text-white gsap-cta-h1" style="font-size: clamp(26px, 4vw, 42px); margin: 0 0 24px 0;">
-      Built for homeowners, not contractors.
+      Home intelligence. Finally.
     </h2>
     <!-- punchline removed -->
     <div class="gsap-cta-button" style="display: flex; flex-direction: column; align-items: center;">
@@ -4450,8 +4506,9 @@ document.getElementById('banner-close').addEventListener('click', function() {
       &copy; 2026 Jackknife &middot; Essex County, MA
     </div>
     <div class="flex gap-6 order-2 md:order-2">
-      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
-      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="privacy.html">Privacy Policy</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="terms.html">Terms of Service</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="investors.html">Investors</a>
     </div>
     <div class="order-1 md:order-3">
       <a class="font-label font-bold text-[#00A385] hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100 flex items-center gap-2" href="https://jackknifepro.com" target="_blank" rel="noopener noreferrer">
@@ -4468,7 +4525,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <a class="text-[#9ca3af] hover:text-white transition-colors" href="#">
         <span class="material-symbols-outlined">share</span>
       </a>
-      <a class="text-[#9ca3af] hover:text-white transition-colors" href="#">
+      <a class="text-[#9ca3af] hover:text-white transition-colors" href="mailto:info@jackknife.co">
         <span class="material-symbols-outlined">mail</span>
       </a>
     </div>
@@ -4556,7 +4613,7 @@ document.documentElement.classList.remove("no-js");
   gsap.from(".gsap-trust-bar", {
     opacity: 0,
     y: 32,
-    duration: 0.7,
+    duration: 0.6,
     ease: "power2.out",
     scrollTrigger: { trigger: ".gsap-trust-bar", start: "top 85%", once: true }
   });
@@ -4565,7 +4622,7 @@ document.documentElement.classList.remove("no-js");
     y: 16,
     duration: 0.5,
     stagger: 0.12,
-    delay: 0.3,
+    delay: 0.2,
     ease: "power2.out",
     scrollTrigger: { trigger: ".gsap-trust-bar", start: "top 85%", once: true }
   });
@@ -4614,7 +4671,7 @@ document.documentElement.classList.remove("no-js");
   gsap.from(".gsap-hiw-divider", {
     width: 0,
     duration: 0.5,
-    delay: 0.3,
+    delay: 0.2,
     stagger: 0.12,
     ease: "power2.out",
     scrollTrigger: { trigger: ".gsap-hiw-columns", start: "top 80%", once: true }
@@ -4624,7 +4681,7 @@ document.documentElement.classList.remove("no-js");
   gsap.from(".pillar-section", {
     opacity: 0,
     y: 32,
-    duration: 0.7,
+    duration: 0.6,
     ease: "power2.out",
     scrollTrigger: { trigger: ".pillar-section", start: "top 80%", once: true }
   });
@@ -4641,7 +4698,7 @@ document.documentElement.classList.remove("no-js");
     opacity: 0,
     y: 20,
     duration: 0.6,
-    delay: 0.2,
+    delay: 0.15,
     ease: "power2.out",
     scrollTrigger: { trigger: ".brand-statement-section", start: "top 90%", once: true }
   });
@@ -4649,7 +4706,7 @@ document.documentElement.classList.remove("no-js");
     opacity: 0,
     y: 20,
     duration: 0.6,
-    delay: 0.4,
+    delay: 0.3,
     ease: "power2.out",
     scrollTrigger: { trigger: ".brand-statement-section", start: "top 90%", once: true }
   });
@@ -4687,31 +4744,31 @@ document.documentElement.classList.remove("no-js");
 
   // Hero: cue appears after hero phone animation settles (~2s)
   gsap.from(".scroll-cue-hero", Object.assign({}, scrollCueDefaults, {
-    delay: 2.5,
+    delay: 1.6,
     scrollTrigger: { trigger: "#hero", start: "top 80%", once: true }
   }));
 
   // How It Works: after columns stagger in (~1.2s total)
   gsap.from(".scroll-cue-hiw", Object.assign({}, scrollCueDefaults, {
-    delay: 1.5,
+    delay: 0.9,
     scrollTrigger: { trigger: "#diagnose-home", start: "top 60%", once: true }
   }));
 
   // Hire With Confidence: after phone carousel loads (~1.5s)
   gsap.from(".scroll-cue-hwc", Object.assign({}, scrollCueDefaults, {
-    delay: 2,
+    delay: 1,
     scrollTrigger: { trigger: "#hire-with-confidence", start: "top 60%", once: true }
   }));
 
   // DIY Plans: after content fades in (~1s)
   gsap.from(".scroll-cue-diy", Object.assign({}, scrollCueDefaults, {
-    delay: 1.5,
+    delay: 0.8,
     scrollTrigger: { trigger: "#diy-plans", start: "top 60%", once: true }
   }));
 
   // Stay Organized: after card grid appears (~1s)
   gsap.from(".scroll-cue-organized", Object.assign({}, scrollCueDefaults, {
-    delay: 1.5,
+    delay: 0.8,
     scrollTrigger: { trigger: ".scroll-cue-organized", start: "top 90%", once: true }
   }));
 
@@ -4720,7 +4777,7 @@ document.documentElement.classList.remove("no-js");
     opacity: 0,
     y: 16,
     duration: 0.6,
-    delay: 1.8,
+    delay: 1.2,
     ease: "power2.out",
     scrollTrigger: { trigger: "#hero", start: "top 80%", once: true }
   });
@@ -4800,7 +4857,7 @@ function animatePanelContent(panelIndex) {
         // Badges appear right after pill fades
         setTimeout(function() {
           callouts.forEach(function(c) { c.classList.add('visible'); });
-        }, 400);
+        }, 250);
       }, SHIMMER_DURATION);
     }, BADGE_APPEAR);
 
@@ -4814,7 +4871,7 @@ function animatePanelContent(panelIndex) {
   setTimeout(function() {
     runCycle();
     setInterval(runCycle, CYCLE);
-  }, 800);
+  }, 600);
 })();
 </script>
 

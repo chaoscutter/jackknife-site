@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jackknife - The Opportunity</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00A385",
+          "surface": "#f0f8fa",
+          "on-surface": "#111827",
+        },
+        fontFamily: {
+          "headline": ["Montserrat", "system-ui", "sans-serif"],
+          "body": ["Inter", "system-ui", "sans-serif"],
+          "label": ["Poppins", "sans-serif"]
+        },
+      },
+    },
+  }
+</script>
+</head>
+<body class="bg-[#063340] text-white font-body antialiased">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#063340]/70 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center w-full px-4 sm:px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="select-none whitespace-nowrap">
+      <img src="images/jk-logo.png" alt="Jackknife" style="height: 36px; object-fit: contain;" />
+    </a>
+    <div class="flex items-center gap-3 sm:gap-8">
+      <a class="text-white/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="features.html">Features</a>
+      <a class="text-white/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="faq.html">FAQ</a>
+      <a class="text-white/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="about.html">Our Story</a>
+    </div>
+  </div>
+</nav>
+
+<!-- The Opportunity -->
+<section style="padding: 140px 24px 80px; background: linear-gradient(180deg, #0a3d4c 0%, #063340 100%); min-height: 100vh; display: flex; align-items: center;">
+  <div style="max-width: 720px; margin: 0 auto; width: 100%;">
+
+    <!-- Eyebrow -->
+    <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #00A385; margin: 0 0 20px 0;">The Opportunity</p>
+
+    <!-- Headline -->
+    <h1 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(32px, 5vw, 48px); color: white; margin: 0 0 32px 0; line-height: 1.2;">$16,000 a year. That's what it costs to own a home, beyond the mortgage.</h1>
+
+    <!-- Body copy with emphasized percentages (ascending order) -->
+    <p style="font-family: Inter, sans-serif; font-size: clamp(17px, 2vw, 20px); color: rgba(255,255,255,0.7); line-height: 1.7; margin: 0 0 40px 0;">
+      Property taxes up <span style="color: #00A385; font-weight: 700;">54%</span>. Maintenance up <span style="color: #00A385; font-weight: 700;">61%</span>. Insurance up <span style="color: #00A385; font-weight: 700;">74%</span>. And homeowners are managing all of it with shoeboxes, memory, and guesswork. No system of record. No way to plan. No leverage at resale.
+    </p>
+
+    <!-- Pivot statement -->
+    <p style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3.5vw, 34px); color: white; margin: 0 0 24px 0; line-height: 1.3;">84 million homeowners. No operating system.</p>
+
+    <!-- Solution line -->
+    <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: clamp(20px, 2.5vw, 26px); color: #00A385; margin: 0 0 56px 0; line-height: 1.4;">Jackknife is the operating system for homeownership.</p>
+
+    <!-- Status block -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.12); padding-top: 32px; margin-bottom: 40px;">
+      <p style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin: 0 0 12px 0;">Where we are</p>
+      <p style="font-family: Inter, sans-serif; font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 0 0 12px 0;">Pre-seed. Bootstrapped. Product live. Piloting with first 100 homeowners in Essex County, MA.</p>
+      <p style="font-family: Inter, sans-serif; font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 0;">Contractors pay for introductions. Homeowner data stays with the homeowner.</p>
+    </div>
+
+    <!-- CTA -->
+    <p style="font-family: Inter, sans-serif; font-size: 17px; color: rgba(255,255,255,0.6); margin: 0 0 16px 0;">Raising a pre-seed round.</p>
+    <a href="mailto:ryan@jackknife.co" style="display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 16px; color: white; background: #00A385; padding: 16px 32px; border-radius: 50px; text-decoration: none; transition: all 200ms ease; box-shadow: 0 4px 16px rgba(0, 163, 133, 0.3);"
+       onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 8px 24px rgba(0,163,133,0.4)'"
+       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 16px rgba(0,163,133,0.3)'">
+      Talk to the Founder →
+    </a>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full pt-10 pb-12 bg-[#063340]" style="border-top: 1px solid rgba(255,255,255,0.1);">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+    <div class="text-[#d1d5db] font-body text-sm">
+      &copy; 2026 Jackknife &middot; Essex County, MA
+    </div>
+    <div class="text-2xl font-black tracking-tighter font-headline select-none">
+      <span class="text-white">jack</span><span class="text-[#00a385]">knife</span>
+    </div>
+    <div class="flex gap-6 text-[#d1d5db] font-body text-sm">
+      <a class="hover:text-white transition-colors" href="privacy.html">Privacy</a>
+      <a class="hover:text-white transition-colors" href="terms.html">Terms</a>
+      <a class="hover:text-white transition-colors text-white" href="investors.html">Investors</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
