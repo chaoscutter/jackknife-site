@@ -30,6 +30,22 @@
     background: linear-gradient(135deg, #063340 0%, #0a4a5c 50%, #063340 100%);
   }
 </style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyBJ2m9Hk4BEiQqA_jKlgTYZSlMqPauZApg",
+    authDomain: "jackknife-marketing.firebaseapp.com",
+    projectId: "jackknife-marketing",
+    storageBucket: "jackknife-marketing.firebasestorage.app",
+    messagingSenderId: "666676021582",
+    appId: "1:666676021582:web:25a6f06ba18aea6726761f",
+    measurementId: "G-9L0MQHEH7X"
+  });
+  var db = firebase.firestore();
+</script>
 </head>
 <body class="bg-[#f0f8fa] text-[#111827] font-body antialiased">
 
@@ -166,9 +182,9 @@
       Coming home shouldn't feel like a second job.
     </h2>
     <div style="margin: 0 0 40px 0;"></div>
-    <button class="font-headline font-semibold text-lg px-10 py-5 bg-white text-[#0a4a5c] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
-      Get Jackknife (It's Free)
-    </button>
+    <a href="#" class="inline-block font-headline font-semibold text-lg px-10 py-5 bg-white text-[#0a4a5c] rounded-full hover:bg-[#f0f8fa] transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl" style="text-decoration:none;">
+      Get Early Access
+    </a>
     <p style="font-family: Inter, sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 32px; letter-spacing: 1px; text-transform: uppercase;">
       Available in Essex County, MA
     </p>
@@ -220,6 +236,144 @@
       chevron.style.transform = 'rotate(180deg)';
     }
   }
+</script>
+
+<!-- Waitlist Modal -->
+<div id="waitlist-modal" style="display:none; position:fixed; inset:0; z-index:70; align-items:center; justify-content:center; padding:24px;">
+  <div id="waitlist-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px); opacity:0; transition:opacity 300ms ease;"></div>
+  <div id="waitlist-card" style="position:relative; width:100%; max-width:420px; background:linear-gradient(135deg,#063340 0%,#0a4a5c 100%); border-radius:20px; padding:40px 32px; box-shadow:0 24px 64px rgba(0,0,0,0.4); transform:scale(0.9); opacity:0; transition:transform 300ms cubic-bezier(0.2,0.85,0.25,1), opacity 300ms ease; text-align:center;">
+    <button id="waitlist-close" style="position:absolute; top:16px; right:16px; background:none; border:none; color:rgba(255,255,255,0.5); font-size:24px; cursor:pointer; padding:4px 8px; line-height:1; transition:color 200ms ease;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&times;</button>
+    <div id="wl-step-location">
+      <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">Jackknife is live in Essex County, MA</h3>
+      <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 32px 0; line-height:1.5;">Where are you located?</p>
+      <button id="wl-btn-essex" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; margin:0 0 12px 0; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">I'm in Essex County</button>
+      <button id="wl-btn-other" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:14px 24px; border-radius:50px; cursor:pointer; transition:background 150ms ease;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">I'm somewhere else</button>
+    </div>
+    <div id="wl-step-essex" style="display:none;">
+      <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">Get early access</h3>
+      <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 24px 0; line-height:1.5;">Be one of the first homeowners to try Jackknife.</p>
+      <form id="wl-form-essex" autocomplete="on">
+        <input id="wl-email-essex" type="email" placeholder="you@email.com" required autocomplete="email" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <button type="submit" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Get Early Access</button>
+      </form>
+      <p id="wl-error-essex" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ff6b6b; margin:8px 0 0 0;"></p>
+    </div>
+    <div id="wl-step-other" style="display:none;">
+      <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">We're expanding soon</h3>
+      <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 24px 0; line-height:1.5;">Drop your info and we'll let you know when Jackknife launches in your area.</p>
+      <form id="wl-form-other" autocomplete="on">
+        <input id="wl-email-other" type="email" placeholder="you@email.com" required autocomplete="email" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <input id="wl-zip" type="text" placeholder="Zip code" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <button type="submit" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Notify Me When Available</button>
+      </form>
+      <p id="wl-error-other" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ff6b6b; margin:8px 0 0 0;"></p>
+    </div>
+    <div id="wl-step-success" style="display:none;">
+      <div style="width:56px; height:56px; border-radius:50%; background:#00A385; display:flex; align-items:center; justify-content:center; margin:0 auto 20px auto;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 id="wl-success-title" style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;"></h3>
+      <p id="wl-success-body" style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0; line-height:1.5;"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var modal = document.getElementById('waitlist-modal');
+  var overlay = document.getElementById('waitlist-overlay');
+  var card = document.getElementById('waitlist-card');
+  var closeBtn = document.getElementById('waitlist-close');
+  var stepLocation = document.getElementById('wl-step-location');
+  var stepEssex = document.getElementById('wl-step-essex');
+  var stepOther = document.getElementById('wl-step-other');
+  var stepSuccess = document.getElementById('wl-step-success');
+
+  function showStep(step) {
+    stepLocation.style.display = step === 'location' ? 'block' : 'none';
+    stepEssex.style.display = step === 'essex' ? 'block' : 'none';
+    stepOther.style.display = step === 'other' ? 'block' : 'none';
+    stepSuccess.style.display = step === 'success' ? 'block' : 'none';
+  }
+
+  function openModal() {
+    showStep('location');
+    modal.style.display = 'flex';
+    void card.offsetHeight;
+    overlay.style.opacity = '1';
+    card.style.opacity = '1';
+    card.style.transform = 'scale(1)';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.style.opacity = '0';
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.9)';
+    document.body.style.overflow = '';
+    setTimeout(function() { modal.style.display = 'none'; }, 300);
+  }
+
+  document.querySelectorAll('a[href="#"]').forEach(function(el) {
+    if (el.textContent.trim().indexOf('Get Early Access') !== -1) {
+      el.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+    }
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+
+  document.getElementById('wl-btn-essex').addEventListener('click', function() { showStep('essex'); });
+  document.getElementById('wl-btn-other').addEventListener('click', function() { showStep('other'); });
+
+  document.getElementById('wl-form-essex').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('wl-email-essex').value.trim();
+    var errorEl = document.getElementById('wl-error-essex');
+    var submitBtn = this.querySelector('button[type="submit"]');
+    if (!email) return;
+    submitBtn.disabled = true; submitBtn.textContent = 'Saving...'; errorEl.style.display = 'none';
+    db.collection('waitlist').add({
+      email: email, location: 'essex_county', source: 'faq_page',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function() {
+      document.getElementById('wl-success-title').textContent = "You're in!";
+      document.getElementById('wl-success-body').textContent = "We'll be in touch soon with early access details.";
+      showStep('success');
+    }).catch(function(err) {
+      console.error('Waitlist error:', err);
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+      submitBtn.disabled = false; submitBtn.textContent = 'Get Early Access';
+    });
+  });
+
+  document.getElementById('wl-form-other').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('wl-email-other').value.trim();
+    var zip = document.getElementById('wl-zip').value.trim();
+    var errorEl = document.getElementById('wl-error-other');
+    var submitBtn = this.querySelector('button[type="submit"]');
+    if (!email || !zip) return;
+    submitBtn.disabled = true; submitBtn.textContent = 'Saving...'; errorEl.style.display = 'none';
+    db.collection('waitlist').add({
+      email: email, zipCode: zip, location: 'other', source: 'faq_page',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function() {
+      document.getElementById('wl-success-title').textContent = "You're on the list!";
+      document.getElementById('wl-success-body').textContent = "We'll let you know when Jackknife launches in your area.";
+      showStep('success');
+    }).catch(function(err) {
+      console.error('Waitlist error:', err);
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+      submitBtn.disabled = false; submitBtn.textContent = 'Notify Me When Available';
+    });
+  });
+})();
 </script>
 
 </body>
