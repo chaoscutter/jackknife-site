@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jackknife - SMS Updates Sign-Up</title>
+<meta name="description" content="Sign up to receive occasional SMS updates from Jackknife about your waitlist status and product launch."/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00A385",
+          "surface": "#f0f8fa",
+          "on-surface": "#111827",
+        },
+        fontFamily: {
+          "headline": ["Montserrat", "system-ui", "sans-serif"],
+          "body": ["Inter", "system-ui", "sans-serif"],
+          "label": ["Poppins", "sans-serif"]
+        },
+      },
+    },
+  }
+</script>
+<style>
+  .sms-section h2 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #0a4a5c;
+    margin: 32px 0 12px 0;
+    line-height: 1.3;
+  }
+  .sms-section p {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    color: #6b7c85;
+    line-height: 1.7;
+    margin: 0 0 14px 0;
+  }
+  .form-card {
+    max-width: 480px;
+    margin: 24px auto 0 auto;
+    background: white;
+    border: 1px solid rgba(10, 74, 92, 0.08);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 12px 40px rgba(10, 74, 92, 0.06);
+  }
+  .form-label {
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #0a4a5c;
+    display: block;
+    margin: 0 0 6px 0;
+    letter-spacing: 0.2px;
+  }
+  .form-input {
+    display: block;
+    width: 100%;
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    border: 1.5px solid #e5edf0;
+    background: #f9fbfc;
+    color: #0a4a5c;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .form-input:focus {
+    border-color: #00A385;
+    background: white;
+  }
+  .form-input::placeholder { color: #9ca3af; }
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #f0f8fa;
+    border: 1.5px solid #d8e6ea;
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .consent-row:hover { border-color: #00A385; background: #e8f6f2; }
+  .consent-row input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: #00A385;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .consent-text {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #4b5d65;
+  }
+  .consent-text a {
+    color: #00A385;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .consent-text a:hover { text-decoration: underline; }
+  .submit-btn {
+    display: block;
+    width: 100%;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: white;
+    background: #00A385;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 150ms ease, opacity 200ms ease, background 200ms ease;
+    box-shadow: 0 4px 16px rgba(0, 163, 133, 0.3);
+  }
+  .submit-btn:hover:not(:disabled) { transform: scale(1.02); }
+  .submit-btn:active:not(:disabled) { transform: scale(0.98); }
+  .submit-btn:disabled {
+    background: #b6c5cb;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  .fineprint {
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #8a9aa3;
+    margin-top: 18px;
+  }
+  .fineprint a {
+    color: #00A385;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .fineprint a:hover { text-decoration: underline; }
+  .success-card {
+    display: none;
+    background: linear-gradient(135deg, #e8f6f2 0%, #d6efe7 100%);
+    border: 1.5px solid #00A385;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .success-card.visible { display: block; }
+  .success-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #00A385;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px auto;
+  }
+  .success-card h3 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: #0a4a5c;
+    margin: 0 0 6px 0;
+  }
+  .success-card p {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    color: #4b5d65;
+    margin: 0;
+  }
+</style>
+</head>
+<body class="bg-[#f0f8fa] text-[#111827] font-body antialiased">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#f0f8fa]/70 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center w-full px-4 sm:px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="select-none whitespace-nowrap">
+      <img src="images/jk-logo.png" alt="Jackknife" style="height: 36px; object-fit: contain;" />
+    </a>
+    <div class="flex items-center gap-3 sm:gap-8">
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="features.html">Features</a>
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="faq.html">FAQ</a>
+      <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="about.html">Our Story</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div style="padding: 140px 24px 8px; text-align: center;">
+  <h1 style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(32px, 5vw, 44px); color: #0a4a5c; margin: 0; line-height: 1.15;">Get Jackknife Updates via Text</h1>
+  <p style="font-family: Inter, sans-serif; font-size: 16px; color: #6b7c85; max-width: 540px; margin: 16px auto 0 auto; line-height: 1.6;">
+    Sign up below to receive occasional SMS updates from Jackknife about your waitlist status and product launch.
+  </p>
+</div>
+
+<!-- SMS Sign-Up Form -->
+<section class="sms-section" style="max-width: 720px; margin: 0 auto; padding: 16px 24px 80px;">
+
+  <div class="form-card">
+    <form id="sms-form" autocomplete="on" novalidate>
+      <div style="margin-bottom: 16px;">
+        <label class="form-label" for="sms-email">Email Address</label>
+        <input
+          class="form-input"
+          id="sms-email"
+          name="email"
+          type="email"
+          placeholder="you@email.com"
+          required
+          autocomplete="email"
+        />
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <label class="form-label" for="sms-phone">Mobile Phone Number</label>
+        <input
+          class="form-input"
+          id="sms-phone"
+          name="phone"
+          type="tel"
+          placeholder="(555) 123-4567"
+          required
+          autocomplete="tel"
+          inputmode="tel"
+        />
+      </div>
+
+      <label class="consent-row" for="sms-consent" style="margin-bottom: 18px;">
+        <input id="sms-consent" name="sms-consent" type="checkbox" required />
+        <span class="consent-text">
+          By checking this box, I agree to receive recurring informational and transactional text messages from Jackknife at the phone number provided above. Consent is not a condition of any purchase. Message frequency varies (no more than 4 msgs/month). Msg &amp; data rates may apply. Reply HELP for help or STOP to cancel at any time.
+          <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a>
+        </span>
+      </label>
+
+      <button id="sms-submit" class="submit-btn" type="submit" disabled>
+        Sign Up for SMS Updates
+      </button>
+
+      <p id="sms-error" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ef4444; margin:10px 0 0 0;"></p>
+    </form>
+
+    <div id="sms-success" class="success-card" role="status" aria-live="polite">
+      <div class="success-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>You're signed up!</h3>
+      <p>We'll text you when Jackknife is ready. Reply STOP anytime to opt out.</p>
+    </div>
+
+    <p class="fineprint">
+      Jackknife will never sell or share your mobile information with third parties for marketing purposes. Supported carriers include AT&amp;T, Verizon, T-Mobile, and others. Carriers are not liable for delayed or undelivered messages.
+    </p>
+
+    <p class="fineprint" style="text-align: center; margin-top: 12px;">
+      <a href="privacy.html">Privacy Policy</a>
+      &middot;
+      <a href="terms.html">Terms of Service</a>
+      &middot;
+      <a href="mailto:info@jackknife.co">Contact Support</a>
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full pt-10 pb-12 bg-[#063340]" style="border-top: 1px solid rgba(255,255,255,0.1);">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+    <div class="text-[#d1d5db] font-body text-sm">
+      &copy; 2026 Jackknife &middot; Essex County, MA
+    </div>
+    <div class="text-2xl font-black tracking-tighter font-headline select-none">
+      <span class="text-white">jack</span><span class="text-[#00a385]">knife</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6 text-[#d1d5db] font-body text-sm">
+      <a class="hover:text-white transition-colors" href="privacy.html">Privacy</a>
+      <a class="hover:text-white transition-colors" href="terms.html">Terms</a>
+      <a class="hover:text-white transition-colors text-white" href="sms-signup.html">SMS Updates</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('sms-form');
+  var consent = document.getElementById('sms-consent');
+  var submitBtn = document.getElementById('sms-submit');
+  var success = document.getElementById('sms-success');
+  var emailInput = document.getElementById('sms-email');
+  var phoneInput = document.getElementById('sms-phone');
+  var errorEl = document.getElementById('sms-error');
+
+  function syncSubmitState() {
+    submitBtn.disabled = !consent.checked;
+  }
+  consent.addEventListener('change', syncSubmitState);
+  syncSubmitState();
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!consent.checked) return;
+    var email = emailInput.value.trim();
+    var phone = phoneInput.value.trim();
+    if (!email) { emailInput.focus(); return; }
+    if (!phone) { phoneInput.focus(); return; }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving...';
+    errorEl.style.display = 'none';
+
+    function showSuccess() {
+      form.style.display = 'none';
+      success.classList.add('visible');
+    }
+
+    if (typeof firebase !== 'undefined' && firebase.firestore) {
+      try {
+        var db = firebase.firestore();
+        db.collection('sms_optins').add({
+          email: email,
+          phone: phone,
+          consentText: 'Recurring informational/transactional SMS, max 4/mo, msg & data rates may apply, STOP to cancel, HELP for help.',
+          consentVersion: 'v1-2026-05',
+          source: 'sms_signup_page',
+          userAgent: navigator.userAgent,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(showSuccess).catch(function (err) {
+          console.error('SMS opt-in error:', err);
+          errorEl.textContent = 'Something went wrong. Please try again.';
+          errorEl.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign Up for SMS Updates';
+        });
+      } catch (err) {
+        console.error('Firestore init error:', err);
+        showSuccess();
+      }
+    } else {
+      showSuccess();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -4515,9 +4515,10 @@ document.getElementById('banner-close').addEventListener('click', function() {
     <div class="text-[#d1d5db] font-body text-sm order-3 md:order-1">
       &copy; 2026 Jackknife &middot; Essex County, MA
     </div>
-    <div class="flex gap-6 order-2 md:order-2">
+    <div class="flex flex-wrap justify-center gap-6 order-2 md:order-2">
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="privacy.html">Privacy Policy</a>
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="terms.html">Terms of Service</a>
+      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="sms-signup.html">SMS Updates</a>
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="demo.html">Request a Demo</a>
     </div>
   </div>
@@ -4963,6 +4964,12 @@ function animatePanelContent(panelIndex) {
       <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 24px 0; line-height:1.5;">Be one of the first homeowners to try Jackknife.</p>
       <form id="wl-form-essex" autocomplete="on">
         <input id="wl-email-essex" type="email" placeholder="you@email.com" required autocomplete="email" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <p style="font-family:Inter,sans-serif; font-size:11px; line-height:1.5; color:rgba(255,255,255,0.55); margin:0 0 14px 0; text-align:left;">
+          By submitting, you agree to receive occasional informational emails from Jackknife. Unsubscribe anytime. See our
+          <a href="privacy.html" style="color:#00A385; text-decoration:underline;">Privacy Policy</a> &middot;
+          <a href="terms.html" style="color:#00A385; text-decoration:underline;">Terms</a>.
+          For SMS updates, <a href="sms-signup.html" style="color:#00A385; text-decoration:underline;">sign up here</a>.
+        </p>
         <button type="submit" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Get Early Access</button>
       </form>
       <p id="wl-error-essex" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ff6b6b; margin:8px 0 0 0;"></p>
@@ -4975,6 +4982,12 @@ function animatePanelContent(panelIndex) {
       <form id="wl-form-other" autocomplete="on">
         <input id="wl-email-other" type="email" placeholder="you@email.com" required autocomplete="email" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
         <input id="wl-zip" type="text" placeholder="Zip code" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" style="display:block; width:100%; font-family:Inter,sans-serif; font-size:15px; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; outline:none; margin:0 0 12px 0; box-sizing:border-box; transition:border-color 200ms ease;" onfocus="this.style.borderColor='#00A385'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <p style="font-family:Inter,sans-serif; font-size:11px; line-height:1.5; color:rgba(255,255,255,0.55); margin:0 0 14px 0; text-align:left;">
+          By submitting, you agree to receive occasional informational emails from Jackknife. Unsubscribe anytime. See our
+          <a href="privacy.html" style="color:#00A385; text-decoration:underline;">Privacy Policy</a> &middot;
+          <a href="terms.html" style="color:#00A385; text-decoration:underline;">Terms</a>.
+          For SMS updates, <a href="sms-signup.html" style="color:#00A385; text-decoration:underline;">sign up here</a>.
+        </p>
         <button type="submit" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; transition:transform 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Notify Me When Available</button>
       </form>
       <p id="wl-error-other" style="display:none; font-family:Inter,sans-serif; font-size:13px; color:#ff6b6b; margin:8px 0 0 0;"></p>
