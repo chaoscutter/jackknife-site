@@ -10,8 +10,10 @@ const C = {
 };
 const F = { black:'Helvetica-Bold', bold:'Helvetica-Bold', reg:'Helvetica', obl:'Helvetica-Oblique' };
 
+const OUT = process.env.DECK_OUT || 'jackknife-trustpilot-deck.pdf';
+const LOGO = process.env.DECK_LOGO || 'images/jk-logo.png';
 const doc = new PDFDocument({ size:[W,H], margins:{top:0,left:0,bottom:0,right:0} });
-doc.pipe(fs.createWriteStream('jackknife-trustpilot-deck.pdf'));
+doc.pipe(fs.createWriteStream(OUT));
 
 const PX = 64, PT = 60; // content padding
 // Block pdfkit's automatic page breaks — we control pagination explicitly.
@@ -35,7 +37,7 @@ function pageno(n,onDark){
 
 /* 1 — TITLE */
 page(C.white);
-doc.image('images/jk-logo.png', PX, PT+6, {height:30});
+doc.image(LOGO, PX, PT+6, {height:30});
 let lx = PX + 150;
 doc.font(F.bold).fontSize(18).fillColor(C.teal).text('×', lx, PT+10);
 star(lx+34, PT+19, 9, C.tp);
