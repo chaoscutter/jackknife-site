@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jackknife × Trustpilot — The Trust Fabric for the Agentic Home Economy</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --teal:#00A385;
+    --navy:#0a4a5c;
+    --navy-deep:#063340;
+    --light:#f0f8fa;
+    --gray:#6b7c85;
+    --coral:#E85A4F;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:#0a1416;
+    color:var(--navy-deep);
+    overflow:hidden;
+  }
+  /* ---- deck mechanics ---- */
+  .deck{height:100vh;width:100vw;position:relative;}
+  .slide{
+    position:absolute;inset:0;
+    display:none;
+    flex-direction:column;
+    padding:6vh 7vw;
+    background:var(--white);
+    overflow:hidden;
+  }
+  .slide.active{display:flex;animation:fade .45s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+  /* navigation chrome */
+  .nav{
+    position:fixed;bottom:22px;right:28px;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;
+    color:#fff;mix-blend-mode:difference;
+  }
+  .nav button{
+    background:rgba(255,255,255,.14);border:none;color:#fff;
+    width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;
+    backdrop-filter:blur(4px);transition:.2s;
+  }
+  .nav button:hover{background:var(--teal);}
+  .pageno{position:fixed;bottom:26px;left:32px;z-index:50;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;
+    letter-spacing:.12em;color:var(--gray);}
+  .slide.dark .pn-mirror{color:rgba(255,255,255,.5);}
+
+  /* shared type */
+  .eyebrow{
+    font-family:'Montserrat',sans-serif;font-weight:800;
+    font-size:clamp(11px,1vw,14px);letter-spacing:.22em;
+    text-transform:uppercase;color:var(--teal);margin-bottom:22px;
+  }
+  h1{font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(34px,5.4vw,76px);line-height:1.02;letter-spacing:-.02em;
+    color:var(--navy-deep);}
+  h2{font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(28px,3.8vw,52px);line-height:1.05;letter-spacing:-.015em;
+    color:var(--navy-deep);margin-bottom:28px;}
+  p.lead{font-size:clamp(16px,1.5vw,22px);line-height:1.5;color:var(--gray);max-width:60ch;}
+  .accent{color:var(--teal);}
+  .coral{color:var(--coral);}
+
+  /* dark slides */
+  .slide.dark{background:var(--navy-deep);}
+  .slide.dark h1,.slide.dark h2{color:#fff;}
+  .slide.dark p.lead{color:#aecdd3;}
+  .slide.navy{background:var(--navy);}
+  .slide.navy h1,.slide.navy h2{color:#fff;}
+  .slide.navy p.lead{color:#bcd9df;}
+
+  /* ---- slide 1 title ---- */
+  .title-wrap{margin:auto 0;}
+  .brandrow{display:flex;align-items:center;gap:16px;margin-bottom:40px;}
+  .brandrow img{height:34px;width:auto;}
+  .x{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--teal);font-size:20px;}
+  .tp-badge{font-family:'Montserrat',sans-serif;font-weight:800;font-size:20px;color:#00b67a;display:flex;align-items:center;gap:7px;}
+  .tp-star{display:inline-block;width:22px;height:22px;background:#00b67a;
+    clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+  .title-sub{margin-top:34px;font-size:clamp(14px,1.3vw,18px);color:var(--gray);
+    font-weight:500;letter-spacing:.01em;}
+  .title-meta{margin-top:auto;display:flex;gap:40px;font-family:'Montserrat',sans-serif;
+    font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);}
+
+  /* ---- thesis big statement ---- */
+  .bigstatement{margin:auto 0;}
+  .bigstatement .q{font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(30px,4.6vw,62px);line-height:1.08;letter-spacing:-.02em;color:#fff;}
+
+  /* ---- trust map two-sided ---- */
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:14px;flex:1;
+    border:1px solid #d9e7ea;border-radius:18px;overflow:hidden;}
+  .map .cell{padding:clamp(22px,3.4vh,44px) clamp(22px,2.6vw,40px);display:flex;flex-direction:column;}
+  .map .left{background:var(--light);border-right:1px solid #d9e7ea;}
+  .map .right{background:#fff;position:relative;}
+  .map .right::before{content:"OPEN / UNBUILT";position:absolute;top:16px;right:18px;
+    font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;letter-spacing:.16em;
+    color:var(--coral);border:1.5px solid var(--coral);padding:4px 9px;border-radius:30px;}
+  .map .who{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(20px,2.2vw,30px);
+    margin-bottom:8px;}
+  .map .left .who{color:#00b67a;}
+  .map .right .who{color:var(--teal);}
+  .map .axis{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--gray);margin-bottom:18px;}
+  .map .ask{font-size:clamp(16px,1.5vw,21px);line-height:1.4;color:var(--navy-deep);font-weight:600;}
+  .map .note{margin-top:auto;font-size:clamp(13px,1.1vw,15px);color:var(--gray);line-height:1.45;padding-top:18px;}
+
+  /* ---- generic content columns ---- */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);flex:1;align-items:center;}
+  .stack{display:flex;flex-direction:column;gap:22px;}
+  .card{background:var(--light);border-radius:16px;padding:24px 26px;border-left:4px solid var(--teal);}
+  .card h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,20px);
+    color:var(--navy-deep);margin-bottom:7px;}
+  .card p{font-size:clamp(13px,1.15vw,16px);line-height:1.45;color:var(--gray);}
+  .card .num{font-family:'Montserrat',sans-serif;font-weight:900;color:var(--teal);
+    font-size:13px;letter-spacing:.1em;display:block;margin-bottom:10px;}
+
+  /* analogy slide */
+  .analogy{margin:auto 0;text-align:center;max-width:18ch;margin-left:auto;margin-right:auto;}
+  .analogy .eq{font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(40px,7vw,104px);line-height:1;letter-spacing:-.03em;color:#fff;}
+  .analogy .sub{margin-top:30px;font-size:clamp(16px,1.6vw,23px);color:#aecdd3;line-height:1.5;
+    max-width:46ch;margin-left:auto;margin-right:auto;}
+
+  /* synergy loop */
+  .loop{display:flex;align-items:stretch;gap:18px;flex:1;margin-top:10px;}
+  .loop .node{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;padding:clamp(20px,3vh,34px);display:flex;flex-direction:column;}
+  .loop .node .tag{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;}
+  .loop .node.tp .tag{color:#00b67a;}
+  .loop .node h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#fff;
+    font-size:clamp(18px,1.7vw,24px);line-height:1.15;margin-bottom:12px;}
+  .loop .node p{font-size:clamp(13px,1.1vw,15px);line-height:1.45;color:#aecdd3;}
+  .loop .arrow{display:flex;align-items:center;color:var(--teal);font-size:30px;font-weight:900;}
+
+  /* questions */
+  .qlist{display:flex;flex-direction:column;gap:22px;margin-top:10px;flex:1;justify-content:center;}
+  .qrow{display:flex;gap:22px;align-items:flex-start;}
+  .qrow .n{font-family:'Montserrat',sans-serif;font-weight:900;color:var(--teal);
+    font-size:clamp(26px,3vw,42px);line-height:1;min-width:1.4ch;}
+  .qrow p{font-size:clamp(16px,1.6vw,23px);line-height:1.4;color:#fff;font-weight:500;max-width:54ch;}
+  .slide.navy .qrow p{color:#fff;}
+
+  .kicker{margin-top:auto;font-family:'Montserrat',sans-serif;font-weight:800;
+    font-size:clamp(13px,1.2vw,17px);letter-spacing:.02em;color:var(--teal);padding-top:24px;}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:4px;background:var(--teal);z-index:60;transition:width .3s;}
+
+  @media print{
+    body{overflow:visible;background:#fff;}
+    .nav,.pageno,.progress{display:none;}
+    .deck{height:auto;}
+    .slide{display:flex!important;position:relative;height:100vh;page-break-after:always;}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 — TITLE -->
+  <section class="slide active">
+    <div class="title-wrap">
+      <div class="brandrow">
+        <img src="images/jk-logo.png" alt="Jackknife"/>
+        <span class="x">×</span>
+        <span class="tp-badge"><span class="tp-star"></span>Trustpilot</span>
+      </div>
+      <h1>The trust fabric for the<br/><span class="accent">agentic home economy.</span></h1>
+      <p class="title-sub">Why Jackknife is the verification layer for home data — and where it clicks into Trustpilot's world.</p>
+    </div>
+    <div class="title-meta">
+      <span>Board Conversation</span>
+      <span>Jackknife · Essex County, MA</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 2 — THESIS -->
+  <section class="slide dark">
+    <div class="bigstatement">
+      <div class="eyebrow">The one-line thesis</div>
+      <p class="q">Trustpilot verifies the <span class="accent">counterparty.</span><br/>
+      Jackknife verifies the <span class="accent">asset.</span><br/>
+      In an agent-to-agent economy,<br/>you can't transact without both —<br/>
+      and almost nobody is building the asset side.</p>
+    </div>
+  </section>
+
+  <!-- 3 — WHY VERIFICATION IS THE WEDGE -->
+  <section class="slide">
+    <div class="eyebrow">Why this matters now</div>
+    <h2>In an A2A economy, the bottleneck<br/>isn't intelligence. It's trusted data.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">Models are cheap and getting cheaper. The entire risk surface of autonomous transactions is one question: <strong style="color:var(--navy-deep)">"Can I trust this input?"</strong></p>
+        <p class="lead" style="margin-top:20px;">Whoever owns a verified data layer owns a toll booth in the agentic economy. Trustpilot already lives this — "trust as infrastructure" is the franchise.</p>
+      </div>
+      <div class="stack">
+        <div class="card"><h3>What Trustpilot verifies</h3><p>Who you're dealing with. Is this business reputable? <em>One axis.</em></p></div>
+        <div class="card" style="border-left-color:var(--coral)"><h3>What's still wide open</h3><p>What's actually true about the thing being transacted. For the home, that axis is <strong style="color:var(--teal)">Jackknife</strong>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 — TWO-SIDED TRUST MAP -->
+  <section class="slide">
+    <div class="eyebrow">The two-sided trust map</div>
+    <h2 style="margin-bottom:14px;">Every home-services transaction needs<br/>both sides to be machine-verifiable.</h2>
+    <div class="map">
+      <div class="cell left">
+        <div class="axis">Counterparty trust</div>
+        <div class="who"><span class="tp-star" style="vertical-align:-3px;margin-right:6px;"></span>Trustpilot</div>
+        <div class="ask">"Is this contractor / business legit?"</div>
+        <div class="note">Solved. A 15-year franchise built on reputation signals about companies.</div>
+      </div>
+      <div class="cell right">
+        <div class="axis">Asset trust</div>
+        <div class="who">Jackknife</div>
+        <div class="ask">"What's actually in this home — make, age, condition, warranty, recall status?"</div>
+        <div class="note">Greenfield. The home is the largest, least-digitized consumer asset class.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — WHAT MAKES JK A VERIFICATION LAYER -->
+  <section class="slide navy">
+    <div class="eyebrow">Not an inventory app — a verification layer</div>
+    <h2>Three properties turn data from<br/><em>self-reported</em> into <span class="accent">attested.</span></h2>
+    <div class="loop">
+      <div class="node">
+        <span class="tag">01 · Provenance</span>
+        <h3>Evidence-grounded capture</h3>
+        <p>Starts from a photo, not a typed claim. Timestamped, hard to fake — an attestation, not an assertion.</p>
+      </div>
+      <div class="node">
+        <span class="tag">02 · Reconciled</span>
+        <h3>Cross-referenced to ground truth</h3>
+        <p>Make/model resolved against manufacturer specs, warranty terms, and the federal CPSC recall database.</p>
+      </div>
+      <div class="node">
+        <span class="tag">03 · Accepted</span>
+        <h3>Records third parties act on</h3>
+        <p>Insurance-claim export already produces documentation insurers accept. That's the literal definition of a verification layer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — ANALOGY -->
+  <section class="slide dark">
+    <div class="analogy">
+      <div class="eyebrow" style="text-align:center;">The analogy for the room</div>
+      <div class="eq">Carfax,<br/>for the home.</div>
+      <p class="sub">A trusted record that buyers, sellers, insurers — and increasingly, agents — query before they transact. Far larger asset class. Far less digitized.</p>
+      <p class="sub" style="font-style:italic;color:#7fb9c4;margin-top:18px;">"Stop managing your most important asset with a junk drawer and a prayer."</p>
+    </div>
+  </section>
+
+  <!-- 7 — THE KILLER SYNERGY -->
+  <section class="slide navy">
+    <div class="eyebrow">The point to land</div>
+    <h2 style="margin-bottom:10px;">Jackknife sits <span class="accent">upstream</span> of Trustpilot's<br/>oldest problem: review authenticity.</h2>
+    <div class="loop">
+      <div class="node tp">
+        <span class="tag">Trustpilot's gap</span>
+        <h3>Unverified, gameable prose</h3>
+        <p>Reviews are self-reported and hard to authenticate — and in an agentic world, prose agents don't want to parse anyway.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <span class="tag">Jackknife's byproduct</span>
+        <h3>Verified transactions</h3>
+        <p>Tracks every repair diagnosis→completion: real job, real outcome, on a real asset. The highest-grade trust signal in home services.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node tp">
+        <span class="tag">The fit</span>
+        <h3>Complementary, not competitive</h3>
+        <p>JK supplies verified-outcome signals; Trustpilot is the contractor-reputation oracle JK's matching layer consumes. Each fills the other's blind spot.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 — QUESTIONS -->
+  <section class="slide navy">
+    <div class="eyebrow">Turn the pitch into a dialogue</div>
+    <h2>Three questions to put to the board.</h2>
+    <div class="qlist">
+      <div class="qrow"><span class="n">1</span><p>As agents start transacting, does Trustpilot's product evolve from human-readable reviews toward <strong>machine-consumable trust primitives</strong> — and what's the unit of trust in that world?</p></div>
+      <div class="qrow"><span class="n">2</span><p>Trustpilot verifies the counterparty. <strong>Who verifies the asset?</strong> Have they thought about the demand-side of the trust fabric at all?</p></div>
+      <div class="qrow"><span class="n">3</span><p>Would a stream of <strong>verified-completion signals</strong> be valuable to them — and is that a partnership or a build-vs-buy question?</p></div>
+    </div>
+  </section>
+
+  <!-- 9 — CLOSER -->
+  <section class="slide dark">
+    <div class="bigstatement">
+      <div class="eyebrow">Walk in with this</div>
+      <p class="q">Trust is a <span class="accent">two-sided fabric.</span><br/>
+      You own the counterparty side.<br/>
+      The asset side is unbuilt.<br/>
+      The agentic economy makes<br/>both mandatory.</p>
+      <p class="lead" style="margin-top:34px;">That positions Jackknife as adjacent infrastructure to Trustpilot — not a downstream app. A much stronger seat at the table.</p>
+    </div>
+    <div class="kicker">Jackknife — the verification layer of home data.</div>
+  </section>
+
+</div>
+
+<div class="progress" style="display:none"></div>
+<div class="pageno"><span id="pn">01</span> / <span id="pt">09</span></div>
+<div class="nav">
+  <button id="prev" aria-label="Previous">‹</button>
+  <span id="navlabel">USE ← →</span>
+  <button id="next" aria-label="Next">›</button>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;const total=slides.length;
+  document.getElementById('pt').textContent=String(total).padStart(2,'0');
+  const prog=document.getElementById('progress');
+  function show(n){
+    i=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    document.getElementById('pn').textContent=String(i+1).padStart(2,'0');
+    prog.style.width=((i+1)/total*100)+'%';
+  }
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1);}
+    if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1);}
+    if(e.key==='Home')show(0);
+    if(e.key==='End')show(total-1);
+  });
+  let sx=null;
+  document.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));sx=null;},{passive:true});
+  show(0);
+</script>
+</body>
+</html>
