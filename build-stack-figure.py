@@ -1,15 +1,15 @@
-"""Renders the stack-inversion barbell figure as a high-res PNG via PyMuPDF.
-Deterministic drawing — no image-model text garbling."""
-import fitz
+"""Stack-inversion figure — sized so type stays legible when embedded small
+in a portrait memo (~0.46x). Fewer words, larger type, same footprint."""
+import fitz, math
 
 W, H = 1000, 620
-S = 3  # supersample
+S = 3
 BG, NAVY, TEAL, GRAY, CORAL, GREYBAR = (
-    (0.969, 0.961, 0.941),   # F7F5F0
-    (0.024, 0.200, 0.251),   # 063340
-    (0.0, 0.639, 0.522),     # 00A385
+    (0.969, 0.961, 0.941),
+    (0.024, 0.200, 0.251),
+    (0.0, 0.639, 0.522),
     (0.42, 0.49, 0.52),
-    (0.78, 0.357, 0.29),     # C75B4A
+    (0.78, 0.357, 0.29),
     (0.875, 0.895, 0.90),
 )
 
@@ -17,85 +17,74 @@ doc = fitz.open()
 pg = doc.new_page(width=W, height=H)
 pg.draw_rect(pg.rect, color=None, fill=BG)
 
-def text(x, y, s, size, color, bold=True, align=0, width=None):
+def text(x, y, s, size, color, bold=True, align=0, width=W):
     fn = "hebo" if bold else "helv"
-    if width is None:
-        width = W
-    r = fitz.Rect(x, y, x + width, y + size * 3)
-    pg.insert_textbox(r, s, fontsize=size, fontname=fn, color=color, align=align)
+    pg.insert_textbox(fitz.Rect(x, y, x + width, y + size * 3 + 6),
+                      s, fontsize=size, fontname=fn, color=color, align=align)
 
-# ---- panel geometry (no big header: the memo's section title carries it) ----
-PAD = 64
-panel_w = 380
-gap = W - 2 * PAD - 2 * panel_w          # center corridor for arrows
+PAD = 56
+panel_w = 392
+gap = W - 2 * PAD - 2 * panel_w
 lx, rx = PAD, PAD + panel_w + gap
-top_y = 92
-stack_h = 440
+top_y = 116
+stack_h = 430
 
-def panel_header(x, era, sub):
-    text(x, top_y - 50, era, 19, NAVY, True, 1, panel_w)
-    text(x, top_y - 26, sub, 11.5, GRAY, False, 1, panel_w)
+# era headers (bold 27 / sub 17  ->  ~12.3 / 7.8 effective)
+def header(x, era, sub):
+    text(x, top_y - 66, era, 27, NAVY, True, 1, panel_w)
+    text(x, top_y - 32, sub, 17, GRAY, False, 1, panel_w)
+header(lx, "SAAS  ERA", "the app is the destination")
+header(rx, "AGENTIC  ERA", "the agent is the interface")
 
-panel_header(lx, "SAAS  ERA", "the app is the destination")
-panel_header(rx, "AGENTIC  ERA", "the agent is the interface")
-
-def bar(x, y, h, fill, label, sub=None, label_color=(1, 1, 1), outline=None, thin=False):
-    r = fitz.Rect(x, y, x + panel_w, y + h)
-    pg.draw_rect(r, color=outline, fill=fill, width=1.2 if outline else 0)
+def bar(x, y, h, fill, label, sub=None, label_color=(1, 1, 1), thin=False):
+    pg.draw_rect(fitz.Rect(x, y, x + panel_w, y + h), color=None, fill=fill)
     if thin:
-        return r
-    ly = y + h / 2 - (13 if sub else 7)
-    text(x, ly, label, 14.5, label_color, True, 1, panel_w)
+        return fitz.Rect(x, y, x + panel_w, y + h)
+    lc = label_color if fill == TEAL else NAVY
     if sub:
-        text(x + 14, ly + 19, sub, 9.5, label_color if fill == TEAL else GRAY, False, 1, panel_w - 28)
-    return r
+        ty = y + h / 2 - 22
+        text(x, ty, label, 24, lc, True, 1, panel_w)          # ~11 effective
+        text(x + 16, ty + 32, sub, 18, lc, False, 1, panel_w - 32)  # ~8.2 effective
+    else:
+        text(x, y + h / 2 - 15, label, 24, lc, True, 1, panel_w)
+    return fitz.Rect(x, y, x + panel_w, y + h)
 
 GAPY = 12
-# ---- LEFT: SaaS era (bottom→top: ORIGINATION, RECORD, TRANSPORT, ATTESTATION) ----
-heights_l = {"orig": 64, "rec": 64, "trans": 210, "att": 64}
+# LEFT — value sits in the middle
 y = top_y + stack_h
-y -= heights_l["orig"]; bar(lx, y, heights_l["orig"], GREYBAR, "ORIGINATION", None, NAVY)
-y -= GAPY + heights_l["rec"]; bar(lx, y, heights_l["rec"], GREYBAR, "RECORD", None, NAVY)
-y -= GAPY + heights_l["trans"]; tl = bar(lx, y, heights_l["trans"], TEAL, "INTERFACE & TRANSPORT",
-        "distribution · screens · data movement · where app value lived")
-y -= GAPY + heights_l["att"]; bar(lx, y, heights_l["att"], GREYBAR, "ATTESTATION", None, NAVY)
+y -= 60;  bar(lx, y, 60, GREYBAR, "ORIGINATION")
+y -= GAPY + 60;  bar(lx, y, 60, GREYBAR, "RECORD")
+y -= GAPY + 196; tl = bar(lx, y, 196, TEAL, "INTERFACE & TRANSPORT", "where app value lived")
+y -= GAPY + 60;  bar(lx, y, 60, GREYBAR, "ATTESTATION")
 
-# ---- RIGHT: Agentic era ----
-heights_r = {"orig": 148, "rec": 64, "trans": 16, "att": 148}
+# RIGHT — value barbells to both ends
 y = top_y + stack_h
-y -= heights_r["orig"]; ro = bar(rx, y, heights_r["orig"], TEAL, "ORIGINATION",
-        "unscrapeable ground truth the agent must call")
-y -= GAPY + heights_r["rec"]; bar(rx, y, heights_r["rec"], GREYBAR, "RECORD", None, NAVY)
-y -= GAPY + heights_r["trans"]
-rt = bar(rx, y, heights_r["trans"], CORAL, "", thin=True)
-text(rx, y - 16, "INTERFACE & TRANSPORT   falls to 0 · absorbed by the OS agent", 9.5, CORAL, True, 1, panel_w)
-y -= GAPY + 16 + heights_r["att"]; ra = bar(rx, y, heights_r["att"], TEAL, "ATTESTATION",
-        "the signature a counterparty's agent trusts without re-checking")
+y -= 150; ro = bar(rx, y, 150, TEAL, "ORIGINATION", "ground truth the agent must call")
+y -= GAPY + 60; bar(rx, y, 60, GREYBAR, "RECORD")
+y -= GAPY + 14
+rt = bar(rx, y, 14, CORAL, "", thin=True)
+text(rx, y - 26, "INTERFACE & TRANSPORT   FALLS TO 0", 18, CORAL, True, 1, panel_w)
+y -= GAPY + 26 + 150; ra = bar(rx, y, 150, TEAL, "ATTESTATION", "a signature agents trust on sight")
 
-# ---- center corridor arrows: value drains from middle to both ends ----
-cx = lx + panel_w + gap / 2
-mid_y = tl.y0 + tl.height / 2
-up_y = ra.y0 + ra.height / 2
-dn_y = ro.y0 + ro.height / 2
-
+# arrows: value drains from the middle to both ends
 def arrow(x0, y0, x1, y1):
-    pg.draw_line(fitz.Point(x0, y0), fitz.Point(x1, y1), color=TEAL, width=2.2)
-    # arrowhead
-    import math
-    ang = math.atan2(y1 - y0, x1 - x0)
-    for da in (math.pi - 0.45, math.pi + 0.45):
+    pg.draw_line(fitz.Point(x0, y0), fitz.Point(x1, y1), color=TEAL, width=2.6)
+    a = math.atan2(y1 - y0, x1 - x0)
+    for da in (math.pi - 0.4, math.pi + 0.4):
         pg.draw_line(fitz.Point(x1, y1),
-                     fitz.Point(x1 + 13 * math.cos(ang + da), y1 + 13 * math.sin(ang + da)),
-                     color=TEAL, width=2.2)
+                     fitz.Point(x1 + 15 * math.cos(a + da), y1 + 15 * math.sin(a + da)),
+                     color=TEAL, width=2.6)
+mid = tl.y0 + tl.height / 2
+arrow(lx + panel_w + 6, mid, rx - 12, ra.y0 + ra.height / 2)
+arrow(lx + panel_w + 6, mid, rx - 12, ro.y0 + ro.height / 2)
 
-arrow(lx + panel_w + 8, mid_y, rx - 10, up_y)
-arrow(lx + panel_w + 8, mid_y, rx - 10, dn_y)
-
-# ---- footer (single line) ----
-fy = top_y + stack_h + 30
-pg.draw_line(fitz.Point(PAD, fy - 10), fitz.Point(W - PAD, fy - 10), color=(0.85, 0.85, 0.83), width=0.8)
-text(PAD, fy, "Interchangeable endpoints get auctioned (Siri can call Uber or Lyft). Exclusive ground truth gets called. There is exactly one record of a given home.",
-     10.5, NAVY, True, 1, W - 2 * PAD)
+# footer
+fy = top_y + stack_h + 18
+pg.draw_line(fitz.Point(PAD, fy - 8), fitz.Point(W - PAD, fy - 8), color=(0.85, 0.85, 0.83), width=0.8)
+text(PAD, fy, "Interchangeable supply gets auctioned. Exclusive ground truth gets called.",
+     18, NAVY, True, 1, W - 2 * PAD)
+text(PAD, fy + 28, "There is exactly one record of a given home - it cannot be crawled or multi-homed.",
+     16, TEAL, True, 1, W - 2 * PAD)
 
 pix = pg.get_pixmap(matrix=fitz.Matrix(S, S))
 pix.save("stack-inversion-figure.png")
