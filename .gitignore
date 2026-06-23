@@ -7,3 +7,6 @@ firebase-debug.*.log
 node_modules/
 package-lock.json
 package.json
+
+# Generated deliverables bundle (derived from tracked artifacts)
+jackknife-trustpilot-deliverables.zip
