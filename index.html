@@ -1484,7 +1484,7 @@
 <!-- ANNOUNCEMENT BANNER                                          -->
 <!-- ============================================================ -->
 <div id="announce-banner" style="position: sticky; top: 0; z-index: 60; width: 100%; min-height: 40px; background: #063340; display: flex; align-items: center; justify-content: center; padding: 8px 40px 8px 20px;">
-  <p style="font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 500; color: white; margin: 0; text-align: center;">Now live in Essex County, MA — be one of the first 100 homeowners.</p>
+  <p style="font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 500; color: white; margin: 0; text-align: center;">Now live in Essex County, MA. Be one of the first 100 homeowners.</p>
   <button id="banner-close" aria-label="Dismiss banner" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 16px; cursor: pointer; padding: 4px 6px; line-height: 1; transition: color 0.2s ease;" onmouseover="this.style.color='rgba(255,255,255,1)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&times;</button>
 </div>
 <style>
@@ -1508,7 +1508,6 @@
       <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="features.html">Features</a>
       <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="faq.html">FAQ</a>
       <a class="text-[#111827]/70 hover:text-[#00A385] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="about.html">Our Story</a>
-      <a class="text-[#00A385] hover:text-[#0a4a5c] transition-colors font-label text-xs sm:text-sm tracking-wide font-semibold" href="demo.html">Book a Demo</a>
     </div>
   </div>
 </nav>
@@ -4519,7 +4518,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="privacy.html">Privacy Policy</a>
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="terms.html">Terms of Service</a>
       <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="sms-signup.html">SMS Updates</a>
-      <a class="font-label text-[#d1d5db] hover:text-white hover:underline decoration-[#00A385] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="demo.html">Request a Demo</a>
     </div>
   </div>
   <div class="max-w-7xl mx-auto px-12 mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-6 md:gap-4">
@@ -4951,7 +4949,7 @@ function animatePanelContent(panelIndex) {
 
     <!-- Step 1: Location check -->
     <div id="wl-step-location">
-      <img src="images/jk-logo-white.png" alt="Jackknife" style="height:28px; margin:0 auto 24px auto; display:block;" onerror="this.style.display='none'">
+      <img src="images/jk-logo-dark.jpg" alt="Jackknife" style="height:28px; margin:0 auto 24px auto; display:block; object-fit:contain; mix-blend-mode:lighten;" onerror="this.style.display='none'">
       <h3 style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;">Jackknife is live in Essex County, MA</h3>
       <p style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 32px 0; line-height:1.5;">Where are you located?</p>
       <button id="wl-btn-essex" style="display:block; width:100%; font-family:Montserrat,sans-serif; font-weight:700; font-size:15px; color:white; background:#00A385; border:none; padding:14px 24px; border-radius:50px; cursor:pointer; margin:0 0 12px 0; transition:transform 150ms ease, box-shadow 150ms ease; box-shadow:0 4px 16px rgba(0,163,133,0.3);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">I'm in Essex County</button>
@@ -5000,6 +4998,10 @@ function animatePanelContent(panelIndex) {
       </div>
       <h3 id="wl-success-title" style="font-family:Montserrat,sans-serif; font-weight:800; font-size:22px; color:white; margin:0 0 8px 0; line-height:1.3;"></h3>
       <p id="wl-success-body" style="font-family:Inter,sans-serif; font-size:15px; color:rgba(255,255,255,0.6); margin:0; line-height:1.5;"></p>
+      <!-- Shown on the Essex County path only: the app is live there today. -->
+      <a id="wl-appstore" href="https://apps.apple.com/us/app/jackknife/id6768254724" target="_blank" rel="noopener noreferrer" style="display:none; width:fit-content; margin:24px auto 0 auto; background:white; border-radius:14px; padding:10px 18px; box-shadow:0 6px 20px rgba(0,0,0,0.25); transition:transform 150ms ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        <img src="images/app-store-badge.svg" alt="Download Jackknife on the App Store" style="height:40px; width:auto; display:block;">
+      </a>
     </div>
   </div>
 </div>
@@ -5089,7 +5091,8 @@ function animatePanelContent(panelIndex) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(function() {
       document.getElementById('wl-success-title').textContent = "You're in!";
-      document.getElementById('wl-success-body').textContent = "We'll be in touch soon with early access details.";
+      document.getElementById('wl-success-body').textContent = "Jackknife is live in Essex County. Download the app to get started.";
+      document.getElementById('wl-appstore').style.display = 'block';
       showStep('success');
     }).catch(function(err) {
       console.error('Waitlist error:', err);
@@ -5122,6 +5125,7 @@ function animatePanelContent(panelIndex) {
     }).then(function() {
       document.getElementById('wl-success-title').textContent = "You're on the list!";
       document.getElementById('wl-success-body').textContent = "We'll let you know when Jackknife launches in your area.";
+      document.getElementById('wl-appstore').style.display = 'none';
       showStep('success');
     }).catch(function(err) {
       console.error('Waitlist error:', err);
