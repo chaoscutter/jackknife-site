@@ -1460,8 +1460,62 @@
   @media (max-width: 768px) {
     .cta-microcopy { font-size: 14px; margin-top: 8px; }
   }
+
+/* W4: Jackknife is pre-launch, so there is no rated Pro network behind the
+   ratings, job counts and review counts in these screens. They say so. */
+.jk-illustrative {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(107, 124, 133, 0.25);
+  background: rgba(107, 124, 133, 0.06);
+  font-family: Poppins, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7c85;
+}
+.jk-illustrative::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+.jk-illustrative-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex: 0 0 auto;
+  margin-top: 28px;
+}
 </style>
 
+  <!-- jk:meta -->
+  <meta name="description" content="Point your phone at anything in your home and know what it is, how old it is, and what it needs next. Free for homeowners in Essex County, MA."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Jackknife"/>
+  <meta property="og:url" content="https://www.jackknife.co/"/>
+  <meta property="og:title" content="Every homeowner deserves a home expert"/>
+  <meta property="og:description" content="Point your phone at anything in your home and know what it is, how old it is, and what it needs next. Free for homeowners in Essex County, MA."/>
+  <meta property="og:image" content="https://www.jackknife.co/images/og-card.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Jackknife: home intelligence, finally. Essex County, MA."/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Every homeowner deserves a home expert"/>
+  <meta name="twitter:description" content="Point your phone at anything in your home and know what it is, how old it is, and what it needs next. Free for homeowners in Essex County, MA."/>
+  <meta name="twitter:image" content="https://www.jackknife.co/images/og-card.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 </head>
 <body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container no-js">
 
@@ -1811,6 +1865,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
         </div>
       </div>
     </div>
+    <div class="jk-illustrative-row"><p class="jk-illustrative">Illustrative</p></div>
     <div class="scroll-cue scroll-cue-hiw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
@@ -2912,6 +2967,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
 
         </div><!-- end hwc-phone-col -->
       </div><!-- end hwc-layout -->
+    <div class="jk-illustrative-row"><p class="jk-illustrative">Illustrative</p></div>
     <div class="scroll-cue scroll-cue-hwc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </section>
 
@@ -4507,9 +4563,6 @@ document.getElementById('banner-close').addEventListener('click', function() {
       <img src="images/jk-logo-dark.jpg" alt="Jackknife" class="footer-logo" style="height: 56px; object-fit: contain; mix-blend-mode: lighten;" />
     </div>
     <div class="flex gap-4">
-      <a class="text-[#9ca3af] hover:text-white transition-colors" href="#">
-        <span class="material-symbols-outlined">share</span>
-      </a>
       <a class="text-[#9ca3af] hover:text-white transition-colors" href="mailto:info@jackknife.co">
         <span class="material-symbols-outlined">mail</span>
       </a>
