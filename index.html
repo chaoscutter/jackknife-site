@@ -1435,9 +1435,11 @@
     background-color: #009474;
   }
 
-  /* Footer logo: larger and centered on desktop */
+  /* Footer logo: larger and centered on desktop. 80px was tuned for the
+     wordmark alone at 2.85:1; the icon+wordmark lockup is 5.53:1, so the same
+     height renders nearly twice as wide. 60px keeps the intended weight. */
   @media (min-width: 768px) {
-    .footer-logo { height: 80px !important; }
+    .footer-logo { height: 60px !important; }
   }
 
   /* CTA Microcopy */
@@ -1538,7 +1540,7 @@
 <nav id="main-nav" class="fixed w-full z-50 bg-[#f0f8fa]/70 backdrop-blur-xl shadow-sm" style="top: 40px;">
   <div class="flex justify-between items-center w-full px-4 sm:px-8 py-4 max-w-7xl mx-auto">
     <div class="select-none whitespace-nowrap">
-      <img src="images/jk-logo.png" alt="Jackknife" style="height: 36px; object-fit: contain;" />
+      <img src="images/jk-lockup.png" alt="Jackknife" style="height: 36px; object-fit: contain;" />
     </div>
     <button id="hamburger-btn" aria-label="Menu" style="background: none; border: none; cursor: pointer; padding: 4px;">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a4a5c" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -4560,7 +4562,7 @@ document.getElementById('banner-close').addEventListener('click', function() {
   </div>
   <div class="max-w-7xl mx-auto px-12 mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-6 md:gap-4">
     <div class="select-none">
-      <img src="images/jk-logo-dark.jpg" alt="Jackknife" class="footer-logo" style="height: 56px; object-fit: contain; mix-blend-mode: lighten;" />
+      <img src="images/jk-lockup-light.png" alt="Jackknife" class="footer-logo" style="height: 56px; object-fit: contain;" />
     </div>
     <div class="flex gap-4">
       <a class="text-[#9ca3af] hover:text-white transition-colors" href="mailto:info@jackknife.co">
