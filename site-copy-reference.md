@@ -139,7 +139,7 @@ Photo of a water-stained ceiling. The phone cycles through 4 steps:
 | Column | Headline | Body |
 |--------|----------|------|
 | 1 | No ads. | Jackknife is 100% ad-free. We work for homeowners not advertisers. |
-| 2 | We don't sell your data. | Contractors pay for qualified matches to homeowner job requests. |
+| 2 | We don't sell your data. | Insurers and manufacturers pay to confirm facts about your home, only when you say yes. |
 | 3 | You call the shots. | Need help from a pro? You select the pro and control every piece of information shared. |
 
 ---
