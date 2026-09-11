@@ -466,8 +466,62 @@
 
   .gsap-s3-copy { opacity: 0; }
   .gsap-s3-image { opacity: 0; }
+
+/* W4: Jackknife is pre-launch, so there is no rated Pro network behind the
+   ratings, job counts and review counts in these screens. They say so. */
+.jk-illustrative {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(107, 124, 133, 0.25);
+  background: rgba(107, 124, 133, 0.06);
+  font-family: Poppins, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7c85;
+}
+.jk-illustrative::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+.jk-illustrative-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex: 0 0 auto;
+  margin-top: 16px;
+}
 </style>
 
+  <!-- jk:meta -->
+  <meta name="description" content="Identify an appliance from one photo, keep a record of what you own, document a claim, and choose your own Pro. Everything your home needs in one app."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Jackknife"/>
+  <meta property="og:url" content="https://www.jackknife.co/features.html"/>
+  <meta property="og:title" content="What Jackknife does for your home"/>
+  <meta property="og:description" content="Identify an appliance from one photo, keep a record of what you own, document a claim, and choose your own Pro. Everything your home needs in one app."/>
+  <meta property="og:image" content="https://www.jackknife.co/images/og-card.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Jackknife: home intelligence, finally. Essex County, MA."/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="What Jackknife does for your home"/>
+  <meta name="twitter:description" content="Identify an appliance from one photo, keep a record of what you own, document a claim, and choose your own Pro. Everything your home needs in one app."/>
+  <meta name="twitter:image" content="https://www.jackknife.co/images/og-card.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 </head>
 <body class="bg-[#f0f8fa] text-[#111827] font-body antialiased">
 
@@ -591,14 +645,15 @@
           <p class="claim-qa-question">"Am I covered for water damage to my floors?"</p>
           <div class="claim-qa-answer">
             <svg width="16" height="16" viewBox="10 5 56 40" fill="none" style="flex-shrink: 0; margin-top: 2px;"><path d="M39.2 8.54c-3-2.41-7.44-1.94-9.87 1.06L13.55 29.1c-2.42 3-1.95 7.42 1.05 9.84 3 2.42 7.44 1.94 9.87-1.06l15.79-19.51c2.42-3 1.95-7.41-1.05-9.83zm-2.16 7.29c-1 1.24-2.82 1.44-4.07.44-1.25-1-1.44-2.81-.44-4.06 1-1.24 2.82-1.44 4.07-.44 1.25 1 1.44 2.81.44 4.06z" fill="#00A385"/><path d="M44.66 12.93l19.57 15.73s-5.88 9.48-15.11 2.14l-9.25-7.42 2.51-3.21s2.62-2.66 2.26-7.24z" fill="#00A385"/></svg>
-            <p>Yes. Your policy covers sudden water damage. Deductible: $1,000.</p>
+            <p>Your policy on file: sudden water damage covered. $1,000 deductible.</p>
           </div>
 
           <!-- Divider -->
           <hr class="claim-divider" />
 
           <!-- Call Agent -->
-          <button class="claim-agent-btn">📞 Call Your Agent<br><span style="font-weight: 500; font-size: 10px; color: #6b7c85;">Sarah Chen · Arbella Insurance</span></button>
+          <button class="claim-agent-btn">📞 Call Your Agent<br><span style="font-weight: 500; font-size: 10px; color: #6b7c85;">Sarah Chen · Northbeam Mutual</span></button>
+          <div class="jk-illustrative-row"><p class="jk-illustrative">Illustrative</p></div>
         </div>
       </div>
     </div>
